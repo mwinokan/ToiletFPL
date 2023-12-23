@@ -22,7 +22,7 @@ timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 path = '../FPL_GUI.wiki'
 
 run_push_changes = True
-test = True
+test = False
 offline = False
 
 create_launchd_plist = False
