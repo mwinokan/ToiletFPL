@@ -153,7 +153,7 @@ _league_table_html = {}
 
 brk = '</p><p>'
 
-league_halfway_text = {663873:f"The RBS Diamond Invitational has proved to be a wild ride so far, in which our elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award some shiny new limited-edition awards to a lucky few recipients.{brk}<a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1731530.html\">Ed Lees</a> saw himself off to a strong start with some clever picks in GW1, and a daring triple captain on <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_318.html\">Erling Haaland</a> in GW2 (he did only net five points but hey it's something!). Personally, the most memorable part of Ed's FPL so far was transferring out Haaland for <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_80.html\">Toney</a> in GW5 in a combined move that saw him lose 19 points. In fact, most weeks had Ed not made any transfers he would have been better off, and this is reflected in his Christmas Clown award for having the worst total transfer gain in the league.{brk}Following Ed's demise, GW6 turned out to be a real turning point where managers <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1153277.html\">Thomas Allan</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3106633.html\">Rob Sutton</a> would escape the pack and prove exceptionally hard to chase as they sit in second and first place respectively. Rob's trophy cabinet of course contains his Christmas King award but there's barely any room as he averaged 1.5 awards every week, totalling 24 (with only one actually bad one with his GW4 clown!) Rob's consistent differential power moves were not always an instant success (except when he brought in <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_428.html\">Son</a> for his 19-pointer before promptly wildcarding him out) but his faith in <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_261.html\">Maddison</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_160.html\">Zaha</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_80.html\">Toney</a>, and <a href=\"https://mwinokan.github.io/FPL_GUI/html/player_283.html\">Salah</a> particularly rewarded him throughout the season so far. Rob's Take the Plange now sit comfortably at 44k worldwide. Will Rob find himself topping the diamond league at the end of GW38?{brk}Thomas Allan' season does seem to look a bit like Rob's with only a few missteps. An impressive GW8 wildcard brought about a +95% improvement in overall rank within five gameweeks, and a tactical GW12 free hit helped cement a solid top 100k rank and the Christmas Fortune Teller award with an impressive +62 point total for his transfers up to the world cup.{brk}Going further down the table my team <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_780664.html\">Loyd's Groß Men</a> sits in third place after a relatively quiet start, and a decent GW12 wildcard that saw my boys climb a few ranks and a Robertson 9-pointer sat me nicely in the top 650k OR, hopefully onwards and upwards.{brk}As we approach mid-table the points totals all get a bit more compressed, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_123660.html\">Horatio Turner</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1636178.html\">Tanya Fozzard</a> sit in fourth and fifth place. While their ranks are quite similar the journeys these two managers have been on are wildly different. Tanya's 'Mikel ArTanya' reached a gameweek rank height of 44k in GW5 with a massive 97 points, while Horatio's gameweek ranks have been more modest, but consistent. What impresses me most, however, is that Tanya has managed to achieve such success with only ten non-wildcard transfers, earning her the first Iceman award. Well done.{brk}Before we get to the relegation battle, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_2778113.html\">Matthew Wiggins</a>' escape from the bottom has to be commended. In GW6 he sat dead last, trailing the global average by 17 points. Matthew's improvement since that GW6 wildcard has been remarkable, however, and a fantastic GW16 bench boost confirmed his escape from relegation (at least for now). Matthew has won the Glow-Up award for his improvement since GW8.{brk}Now we turn to the relegation battle. Some managers like <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1731530.html\">Ed</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1737071.html\">Joe Pashley</a> only narrowly ended up down here with a couple unlucky results in recent gameweeks. Joe's season was off to a bad start with a GW2 wildcard that lost him 20 points. Nevertheless, his rank did climb as he won his own 'Massive Goal FC' award four times, before taking a bit of a plunge with two bad gameweeks in 15 and 16.{brk}Second to last is <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_5279233.html\">Joseph Conlon</a>, who hasn't made a transfer since GW7. That's probably how he ended up with his eight Chair awards. We've seen that big comebacks are possible so please come back, Joe...{brk}And finally, the man we've all been waiting to discuss is of course <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1105564.html\">Ethan Barker</a>. Ethan's journey can only be described as a Shakespearean tragedy, and this man must have nerves of steel to not have done an Elon and just perma-banned all of us. His trophy cabinet contains six cocks and four clowns, and unfortunately, the Christmas awards don't look any better with the Christmas Cock, Kneejerker, Peasant, and Has-Been awards.{brk}What a fun season it has been so far with shake-ups and drama. I can't wait to see what GW17 and beyond have in store for us. Will Ethan, Ed, and the Joe's be relegated? Will anyone catch Rob and Tom?",910674:f"Now we turn to the Tesco Bean Value Toilet League which boasts over 60 active managers competing for glory, awards, and of course promotion to the Diamond League. With such a large pool of players each gameweek the awards have been exciting and varied, with managers from all over the table adding to their trophy cabinets. The Christmas awards are no exception.{brk}In first place sits <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3106633.html\">Rob Sutton</a> on 965 points, earning him the Christmas King award in both leagues. Our Christmas Cock and egg-holder in 75th place in the league is <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_9680336.html\">Yasir Arafat</a> who did only join in GW5, but this does not protect him from the dreaded cock. Our fortune teller is <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_4237714.html\">Andrew Toon</a> who managed to gain an astounding 109 points through his net transfers so far. The clown award goes to <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_7545553.html\">Priam Ghatak</a> who lost a net 20 points to transfers.{brk}All the following awards are new for Christmas. The Kneejerker and Iceman awards relate to the total number of transfers made so far won by <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3677532.html\">Jacob Clipsham</a> and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_5250876.html\">Aldo Ventresca</a>, respectively. Team value, although not as important as at the start of the season, is still an interesting gauge of a manager's wisdom, and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_587733.html\">Jonah Varney</a> (depicted as Roman Abramovich above) takes the Oligarch award with an astounding £104.1M total squad value. <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_4376362.html\">Sam Watkins</a> will have rather less money to spend on their free world cup transfers with £98.4M and the Peasant award. Our final two awards split the season so far into two 8 GW chunks, and look at who's improved the most - <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_71985.html\">Ben Pelling</a> with his Glow-Up - and the least - <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_4542423.html\">Reece Smith</a> as our Has-Been.{brk}Now we turn to those with the prospect of promotion tantalisingly in sight. Currently, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_1629225.html\">Kieran Sabine</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_3754813.html\">Kajan Kugananthajothy</a>, <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_105722.html\">Owen Wilmot</a>, and <a href=\"https://mwinokan.github.io/FPL_GUI/html/man_6441720.html\">Sam Collins</a> stand to make history. Nevertheless, over half the season still remains to be played and make shake-ups are undubitably still in store. I hope you have enjoyed the season so far, and look forward to all the gossip to come."}
+league_halfway_text = {663873:f"The RBS Diamond Invitational has proved to be a wild ride so far, in which our elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award some shiny new limited-edition awards to a lucky few recipients.{brk}<a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1731530.html\">Ed Lees</a> saw himself off to a strong start with some clever picks in GW1, and a daring triple captain on <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_318.html\">Erling Haaland</a> in GW2 (he did only net five points but hey it's something!). Personally, the most memorable part of Ed's FPL so far was transferring out Haaland for <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_80.html\">Toney</a> in GW5 in a combined move that saw him lose 19 points. In fact, most weeks had Ed not made any transfers he would have been better off, and this is reflected in his Christmas Clown award for having the worst total transfer gain in the league.{brk}Following Ed's demise, GW6 turned out to be a real turning point where managers <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1153277.html\">Thomas Allan</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3106633.html\">Rob Sutton</a> would escape the pack and prove exceptionally hard to chase as they sit in second and first place respectively. Rob's trophy cabinet of course contains his Christmas King award but there's barely any room as he averaged 1.5 awards every week, totalling 24 (with only one actually bad one with his GW4 clown!) Rob's consistent differential power moves were not always an instant success (except when he brought in <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_428.html\">Son</a> for his 19-pointer before promptly wildcarding him out) but his faith in <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_261.html\">Maddison</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_160.html\">Zaha</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_80.html\">Toney</a>, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_283.html\">Salah</a> particularly rewarded him throughout the season so far. Rob's Take the Plange now sit comfortably at 44k worldwide. Will Rob find himself topping the diamond league at the end of GW38?{brk}Thomas Allan' season does seem to look a bit like Rob's with only a few missteps. An impressive GW8 wildcard brought about a +95% improvement in overall rank within five gameweeks, and a tactical GW12 free hit helped cement a solid top 100k rank and the Christmas Fortune Teller award with an impressive +62 point total for his transfers up to the world cup.{brk}Going further down the table my team <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_780664.html\">Loyd's Groß Men</a> sits in third place after a relatively quiet start, and a decent GW12 wildcard that saw my boys climb a few ranks and a Robertson 9-pointer sat me nicely in the top 650k OR, hopefully onwards and upwards.{brk}As we approach mid-table the points totals all get a bit more compressed, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_123660.html\">Horatio Turner</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1636178.html\">Tanya Fozzard</a> sit in fourth and fifth place. While their ranks are quite similar the journeys these two managers have been on are wildly different. Tanya's 'Mikel ArTanya' reached a gameweek rank height of 44k in GW5 with a massive 97 points, while Horatio's gameweek ranks have been more modest, but consistent. What impresses me most, however, is that Tanya has managed to achieve such success with only ten non-wildcard transfers, earning her the first Iceman award. Well done.{brk}Before we get to the relegation battle, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_2778113.html\">Matthew Wiggins</a>' escape from the bottom has to be commended. In GW6 he sat dead last, trailing the global average by 17 points. Matthew's improvement since that GW6 wildcard has been remarkable, however, and a fantastic GW16 bench boost confirmed his escape from relegation (at least for now). Matthew has won the Glow-Up award for his improvement since GW8.{brk}Now we turn to the relegation battle. Some managers like <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1731530.html\">Ed</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1737071.html\">Joe Pashley</a> only narrowly ended up down here with a couple unlucky results in recent gameweeks. Joe's season was off to a bad start with a GW2 wildcard that lost him 20 points. Nevertheless, his rank did climb as he won his own 'Massive Goal FC' award four times, before taking a bit of a plunge with two bad gameweeks in 15 and 16.{brk}Second to last is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_5279233.html\">Joseph Conlon</a>, who hasn't made a transfer since GW7. That's probably how he ended up with his eight Chair awards. We've seen that big comebacks are possible so please come back, Joe...{brk}And finally, the man we've all been waiting to discuss is of course <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1105564.html\">Ethan Barker</a>. Ethan's journey can only be described as a Shakespearean tragedy, and this man must have nerves of steel to not have done an Elon and just perma-banned all of us. His trophy cabinet contains six cocks and four clowns, and unfortunately, the Christmas awards don't look any better with the Christmas Cock, Kneejerker, Peasant, and Has-Been awards.{brk}What a fun season it has been so far with shake-ups and drama. I can't wait to see what GW17 and beyond have in store for us. Will Ethan, Ed, and the Joe's be relegated? Will anyone catch Rob and Tom?",910674:f"Now we turn to the Tesco Bean Value Toilet League which boasts over 60 active managers competing for glory, awards, and of course promotion to the Diamond League. With such a large pool of players each gameweek the awards have been exciting and varied, with managers from all over the table adding to their trophy cabinets. The Christmas awards are no exception.{brk}In first place sits <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3106633.html\">Rob Sutton</a> on 965 points, earning him the Christmas King award in both leagues. Our Christmas Cock and egg-holder in 75th place in the league is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_9680336.html\">Yasir Arafat</a> who did only join in GW5, but this does not protect him from the dreaded cock. Our fortune teller is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4237714.html\">Andrew Toon</a> who managed to gain an astounding 109 points through his net transfers so far. The clown award goes to <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_7545553.html\">Priam Ghatak</a> who lost a net 20 points to transfers.{brk}All the following awards are new for Christmas. The Kneejerker and Iceman awards relate to the total number of transfers made so far won by <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3677532.html\">Jacob Clipsham</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_5250876.html\">Aldo Ventresca</a>, respectively. Team value, although not as important as at the start of the season, is still an interesting gauge of a manager's wisdom, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_587733.html\">Jonah Varney</a> (depicted as Roman Abramovich above) takes the Oligarch award with an astounding £104.1M total squad value. <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4376362.html\">Sam Watkins</a> will have rather less money to spend on their free world cup transfers with £98.4M and the Peasant award. Our final two awards split the season so far into two 8 GW chunks, and look at who's improved the most - <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_71985.html\">Ben Pelling</a> with his Glow-Up - and the least - <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4542423.html\">Reece Smith</a> as our Has-Been.{brk}Now we turn to those with the prospect of promotion tantalisingly in sight. Currently, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1629225.html\">Kieran Sabine</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3754813.html\">Kajan Kugananthajothy</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_105722.html\">Owen Wilmot</a>, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_6441720.html\">Sam Collins</a> stand to make history. Nevertheless, over half the season still remains to be played and make shake-ups are undubitably still in store. I hope you have enjoyed the season so far, and look forward to all the gossip to come."}
 league_season_text = {663873:f"PLACEHOLDER DIAMOND SEASON REVIEW",910674:f"PLACEHOLDER TOILET SEASON REVIEW"}
 
 watchlist = [
@@ -176,9 +176,9 @@ def main():
 	mout.debugOut("main()")
 	import os
 	if offline:
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update [OFFLINE]' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
+		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update [OFFLINE]' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
 	else:
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
+		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
 
 	if create_launchd_plist:
 		# launchd_plist(interval=300)
@@ -527,7 +527,7 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 		style_str = f'"background-color:{bg_color};color:{text_color};vertical-align:middle;"'
 		html_buffer += f'<td style={style_str}>\n'
 		html_buffer += f'<img class="w3-image" src="{p.team_obj._badge_url}" alt="{p.team_obj.shortname}" width="20" height="20">\n'
-		html_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html"><b> {p.name}</a>\n'
+		html_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html"><b> {p.name}</a>\n'
 		if p.is_yellow_flagged:
 			html_buffer += f' ⚠️'
 		elif p.is_red_flagged:
@@ -1165,7 +1165,7 @@ def create_teampage(api,leagues):
 					str_buffer += f'⚠️ '
 				elif p.is_red_flagged:
 					str_buffer += f'⛔️ '
-				str_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html">{p.name}</a>\n'
+				str_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html">{p.name}</a>\n'
 				return str_buffer
 
 			# Top scoring assets
@@ -1324,40 +1324,40 @@ def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 	# html_buffer += '<button class="w3-button w3-hover-aqua"><h3>FPL <span class="w3-tag w3-white">GUI</span></h3></button>\n'
 	html_buffer += '<div class="w3-dropdown-content w3-bar-block w3-card-4">\n'
 
-	url = f'https://mwinokan.github.io/FPL_GUI/index.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/index.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>\n'
 
-	url = f'https://mwinokan.github.io/FPL_GUI/html/comparison.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/html/comparison.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📊 Comparison Tool</a>\n'
 
-	url = f'https://mwinokan.github.io/FPL_GUI/html/assets.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/html/assets.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📈 Asset Graphs</a>\n'
 
 	if season_awards:
-		url = f'https://mwinokan.github.io/FPL_GUI/html/season.html'
+		url = f'https://mwinokan.github.io/ToiletFPL/html/season.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏁 End of season</a>\n'
 
 	if halfway_awards:
-		url = f'https://mwinokan.github.io/FPL_GUI/html/christmas.html'
+		url = f'https://mwinokan.github.io/ToiletFPL/html/christmas.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🎄 Christmas</a>\n'
 
-	url = f'https://mwinokan.github.io/FPL_GUI/html/teams.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/html/teams.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>\n'
 
 	if cup_active:
-		url = f'https://mwinokan.github.io/FPL_GUI/html/toilet_cup.html'
+		url = f'https://mwinokan.github.io/ToiletFPL/html/toilet_cup.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏆 Toilet Cup</a>\n'
 
 	for i,league in enumerate(leagues):
-		url = f'https://mwinokan.github.io/FPL_GUI/html/{league.name.replace(" ","-")}.html'
+		url = f'https://mwinokan.github.io/ToiletFPL/html/{league.name.replace(" ","-")}.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">{league._icon} {league.name}</a>\n'
 
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
 	html_buffer += f'<a class="w3-bar-item w3-{colour} w3-text-{colour} w3-right"></a>\n'
-	url = f'https://mwinokan.github.io/FPL_GUI/html/Tesco-Bean-Value-Toilet-League.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/html/Tesco-Bean-Value-Toilet-League.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>\n'
-	url = f'https://mwinokan.github.io/FPL_GUI/html/The-RBS-Diamond-Invitational.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/html/The-RBS-Diamond-Invitational.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>\n'
 	html_buffer += '</div>\n'
 
@@ -1898,7 +1898,7 @@ def create_manager_formation(man,gw):
 		else:
 			c_str = ''
 
-		html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
+		html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
 
 		html_buffer += f'<br>\n'
 		style_str = get_style_from_event_score(score).rstrip('"')+';width:90%;margin-bottom:2px;"'
@@ -1933,7 +1933,7 @@ def create_manager_formation(man,gw):
 			
 			c_str = ''
 
-			html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/FPL_GUI/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
+			html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
 
 			html_buffer += f'<br>\n'
 			style_str = get_style_from_event_score(score).rstrip('"')+';width:90%;margin-bottom:2px;"'
@@ -2158,7 +2158,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 			html_buffer += f'⛔️ '
 		if player.was_subbed:
 			html_buffer += f'🔄 '
-		html_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{player.id}.html">{player.name}</a></b></td>\n'
+		html_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{player.id}.html">{player.name}</a></b></td>\n'
 
 		###
 
@@ -2584,15 +2584,15 @@ def generate_graphs(league):
 	graph_past_rank = plot.rank_history(league.managers,key, show=False)
 
 def create_sidebar(leagues):
-	url = f'https://mwinokan.github.io/FPL_GUI/index.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/index.html'
 	md_buffer = f"##### [Home]({url})\n\n"
 
-	url = f'https://mwinokan.github.io/FPL_GUI/html/fixtures.html'
+	url = f'https://mwinokan.github.io/ToiletFPL/html/fixtures.html'
 	md_buffer += f"##### [Fixtures]({url})\n\n"
 
 	md_buffer += f"##### League Summaries\n\n"
 	for l in leagues:
-		url = f'https://mwinokan.github.io/FPL_GUI/html/{l.name.replace(" ","-")}.html'
+		url = f'https://mwinokan.github.io/ToiletFPL/html/{l.name.replace(" ","-")}.html'
 		md_buffer += f'* [{l}]({url})\n'
 
 	return md_buffer
@@ -3094,7 +3094,7 @@ def league_best_chips(league):
 			html_buffer += "💎"
 		html_buffer += f'with {man._tc_name} in GW{man._tc_week}\n'
 
-		# html_buffer += f'<a href="https://mwinokan.github.io/FPL_GUI/html/player_{player.id}.html">{player.name}</a></b></td>\n'
+		# html_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{player.id}.html">{player.name}</a></b></td>\n'
 
 	html_buffer +='</td>\n'
 	html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_best[0])}</td>\n'
@@ -4854,10 +4854,10 @@ def push_changes():
 	if num_changes > 0:
 	# os.system(f'cd {path}; git add *.md; git commit -m "auto-generated {timestamp}"; git push; cd {path.replace(".wiki","")}')
 		os.system(f'rm kits/*.webp; git add *.py go/*.html go/*.py graphs/*.png index.html html/*.html *.json kits/*.png; git commit -m "auto-generated {timestamp}"; git push')
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'Completed Wiki Update' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
+		os.system("terminal-notifier -title 'FPL_GUI' -message 'Completed Wiki Update' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
 		exit(code=69)
 	else:
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'No changes pushed' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
+		os.system("terminal-notifier -title 'FPL_GUI' -message 'No changes pushed' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
 		exit(code=70)
 
 def pull_changes():
