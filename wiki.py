@@ -4850,6 +4850,7 @@ def push_changes():
 	import os
 	os.system(r'rm -v html/*\@*')
 	# num_changes = int(os.popen("git status | grep 'modified:' | grep -v '.pyc' | wc -l").read())
+	num_changes = 1
 	if num_changes > 0:
 	# os.system(f'cd {path}; git add *.md; git commit -m "auto-generated {timestamp}"; git push; cd {path.replace(".wiki","")}')
 		os.system(f'rm kits/*.webp; git add *.py go/*.html go/*.py graphs/*.png index.html html/*.html *.json kits/*.png; git commit -m "auto-generated {timestamp}"; git push')
