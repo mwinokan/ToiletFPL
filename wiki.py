@@ -22,7 +22,7 @@ timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 path = '../FPL_GUI.wiki'
 
 run_push_changes = True
-test = True
+test = False
 offline = False
 
 create_launchd_plist = False
@@ -4849,10 +4849,10 @@ def push_changes():
 	mout.debugOut(f"push_changes()")
 	import os
 	os.system(r'rm -v html/*\@*')
-	num_changes = int(os.popen("git status | grep 'modified:' | grep -v '.pyc' | wc -l").read())
+	# num_changes = int(os.popen("git status | grep 'modified:' | grep -v '.pyc' | wc -l").read())
 	if num_changes > 0:
 	# os.system(f'cd {path}; git add *.md; git commit -m "auto-generated {timestamp}"; git push; cd {path.replace(".wiki","")}')
-		os.system(f'rm kits/*.webp; git add *.py images/*.png go/*.html go/*.py graphs/*.png index.html html/*.html *.json kits/*.png ct_total_fit.json; git commit -m "auto-generated {timestamp}"; git push')
+		os.system(f'rm kits/*.webp; git add *.py go/*.html go/*.py graphs/*.png index.html html/*.html *.json kits/*.png; git commit -m "auto-generated {timestamp}"; git push')
 		os.system("terminal-notifier -title 'FPL_GUI' -message 'Completed Wiki Update' -open 'https://mwinokan.github.io/FPL_GUI/index.html'")
 		exit(code=69)
 	else:
