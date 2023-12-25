@@ -193,6 +193,10 @@ def main():
 	global api
 	api = fpl_api.FPL_API(offline=offline,quick=False,force_generate_kits=force_generate_kits,write_offline_data=True)
 
+	global halfway_awards
+	if api._current_gw == 18 and not api._live_gw:
+		halfway_awards = True
+
 	global preseason
 	preseason = api._current_gw < 1
 
@@ -260,9 +264,6 @@ def main():
 	
 	create_teampage(api,leagues)
 
-	global halfway_awards
-	if api._current_gw == 18 and not api._live_gw:
-		halfway_awards = True
 	if halfway_awards:
 		create_christmaspage(leagues)
 		# api.finish()
