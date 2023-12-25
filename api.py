@@ -90,7 +90,7 @@ class FPL_API():
 	_element_indices_by_team = None
 	_special_gws = {}
 
-	_skip_gws = [7]
+	_skip_gws = []
 	_wc_cutoff = 16
 
 	_season_str = 2324

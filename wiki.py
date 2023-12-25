@@ -153,8 +153,8 @@ _league_table_html = {}
 
 brk = '</p><p>'
 
-league_halfway_text = {663873:f"The RBS Diamond Invitational has proved to be a wild ride so far, in which our elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award some shiny new limited-edition awards to a lucky few recipients.{brk}<a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1731530.html\">Ed Lees</a> saw himself off to a strong start with some clever picks in GW1, and a daring triple captain on <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_318.html\">Erling Haaland</a> in GW2 (he did only net five points but hey it's something!). Personally, the most memorable part of Ed's FPL so far was transferring out Haaland for <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_80.html\">Toney</a> in GW5 in a combined move that saw him lose 19 points. In fact, most weeks had Ed not made any transfers he would have been better off, and this is reflected in his Christmas Clown award for having the worst total transfer gain in the league.{brk}Following Ed's demise, GW6 turned out to be a real turning point where managers <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1153277.html\">Thomas Allan</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3106633.html\">Rob Sutton</a> would escape the pack and prove exceptionally hard to chase as they sit in second and first place respectively. Rob's trophy cabinet of course contains his Christmas King award but there's barely any room as he averaged 1.5 awards every week, totalling 24 (with only one actually bad one with his GW4 clown!) Rob's consistent differential power moves were not always an instant success (except when he brought in <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_428.html\">Son</a> for his 19-pointer before promptly wildcarding him out) but his faith in <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_261.html\">Maddison</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_160.html\">Zaha</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_80.html\">Toney</a>, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_283.html\">Salah</a> particularly rewarded him throughout the season so far. Rob's Take the Plange now sit comfortably at 44k worldwide. Will Rob find himself topping the diamond league at the end of GW38?{brk}Thomas Allan' season does seem to look a bit like Rob's with only a few missteps. An impressive GW8 wildcard brought about a +95% improvement in overall rank within five gameweeks, and a tactical GW12 free hit helped cement a solid top 100k rank and the Christmas Fortune Teller award with an impressive +62 point total for his transfers up to the world cup.{brk}Going further down the table my team <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_780664.html\">Loyd's Groß Men</a> sits in third place after a relatively quiet start, and a decent GW12 wildcard that saw my boys climb a few ranks and a Robertson 9-pointer sat me nicely in the top 650k OR, hopefully onwards and upwards.{brk}As we approach mid-table the points totals all get a bit more compressed, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_123660.html\">Horatio Turner</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1636178.html\">Tanya Fozzard</a> sit in fourth and fifth place. While their ranks are quite similar the journeys these two managers have been on are wildly different. Tanya's 'Mikel ArTanya' reached a gameweek rank height of 44k in GW5 with a massive 97 points, while Horatio's gameweek ranks have been more modest, but consistent. What impresses me most, however, is that Tanya has managed to achieve such success with only ten non-wildcard transfers, earning her the first Iceman award. Well done.{brk}Before we get to the relegation battle, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_2778113.html\">Matthew Wiggins</a>' escape from the bottom has to be commended. In GW6 he sat dead last, trailing the global average by 17 points. Matthew's improvement since that GW6 wildcard has been remarkable, however, and a fantastic GW16 bench boost confirmed his escape from relegation (at least for now). Matthew has won the Glow-Up award for his improvement since GW8.{brk}Now we turn to the relegation battle. Some managers like <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1731530.html\">Ed</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1737071.html\">Joe Pashley</a> only narrowly ended up down here with a couple unlucky results in recent gameweeks. Joe's season was off to a bad start with a GW2 wildcard that lost him 20 points. Nevertheless, his rank did climb as he won his own 'Massive Goal FC' award four times, before taking a bit of a plunge with two bad gameweeks in 15 and 16.{brk}Second to last is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_5279233.html\">Joseph Conlon</a>, who hasn't made a transfer since GW7. That's probably how he ended up with his eight Chair awards. We've seen that big comebacks are possible so please come back, Joe...{brk}And finally, the man we've all been waiting to discuss is of course <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1105564.html\">Ethan Barker</a>. Ethan's journey can only be described as a Shakespearean tragedy, and this man must have nerves of steel to not have done an Elon and just perma-banned all of us. His trophy cabinet contains six cocks and four clowns, and unfortunately, the Christmas awards don't look any better with the Christmas Cock, Kneejerker, Peasant, and Has-Been awards.{brk}What a fun season it has been so far with shake-ups and drama. I can't wait to see what GW17 and beyond have in store for us. Will Ethan, Ed, and the Joe's be relegated? Will anyone catch Rob and Tom?",910674:f"Now we turn to the Tesco Bean Value Toilet League which boasts over 60 active managers competing for glory, awards, and of course promotion to the Diamond League. With such a large pool of players each gameweek the awards have been exciting and varied, with managers from all over the table adding to their trophy cabinets. The Christmas awards are no exception.{brk}In first place sits <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3106633.html\">Rob Sutton</a> on 965 points, earning him the Christmas King award in both leagues. Our Christmas Cock and egg-holder in 75th place in the league is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_9680336.html\">Yasir Arafat</a> who did only join in GW5, but this does not protect him from the dreaded cock. Our fortune teller is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4237714.html\">Andrew Toon</a> who managed to gain an astounding 109 points through his net transfers so far. The clown award goes to <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_7545553.html\">Priam Ghatak</a> who lost a net 20 points to transfers.{brk}All the following awards are new for Christmas. The Kneejerker and Iceman awards relate to the total number of transfers made so far won by <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3677532.html\">Jacob Clipsham</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_5250876.html\">Aldo Ventresca</a>, respectively. Team value, although not as important as at the start of the season, is still an interesting gauge of a manager's wisdom, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_587733.html\">Jonah Varney</a> (depicted as Roman Abramovich above) takes the Oligarch award with an astounding £104.1M total squad value. <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4376362.html\">Sam Watkins</a> will have rather less money to spend on their free world cup transfers with £98.4M and the Peasant award. Our final two awards split the season so far into two 8 GW chunks, and look at who's improved the most - <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_71985.html\">Ben Pelling</a> with his Glow-Up - and the least - <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4542423.html\">Reece Smith</a> as our Has-Been.{brk}Now we turn to those with the prospect of promotion tantalisingly in sight. Currently, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1629225.html\">Kieran Sabine</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3754813.html\">Kajan Kugananthajothy</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_105722.html\">Owen Wilmot</a>, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_6441720.html\">Sam Collins</a> stand to make history. Nevertheless, over half the season still remains to be played and make shake-ups are undubitably still in store. I hope you have enjoyed the season so far, and look forward to all the gossip to come."}
-league_season_text = {663873:f"PLACEHOLDER DIAMOND SEASON REVIEW",910674:f"PLACEHOLDER TOILET SEASON REVIEW"}
+league_halfway_text = {146330:f"The RBS Diamond Invitational has proved to be a wild ride so far, in which our elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award some shiny new limited-edition awards to a lucky few recipients.{brk}<a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1731530.html\">Ed Lees</a> saw himself off to a strong start with some clever picks in GW1, and a daring triple captain on <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_318.html\">Erling Haaland</a> in GW2 (he did only net five points but hey it's something!). Personally, the most memorable part of Ed's FPL so far was transferring out Haaland for <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_80.html\">Toney</a> in GW5 in a combined move that saw him lose 19 points. In fact, most weeks had Ed not made any transfers he would have been better off, and this is reflected in his Christmas Clown award for having the worst total transfer gain in the league.{brk}Following Ed's demise, GW6 turned out to be a real turning point where managers <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1153277.html\">Thomas Allan</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3106633.html\">Rob Sutton</a> would escape the pack and prove exceptionally hard to chase as they sit in second and first place respectively. Rob's trophy cabinet of course contains his Christmas King award but there's barely any room as he averaged 1.5 awards every week, totalling 24 (with only one actually bad one with his GW4 clown!) Rob's consistent differential power moves were not always an instant success (except when he brought in <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_428.html\">Son</a> for his 19-pointer before promptly wildcarding him out) but his faith in <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_261.html\">Maddison</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_160.html\">Zaha</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_80.html\">Toney</a>, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/player_283.html\">Salah</a> particularly rewarded him throughout the season so far. Rob's Take the Plange now sit comfortably at 44k worldwide. Will Rob find himself topping the diamond league at the end of GW38?{brk}Thomas Allan' season does seem to look a bit like Rob's with only a few missteps. An impressive GW8 wildcard brought about a +95% improvement in overall rank within five gameweeks, and a tactical GW12 free hit helped cement a solid top 100k rank and the Christmas Fortune Teller award with an impressive +62 point total for his transfers up to the world cup.{brk}Going further down the table my team <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_780664.html\">Loyd's Groß Men</a> sits in third place after a relatively quiet start, and a decent GW12 wildcard that saw my boys climb a few ranks and a Robertson 9-pointer sat me nicely in the top 650k OR, hopefully onwards and upwards.{brk}As we approach mid-table the points totals all get a bit more compressed, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_123660.html\">Horatio Turner</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1636178.html\">Tanya Fozzard</a> sit in fourth and fifth place. While their ranks are quite similar the journeys these two managers have been on are wildly different. Tanya's 'Mikel ArTanya' reached a gameweek rank height of 44k in GW5 with a massive 97 points, while Horatio's gameweek ranks have been more modest, but consistent. What impresses me most, however, is that Tanya has managed to achieve such success with only ten non-wildcard transfers, earning her the first Iceman award. Well done.{brk}Before we get to the relegation battle, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_2778113.html\">Matthew Wiggins</a>' escape from the bottom has to be commended. In GW6 he sat dead last, trailing the global average by 17 points. Matthew's improvement since that GW6 wildcard has been remarkable, however, and a fantastic GW16 bench boost confirmed his escape from relegation (at least for now). Matthew has won the Glow-Up award for his improvement since GW8.{brk}Now we turn to the relegation battle. Some managers like <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1731530.html\">Ed</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1737071.html\">Joe Pashley</a> only narrowly ended up down here with a couple unlucky results in recent gameweeks. Joe's season was off to a bad start with a GW2 wildcard that lost him 20 points. Nevertheless, his rank did climb as he won his own 'Massive Goal FC' award four times, before taking a bit of a plunge with two bad gameweeks in 15 and 16.{brk}Second to last is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_5279233.html\">Joseph Conlon</a>, who hasn't made a transfer since GW7. That's probably how he ended up with his eight Chair awards. We've seen that big comebacks are possible so please come back, Joe...{brk}And finally, the man we've all been waiting to discuss is of course <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1105564.html\">Ethan Barker</a>. Ethan's journey can only be described as a Shakespearean tragedy, and this man must have nerves of steel to not have done an Elon and just perma-banned all of us. His trophy cabinet contains six cocks and four clowns, and unfortunately, the Christmas awards don't look any better with the Christmas Cock, Kneejerker, Peasant, and Has-Been awards.{brk}What a fun season it has been so far with shake-ups and drama. I can't wait to see what GW17 and beyond have in store for us. Will Ethan, Ed, and the Joe's be relegated? Will anyone catch Rob and Tom?",121011:f"Now we turn to the Tesco Bean Value Toilet League which boasts over 60 active managers competing for glory, awards, and of course promotion to the Diamond League. With such a large pool of players each gameweek the awards have been exciting and varied, with managers from all over the table adding to their trophy cabinets. The Christmas awards are no exception.{brk}In first place sits <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3106633.html\">Rob Sutton</a> on 965 points, earning him the Christmas King award in both leagues. Our Christmas Cock and egg-holder in 75th place in the league is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_9680336.html\">Yasir Arafat</a> who did only join in GW5, but this does not protect him from the dreaded cock. Our fortune teller is <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4237714.html\">Andrew Toon</a> who managed to gain an astounding 109 points through his net transfers so far. The clown award goes to <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_7545553.html\">Priam Ghatak</a> who lost a net 20 points to transfers.{brk}All the following awards are new for Christmas. The Kneejerker and Iceman awards relate to the total number of transfers made so far won by <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3677532.html\">Jacob Clipsham</a> and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_5250876.html\">Aldo Ventresca</a>, respectively. Team value, although not as important as at the start of the season, is still an interesting gauge of a manager's wisdom, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_587733.html\">Jonah Varney</a> (depicted as Roman Abramovich above) takes the Oligarch award with an astounding £104.1M total squad value. <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4376362.html\">Sam Watkins</a> will have rather less money to spend on their free world cup transfers with £98.4M and the Peasant award. Our final two awards split the season so far into two 8 GW chunks, and look at who's improved the most - <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_71985.html\">Ben Pelling</a> with his Glow-Up - and the least - <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_4542423.html\">Reece Smith</a> as our Has-Been.{brk}Now we turn to those with the prospect of promotion tantalisingly in sight. Currently, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_1629225.html\">Kieran Sabine</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_3754813.html\">Kajan Kugananthajothy</a>, <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_105722.html\">Owen Wilmot</a>, and <a href=\"https://mwinokan.github.io/ToiletFPL/html/man_6441720.html\">Sam Collins</a> stand to make history. Nevertheless, over half the season still remains to be played and make shake-ups are undubitably still in store. I hope you have enjoyed the season so far, and look forward to all the gossip to come."}
+league_season_text = {146330:f"PLACEHOLDER DIAMOND SEASON REVIEW",121011:f"PLACEHOLDER TOILET SEASON REVIEW"}
 
 watchlist = [
 			]
@@ -261,7 +261,7 @@ def main():
 	create_teampage(api,leagues)
 
 	global halfway_awards
-	if api._current_gw == 19 and not api._live_gw:
+	if api._current_gw == 18 and not api._live_gw:
 		halfway_awards = True
 	if halfway_awards:
 		create_christmaspage(leagues)
@@ -332,10 +332,26 @@ def main():
 	if run_push_changes:
 		push_changes()
 
+def test_christmas():
+	leagues = []
+	for icon,code,colour,shortname in zip(league_icons,league_codes,league_colours,league_shortnames):
+		try:
+			leagues.append(League(code,api))
+			leagues[-1]._icon = icon
+			leagues[-1]._shortname = shortname
+			leagues[-1]._colour_str = colour
+		except fpl_api.Request404:
+			mout.error(f'Could not init League({code},{shortname})')
+
+	for i,l in enumerate(leagues):
+		create_leaguepage(l,leagues,i)
+
+	create_christmaspage(leagues)
+
 def run_test():
 
-	push_changes()
-	return
+	# push_changes()
+	test_christmas()
 
 	# print(api.fixtures.columns)
 
@@ -347,20 +363,20 @@ def run_test():
 	# print(api.get_player_team_obj(17))
 
 	# print(api.elements.columns)
-	print(api.get_player_index(664))
-	pprint(api.elements['web_name'][api.get_player_index(664)])
+	# print(api.get_player_index(664))
+	# pprint(api.elements['web_name'][api.get_player_index(664)])
 
-	p = Player('Maddison',api)
+	# p = Player('Maddison',api)
 
-	s = p.get_event_score(8,debug=True)
+	# s = p.get_event_score(8,debug=True)
 
-	print(p,s)
+	# print(p,s)
 
-	p = Player('Ward-Prowse',api)
+	# p = Player('Ward-Prowse',api)
 
-	s = p.get_event_score(8,debug=True)
+	# s = p.get_event_score(8,debug=True)
 
-	print(p,s)
+	# print(p,s)
 
 	# create_comparison_page(api,[])
 
@@ -2399,9 +2415,14 @@ def get_manager_json_awards(api,leagues):
 
 					# print(key,data)
 
-					for m_id in data[0]:
-						m = api.get_manager(id=m_id)
+					# for m_id in data[0]:
+					try:
+						m = api.get_manager(id=data[0])
 						m._awards.append(dict(key=key,score=data[-1],league=l_name,gw='half'))
+					except TypeError as e:
+						mout.error(key,data)
+						mout.error(str(e))
+						raise e
 
 				continue
 
@@ -2422,9 +2443,9 @@ def get_manager_json_awards(api,leagues):
 				for key,data in gw_data.items():
 					for key2,data2 in data.items():
 
-						for m_id in data2[1]:
-							m = api.get_manager(id=m_id)
-							m._awards.append(dict(key=f'{key}_{key2}',score=data2[0],league=l_name,gw='chips'))
+						# for m_id in data2[1]:
+						m = api.get_manager(id=data2[1])
+						m._awards.append(dict(key=f'{key}_{key2}',score=data2[0],league=l_name,gw='chips'))
 
 				continue
 
@@ -2926,17 +2947,14 @@ def create_christmaspage(leagues):
 	html_buffer = ""
 
 	html_buffer += '<div class="w3-center">\n'
-	html_buffer += f"<h2>{title}</h2>\n"
+	html_buffer += floating_subtitle(title)
+	# html_buffer += f"<h2>{title}</h2>\n"
 	html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/psd/christmas22.png?raw=true" alt="Banner" width="1320" height="702">\n'
 	html_buffer += '</div>\n'
 
-	# html_buffer += '<div class="w3-black">\n'
-	# html_buffer += "<p>Foreword</p>\n"
-	# html_buffer += "<p>Promotion/relegation</p>\n"
-	# html_buffer += '</div>\n'
-	# html_buffer += "<p>League statistics</p>"
+	html_buffer += '<div class="w3-col s12 m12 l12">\n'
+	html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 
-	# html_buffer += '<p><strong>Choose which league awards to show:</strong></p>\n'
 	html_buffer += '<div class="w3-bar w3-black">\n'
 	
 	for i,league in enumerate(leagues[:2]):
@@ -2951,9 +2969,9 @@ def create_christmaspage(leagues):
 	for i,league in enumerate(leagues[:2]):
 
 		if i==0:
-			html_buffer += f'<div id="{league.id}" class="w3-container w3-border league">\n'
+			html_buffer += f'<div id="{league.id}" class="w3-container league">\n'
 		else:
-			html_buffer += f'<div id="{league.id}" class="w3-container w3-border league" style="display:none">\n'
+			html_buffer += f'<div id="{league.id}" class="w3-container league" style="display:none">\n'
 
 		html_buffer += '<div class="w3-justify w3-row-padding">\n'
 
@@ -2961,21 +2979,26 @@ def create_christmaspage(leagues):
 		html_buffer += league_halfway_text[league.id]
 		html_buffer += "</p>\n"
 
-		html_buffer += "<h3>Chip Usage</h3>\n"
+		# html_buffer += "<h3>Chip Usage</h3>\n"
+		html_buffer += floating_subtitle('Chip Usage')
 		html_buffer += league_best_chips(league)
 
+		# html_buffer += "</div>\n"
+
 		award_buffer = ""
-		award_buffer += "<h3>Halfway Awards</h3>\n"
+		award_buffer += floating_subtitle('Halfway Awards')
+		# award_buffer += "<h3>Halfway Awards</h3>\n"
 		award_buffer += christmas_awards(league)
 
 		if league.num_managers > 20:
 			subset = []
-			subset += sum([d[0] for d in json[str(league.id)]['half']['awards'].values()],[])
-			subset += sum([d[-1] for d in json[str(league.id)]['chips']['wc1'].values()],[])
+			subset += [d[0] for d in json[str(league.id)]['half']['awards'].values()]
+			subset += [d[-1] for d in json[str(league.id)]['chips']['wc1'].values()]
 		else:
 			subset = None
 
-		html_buffer += "<h3>League Graph</h3>\n"
+		html_buffer += floating_subtitle('League Graph')
+		# html_buffer += "<h3>League Graph</h3>\n"
 		import sys
 		sys.path.insert(1,'go')
 		from goleague import create_league_figure
@@ -2983,14 +3006,20 @@ def create_christmaspage(leagues):
 
 		html_buffer += award_buffer
 
+		html_buffer += floating_subtitle('League Table')
 		md_buffer = ""
-		md_buffer += f"\n## League Table:\n"
+		# md_buffer += f"\n## League Table:\n"
 		md_buffer += f"Is your team's kit the boring default? Design it [here](https://fantasy.premierleague.com/entry-update)\n\n"
 		html_buffer += md2html(md_buffer)
+		html_buffer += '</div>\n'
 		html_buffer += _league_table_html[league.id]
 
+		html_buffer += '<br>\n'
+
 		html_buffer += '</div>\n'
-		html_buffer += '</div>\n'
+
+	html_buffer += '</div>\n'
+	html_buffer += '</div>\n'
 
 	html_buffer += '<script>\n'
 	html_buffer += 'function openLeague(evt, leagueName) {\n'
@@ -3009,7 +3038,7 @@ def create_christmaspage(leagues):
 	html_buffer += '</script>\n'
 
 	navbar = create_navbar(leagues, active='C', colour='black', active_colour='red')
-	html_page(f'html/christmas.html',None,title='2022 Christmas Review', gw=api._current_gw, html=html_buffer, bar_html=navbar, showtitle=True,plotly=True)
+	html_page(f'html/christmas.html',None,title='2023 Christmas Review', gw=api._current_gw, html=html_buffer, bar_html=navbar, showtitle=True,plotly=True, colour='seagreen', nonw3_colour=True, text_colour='white')
 
 def manager_ids(mans):
 	return [m.id for m in mans]
@@ -3026,46 +3055,47 @@ def league_best_chips(league):
 
 	# bench boost
 	bb_subset = [m for m in league.managers if m._bb_week]
-	bb_best = get_winners("Best BB", bb_subset, lambda x: x._bb_ptsgain)
-	bb_worst = get_losers("Worst BB", bb_subset, lambda x: x._bb_ptsgain)
-	if finished:
+	if len(bb_subset) > 1:
+		bb_best = get_winners("Best BB", bb_subset, lambda x: x._bb_ptsgain)
+		bb_worst = get_losers("Worst BB", bb_subset, lambda x: x._bb_ptsgain)
 		create_key(json[str(league.id)]['chips'],'bb')
-		json[str(league.id)]['chips']['bb']['best'] = [bb_best[0],manager_ids(bb_best[1])]
-		json[str(league.id)]['chips']['bb']['worst'] = [bb_worst[0],manager_ids(bb_worst[1])]
+		json[str(league.id)]['chips']['bb']['best'] = [bb_best[0],bb_best[1].id]
+		json[str(league.id)]['chips']['bb']['worst'] = [bb_worst[0],bb_worst[1].id]
 
 	# triple captain
 	tc_subset = [m for m in league.managers if m._tc_week]
-	tc_best = get_winners("Best TC", tc_subset, lambda x: x._tc_ptsgain)
-	tc_worst = get_losers("Worst TC", tc_subset, lambda x: x._tc_ptsgain)
-	if finished:
+	if len(tc_subset) > 1:
+		tc_best = get_winners("Best TC", tc_subset, lambda x: x._tc_ptsgain)
+		tc_worst = get_losers("Worst TC", tc_subset, lambda x: x._tc_ptsgain)
 		create_key(json[str(league.id)]['chips'],'tc')
-		json[str(league.id)]['chips']['tc']['best'] = [tc_best[0],manager_ids(tc_best[1])]
-		json[str(league.id)]['chips']['tc']['worst'] = [tc_worst[0],manager_ids(tc_worst[1])]
+		json[str(league.id)]['chips']['tc']['best'] = [tc_best[0],tc_best[1].id]
+		json[str(league.id)]['chips']['tc']['worst'] = [tc_worst[0],tc_worst[1].id]
 
 	# Free hit
 	fh_subset = [m for m in league.managers if m._fh_week]
-	fh_best = get_losers("Best fh", fh_subset, lambda x: x._fh_gwrank)
-	fh_worst = get_winners("Worst fh", fh_subset, lambda x: x._fh_gwrank)
-	if finished:
+	if len(fh_subset) > 1:
+		fh_best = get_losers("Best fh", fh_subset, lambda x: x._fh_gwrank)
+		fh_worst = get_winners("Worst fh", fh_subset, lambda x: x._fh_gwrank)
 		create_key(json[str(league.id)]['chips'],'fh')
-		json[str(league.id)]['chips']['fh']['best'] = [fh_best[0],manager_ids(fh_best[1])]
-		json[str(league.id)]['chips']['fh']['worst'] = [fh_worst[0],manager_ids(fh_worst[1])]
+		json[str(league.id)]['chips']['fh']['best'] = [fh_best[0],fh_best[1].id]
+		json[str(league.id)]['chips']['fh']['worst'] = [fh_worst[0],fh_worst[1].id]
 
 	# First wildcard
 	wc1_subset = [m for m in league.managers if m._wc1_week]
 	wc1_best = get_winners("Best wc1", wc1_subset, lambda x: x._wc1_ordelta_percent)
 	wc1_worst = get_losers("Worst wc1", wc1_subset, lambda x: x._wc1_ordelta_percent)
 	create_key(json[str(league.id)]['chips'],'wc1')
-	json[str(league.id)]['chips']['wc1']['best'] = [wc1_best[0],manager_ids(wc1_best[1])]
-	json[str(league.id)]['chips']['wc1']['worst'] = [wc1_worst[0],manager_ids(wc1_worst[1])]
+	json[str(league.id)]['chips']['wc1']['best'] = [wc1_best[0],wc1_best[1].id]
+	json[str(league.id)]['chips']['wc1']['worst'] = [wc1_worst[0],wc1_worst[1].id]
 
 	# Second wildcard
 	wc2_subset = [m for m in league.managers if m._wc2_week]
-	wc2_best = get_winners("Best wc2", wc2_subset, lambda x: x._wc2_ordelta_percent)
-	wc2_worst = get_losers("Worst wc2", wc2_subset, lambda x: x._wc2_ordelta_percent)
-	create_key(json[str(league.id)]['chips'],'wc2')
-	json[str(league.id)]['chips']['wc2']['best'] = [wc2_best[0],manager_ids(wc2_best[1])]
-	json[str(league.id)]['chips']['wc2']['worst'] = [wc2_worst[0],manager_ids(wc2_worst[1])]
+	if finished:
+		wc2_best = get_winners("Best wc2", wc2_subset, lambda x: x._wc2_ordelta_percent)
+		wc2_worst = get_losers("Worst wc2", wc2_subset, lambda x: x._wc2_ordelta_percent)
+		create_key(json[str(league.id)]['chips'],'wc2')
+		json[str(league.id)]['chips']['wc2']['best'] = [wc2_best[0],manager_ids(wc2_best[1])]
+		json[str(league.id)]['chips']['wc2']['worst'] = [wc2_worst[0],manager_ids(wc2_worst[1])]
 
 	# table
 	html_buffer += '<table class="w3-table-all w3-hoverable">\n'
@@ -3083,48 +3113,41 @@ def league_best_chips(league):
 	html_buffer += '<tbody>\n'
 
 	### triple captain
-	html_buffer += '<tr>\n'
-	html_buffer += f'<td class="w3-amber" style="text-align:center;">TC</td>\n'
-	html_buffer += f'<td style="text-align:center;">\n'
-	for i,man in enumerate(tc_best[1]):
-		if i != 0:
-			html_buffer += "<br>\n"
+	if len(tc_subset) > 1:
+		html_buffer += '<tr>\n'
+		html_buffer += f'<td class="w3-amber" style="text-align:center;">TC</td>\n'
+		html_buffer += f'<td style="text-align:center;">\n'
+		man = tc_best[1]
 		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
 		if 'Toilet' in league.name and man.is_diamond:
 			html_buffer += "💎"
 		html_buffer += f'with {man._tc_name} in GW{man._tc_week}\n'
 
-		# html_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{player.id}.html">{player.name}</a></b></td>\n'
-
-	html_buffer +='</td>\n'
-	html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_best[0])}</td>\n'
-	if len(tc_subset) == 1:
-		html_buffer += f'<td></td>\n'
-		html_buffer += f'<td></td>\n'
-	else:
-		html_buffer += f'<td style="text-align:center;">\n'
-		for i,man in enumerate(tc_worst[1]):
-			if i != 0:
-				html_buffer += "<br>\n"
+		html_buffer +='</td>\n'
+		html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_best[0])}</td>\n'
+		if len(tc_subset) == 1:
+			html_buffer += f'<td></td>\n'
+			html_buffer += f'<td></td>\n'
+		else:
+			man = tc_worst[1]
+			html_buffer += f'<td style="text-align:center;">\n'
 			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
 			if 'Toilet' in league.name and man.is_diamond:
 				html_buffer += "💎"
 			html_buffer += f'with {man._tc_name} in GW{man._tc_week}\n'
-		html_buffer +='</td>\n'
-		html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_worst[0])}</td>\n'
-	html_buffer += '</tr>\n'
+			html_buffer +='</td>\n'
+			html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_worst[0])}</td>\n'
+		html_buffer += '</tr>\n'
 
 	### wildcard 1
 	html_buffer += '<tr>\n'
 	html_buffer += f'<td class="w3-red" style="text-align:center;">WC1</td>\n'
 	html_buffer += f'<td style="text-align:center;">\n'
-	for i,man in enumerate(wc1_best[1]):
-		if i != 0:
-			html_buffer += "<br>\n"
-		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-		if 'Toilet' in league.name and man.is_diamond:
-			html_buffer += "💎"
-		html_buffer += f' in GW{man._wc1_week}\n'
+	man = wc1_best[1]
+	html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+	if 'Toilet' in league.name and man.is_diamond:
+		html_buffer += "💎"
+	html_buffer += f' in GW{man._wc1_week}\n'
 	html_buffer +='</td>\n'
 	delta = man._wc1_ordelta_percent
 	if delta > 0:
@@ -3132,18 +3155,17 @@ def league_best_chips(league):
 	else:
 		delta = f"{delta:.0f}"
 	html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+
 	if len(wc1_subset) == 1:
 		html_buffer += f'<td></td>\n'
 		html_buffer += f'<td></td>\n'
 	else:
 		html_buffer += f'<td style="text-align:center;">\n'
-		for i,man in enumerate(wc1_worst[1]):
-			if i != 0:
-				html_buffer += "<br>\n"
-			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-			if 'Toilet' in league.name and man.is_diamond:
-				html_buffer += "💎"
-			html_buffer += f' in GW{man._wc1_week}\n'
+		man = wc1_worst[1]
+		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+		if 'Toilet' in league.name and man.is_diamond:
+			html_buffer += "💎"
+		html_buffer += f' in GW{man._wc1_week}\n'
 		html_buffer +='</td>\n'
 		delta = man._wc1_ordelta_percent
 		if delta > 0:
@@ -3154,35 +3176,15 @@ def league_best_chips(league):
 	html_buffer += '</tr>\n'
 
 	### wildcard 2
-	html_buffer += '<tr>\n'
-	html_buffer += f'<td class="w3-red" style="text-align:center;">WC2</td>\n'
-	html_buffer += f'<td style="text-align:center;">\n'
-	for i,man in enumerate(wc2_best[1]):
-		if i != 0:
-			html_buffer += "<br>\n"
+	if finished:
+		html_buffer += '<tr>\n'
+		html_buffer += f'<td class="w3-red" style="text-align:center;">WC2</td>\n'
+		html_buffer += f'<td style="text-align:center;">\n'
+		man = wc2_best[1]
 		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
 		if 'Toilet' in league.name and man.is_diamond:
 			html_buffer += "💎"
 		html_buffer += f' in GW{man._wc2_week}\n'
-	html_buffer +='</td>\n'
-	delta = man._wc2_ordelta_percent
-	if delta > 0:
-		delta = f"+{delta:.0f}"
-	else:
-		delta = f"{delta:.0f}"
-	html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
-	if len(wc2_subset) == 1:
-		html_buffer += f'<td></td>\n'
-		html_buffer += f'<td></td>\n'
-	else:
-		html_buffer += f'<td style="text-align:center;">\n'
-		for i,man in enumerate(wc2_worst[1]):
-			if i != 0:
-				html_buffer += "<br>\n"
-			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-			if 'Toilet' in league.name and man.is_diamond:
-				html_buffer += "💎"
-			html_buffer += f' in GW{man._wc2_week}\n'
 		html_buffer +='</td>\n'
 		delta = man._wc2_ordelta_percent
 		if delta > 0:
@@ -3190,38 +3192,35 @@ def league_best_chips(league):
 		else:
 			delta = f"{delta:.0f}"
 		html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
-	html_buffer += '</tr>\n'
+		if len(wc2_subset) == 1:
+			html_buffer += f'<td></td>\n'
+			html_buffer += f'<td></td>\n'
+		else:
+			html_buffer += f'<td style="text-align:center;">\n'
+			man = wc2_worst[1]
+			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+			if 'Toilet' in league.name and man.is_diamond:
+				html_buffer += "💎"
+			html_buffer += f' in GW{man._wc2_week}\n'
+			html_buffer +='</td>\n'
+			delta = man._wc2_ordelta_percent
+			if delta > 0:
+				delta = f"+{delta:.0f}"
+			else:
+				delta = f"{delta:.0f}"
+			html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+		html_buffer += '</tr>\n'
 
 	### free hit
-	html_buffer += '<tr>\n'
-	html_buffer += f'<td class="w3-green" style="text-align:center;">FH</td>\n'
-	html_buffer += f'<td style="text-align:center;">\n'
-	for i,man in enumerate(fh_best[1]):
-		if i != 0:
-			html_buffer += "<br>\n"
+	if len(fh_subset) > 1:
+		html_buffer += '<tr>\n'
+		html_buffer += f'<td class="w3-green" style="text-align:center;">FH</td>\n'
+		html_buffer += f'<td style="text-align:center;">\n'
+		man = fh_best[1]
 		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
 		if 'Toilet' in league.name and man.is_diamond:
 			html_buffer += "💎"
 		html_buffer += f' with {man._fh_total}pts in GW{man._fh_week}\n'
-	html_buffer +='</td>\n'
-	delta = 100*(man._fh_orprev-man._fh_or)/man._fh_orprev
-	if delta > 0:
-		delta = f"+{delta:.0f}"
-	else:
-		delta = f"{delta:.0f}"
-	html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
-	if len(fh_subset) == 1:
-		html_buffer += f'<td></td>\n'
-		html_buffer += f'<td></td>\n'
-	else:
-		html_buffer += f'<td style="text-align:center;">\n'
-		for i,man in enumerate(fh_worst[1]):
-			if i != 0:
-				html_buffer += "<br>\n"
-			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-			if 'Toilet' in league.name and man.is_diamond:
-				html_buffer += "💎"
-			html_buffer += f'with {man._fh_total}pts in GW{man._fh_week}\n'
 		html_buffer +='</td>\n'
 		delta = 100*(man._fh_orprev-man._fh_or)/man._fh_orprev
 		if delta > 0:
@@ -3229,36 +3228,50 @@ def league_best_chips(league):
 		else:
 			delta = f"{delta:.0f}"
 		html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
-	html_buffer += '</tr>\n'
+		if len(fh_subset) == 1:
+			html_buffer += f'<td></td>\n'
+			html_buffer += f'<td></td>\n'
+		else:
+			html_buffer += f'<td style="text-align:center;">\n'
+			man = fh_worst[1]
+			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+			if 'Toilet' in league.name and man.is_diamond:
+				html_buffer += "💎"
+			html_buffer += f'with {man._fh_total}pts in GW{man._fh_week}\n'
+			html_buffer +='</td>\n'
+			delta = 100*(man._fh_orprev-man._fh_or)/man._fh_orprev
+			if delta > 0:
+				delta = f"+{delta:.0f}"
+			else:
+				delta = f"{delta:.0f}"
+			html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+		html_buffer += '</tr>\n'
 
 	### bench boost
-	html_buffer += '<tr>\n'
-	html_buffer += f'<td class="w3-blue" style="text-align:center;">BB</td>\n'
-	html_buffer += f'<td style="text-align:center;">\n'
-	for i,man in enumerate(bb_best[1]):
-		if i != 0:
-			html_buffer += "<br>\n"
+	if len(bb_subset) > 1:
+		html_buffer += '<tr>\n'
+		html_buffer += f'<td class="w3-blue" style="text-align:center;">BB</td>\n'
+		html_buffer += f'<td style="text-align:center;">\n'
+		man = bb_best[1]
 		html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
 		if 'Toilet' in league.name and man.is_diamond:
 			html_buffer += "💎"
 		html_buffer += f'in GW{man._bb_week}\n'
-	html_buffer +='</td>\n'
-	html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb_best[0])}</td>\n'
-	if len(bb_subset) == 1:
-		html_buffer += f'<td></td>\n'
-		html_buffer += f'<td></td>\n'
-	else:
-		html_buffer += f'<td style="text-align:center;">\n'
-		for i,man in enumerate(bb_worst[1]):
-			if i != 0:
-				html_buffer += "<br>\n"
+		html_buffer +='</td>\n'
+		html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb_best[0])}</td>\n'
+		if len(bb_subset) == 1:
+			html_buffer += f'<td></td>\n'
+			html_buffer += f'<td></td>\n'
+		else:
+			html_buffer += f'<td style="text-align:center;">\n'
+			man = bb_worst[1]
 			html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
 			if 'Toilet' in league.name and man.is_diamond:
 				html_buffer += "💎"
 			html_buffer += f'in GW{man._bb_week}\n'
-		html_buffer +='</td>\n'
-		html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb_worst[0])}</td>\n'
-	html_buffer += '</tr>\n'
+			html_buffer +='</td>\n'
+			html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb_worst[0])}</td>\n'
+		html_buffer += '</tr>\n'
 
 	# triple captain
 
@@ -3282,28 +3295,32 @@ def pts_delta_format(delta):
 	else:
 		return f'+{delta}pts'
 
-def get_losers(name,managers,criterium,cutoff=4):
-	return get_winners(name, managers, criterium,reverse=False,cutoff=cutoff)
+# def get_losers(name,managers,criterium,cutoff=4):
+# 	return get_winners(name, managers, criterium,reverse=False,cutoff=cutoff)
 
-def get_winners(name,managers,criterium,reverse=True,cutoff=4):
+# def get_winners(name,managers,criterium,reverse=True,cutoff=4):
+# 	sorted_managers = sorted(managers, key=criterium, reverse=reverse)
+# 	scores = [criterium(x) for x in sorted_managers]
+# 	data = Counter(scores)
+# 	num = data[scores[0]]
+# 	if num < cutoff:
+# 		if num > 1: 
+# 			s = "s"
+# 		else: 		
+# 			s = ""
+# 		return scores[0],sorted_managers[0:num]
+# 	else:
+# 		mout.warningOut(f"Too many people sharing {name} award")
+# 		return scores[0],sorted_managers[0:num]
 
-	# print(criterium(managers[0]))
-	# print(managers)
-	# print([criterium(x) for x in managers])
+def get_losers(name,managers,criterium):
+	return get_winners(name, managers, criterium,reverse=False)
 
+def get_winners(name,managers,criterium,reverse=True):
 	sorted_managers = sorted(managers, key=criterium, reverse=reverse)
-	scores = [criterium(x) for x in sorted_managers]
-	data = Counter(scores)
-	num = data[scores[0]]
-	if num < cutoff:
-		if num > 1: 
-			s = "s"
-		else: 		
-			s = ""
-		return scores[0],sorted_managers[0:num]
-	else:
-		mout.warningOut(f"Too many people sharing {name} award")
-		return scores[0],sorted_managers[0:num]
+	man = sorted_managers[0]
+	score = criterium(man)
+	return score, man
 
 def make_season_awards(league):
 
@@ -3317,22 +3334,22 @@ def make_season_awards(league):
 	# print(league.managers)
 	# print(league.active_managers)
 
-	sorted_managers = sorted(league.active_managers, key=lambda x: x.total_livescore, reverse=True)
-	scores = [x.total_livescore for x in sorted_managers]
-	data = Counter(scores)
+	sorted_managers = sorted(league.active_managers, key=lambda x: (x.livescore, x.gw_rank_gain), reverse=True)
+	score = sorted_managers[0].total_livescore
+	# data = Counter(scores)
 	# print(data)
 	# print(scores)
-	num = data[scores[0]]
-	if num < 4:
-		if num > 1: 
-			s = "s"
-		else: 		
-			s = ""
-		html_buffer += award_panel('👑',f'King{s}','Best Score',f'{scores[0]} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0:num],colour='amber',border='yellow',name_class="h2",halfonly=True)
-		json[str(league.id)]['season']['awards']['king'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	else:
-		mout.warningOut("Too many people sharing king award")
-		json[str(league.id)]['season']['awards']['king'] = None
+	# num = data[scores[0]]
+	# if num < 4:
+	# 	if num > 1: 
+	# 		s = "s"
+	# 	else: 		
+	# 		s = ""
+	html_buffer += award_panel('👑',f'King','Best Score',f'{score} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0],colour='amber',border='yellow',name_class="h2",halfonly=True)
+	json[str(league.id)]['season']['awards']['king'] = [sorted_managers[0].id,score]
+	# else:
+		# mout.warningOut("Too many people sharing king award")
+		# json[str(league.id)]['season']['awards']['king'] = None
 
 	sorted_managers.reverse()
 	scores.reverse()
@@ -3452,136 +3469,69 @@ def christmas_awards(league):
 	create_key(json[str(league.id)],'half')
 	create_key(json[str(league.id)]['half'],'awards')
 
-	# print(league.managers)
-	# print(league.active_managers)
+	### KING
+	sorted_managers = sorted(league.active_managers, key=lambda x: (x.total_livescore, x.gw_rank_gain), reverse=True)
+	man = sorted_managers[0]
+	score = man.total_livescore
+	html_buffer += award_panel('👑',f'King','Best Score',f'{score} pts, {api.big_number_format(man.overall_rank)} OR',man,colour='amber',border='green',name_class="h2",halfonly=True)
+	json[str(league.id)]['half']['awards']['king'] = [man.id,score]
 
-	sorted_managers = sorted(league.active_managers, key=lambda x: x.total_livescore, reverse=True)
-	scores = [x.total_livescore for x in sorted_managers]
-	data = Counter(scores)
-	# print(data)
-	# print(scores)
-	num = data[scores[0]]
-	if num < 4:
-		if num > 1: 
-			s = "s"
-		else: 		
-			s = ""
-		html_buffer += award_panel('👑',f'King{s}','Best Score',f'{scores[0]} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0:num],colour='amber',border='green',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['king'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	else:
-		mout.warningOut("Too many people sharing king award")
-		json[str(league.id)]['half']['awards']['king'] = None
+	### COCK
+	man = sorted_managers[-1]
+	score = man.total_livescore
+	html_buffer += award_panel('🐓',f'Cock','Worst Score',f'{score} pts, {api.big_number_format(man.overall_rank)} OR',man,colour='red',border='green',name_class="h2",halfonly=True)
+	json[str(league.id)]['half']['awards']['cock'] = [man.id,score]
 
-	sorted_managers.reverse()
-	scores.reverse()
-	data = Counter(scores)
-	num = data[scores[0]]
-	if num < 4:
-		if num > 1: s = "s"
-		else: 		s = ""
-		html_buffer += award_panel('🐓',f'Cock{s}','Worst Score',f'{scores[0]} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0:num],colour='red',border='green',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['cock'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	else:
-		mout.warningOut("Too many people sharing cock award")
-		json[str(league.id)]['half']['awards']['cock'] = None
+	### FORTUNE TELLER
+	sorted_managers = sorted(league.active_managers, key=lambda x: (x.calculate_transfer_gain(), x._transfer_uniqueness), reverse=True)
+	man = sorted_managers[0]
+	score = man.total_transfer_gain
+	html_buffer += award_panel('🔮',f'Fortune Teller','Best Total Transfer Gain',f"{score:+} pts",man,colour='purple',border='green',name_class="h2",halfonly=True)
+	json[str(league.id)]['half']['awards']['fortune'] = [man.id,score]
 
-	sorted_managers = sorted(league.active_managers, key=lambda x: x.total_transfer_gain, reverse=True)
-	scores = [x.total_transfer_gain for x in sorted_managers]
-	data = Counter(scores)
-	num = data[scores[0]]
-	if num < 4:
-		html_buffer += award_panel('🔮',f'Fortune Teller','Best Total Transfer Gain',f"+{scores[0]} pts",sorted_managers[0:num],colour='purple',border='green',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['fortune'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	else:
-		mout.warningOut("Too many people sharing fortune spot")
-		json[str(league.id)]['half']['awards']['fortune'] = None
-
-	sorted_managers.reverse()
-	scores.reverse()
-	data = Counter(scores)
-	num = data[scores[0]]
-	if num < 4:
-		html_buffer += award_panel('🤡',f'Clown','Worst Total Transfer Gain',f"{scores[0]} pts",sorted_managers[0:num],colour='pale-red',border='green',name_class="h2",halfonly=True)
-		json[str(league.id)]['half']['awards']['clown'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	else:
-		mout.warningOut("Too many people sharing clown spot")
-		json[str(league.id)]['half']['awards']['clown'] = None
+	### CLOWN
+	man = sorted_managers[-1]
+	score = man.total_transfer_gain
+	html_buffer += award_panel('🤡',f'Clown','Worst Total Transfer Gain',f"{score:+} pts",man,colour='pale-red',border='green',name_class="h2",halfonly=True)
+	json[str(league.id)]['half']['awards']['clown'] = [man.id,score]
 
 	# kneejerker
-	sorted_managers = sorted(league.active_managers, key=lambda x: x.num_nonwc_transfers, reverse=True)
-	scores = [x.num_nonwc_transfers for x in sorted_managers]
-	data = Counter(scores)
-	num = data[scores[0]]
-	if num > 1:
-		sorted_managers2 = [sorted(sorted_managers[0:num], key=lambda x: x.num_hits, reverse=True)[0]]
-		scores2 = [[x.num_hits for x in sorted_managers][0]]
-		data = Counter(scores2)
-		num = data[scores2[0]]
-		print("Kneejerker",sorted_managers2[0:num],scores[0],scores2[0])
-		json[str(league.id)]['half']['awards']['kneejerker'] = [[m.id for m in sorted_managers2[0:num]],scores[0],scores2[0]]
-		html_buffer += award_panel('🔨',f'Kneejerker','Most Transfers',f'{scores[0]} transfers, {scores2[0]} hits',sorted_managers2[0:num],colour='deep-orange',border='green',name_class="h2",halfonly=True)
-	else:
-		print("Kneejerker",sorted_managers[0:num],scores[0],sorted_managers[0].num_hits)
-		json[str(league.id)]['half']['awards']['kneejerker'] = [[sorted_managers[0].id],scores[0],sorted_managers[0].num_hits]
-		html_buffer += award_panel('🔨',f'Kneejerker','Most Transfers',f'{scores[0]} transfers, {sorted_managers[0].num_hits} hits',sorted_managers[0],colour='deep-orange',border='green',name_class="h2",halfonly=True)
+	sorted_managers = sorted(league.active_managers, key=lambda x: (x.num_nonwc_transfers, x.num_hits, x._transfer_uniqueness), reverse=True)
+	man = sorted_managers[0]
+	json[str(league.id)]['half']['awards']['kneejerker'] = [man.id,man.num_nonwc_transfers,man.num_hits]
+	html_buffer += award_panel('🔨',f'Kneejerker','Most Transfers',f'{man.num_nonwc_transfers} transfers, {man.num_hits} hits',man,colour='deep-orange',border='green',name_class="h2",halfonly=True)
 
 	# iceman
-	sorted_managers.reverse()
-	scores.reverse()
-	data = Counter(scores)
-	num = data[scores[0]]
-	if num > 1:
-		sorted_managers2 = sorted(sorted_managers[0:num], key=lambda x: x.num_hits, reverse=False)
-		scores2 = [x.num_hits for x in sorted_managers]
-		data = Counter(scores2)
-		num = data[scores2[0]]
-		print("Iceman",sorted_managers2[0:num],scores[0],scores2[0])
-		json[str(league.id)]['half']['awards']['iceman'] = [[m.id for m in sorted_managers2[0:num]],scores[0],scores2[0]]
-		html_buffer += award_panel('🥶',f'Iceman','Least Transfers',f'{scores[0]} transfers, {scores2[0]} hits',sorted_managers2[0:num],colour='aqua',border='green',name_class="h2",halfonly=True)
-	else:
-		print("Iceman",sorted_managers[0:num],scores[0],sorted_managers[0].num_hits)
-		json[str(league.id)]['half']['awards']['iceman'] = [[sorted_managers[0].id],scores[0],sorted_managers[0].num_hits]
-		html_buffer += award_panel('🥶',f'Iceman','Least Transfers',f'{scores[0]} transfers, {sorted_managers[0].num_hits} hits',sorted_managers[0],colour='aqua',border='green',name_class="h2",halfonly=True)
+	man = sorted_managers[-1]
+	json[str(league.id)]['half']['awards']['iceman'] = [man.id,man.num_nonwc_transfers,man.num_hits]
+	html_buffer += award_panel('🥶',f'Iceman','Least Transfers',f'{man.num_nonwc_transfers} transfers, {man.num_hits} hits',man,colour='aqua',border='green',name_class="h2",halfonly=True)
 
 	# oligarch
-	sorted_managers = sorted(league.active_managers, key=lambda x: x.team_value, reverse=True)
-	scores = [x.team_value for x in sorted_managers]
-	data = Counter(scores)
-	num = data[scores[0]]
-	json[str(league.id)]['half']['awards']['oligarch'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	html_buffer += award_panel('🛢',f'Oligarch','Highest Team Value',f'£{scores[0]:.1f}',sorted_managers[0:num],colour='black',border='green',name_class="h2",halfonly=True)
+	sorted_managers = sorted(league.active_managers, key=lambda x: (x.team_value, -x.total_livescore), reverse=True)
+	man = sorted_managers[0]
+	json[str(league.id)]['half']['awards']['oligarch'] = [man.id,man.team_value]
+	html_buffer += award_panel('🛢',f'Oligarch','Highest Team Value',f'£{man.team_value:.1f}',man,colour='black',border='green',name_class="h2",halfonly=True)
 
 	# peasant
-	sorted_managers.reverse()
-	scores.reverse()
-	data = Counter(scores)
-	num = data[scores[0]]
-	json[str(league.id)]['half']['awards']['peasant'] = [[m.id for m in sorted_managers[0:num]],scores[0]]
-	html_buffer += award_panel('🏚',f'Peasant','Lowest Team Value',f'£{scores[0]:.1f}',sorted_managers[0:num],colour='brown',border='green',name_class="h2",halfonly=True)
+	man = sorted_managers[-1]
+	json[str(league.id)]['half']['awards']['peasant'] = [man.id,man.team_value]
+	html_buffer += award_panel('🏚',f'Peasant','Lowest Team Value',f'£{man.team_value:.1f}',man,colour='brown',border='green',name_class="h2",halfonly=True)
+
+	christmas_gw = 18
 	
 	# glow-up (best improvement in the quarter season (GW8-GW16))
-	sorted_managers = sorted(league.active_managers, key=lambda x: (x.get_specific_overall_rank(8)-x.get_specific_overall_rank(16))/x.get_specific_overall_rank(8), reverse=True)
+	sorted_managers = sorted(league.active_managers, key=lambda x: (x.get_specific_overall_rank(christmas_gw/2)-x.get_specific_overall_rank(christmas_gw))/x.get_specific_overall_rank(christmas_gw/2), reverse=True)
 	m = sorted_managers[0]
-	s = (m.get_specific_overall_rank(8)-m.get_specific_overall_rank(16))/m.get_specific_overall_rank(8)
-	json[str(league.id)]['half']['awards']['glow_up'] = [[m.id],s]
-	if s > 0:
-		html_buffer += award_panel('💡',f'Glow-Up','Best 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = +{100*s:.1f}%',m,colour='pale-yellow',border='green',name_class="h2",halfonly=True)
-	else:
-		html_buffer += award_panel('💡',f'Glow-Up','Best 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = {100*s:.1f}%',m,colour='pale-yellow',border='green',name_class="h2",halfonly=True)
+	s = (m.get_specific_overall_rank(christmas_gw/2)-m.get_specific_overall_rank(christmas_gw))/m.get_specific_overall_rank(christmas_gw/2)
+	json[str(league.id)]['half']['awards']['glow_up'] = [m.id,s]
+	html_buffer += award_panel('💡',f'Glow-Up',f'Best {int(christmas_gw/2):d}GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(christmas_gw/2))}→{api.big_number_format(m.get_specific_overall_rank(christmas_gw))} = {100*s:+.1f}%',m,colour='pale-yellow',border='green',name_class="h2",halfonly=True)
 
-	# iceman
+	# has-been
 	m = sorted_managers[-1]
-	s = m.get_specific_overall_rank(16)-m.get_specific_overall_rank(8)
-	s = -s/m.get_specific_overall_rank(8)
-	json[str(league.id)]['half']['awards']['has_been'] = [[m.id],s]
-	if s > 0:
-		html_buffer += award_panel('👨‍🦳',f'Has-Been','Worst 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = +{100*s:.1f}%',m,colour='grey',border='green',name_class="h2",halfonly=True)
-	else:
-		html_buffer += award_panel('👨‍🦳',f'Has-Been','Worst 8GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(8))}→{api.big_number_format(m.get_specific_overall_rank(16))} = {100*s:.1f}%',m,colour='grey',border='green',name_class="h2",halfonly=True)
-
-	# has-been (best improvement in the quarter season (GW8-GW16))
-
-	# best chip uses
+	s = m.get_specific_overall_rank(christmas_gw)-m.get_specific_overall_rank(christmas_gw/2)
+	s = -s/m.get_specific_overall_rank(christmas_gw/2)
+	json[str(league.id)]['half']['awards']['has_been'] = [m.id,s]
+	html_buffer += award_panel('👨‍🦳',f'Has-Been',f'Worst {int(christmas_gw/2):d}GW improvement',f'{api.big_number_format(m.get_specific_overall_rank(christmas_gw/2))}→{api.big_number_format(m.get_specific_overall_rank(christmas_gw))} = {100*s:+.1f}%',m,colour='grey',border='green',name_class="h2",halfonly=True)
 
 	return html_buffer
 

@@ -49,7 +49,7 @@ def fix_table_classes(html):
 	return html
 
 # @mout.debug_time
-def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False,plotly=False):
+def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False,plotly=False, text_colour='black'):
 	mout.debugOut(f"html_page({target})")
 
 	if mdfile is None:
@@ -107,7 +107,7 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 
 	# BODY
 	if nonw3_colour:
-		fout_buffer.append(f'<body class="shadow25" style="background-color:{colour};">\n')
+		fout_buffer.append(f'<body class="shadow25" style="background-color:{colour};color:{text_colour}">\n')
 	else:
 		fout_buffer.append(f'<body class="w3-{colour} shadow25">\n')
 

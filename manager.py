@@ -39,7 +39,7 @@ class Manager():
 		self._nonwc_transfers = None
 
 		self._kit_path = f"kits/man_{self.id}.png"
-		self._gui_url = f"https://mwinokan.github.io/FPL_GUI/html/man_{self.id}.html"
+		self._gui_url = f"https://mwinokan.github.io/ToiletFPL/html/man_{self.id}.html"
 		self._gui_path = f"html/man_{self.id}.html"
 
 		self.get_stats()

@@ -113,7 +113,7 @@ class Player():
 		self.__fix_started = None
 		self.__fix_finished = None
 
-		self._gui_url = f"https://mwinokan.github.io/FPL_GUI/html/player_{self.id}.html"
+		self._gui_url = f"https://mwinokan.github.io/ToiletFPL/html/player_{self.id}.html"
 
 		if int(self.id) not in self._api._loaded_players:
 			self._api._loaded_players.append(int(self.id))
