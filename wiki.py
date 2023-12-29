@@ -1354,7 +1354,7 @@ def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 		url = f'https://mwinokan.github.io/ToiletFPL/html/season.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏁 End of season</a>\n'
 
-	if halfway_awards:
+	if halfway_awards or api._current_gw > 18:
 		url = f'https://mwinokan.github.io/ToiletFPL/html/christmas.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🎄 Christmas</a>\n'
 
