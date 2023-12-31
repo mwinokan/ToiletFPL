@@ -23,7 +23,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = True
+offline = False
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -352,7 +352,7 @@ def test_christmas():
 def run_test():
 
 	# push_changes()
-	test_christmas()
+	# test_christmas()
 
 	# print(api.fixtures.columns)
 
@@ -391,9 +391,9 @@ def run_test():
 
 	# # p.expected_points(gw=2,use_official=True,debug=True)
 	# # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
-	# man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
-	# # man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
-	# create_managerpage(api, man, [])
+	# man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
+	man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
+	create_managerpage(api, man, [])
 
 	api.finish()
 	exit()
@@ -1864,16 +1864,42 @@ def create_managerpage(api,man,leagues):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
-	if len(man._graph_paths) > 0:
+	# if len(man._graph_paths) > 0:
 
 		html_buffer += floating_subtitle('Graphs')
 
-		for path in man._graph_paths:
-			html_buffer += '<div class="w3-col s12 m12 l6">\n'
-			html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
-			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{path}?raw=true" alt="Manager Graph">\n'
-			html_buffer += '</div>\n'
-			html_buffer += '</div>\n'
+		import sys
+		sys.path.insert(1,'go')
+		from goleague import create_league_figure	
+		from goman import manager_rank_waterfall	
+
+		### ADD GAMEWEEK RANKS!	
+
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		html_buffer += create_league_figure(api, league=None, subset=None, single=man, rank=True)
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		html_buffer += manager_rank_waterfall(api,man)
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+		
+		html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		html_buffer += create_league_figure(api, league=None, subset=None, single=man, rank=False)
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+
+	
+		# for path in man._graph_paths:
+		# 	html_buffer += '<div class="w3-col s12 m12 l6">\n'
+		# 	html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		# 	html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{path}?raw=true" alt="Manager Graph">\n'
+		# 	html_buffer += '</div>\n'
+		# 	html_buffer += '</div>\n'
 		
 	navbar = create_navbar(leagues)
 

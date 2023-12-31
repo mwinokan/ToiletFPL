@@ -19,7 +19,7 @@ def main():
 
 	create_league_figure(api,league,show=True)
 
-def create_league_figure(api,league,subset=None,show=False,rank=True):
+def create_league_figure(api,league,subset=None,show=False,rank=True,single=False):
 	gw = api._current_gw
 	mout.debugOut(f"create_league_figure()")
 
@@ -36,7 +36,12 @@ def create_league_figure(api,league,subset=None,show=False,rank=True):
 		for x,y in zip(x,y):
 			data_dict[x] = y
 
-	for i,man in enumerate(sorted(league.managers,key= lambda x: x.name)):
+	if single:
+		generator = [single]
+	else:
+		generator = sorted(league.managers,key= lambda x: x.name)
+
+	for i,man in enumerate(generator):
 
 		if not rank:
 			text = [None]+man.chip_text_list(with_name=False)
@@ -75,7 +80,17 @@ def create_league_figure(api,league,subset=None,show=False,rank=True):
 			text[-1] += f' {man.name}'
 
 		# fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="bottom center",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
-		fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="middle right",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
+
+		if single:
+			fig.add_trace(go.Scatter(name='Overall Rank',opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="middle right",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
+
+			if rank:
+				this_y = [p for i,p in zip(man.active_gws,man._event_rank) if i not in api._skip_gws]
+				fig.add_trace(go.Scatter(name='GW Rank',opacity=1.0,x=this_x, y=this_y,visible=visible,textposition="middle right",mode='markers',customdata=[man._gui_url for x in this_x]))
+
+		else:
+			fig.add_trace(go.Scatter(name=man.name,opacity=1.0,x=this_x,text=text, y=this_y,visible=visible,textposition="middle right",mode='markers+lines+text',customdata=[man._gui_url for x in this_x]))
+
 
 	if not rank:
 		fig.update_traces(marker=dict(line=dict(width=1,color='Black')),selector=dict(mode='markers'))
@@ -84,7 +99,11 @@ def create_league_figure(api,league,subset=None,show=False,rank=True):
 	else:
 		fig.update_yaxes(title_text=f"Overall Rank",autorange='reversed',type='log')
 
-	fig.update_layout(legend_title_text = f"{league.name}",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
+	if not single:
+		fig.update_layout(legend_title_text = f"{league.name}",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
+	else:
+		fig.update_layout(legend_title_text = f"{single.name}",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
+
 	fig.update_xaxes(title_text=f"Gameweek")
 
 	# Get HTML representation of plotly.js and this figure
