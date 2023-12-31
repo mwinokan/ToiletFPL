@@ -23,7 +23,7 @@ path = '../FPL_GUI.wiki'
 
 run_push_changes = True
 test = False
-offline = False
+offline = True
 
 create_launchd_plist = False
 force_generate_kits = False
@@ -3790,7 +3790,14 @@ def create_leaguepage(league,leagues,i):
 
 			# start = time.perf_counter()
 			players = league.get_starting_players(unique=False)
-			p = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)[0]
+
+			n = league.num_managers
+
+			# p = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)[0]
+			
+			# p = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)[0]
+			p = sorted(players, key=lambda p: (effective_points_gained(p,n), -p._parent_manager.avg_selection), reverse=True)[0]
+
 			m = p._parent_manager
 			p_str = p.name
 			if p.is_captain:
@@ -4666,6 +4673,10 @@ def position_template(league,players,pos_str,gw):
 
 	return html_buffer
 
+def effective_points_gained(player,n):
+	# return player.multiplier*player.get_event_score(not_playing_is_none=False)/player.league_count
+	return player.get_event_score(not_playing_is_none=False) * (player.multiplier - player.league_count/n)
+
 def league_differentials(league,gw):
 	global json
 
@@ -4673,7 +4684,10 @@ def league_differentials(league,gw):
 
 	players = league.get_starting_players(unique=False)
 
-	sorted_players = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)
+	n = league.num_managers
+
+	sorted_players = sorted(players, key=lambda p: (effective_points_gained(p,n), -p._parent_manager.avg_selection), reverse=True)
+	# sorted_players = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)
 
 	html_buffer += f'<table class="w3-table responsive-text">\n'
 	# html_buffer += f'<tr>\n'
@@ -4689,6 +4703,8 @@ def league_differentials(league,gw):
 		m = p._parent_manager
 		score, summary = p.get_event_score(summary=True,not_playing_is_none=False,team_line=False)
 		summary = summary.replace("\n","<br>")
+
+		# print(p,m,effective_points_gained(p,n),p.league_count,m.avg_selection)
 
 		html_buffer += f'<tr>\n'
 		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
