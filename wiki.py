@@ -2156,6 +2156,8 @@ def create_chip_table(api,man):
 
 	return html_buffer
 
+# def create_picks_table(api,players,)
+
 def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None):
 
 	html_buffer = ""

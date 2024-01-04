@@ -7,7 +7,11 @@ def manager_rank_waterfall(api, man):
 
 	gws = man._active_gws
 
-	or_delta = [man._overall_rank[0]] + [r - man._overall_rank[i-1] for i,r in enumerate(man._overall_rank[1:])]
+	or_delta = [man._overall_rank[0]] + [r - man._overall_rank[i] for i,r in enumerate(man._overall_rank[1:])]
+
+	# print(gws)
+	# print(man._overall_rank)
+	# print(or_delta)
 
 	# for gw, r in zip(gws,or_delta):
 	# 	print(gw,r)
