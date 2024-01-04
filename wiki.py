@@ -19,41 +19,28 @@ from pprint import pprint
 from datetime import datetime
 timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 
-path = '../FPL_GUI.wiki'
+# deployment configuration
+DEPLOY_ROOT = 'mwinokan.github.io/ToiletFPL'
+JSON_PATH = "data_wiki_2324.json" # store the award data in this JSON
+TAGLINE = "Home of the RBS Diamond Invitational and Tesco Bean Value Toilet League"
 
-run_push_changes = True
-test = False
-offline = False
+# run options
+run_push_changes = True # push changes to github
+test = False # only run the 'run_test' function
+offline = False # use cached request data
 
-create_launchd_plist = False
-force_generate_kits = False
+### other options
+force_generate_kits = False # force the generation of manager's kits
+scrape_kits = False # scrape latest PL team jerseys and exit
+fetch_latest = True # pull latest changes from github before running
+force_go_graphs = True # force update of Assets graph
 
-scrape_kits = False
-fetch_latest = True
-force_plot = False
-force_go_graphs = True
+# gamestate options (to be automated)
+halfway_awards = False # generate half-season / christmas awards
+season_awards = False # generate full-season awards
+cup_active = False # activate the cup
 
-force = False
-halfway_awards = False
-season_awards = False
-cup_active = False
-
-wc1_cutoff = 19
-
-JSON_PATH = "data_wiki_2324.json"
-
-import sys
-if len(sys.argv) > 1 and sys.argv[1] == '-daemon':
-	create_launchd_plist = True
-elif len(sys.argv) > 1 and sys.argv[1] == '-f':
-	force = True
-
-# 22/23
-league_codes = [663873,910674,937886,1020381,696154]
-league_colours = ['aqua','brown','green','red','purple']
-league_colours = ['aqua','dark-grey','pale-green','pale-red','dark-grey']
-league_shortnames = ['Diamond','Toilet','GU','RU','Dinner']
-league_icons = ["💎","🚽","🦌","📚","🍝"]
+# configure the leagues
 
 # 23/24
 league_codes = [146330,121011,114707]
@@ -95,6 +82,7 @@ award_flavourtext = dict(
 	fh_best='Best Free Hit',
 	fh_worst='Worst Free Hit'
 )
+
 award_unittext = dict(
 	king="points",
 	cock="points",
@@ -148,7 +136,6 @@ award_colour = dict(king="amber",
 	flushed='brown',
 )
 
-
 _league_table_html = {}
 
 brk = '</p><p>'
@@ -156,14 +143,7 @@ brk = '</p><p>'
 league_halfway_text = {146330:f"The RBS Diamond Invitational has proved to be a wild ride so far, in which our 12 elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award the second annual Christmas awards to a lucky few recipients.{brk}Ed Lees saw himself off to a strong start, rocketing up to top of the league and a 33k overall rank by gameweek 3, partly thanks to transferring in Gusto for his 14-pointer. So far, Ed has gained a healthy 61 points from his transfers, and earns the Christmas 🔮 Fortune Teller award. It would take another five game weeks to unseat Ed from the top, as many wildcarding managers shook up the template. At this point Nye Johnson took the lead, gaining only five points over his GW7 squad with his wildcard, but picks such as Maddison, Son, and Watkins saw him improve his rank by 95% within five weeks. A tragic Tsimikas (15) to Lascelles (0)  move in GW12 marked the end of his tenure at the top as Tanya Fozzard’s took over with a steady climb that earn’s her this season’s Christmas 👑 King award.{brk}Newly promoted Kajan Kugananthajothy did not take last year’s form into the new season and despite many attempts to fix his squad - taking a whopping 20 non-wildcard transfers including 10 hits - he is this Christmas’ 🔨 Kneejerker, 🐓 Cock and 🤡 Clown. 🥶 Iceman and 🏚 Peasant Rob Sutton on the other hand kept a cool head, taking only a single hit and making 12 transfers so far, that’s probably why his team value is only £101 million, the lowest in the league. Rob’s season wasn’t always bad though, in GW6 he was second in the table and almost breached the top 250k, several red arrows has earned him the 👨‍🦳 Has-Been award for his -122% OR drop between GW9 and GW18. Can Rob save his season and escape the four relegation spots?",121011:""}
 league_season_text = {146330:f"PLACEHOLDER DIAMOND SEASON REVIEW",121011:f"PLACEHOLDER TOILET SEASON REVIEW"}
 
-watchlist = [
-			]
-
-squad = None
 preseason = False
-
-risers = []
-fallers = []
 
 completed_playerpages = []
 
@@ -176,16 +156,9 @@ def main():
 	mout.debugOut("main()")
 	import os
 	if offline:
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update [OFFLINE]' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
+		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update [OFFLINE]' -open 'https://{DEPLOY_ROOT}/index.html'")
 	else:
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
-
-	if create_launchd_plist:
-		# launchd_plist(interval=300)
-		# launchd_plist(interval=600)
-		launchd_plist(interval=3600)
-		# launchd_plist(interval=14400)
-		exit()
+		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'")
 
 	if fetch_latest:
 		pull_changes()
@@ -200,15 +173,7 @@ def main():
 	global preseason
 	preseason = api._current_gw < 1
 
-	global squad
-	squad = Squad()
-	for name in watchlist:
-		squad.add_player(Player(name,api))
-
-	# api._force_generate_kits = not api._live_gw
 	api._skip_kits = False
-
-	clear_logs()
 
 	global json
 	json = load_json()
@@ -226,15 +191,6 @@ def main():
 
 	leagues = []
 	for icon,code,colour,shortname in zip(league_icons,league_codes,league_colours,league_shortnames):
-		# if code == 910674:
-		# 	leagues.append(League(code,api,extra=[
-		# 		[3106633,'Rob','Sutton','Take the Plange*'],
-		# 		[2778113,'Matthew','Wiggins','Makin Emile Of It FC*'],
-		# 		# [5977880,'Magnus','Carlsen','KFUM Tjuvholmen**']
-		# 		]))
-		# elif code == 696154:
-		# 	leagues.append(League(code,api,extra=extra_managers))
-		# else:
 		try:
 			leagues.append(League(code,api))
 			leagues[-1]._icon = icon
@@ -248,34 +204,20 @@ def main():
 	navbar = create_navbar(leagues)
 
 	create_homepage(navbar)
-
-	# get_manager_json_positions(api,leagues)
 	
-	if api._current_gw > 28:
+	if cup_active:
 		create_cup_page(api,leagues[1],leagues)
-
-	# leagues[0].create_points_graph()
-	# leagues[-1].create_points_graph()
 
 	for i,l in enumerate(leagues):
 		create_leaguepage(l,leagues,i)
-		# exit()
-	# exit()
 	
 	create_teampage(api,leagues)
 
 	if halfway_awards:
 		create_christmaspage(leagues)
-		# api.finish()
-		# exit()
 
-	# global season_awards
-	# if api._current_gw == 38 and not api._live_gw:
-	# 	season_awards = True
 	if season_awards:
 		create_seasonpage(leagues)
-		# api.finish()
-		# exit()
 
 	json['timestamp'] = timestamp
 
@@ -283,19 +225,13 @@ def main():
 	json = load_json()
 
 	get_manager_json_awards(api,leagues)
-	# get_manager_json_positions(api,leagues)
 
 	count = 0
 	mout.debugOut("main()::ManagerPages")
 	mout.hideDebug()
 	maximum = len(api._managers)
-	plot = force_plot or not api._live_gw
 	for i,m in enumerate(api._managers.values()):
 		mout.progress(i,maximum)
-		if api._current_gw > 1:
-			m.create_rank_graph(plot=plot,show=False)
-			m.create_points_graph(plot=plot,show=False)
-		# m.create_leaguepos_graph(plot=plot,show=False)
 		create_managerpage(api, m, leagues)
 	mout.progress(maximum,maximum)
 	mout.showDebug()
@@ -308,25 +244,11 @@ def main():
 		mout.progress(count,maximum,append=f' {count}/{maximum}')
 		pid = int(pid)
 		create_playerpage(api,Player(None,index=api.get_player_index(pid),api=api),leagues)
-		# if count > 10:
-		# 	exit()	
 		count += 1
 	mout.progress(maximum,maximum)
 	mout.showDebug()
 	
-	# if api._current_gw > 0:
 	create_assetpage(leagues)
-
-	# mout.varOut("#requests=",len(api._request_log))
-
-	# # sorted_managers = sorted(league.managers, key=lambda x: x.livescore, reverse=True)
-	# reqs = [x for x in api._request_log]
-	# data = Counter(reqs)
-	# for req in api._request_log:
-	# 	if data[req] > 1:
-	# 		mout.warningOut(f"Multiple requests ({data[req]}) to {req}")
-
-	# js.dump(api._request_log,open('requests.json','wt'), indent="\t")
 
 	api.finish()
 
@@ -409,9 +331,6 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 		players.append(p)
 
 	players = sorted(players,key=lambda x: x.selected_by,reverse=True)
-
-	# subset = ['Luis','Martinelli','Foden','Ederson','Chukwu']
-	# subset = [Player(n,api) for n in subset]
 
 	html_buffer = ""
 
@@ -544,7 +463,7 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 		style_str = f'"background-color:{bg_color};color:{text_color};vertical-align:middle;"'
 		html_buffer += f'<td style={style_str}>\n'
 		html_buffer += f'<img class="w3-image" src="{p.team_obj._badge_url}" alt="{p.team_obj.shortname}" width="20" height="20">\n'
-		html_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html"><b> {p.name}</a>\n'
+		html_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html"><b> {p.name}</a>\n'
 		if p.is_yellow_flagged:
 			html_buffer += f' ⚠️'
 		elif p.is_red_flagged:
@@ -635,7 +554,6 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 		for i in range(now_gw+1,end_gw+1):
 			exp = p.expected_points(gw=i,debug=False)
 			style_str = get_style_from_event_score(exp).rstrip('"')+';vertical-align:middle;"'
-			# html_buffer += f'<td class="w3-center" style={style_str}>{exp:.1f}</td>\n'
 			html_buffer += f'<td class="w3-center" style={style_str}>{p.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
 
 		html_buffer += f'</tr>\n'
@@ -742,8 +660,6 @@ def create_cup_page(api,league,leagues):
 
 	all_matches = []
 
-	# for manager in [Manager("Max Winokan",780664,api)]:
-
 	mout.debugOut(f"Getting all cup matches in {league.name}...")
 	for i,manager in enumerate(league.managers):
 		mout.progress(i,league.num_managers,width=50)
@@ -766,8 +682,6 @@ def create_cup_page(api,league,leagues):
 		matches = [m for m in all_matches if m['gw'] == gw]
 	
 		processed = []
-
-		# print(f'GW{gw} Cup Matches')
 
 		html_buffer += f'<h2>GW{gw} Cup Matches: {matches[0]["title"]}</h2>\n'
 		html_buffer += '<table class="w3-table-all">\n'
@@ -813,7 +727,6 @@ def create_cup_page(api,league,leagues):
 				man2 = match['opponent']
 				
 				if man2.id in processed:
-					# print('Skipping!')
 					continue
 
 				man2_score = man2.get_event_score(gw)
@@ -838,8 +751,6 @@ def create_cup_page(api,league,leagues):
 
 				man2 = None
 				winner = 1
-
-			# print(man1,man2)
 
 			html_buffer += '<tr>\n'
 
@@ -1022,9 +933,6 @@ def create_teampage(api,leagues):
 
 		html_buffer += '<table class="w3-table responsive-text">\n'
 
-		# table_buffer += '<tr>\n'
-		# html_buffer += f'<th class="w3-center" style={team_style_str}>Opponent</th>\n'
-
 		table_buffer = "<tr>\n"
 
 		### opponents
@@ -1078,7 +986,6 @@ def create_teampage(api,leagues):
 		table_buffer += '</tr>\n'
 
 		table_buffer += '<tr>\n'
-		# table_buffer += f'<th class="w3-center" style={team_style_str}>Score</th>\n'
 
 		special_gws = {}
 
@@ -1182,7 +1089,7 @@ def create_teampage(api,leagues):
 					str_buffer += f'⚠️ '
 				elif p.is_red_flagged:
 					str_buffer += f'⛔️ '
-				str_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html">{p.name}</a>\n'
+				str_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>\n'
 				return str_buffer
 
 			# Top scoring assets
@@ -1235,8 +1142,6 @@ def create_teampage(api,leagues):
 
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
-
-		# break
 
 	mout.progress(20,20)
 
@@ -1314,15 +1219,6 @@ def create_assetpage(leagues):
 			html_buffer += create_gwexp_figure(api,players)
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
-
-		# if gw > 3:
-		# 	html_buffer += floating_subtitle('BPS vs ')
-		# 	html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		# 	html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
-		# 	html_buffer += "<p>Player </p>"
-		# 	html_buffer += create_bonus_figure(api,players)
-		# 	html_buffer += '</div>\n'
-		# 	html_buffer += '</div>\n'
 			
 		# navbar = None
 		navbar = create_navbar(leagues)
@@ -1338,43 +1234,42 @@ def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 	html_buffer += f'<a class="w3-bar-item w3-{colour} w3-text-{colour}"></a>\n'
 	html_buffer += '<div class="w3-dropdown-hover">\n'
 	html_buffer += '<button class="w3-button w3-hover-aqua"><h3><span class="w3-tag w3-white">toilet.football</span></h3></button>\n'
-	# html_buffer += '<button class="w3-button w3-hover-aqua"><h3>FPL <span class="w3-tag w3-white">GUI</span></h3></button>\n'
 	html_buffer += '<div class="w3-dropdown-content w3-bar-block w3-card-4">\n'
 
-	url = f'https://mwinokan.github.io/ToiletFPL/index.html'
+	url = f'https://{DEPLOY_ROOT}/index.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>\n'
 
-	url = f'https://mwinokan.github.io/ToiletFPL/html/comparison.html'
+	url = f'https://{DEPLOY_ROOT}/html/comparison.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📊 Comparison Tool</a>\n'
 
-	url = f'https://mwinokan.github.io/ToiletFPL/html/assets.html'
+	url = f'https://{DEPLOY_ROOT}/html/assets.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📈 Asset Graphs</a>\n'
 
 	if season_awards:
-		url = f'https://mwinokan.github.io/ToiletFPL/html/season.html'
+		url = f'https://{DEPLOY_ROOT}/html/season.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏁 End of season</a>\n'
 
 	if halfway_awards or api._current_gw > 18:
-		url = f'https://mwinokan.github.io/ToiletFPL/html/christmas.html'
+		url = f'https://{DEPLOY_ROOT}/html/christmas.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🎄 Christmas</a>\n'
 
-	url = f'https://mwinokan.github.io/ToiletFPL/html/teams.html'
+	url = f'https://{DEPLOY_ROOT}/html/teams.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>\n'
 
 	if cup_active:
-		url = f'https://mwinokan.github.io/ToiletFPL/html/toilet_cup.html'
+		url = f'https://{DEPLOY_ROOT}/html/toilet_cup.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏆 Toilet Cup</a>\n'
 
 	for i,league in enumerate(leagues):
-		url = f'https://mwinokan.github.io/ToiletFPL/html/{league.name.replace(" ","-")}.html'
+		url = f'https://{DEPLOY_ROOT}/html/{league.name.replace(" ","-")}.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">{league._icon} {league.name}</a>\n'
 
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
 	html_buffer += f'<a class="w3-bar-item w3-{colour} w3-text-{colour} w3-right"></a>\n'
-	url = f'https://mwinokan.github.io/ToiletFPL/html/Tesco-Bean-Value-Toilet-League.html'
+	url = f'https://{DEPLOY_ROOT}/html/Tesco-Bean-Value-Toilet-League.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>\n'
-	url = f'https://mwinokan.github.io/ToiletFPL/html/The-RBS-Diamond-Invitational.html'
+	url = f'https://{DEPLOY_ROOT}/html/The-RBS-Diamond-Invitational.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>\n'
 	html_buffer += '</div>\n'
 
@@ -1635,20 +1530,10 @@ def create_trophycabinet(api,man):
 				html_buffer += '</td>\n'
 				html_buffer += '<td style="text-align:right;vertical-align:middle;">\n'
 
-				# delta = man._wc1_ordelta_percent
-				# if delta > 0:
-				# 	delta = f"+{delta:.0f}"
-				# else:
-				# 	delta = f"{delta:.0f}"
-
-				# html_buffer += f'<h2><span class="w3-tag">Christmas</span></h2>\n'
 				html_buffer += '</tr>\n'
 				html_buffer += '</table>\n'
 				html_buffer += '</div>\n'
 				html_buffer += '</div>\n'
-
-			# if chip_awards:
-			# 	print(man.name,chip_awards)
 
 			for key in award_keys:
 
@@ -1818,7 +1703,6 @@ def create_managerpage(api,man,leagues):
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:block;">\n'
 		
-		# html_buffer += f'<h3>Expected Points Graph</h3>\n'
 		html_buffer += f'<div id="comparisonGraph" style="width:100%;height:500px">\n'
 		html_buffer += f'</div>\n'
 
@@ -1852,10 +1736,6 @@ def create_managerpage(api,man,leagues):
 		html_buffer += ', {	title: "Expected Points", margin: { r:0 }, font: {size: 14}} , {responsive: true});\n'
 		html_buffer += '</script>\n'
 
-		# if int(man.id) == 780664:
-		# 	html_buffer += '<h2>Watchlist</h2>\n'
-		# 	html_buffer += create_picks_table(api, squad.sorted_players, manager=None)
-
 		html_buffer += floating_subtitle('History')
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
@@ -1863,8 +1743,6 @@ def create_managerpage(api,man,leagues):
 		html_buffer += create_manager_history_table(api,man)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
-
-	# if len(man._graph_paths) > 0:
 
 		html_buffer += floating_subtitle('Graphs')
 
@@ -1892,14 +1770,6 @@ def create_managerpage(api,man,leagues):
 		html_buffer += create_league_figure(api, league=None, subset=None, single=man, rank=False)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
-
-	
-		# for path in man._graph_paths:
-		# 	html_buffer += '<div class="w3-col s12 m12 l6">\n'
-		# 	html_buffer += '<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
-		# 	html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{path}?raw=true" alt="Manager Graph">\n'
-		# 	html_buffer += '</div>\n'
-		# 	html_buffer += '</div>\n'
 		
 	navbar = create_navbar(leagues)
 
@@ -1941,7 +1811,7 @@ def create_manager_formation(man,gw):
 		else:
 			c_str = ''
 
-		html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
+		html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
 
 		html_buffer += f'<br>\n'
 		style_str = get_style_from_event_score(score).rstrip('"')+';width:90%;margin-bottom:2px;"'
@@ -1976,7 +1846,7 @@ def create_manager_formation(man,gw):
 			
 			c_str = ''
 
-			html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
+			html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
 
 			html_buffer += f'<br>\n'
 			style_str = get_style_from_event_score(score).rstrip('"')+';width:90%;margin-bottom:2px;"'
@@ -2001,7 +1871,6 @@ def create_manager_history_table(api,man):
 	
 	html_buffer += '<div class="w3-responsive">\n'
 	html_buffer += '<table class="w3-table w3-hoverable">\n'
-	# html_buffer += '<table class="w3-table w3-border w3-hoverable">\n'
 	
 	html_buffer += '<tr>\n'
 	html_buffer += '<th class="w3-center">GW</th>\n'
@@ -2009,10 +1878,7 @@ def create_manager_history_table(api,man):
 	html_buffer += '<th class="w3-center">Overall Rank</th>\n'
 	html_buffer += '<th class="w3-center">GW Score</th>\n'
 	html_buffer += '<th class="w3-center">GW Rank</th>\n'
-	# html_buffer += '<th class="w3-center">Captain</th>\n'
-	# html_buffer += '<th class="w3-center">Bench Points</th>\n'
 	html_buffer += '<th class="w3-center">Transfers Taken</th>\n'
-	# html_buffer += '<th class="w3-center">Avg.Selection</th>\n'
 	html_buffer += '<th class="w3-center">Total Value</th>\n'
 	html_buffer += '</tr>\n'
 
@@ -2038,13 +1904,10 @@ def create_manager_history_table(api,man):
 		else:
 			html_buffer += f'<td class="w3-center">{man._event_points[j-1]}</td>\n'
 		html_buffer += f'<td class="w3-center">{api.big_number_format(man._event_rank[j-1])}</td>\n'
-		# html_buffer += f'<td class="w3-center">Captain</td>\n'
-		# html_buffer += f'<td class="w3-center">Bench Points</td>\n'
 		transfer_str = man.get_transfer_str(j).replace("\n","<br>").replace('**WC**','<strong>WC</strong>')
 		if transfer_str.startswith('<br>'):
 			transfer_str = transfer_str[4:]
 		html_buffer += f'<td>{transfer_str}</td>\n'
-		# html_buffer += f'<td class="w3-center">{man.avg_selection:.1f}%</td>\n'
 		html_buffer += f'<td class="w3-center">£{man._squad_value[j-1]:.1f}</td>\n'
 		html_buffer += '</tr>\n'
 
@@ -2057,14 +1920,11 @@ def create_chip_table(api,man):
 
 	html_buffer = ""
 
-
 	chips = [v for v in man._chip_dict.items() if v[1] is not None]
 
 	chips = sorted(chips,key=lambda x: x[1])
 
 	if len(chips) > 0:
-
-		# html_buffer += '<h2>Chips</h2>\n'
 
 		html_buffer += '<div class="w3-responsive">\n'
 		html_buffer += '<table class="w3-table w3-border w3-hoverable">\n'
@@ -2156,8 +2016,6 @@ def create_chip_table(api,man):
 
 	return html_buffer
 
-# def create_picks_table(api,players,)
-
 def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None):
 
 	html_buffer = ""
@@ -2203,7 +2061,7 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 			html_buffer += f'⛔️ '
 		if player.was_subbed:
 			html_buffer += f'🔄 '
-		html_buffer += f'<a href="https://mwinokan.github.io/ToiletFPL/html/player_{player.id}.html">{player.name}</a></b></td>\n'
+		html_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{player.id}.html">{player.name}</a></b></td>\n'
 
 		###
 
@@ -2258,7 +2116,6 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 				flag_str = '⛔️ '
 			elif chance < 1:
 				flag_str = '⚠️ '
-			# html_buffer += f'<td class="w3-center" style={style_str}>{flag_str}{player.get_fixture_str(i,short=True,lower_away=True)} ({exp:.1f})</td>\n'
 			html_buffer += f'<td class="w3-center" style={style_str}>{flag_str}{player.get_fixture_str(i,short=True,lower_away=True)}</td>\n'
 
 		html_buffer += '</tr>\n'
@@ -2329,8 +2186,6 @@ def get_style_from_difficulty(difficulty,old=False):
 	style_str = '"'
 
 	if old:
-
-		# difficulty = round(difficulty+1)
 
 		if difficulty == 1:
 			style_str += 'background-color:darkgreen;color:white'
@@ -2424,10 +2279,7 @@ def get_manager_json_positions(api,leagues):
 
 						m._league_positions[l_name][gw_id] = m_pos
 
-# @mout.debug_log
 def get_manager_json_awards(api,leagues):
-
-	# print(json)
 
 	for l_id,l_data in json.items():
 
@@ -2442,9 +2294,6 @@ def get_manager_json_awards(api,leagues):
 
 				for key,data in gw_data['awards'].items():
 
-					# print(key,data)
-
-					# for m_id in data[0]:
 					try:
 						m = api.get_manager(id=data[0])
 						m._awards.append(dict(key=key,score=data[-1],league=l_name,gw='half'))
@@ -2458,9 +2307,6 @@ def get_manager_json_awards(api,leagues):
 			if 'season' in gw_id:
 
 				for key,data in gw_data['awards'].items():
-
-					# print(key,data)
-
 					for m_id in data[0]:
 						m = api.get_manager(id=m_id)
 						m._awards.append(dict(key=key,score=data[-1],league=l_name,gw='season'))
@@ -2493,9 +2339,6 @@ def get_manager_json_awards(api,leagues):
 								m._awards.append(dict(key=key,player=data[1],is_captain=data[2],score=data[3],gw=gw_id,league=l_name))
 						else:
 							subset = data[0:-1]
-							# print(subset)
-							# print(key)
-							# print(data)
 							for id in subset:
 								if id in api._managers.keys():
 									m = api.get_manager(id=id)
@@ -2514,18 +2357,11 @@ def fixture_table(api,gw):
 		html_buffer += '</div>'
 		return html_buffer
 
-	# f = api.get_gw_fixtures(gw)
-	# fixtures = []
-	# for i,c in enumerate(f['code']):
-	# 	this_fix = dict(index=i,finished=f['finished'][i],started=f['started'][i],team_a=f['team_a'][i],team_h=f['team_h'][i],team_a_score=f['team_a_score'][i],team_h_score=f['team_h_score'][i],kickoff=f['kickoff_time'][i])
-	# 	fixtures.append(this_fix)
-
 	html_buffer += '<div class="w3-center">'
 	html_buffer += f'<h2>GW{gw} Fixtures</h2>'
 	html_buffer += '</div>'
 	html_buffer += '<div class="w3-responsive">'
 	html_buffer += '<table class="w3-table w3-hoverable responsive-text">'
-	# html_buffer += '<table class="w3-table w3-small w3-hoverable">'
 
 	new = True
 	for i,fix in enumerate(fixtures):
@@ -2545,11 +2381,8 @@ def fixture_table(api,gw):
 
 		team_h_obj = api.get_player_team_obj(fix['team_h'])
 		team_a_obj = api.get_player_team_obj(fix['team_a'])
-		# pred_h_score = (team_a_obj.goals_conceded_per_game + team_h_obj.goals_scored_per_game)/2 * (1-team_a_obj.expected_clean_sheet(team_h_obj))
-		# pred_a_score = (team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game)/2 * (1-team_h_obj.expected_clean_sheet(team_a_obj))
 
 		html_buffer += '<tr>'
-		# url = f'https://github.com/mwinokan/FPL_GUI/blob/main/{p.team_obj._badge_path}'
 		html_buffer += f'<td class="w3-right">{team_h_obj._shortname}\t<img class="w3-image" src="{team_h_obj._badge_url}" alt="Team" width="30" height="30"></td>'
 		if not fix['started']:
 			local_tz = pytz.timezone("Europe/London")
@@ -2557,48 +2390,12 @@ def fixture_table(api,gw):
 			utc_dt = utc_dt.replace(tzinfo=pytz.utc).astimezone(local_tz)
 			time_str = utc_dt.strftime('%H:%M')
 			html_buffer += f'<td class="w3-center">{time_str}</td>'
-			# html_buffer += f'<td class="w3-center">{time_str} ({pred_h_score:.0f} - {pred_a_score:.0f})</td>'
-		# elif not fix['started']:
-		# 	html_buffer += f'<td class="w3-center w3-text-green"><b>{fix["team_h_score"]:.0f} - {fix["team_a_score"]:.0f}</b></td>'
 		else:
 
 			team_h_score = fix["team_h_score"]
 			team_a_score = fix["team_a_score"]
 
 			html_buffer += f'<td class="w3-center"><b>{team_h_score:.0f} - {team_a_score:.0f}</b></td>'
-			# print(team_h_obj._shortname,team_a_obj._shortname)
-			# print(f"Real: {team_h_score:.0f} {team_a_score:.0f}")
-			# print(f"Pred: {pred_h_score:.0f} {pred_a_score:.0f}")
-
-			# if team_h_score == team_a_score:
-			# 	real_result = 'D'
-			# elif team_h_score > team_a_score:
-			# 	real_result = 'H'
-			# else:
-			# 	real_result = 'A'
-
-			# if round(pred_h_score,0) == round(pred_a_score,0):
-			# 	pred_result = 'D'
-			# elif round(pred_h_score,0) > round(pred_a_score,0):
-			# 	pred_result = 'H'
-			# else:
-			# 	pred_result = 'A'
-
-			# if real_result == pred_result:
-			# 	result = True
-			# else:
-			# 	result = False
-
-			# print(f"Result: {result}")
-			# print(f"d#Goals: {team_h_score+team_a_score-pred_h_score-pred_a_score:.1f}")
-
-			# 	if round((team_a_obj.goals_conceded_per_game + team_h_obj.goals_scored_per_game)/2,0) == round((team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game),0):
-			# 		result = True
-			# 	else:
-			# 		result = False
-			# print(f"Predicted: {(team_a_obj.goals_conceded_per_game + team_h_obj.goals_scored_per_game)/2:.1f} {(team_h_obj.goals_conceded_per_game + team_a_obj.goals_scored_per_game)/2:.1f}")
-			# print(f"xClean: {team_h_obj.expected_clean_sheet(team_a_obj):.1f} {team_a_obj.expected_clean_sheet(team_h_obj):.1f}")
-			# print("")
 		html_buffer += f'<td><img class="w3-image" src="{team_a_obj._badge_url}" alt="Team" width="30" height="30">\t{team_a_obj._shortname}</td>'
 		html_buffer += '</tr>'
 
@@ -2633,25 +2430,9 @@ def generate_graphs(league):
 
 	graph_past_rank = plot.rank_history(league.managers,key, show=False)
 
-def create_sidebar(leagues):
-	url = f'https://mwinokan.github.io/ToiletFPL/index.html'
-	md_buffer = f"##### [Home]({url})\n\n"
-
-	url = f'https://mwinokan.github.io/ToiletFPL/html/fixtures.html'
-	md_buffer += f"##### [Fixtures]({url})\n\n"
-
-	md_buffer += f"##### League Summaries\n\n"
-	for l in leagues:
-		url = f'https://mwinokan.github.io/ToiletFPL/html/{l.name.replace(" ","-")}.html'
-		md_buffer += f'* [{l}]({url})\n'
-
-	return md_buffer
-
 def previous_player_table(min_minutes=200,show_top=10):
 
 	html_buffer = ""
-
-	# print(api._prev_elements.columns)
 
 	temp_elements = api._prev_elements[[
 		'element_type',
@@ -2712,9 +2493,6 @@ def previous_player_table(min_minutes=200,show_top=10):
 		if pd["assists"] > 0:
 			buffer += f'<span class="w3-tag w3-blue">{pd["assists"]} assists</span>\n'
 
-		# if pd["own_goals"] > 0:
-		# 	buffer += f'<span class="w3-tag w3-black">{pd["own_goals"]} own goals</span>\n'
-
 		if pd["yellow_cards"] > 0:
 			buffer += f'<span class="w3-tag w3-yellow">{pd["yellow_cards"]} yellow cards</span>\n'
 
@@ -2747,7 +2525,6 @@ def previous_player_table(min_minutes=200,show_top=10):
 		table_buffer = ""
 
 		html_buffer += '<div class="w3-col s12 m12 l6">\n'
-		# html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
 
 		table_buffer += '<table class="w3-table w3-bordered responsive-text">\n'
 		table_buffer += '<tr>\n'
@@ -2766,10 +2543,8 @@ def previous_player_table(min_minutes=200,show_top=10):
 			name = f'<b>{pd["web_name"]}</b>'
 			tot_pts = f'{pd["total_points"]}'
 
-			# table_buffer += f'<tr class="w3-{api._short_team_pairs[pd["team_code"]-1].lower()}">\n'
 			table_buffer += f'<tr>\n'
 
-			# table_buffer += f'<td><img class="w3-image" style="height:20px" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p{pd["photo"].replace(".jpg",".png")}"></img>\n'
 			table_buffer += f'<td>\n'
 			table_buffer += f'{name}</td>\n'
 			table_buffer += f'<td>{tot_pts}</td>\n'
@@ -2783,9 +2558,6 @@ def previous_player_table(min_minutes=200,show_top=10):
 
 		table_buffer += '</table>\n'
 
-		# photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/p{player_data["photo"].replace(".jpg",".png")}'
-
-
 		pd = elements.iloc[0]
 
 		html_buffer += f'<div class="w3-panel w3-{api._short_team_pairs[pd["team_code"]-1].lower()}-inv shadow89" style="padding:0px;padding-bottom:4px;">\n'
@@ -2793,7 +2565,6 @@ def previous_player_table(min_minutes=200,show_top=10):
 		html_buffer += f"<h2>Best {['Goalkeeper','Defender','Midfielder','Forward'][i]}</h2>"
 
 		html_buffer += f'<h2>{pd["web_name"]}: {pd["total_points"]} points</h2>'
-		# html_buffer += f'{pd["team_code"]}</h2>'
 
 		html_buffer += f'<img class="w3-image" style="width:30%" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p{pd["photo"].replace(".jpg",".png")}"></img>\n'
 
@@ -2807,8 +2578,6 @@ def previous_player_table(min_minutes=200,show_top=10):
 
 		html_buffer += '</div>\n' # panel
 		html_buffer += '</div>\n' # col
-
-		# exit()
 
 	return html_buffer
 
@@ -2831,7 +2600,7 @@ def create_homepage(navbar):
 	# tagline
 	html_buffer += '<div class="w3-col s12 m12 l4">\n'
 	html_buffer += '<div class="w3-panel w3-amber w3-center w3-padding shadow89">\n'
-	html_buffer += '<h3>Home of the RBS Diamond Invitational and Tesco Bean Value Toilet League</h3>\n'
+	html_buffer += f'<h3>{TAGLINE}</h3>\n'
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
 
@@ -2847,7 +2616,7 @@ def create_homepage(navbar):
 	html_buffer += '<div class="w3-panel w3-center w3-indigo w3-padding shadow89">\n'
 	url = 'https://www.facebook.com/groups/1488748394903477/'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">🗯️ Facebook Group</a>\n'
-	url = 'https://github.com/mwinokan/FPL_GUI/issues/new'
+	url = 'https://github.com/mwinokan/ToiletFPL/issues/new'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">❓ Feature Request</a>\n'
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
@@ -2877,9 +2646,6 @@ def create_homepage(navbar):
 	style = api.create_team_styles_css()
 	html_page('index.html', html=html_buffer,title="toilet.football", gw=api._current_gw,bar_html=navbar,colour='aqua',extra_style=style)
 
-		# html_page(f'html/player_{player.id}.html',None,title=f"{player.name}",sidebar_content=None, gw=gw, html=html_buffer, showtitle=False, bar_html=navbar,extra_style=style,colour=player.team_obj.style['accent'],nonw3_colour=True)
-
-
 def create_seasonpage(leagues):
 	mout.debugOut("create_seasonpage()")
 
@@ -2889,7 +2655,6 @@ def create_seasonpage(leagues):
 
 	html_buffer += '<div class="w3-center">\n'
 	html_buffer += f"<h2>{title}</h2>\n"
-	# html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/psd/christmas22.png?raw=true" alt="Banner" width="1320" height="702">\n'
 	html_buffer += '</div>\n'
 
 	html_buffer += '<div class="w3-bar w3-black">\n'
@@ -2911,10 +2676,6 @@ def create_seasonpage(leagues):
 			html_buffer += f'<div id="{league.id}" class="w3-container w3-border league" style="display:none">\n'
 
 		html_buffer += '<div class="w3-justify w3-row-padding">\n'
-
-		# html_buffer += "<p>\n"
-		# html_buffer += league_season_text[league.id]
-		# html_buffer += "</p>\n"
 
 		html_buffer += "<h3>Chip Usage</h3>\n"
 		html_buffer += league_best_chips(league)
@@ -2943,7 +2704,6 @@ def create_seasonpage(leagues):
 		md_buffer += f"Is your team's kit the boring default? Design it [here](https://fantasy.premierleague.com/entry-update)\n\n"
 		html_buffer += md2html(md_buffer)
 		html_buffer += league_table_html(league, api._current_gw, awardkey='season')
-		# html_buffer += _league_table_html[league.id]
 
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -3302,17 +3062,6 @@ def league_best_chips(league):
 			html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb_worst[0])}</td>\n'
 		html_buffer += '</tr>\n'
 
-	# triple captain
-
-	# 	if chip == 'TC':
-	# 		color = 'amber'
-	# 	elif chip.startswith('WC'):
-	# 		color = 'red'
-	# 	elif chip == 'BB':
-	# 		color = 'blue'
-	# 	elif chip == 'FH':
-	# 		color = 'green'
-
 	html_buffer += '</tbody>\n'
 	html_buffer += '</table>\n'
 
@@ -3323,24 +3072,6 @@ def pts_delta_format(delta):
 		return f'{delta}pts'
 	else:
 		return f'+{delta}pts'
-
-# def get_losers(name,managers,criterium,cutoff=4):
-# 	return get_winners(name, managers, criterium,reverse=False,cutoff=cutoff)
-
-# def get_winners(name,managers,criterium,reverse=True,cutoff=4):
-# 	sorted_managers = sorted(managers, key=criterium, reverse=reverse)
-# 	scores = [criterium(x) for x in sorted_managers]
-# 	data = Counter(scores)
-# 	num = data[scores[0]]
-# 	if num < cutoff:
-# 		if num > 1: 
-# 			s = "s"
-# 		else: 		
-# 			s = ""
-# 		return scores[0],sorted_managers[0:num]
-# 	else:
-# 		mout.warningOut(f"Too many people sharing {name} award")
-# 		return scores[0],sorted_managers[0:num]
 
 def get_losers(name,managers,criterium):
 	return get_winners(name, managers, criterium,reverse=False)
@@ -3360,25 +3091,10 @@ def make_season_awards(league):
 	create_key(json[str(league.id)],'season')
 	create_key(json[str(league.id)]['season'],'awards')
 
-	# print(league.managers)
-	# print(league.active_managers)
-
 	sorted_managers = sorted(league.active_managers, key=lambda x: (x.livescore, x.gw_rank_gain), reverse=True)
 	score = sorted_managers[0].total_livescore
-	# data = Counter(scores)
-	# print(data)
-	# print(scores)
-	# num = data[scores[0]]
-	# if num < 4:
-	# 	if num > 1: 
-	# 		s = "s"
-	# 	else: 		
-	# 		s = ""
 	html_buffer += award_panel('👑',f'King','Best Score',f'{score} pts, {api.big_number_format(sorted_managers[0].overall_rank)} OR',sorted_managers[0],colour='amber',border='yellow',name_class="h2",halfonly=True)
 	json[str(league.id)]['season']['awards']['king'] = [sorted_managers[0].id,score]
-	# else:
-		# mout.warningOut("Too many people sharing king award")
-		# json[str(league.id)]['season']['awards']['king'] = None
 
 	sorted_managers.reverse()
 	scores.reverse()
@@ -3564,79 +3280,6 @@ def christmas_awards(league):
 
 	return html_buffer
 
-def price_changes(f):
-
-	global api
-	global risers
-	global fallers
-
-	risers = []
-	fallers = []
-
-	for first,name,delta in zip(api.elements['first_name'],api.elements['web_name'],api.elements['cost_change_event']):
-		delta = float(delta)
-		if delta == 0:
-			continue
-		elif delta > 0:
-			risers.append([Player(f"{first} {name}",api),delta])
-		elif delta < 0:
-			fallers.append([Player(f"{first} {name}",api),delta])
-
-	risers = sorted(risers,key=lambda x: x[0].selected_by, reverse=True)
-	fallers = sorted(fallers,key=lambda x: x[0].selected_by, reverse=True)
-
-	f.write(f"| Risers | Fallers |\n")
-	f.write(f"| --- | --- |\n")
-
-	for i in range(max([len(risers),len(fallers),1])):
-
-		f.write(f"| ")
-
-		if i > len(risers)-1:
-			if i == 0:
-				f.write(f"No risers this week")
-			else:
-				f.write(f" | ")
-		else:
-			p = risers[i][0]
-			f.write(f"[[https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}]] ")
-			f.write(f"[{p.name}]({p._gui_url})")
-
-			f.write(f" +{risers[i][1]/10:.1f} = ")
-			f.write(f"{p.price}")
-			f.write(" |")
-
-		if i > len(fallers)-1:
-			if i == 0:
-				f.write(f"No fallers this week")
-			else:
-				f.write(f" | ")
-		else:
-			p = fallers[i][0]
-			f.write(f"[[https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}]] ")
-			f.write(f"[{p.name}]({p._gui_url})")
-			f.write(f" {fallers[i][1]/10:.1f} = ")
-			f.write(f"{p.price}")
-			f.write(" |")
-
-		f.write(f"\n")
-
-	f.write(f"\n\n")
-		# print(name,delta)
-
-def create_overall_page():
-	mout.debugOut(f"create_overall_page()")
-
-	file = f'{path}/Overall.md'
-
-	with open(file,mode='w') as f:
-		# f.write(f"# Max's FPL GUI\n")
-		f.write(f"N/A\n")
-
-		# f.write(f"## League Summaries\n")
-		# for l in leagues:
-		# 	f.write(f'* [{l}]({l.name.replace(" ","-")})\n')
-
 def award_panel(icon,name,description,value,manager,colour='light-grey',border=None,name_class="h1",value_class="h2",halfonly=False):
 
 	many = isinstance(manager,list)
@@ -3658,11 +3301,9 @@ def award_panel(icon,name,description,value,manager,colour='light-grey',border=N
 	else:
 		html_buffer += f'<div class="w3-panel w3-{colour} shadow89">\n'
 	
-	# html_buffer += f'<table style="width:100%;padding:0px;border-spacing:0px;">\n'
 	html_buffer += f'<table style="width:100%;padding:0px;border-spacing:0px;padding-bottom:10px">\n'
 	html_buffer += f'<tr>\n'
 	html_buffer += f'<td style="text-align:left;vertical-align:middle;">\n'
-	# html_buffer += f'<td style="text-align:left;vertical-align:middle;">\n'
 	html_buffer += f'<{name_class} style="text-shadow: 1px 2px 4px rgba(0,0,0,0.5);">{icon} {name}</{name_class}>\n'
 
 	html_buffer += f'<h4>{description}</h4>\n'
@@ -3670,28 +3311,11 @@ def award_panel(icon,name,description,value,manager,colour='light-grey',border=N
 	html_buffer += f'</td>\n'
 
 	html_buffer += f'<td style="text-align:right;vertical-align:middle;">\n'
-	# html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">\n'
 	html_buffer += f'<h2><span class="w3-tag shadow89">{value}</span></h2>\n'
-	# html_buffer += f'<h2><span class="w3-tag shadow89"><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">{value}</span></h2>\n'
 
-	# html_buffer += '</table>\n'
-	
-	# html_buffer += '<table style="width:100%;padding:0px;border-spacing:0px;padding-bottom:10px;">\n'
-
-	# html_buffer += '<tr>\n'
-	# html_buffer += '<td style="vertical-align:top;">\n'
-	# html_buffer += f'<h4>{description}</h4>\n'
-	# html_buffer += '</td>\n'
-	# html_buffer += '<td style="text-align:right">\n'
-	# html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">\n'
-	# html_buffer += '</td>\n'
-
-	# html_buffer += '<td style="text-align:right">\n'
 	html_buffer += f'<a href="{m.gui_url}">{m.team_name}</a>'
 	html_buffer += f'<br>'
 	html_buffer += f'<a href="{m.gui_url}">{m.name}</a>'
-
-	# html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">\n'
 
 	html_buffer += f'</td>\n'
 	html_buffer += f'</tr>\n'
@@ -3715,44 +3339,6 @@ def floating_subtitle(text,pad=1,button=False):
 	html_buffer += '</div>\n'
 	return html_buffer	
 
-def award_rules_md():
-	return '''
-	* King (Most GW Points)
-		* Tiebreakers: 
-			* Biggest rank gain %
-			* Best GW performed xPts
-
-	* King (Least GW Points)
-		* Tiebreakers: 
-			* Biggest rank loss %
-			* Worst GW performed xPts
-
-	* Massive Goal FC (Most goals)
-		* Tiebreakers:
-			* Highest xG
-
-	* Scientist (Best differential)
-		* Tiebreakers:
-			* Most unique differential
-
-	* Boner (Highest BPS)
-
-	* ASBO (Most carded team)
-
-	* Fortune Teller (Best transfers)
-		* Tiebreaker:
-			* Highest transfer uniqueness
-
-	* Clown (Worst transfers)
-		* Tiebreaker:
-			* Lowest transfer uniqueness
-
-	* Highest non-haaland captain points (Christmas)
-	* Which managers consistently bring players in and their average drops
-	* Rank gain and drop awards 
-
-	'''
-
 def create_leaguepage(league,leagues,i):
 	mout.debugOut(f"create_leaguepage({league})")
 
@@ -3764,8 +3350,7 @@ def create_leaguepage(league,leagues,i):
 
 	file = f'{path}/{league.name.replace(" ","-")}.md'
 
-	# gw = api.current_gw
-	gw = api._wiki_gw
+	gw = api.current_gw
 
 	mout.debugOut(f"create_leaguepage({league})::Awards")
 
@@ -3777,32 +3362,25 @@ def create_leaguepage(league,leagues,i):
 	
 	if awards:
 
-		# print(award_rules_md())
-
 		if gw > 0:
 			html_buffer += floating_subtitle(f'🏆 GW{gw} Awards',pad=0)
 
 			### KING
-			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.livescore, x.gw_rank_gain), reverse=True)
 			m = sorted_managers[0]
 			score = m.livescore
 			html_buffer += award_panel('👑','King','Best GW',f'{score} pts',m,colour=award_colour['king'],name_class="h2")
 			json[str(league.id)][gw]['awards']['king'] = [m.id,score]
-			# mout.out(f'King {time.perf_counter()-start:.1f}s')
 
 			### COCK
 
-			# start = time.perf_counter()
 			m = sorted_managers[-1]
 			score = m.livescore
 			html_buffer += award_panel('🐓','Cock','Worst GW',f'{score} pts',m,colour=award_colour['cock'],name_class="h2")
 			json[str(league.id)][gw]['awards']['cock'] = [m.id,score]
-			# mout.out(f'Cock {time.perf_counter()-start:.1f}s')
 
 			### MASSIVE GOALS
 
-			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.goals, x.gw_xg, x.gw_xa, x.livescore), reverse=True)
 			m = sorted_managers[0]
 			score = m.goals
@@ -3812,18 +3390,13 @@ def create_leaguepage(league,leagues,i):
 				score_str = f'{"⚽️"*score}'
 			html_buffer += award_panel('⚽️','Massive Goal FC','Most Goals',score_str,m,colour=award_colour['goals'],name_class="h3")
 			json[str(league.id)][gw]['awards']['goals'] = [m.id,score]
-			# mout.out(f'Massive Goals {time.perf_counter()-start:.1f}s')
 
 			### SCIENTIST
 
-			# start = time.perf_counter()
 			players = league.get_starting_players(unique=False)
 
 			n = league.num_managers
 
-			# p = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)[0]
-			
-			# p = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)[0]
 			p = sorted(players, key=lambda p: (effective_points_gained(p,n), -p._parent_manager.avg_selection), reverse=True)[0]
 
 			m = p._parent_manager
@@ -3834,32 +3407,26 @@ def create_leaguepage(league,leagues,i):
 				p_str += " (VC)"
 			html_buffer += award_panel('🧑‍🔬','Scientist','Best Differential',p_str,m,colour=award_colour['scientist'],value_class='h3',name_class="h2")
 			json[str(league.id)][gw]['awards']['scientist'] = [m.id,p.id,p.is_captain,int(p.multiplier*p.get_event_score(not_playing_is_none=False))]
-			# mout.out(f'Scientist {time.perf_counter()-start:.1f}s')
 
 			### HOT STUFF
 
 			sorted_managers = sorted([m for m in league.active_managers if m.gw_performed_xpts > 0], key=lambda x: ((x.livescore - x.gw_performed_xpts)/x.gw_performed_xpts, x.gw_performed_xpts), reverse=True)
 			if len(sorted_managers) > 0:
-				# start = time.perf_counter()
 				m = sorted_managers[0]
 				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 
 				html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1%}',m,colour=award_colour['hot_stuff'],name_class="h2")
 				json[str(league.id)][gw]['awards']['hot_stuff'] = [m.id,score]
-				# mout.out(f'Hot Stuff {time.perf_counter()-start:.1f}s')
 
 				### SOGGY BISCUIT
 
-				# start = time.perf_counter()
 				m = sorted_managers[-1]
 				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 				html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
 				json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
-				# mout.out(f'Soggy Biscuit {time.perf_counter()-start:.1f}s')
 
 			if gw > 1:
 
-				# start = time.perf_counter()
 				sorted_managers = sorted(league.active_managers, key=lambda x: x.gw_rank_gain, reverse=True)
 
 				### rocketeer
@@ -3868,72 +3435,55 @@ def create_leaguepage(league,leagues,i):
 				score = m.gw_rank_gain
 				html_buffer += award_panel('🚀','Rocketeer','Best Rank Gain',f'{score:+.1f}%',m,colour=award_colour['rocket'],name_class="h2")
 				json[str(league.id)][gw]['awards']['rocket'] = [m.id,score]
-				# mout.out(f'Rocket {time.perf_counter()-start:.1f}s')
 
 				### down the toilet
 
-				# start = time.perf_counter()
 				m = sorted_managers[-1]
 				score = m.gw_rank_gain
 				html_buffer += award_panel('🚽','#DownTheToilet','Worst Rank Loss',f'{score:.1f}%',m,colour=award_colour['flushed'],name_class="h3")
 				json[str(league.id)][gw]['awards']['flushed'] = [m.id,score]
-				# mout.out(f'Toilet {time.perf_counter()-start:.1f}s')
 
 			### BONER
 
-			# start = time.perf_counter()
 			m = sorted(league.active_managers, key=lambda x: x.bps, reverse=True)[0]
 			html_buffer += award_panel('🦴',f'Boner','Highest Bonus',f'{m.bps} BPS',m,colour=award_colour['boner'],name_class="h2")
 			json[str(league.id)][gw]['awards']['boner'] = [m.id,m.bps]
-			# mout.out(f'Boner {time.perf_counter()-start:.1f}s')
 
 			### SMOOTH BRAIN
 
-			# start = time.perf_counter()
 			m = sorted(league.active_managers, key=lambda x: x.bench_points, reverse=True)[0]
 			html_buffer += award_panel('🧠',f'Smooth Brain','Most Bench Points',f'{m.bench_points} pts',m,colour=award_colour['smooth_brain'],name_class="h3")
 			json[str(league.id)][gw]['awards']['smooth_brain'] = [m.id,m.bench_points]
-			# mout.out(f'Smooth Brain {time.perf_counter()-start:.1f}s')
 
 			### CHAIR
 
-			# start = time.perf_counter()
 			m = sorted(league.active_managers, key=lambda x: x.minutes, reverse=False)[0]
 			html_buffer += award_panel('🪑',f'Chair','Least Minutes Played',f"{m.minutes}'",m,colour=award_colour['chair'],name_class="h2")
 			json[str(league.id)][gw]['awards']['chair'] = [m.id,m.minutes]
-			# mout.out(f'Chair {time.perf_counter()-start:.1f}s')
 
 			### ASBO
 
-			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.get_card_count(), -x.minutes), reverse=True)
 			m = sorted_managers[0]
 			html_buffer += award_panel('🥊',f'ASBO','Most Carded',m.card_emojis,m,colour=award_colour['asbo'],name_class="h2")
 			json[str(league.id)][gw]['awards']['asbo'] = [m.id,m.card_emojis]
-			# mout.out(f'ASBO {time.perf_counter()-start:.1f}s')
 
 		if gw > 1:
 
 			### FORTUNE TELLER
 
-			# start = time.perf_counter()
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.calculate_transfer_gain(), x._transfer_uniqueness), reverse=True)
 			m = sorted_managers[0]
 			score = m.calculate_transfer_gain()
 			html_buffer += award_panel('🔮','Fortune Teller','Best Transfers',f"{score:+d} pts",m,colour=award_colour['fortune'],name_class="h2")
 			json[str(league.id)][gw]['awards']['fortune'] = [m.id,score]
-			# mout.out(f'Fortune {time.perf_counter()-start:.1f}s')
 
 			### CLOWN
 
-			# start = time.perf_counter()
 			m = sorted_managers[-1]
 			score = m.calculate_transfer_gain()
 			html_buffer += award_panel('🤡','Clown','Worst Transfers',f"{score:+d} pts",m,colour=award_colour['clown'],name_class="h2")
 			json[str(league.id)][gw]['awards']['clown'] = [m.id,score]
-			# mout.out(f'Clown {time.perf_counter()-start:.1f}s')
-
-		# if gw > 0:
 
 			### NERD AND INNOVATOR (REMOVED)
 
@@ -3945,19 +3495,8 @@ def create_leaguepage(league,leagues,i):
 			# html_buffer += award_panel('🎓',f'Innovator','Least Template Team',f'{m.avg_selection:.1f}%',m,colour='grey',name_class="h2")
 			# json[str(league.id)][gw]['awards']['innovator'] = [m.id,m.avg_selection]
 
-			# md_buffer += f"### 👻 Ghost team (longest time since transfer)"
-			# md_buffer += f"### 🥶 Iceman (least transfers made)"
-			# md_buffer += f"### 🦿 Billy's Knees (most transfers made)"
-			# md_buffer += f"### 🤑 Most Valuable Team\n"
-			# # md_buffer += f"### 📈 Best team value gain\n"
-			# # md_buffer += f"### 📉 Biggest team value loss\n"
-			# f.write(f"### 💎 GW{gw} Diamond Award (Biggest green arrow)\n")
-			# f.write(f"### 💀 RIP (Biggest red arrow)\n")
-			# md_buffer += f"### 🚩 Most flagged team\n"
 			# most in form team
 			# most out of form team
-
-		#### halfway awards
 
 	if gw > 0:
 		mout.debugOut(f"create_leaguepage({league})::Template")
@@ -4049,8 +3588,6 @@ def create_leaguepage(league,leagues,i):
 	navbar = create_navbar(leagues, active=i, colour='black', active_colour='green')
 	html_page(f'html/{league.name.replace(" ","-")}.html',None,title=f"{league._icon} {league.name}", gw=gw, html=html_buffer, bar_html=navbar, showtitle=True,colour=league._colour_str, extra_style=style, plotly=True)
 
-	# exit()
-
 def league_chips(league,gw):
 
 	'''
@@ -4073,8 +3610,6 @@ def league_chips(league,gw):
 		total_chip_count += 1
 		chip_managers.append(man)
 
-	# if total_chip_count > 0: mout.headerOut(f'{league.shortname} Chips')
-
 	if total_chip_count == 0:
 		return ""
 
@@ -4083,7 +3618,6 @@ def league_chips(league,gw):
 	html_buffer += '<div class="w3-col s12 m12 l12">\n'
 	html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
 
-	# html_buffer += f'<h2>Chips Played:</h2>\n'
 	html_buffer += '<table class="w3-table w3-hoverable">\n'
 	html_buffer += '<thead>\n'
 	html_buffer += '<tr>\n'
@@ -4152,7 +3686,6 @@ def transfer_table(ids,title_str,colour_str):
 
 	html_buffer += '<th>Player</th>\n'
 	html_buffer += '<th class="w3-center">#Trans.</th>\n'
-	# html_buffer += '<th>League Select.</th>\n'	
 	html_buffer += '<th class="w3-center">Form</th>\n'
 
 	now_gw = api._current_gw
@@ -4160,7 +3693,6 @@ def transfer_table(ids,title_str,colour_str):
 	for i in range(now_gw,end_gw+1):
 		html_buffer += f'<th class="w3-center">GW{i}</th>\n'
 
-	# html_buffer += f'<th>Summary</th>\n'
 	html_buffer += '</tr>\n'
 	html_buffer += '</thead>\n'
 
@@ -4228,9 +3760,6 @@ def preseason_table(league):
 	for i,m in enumerate(sorted_managers):
 
 		html_buffer += '\t<tr>\n'
-		# if i+1 == len(sorted_managers):
-			# html_buffer += f'\t\t<td style="text-align:right;">🥚</td>\n'
-		# else:
 		html_buffer += f'\t\t<td style="text-align:right;">{i+1}</td>\n'
 		html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></img>\n'
 
@@ -4287,12 +3816,10 @@ def league_table_html(league,gw,awardkey=None):
 
 	show_fix_played = api._live_gw
 	show_avg_select = gw == 1
-	# show_team_value = not api._live_gw
 	show_team_value = False
 	show_pos_delta = False
 	show_tot_score = gw > 1
 	show_gw_rank = gw > 1
-	# show_transfers = gw > 1 and not api._live_gw
 	show_transfers = gw > 1
 
 	html_buffer += '<div class="w3-responsive">\n'
@@ -4340,22 +3867,14 @@ def league_table_html(league,gw,awardkey=None):
 
 		is_last = i+1 == len(sorted_managers)
 
-		# print(i,m.id,4+diamond_count)
-
 		if 'Toilet' in league.name and m.is_diamond and m.id != 3902717:
 			diamond_count += 1
-			# html_buffer += '<tr class="w3-pale-blue">\n'
 		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 3 + diamond_count:
-			# print('dimiond')
 			html_buffer += '<tr class="w3-pale-green">\n'
 		elif 'Diamond' in league.name and i >= len(sorted_managers)-4:
 			html_buffer += '<tr class="w3-pale-red">\n'
 		elif i == 0:
 			html_buffer += '<tr class="w3-pale-yellow">\n'
-		# elif i == 1:
-		# 	html_buffer += '<tr class="w3-gainsboro">\n'
-		# elif i == 2:
-		# 	html_buffer += '<tr class="w3-peru">\n'
 		else:
 			html_buffer += '<tr>\n'
 
@@ -4386,8 +3905,6 @@ def league_table_html(league,gw,awardkey=None):
 
 		# manager
 		html_buffer += f'<td><a href="{m.gui_url}">{m.name}</a>'
-		# if 'Toilet' in league.name:
-			# print(m.name,m.is_diamond,m._league_positions)
 		if 'Toilet' in league.name and m.is_diamond:
 			html_buffer += " 💎"
 		elif m.id == 3902717:
@@ -4502,7 +4019,6 @@ def league_table_html(league,gw,awardkey=None):
 
 	return html_buffer
 
-# @mout.debug_log
 def league_template(league,gw):
 
 	html_buffer = ""
@@ -4676,17 +4192,12 @@ def position_template(league,players,pos_str,gw):
 			html_buffer += f'</td>\n'
 			if score is not None:
 				style_str = get_style_from_event_score(score).rstrip('"')+';text-align:right;vertical-align:middle;"'
-				# html_buffer += f'<td style={style_str}>\n'
 				html_buffer += f'<td style="text-align:center;">\n'
-				# html_buffer += f'{score}\n'
 				html_buffer += f'<span class="w3-tag" style={style_str}>{score}pts</span>\n'
 				html_buffer += f'</td>\n'
 			else:
 				html_buffer += f'<td>\n'
 				html_buffer += f'</td>\n'
-			# if i < 2:
-			# 	html_buffer += f'<td>\n'
-			# 	html_buffer += f'</td>\n'
 			archive.append([p.id,count/league.num_managers,score])
 		else:
 			break
@@ -4715,15 +4226,8 @@ def league_differentials(league,gw):
 	n = league.num_managers
 
 	sorted_players = sorted(players, key=lambda p: (effective_points_gained(p,n), -p._parent_manager.avg_selection), reverse=True)
-	# sorted_players = sorted(players, key=lambda p: (p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count, 1/p.league_count), reverse=True)
 
 	html_buffer += f'<table class="w3-table responsive-text">\n'
-	# html_buffer += f'<tr>\n'
-	# html_buffer += f'<th>Player</th>\n'
-	# html_buffer += f'<th>Points</th>\n'
-	# html_buffer += f'<th>Team</th>\n'
-	# html_buffer += f'<th>Summary</th>\n'
-	# html_buffer += f'</tr>\n'
 
 	archive = []
 
@@ -4731,8 +4235,6 @@ def league_differentials(league,gw):
 		m = p._parent_manager
 		score, summary = p.get_event_score(summary=True,not_playing_is_none=False,team_line=False)
 		summary = summary.replace("\n","<br>")
-
-		# print(p,m,effective_points_gained(p,n),p.league_count,m.avg_selection)
 
 		html_buffer += f'<tr>\n'
 		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
@@ -4767,78 +4269,12 @@ def league_differentials(league,gw):
 		html_buffer += f'</td>\n'
 		html_buffer += f'</tr>\n'
 		archive.append([p.id,m.id,p.is_captain,p.multiplier*score])
-		# print(p.name,p.league_count,p.multiplier*p.get_event_score(not_playing_is_none=False)/p.league_count)
 	
 	html_buffer += f'</table>\n'
 
 	json[str(league.id)][gw]['differentials'] = archive
 
 	return html_buffer
-
-def launchd_plist(interval=3600):
-
-	f = open("/Users/mw00368/Library/LaunchAgents/com.mwinokan.fpl.wiki.plist",'w')
-
-	str_buffer = """<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-	<dict>
-		<key>Label</key>
-		<string>com.mwinokan.fpl.wiki</string>
-		<key>RunAtLoad</key>
-		<true/>
-		<key>ProgramArguments</key>
-		<array>
-			<string>/Users/mw00368/miniconda3/bin/python3</string>
-			<string>/Users/mw00368/Box/Python/FPL_GUI/wiki.py</string>
-		</array>
-		<key>EnvironmentVariables</key>
-		<dict>
-			<key>PATH</key>
-			<string>/Users/mw00368/miniconda3/bin:/Users/mw00368/miniconda3/condabin:/Users/mw00368/bin:/Applications/Sublime Merge.app/Contents/SharedSupport/bin:/Applications/Sublime Text.app/Contents/SharedSupport/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/usr/local/munki:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/mw00368/MShTools:/Users/mw00368/MolParse:/Users/mw00368/MPyTools</string>
-			<key>PYTHONPATH</key>
-			<string>/Users/mw00368/MolParse:/Users/mw00368/MPyTools</string>
-		</dict>
-		<key>StandardInPath</key>
-		<string>/Users/mw00368/Box/Python/FPL_GUI/daemon.stdin</string>
-		<key>StandardOutPath</key>
-		<string>/Users/mw00368/Box/Python/FPL_GUI/daemon.stdout</string>
-		<key>StandardErrorPath</key>
-		<string>/Users/mw00368/Box/Python/FPL_GUI/daemon.stderr</string>
-		<key>WorkingDirectory</key>
-		<string>/Users/mw00368/Box/Python/FPL_GUI</string>
-		<key>StartInterval</key>"""
-	str_buffer += f"		<integer>{interval}</integer>"
-	str_buffer += """	</dict>
-</plist>"""
-		
-		# <key>StartCalendarInterval</key>
-		# <dict>
-		#     <key>Hour</key>
-		#     <integer>9</integer>
-		#     <key>Minute</key>
-		#     <integer>51</integer>
-		# </dict>
-
-	f.write(str_buffer)
-	f.close()
-
-	import os
-	os.system("launchctl unload ~/Library/LaunchAgents/com.mwinokan.fpl.wiki.plist")
-	os.system("launchctl load ~/Library/LaunchAgents/com.mwinokan.fpl.wiki.plist")
-
-	print("/Users/mw00368/Library/LaunchAgents/com.mwinokan.fpl.wiki.plist")
-	print("first time:")
-	print("launchctl bootstrap gui/$(id -u) com.mwinokan.fpl.wiki.plist")
-	print("start with:")
-	print("launchctl start com.mwinokan.fpl.wiki")
-	print("see details with:")
-	print("launchctl print gui/$UID/com.mwinokan.fpl.wiki")
-
-def clear_logs():
-	mout.debugOut(f"clear_logs()")
-	import os
-	os.system("rm daemon.std*")
 
 def push_changes():
 	mout.debugOut(f"push_changes()")
@@ -4849,10 +4285,10 @@ def push_changes():
 	if num_changes > 0:
 	# os.system(f'cd {path}; git add *.md; git commit -m "auto-generated {timestamp}"; git push; cd {path.replace(".wiki","")}')
 		os.system(f'rm kits/*.webp; git add *.py go/*.html go/*.py graphs/*.png index.html html/*.html *.json kits/*.png; git commit -m "auto-generated {timestamp}"; git push')
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'Completed Wiki Update' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
+		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'Completed Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'")
 		exit(code=69)
 	else:
-		os.system("terminal-notifier -title 'FPL_GUI' -message 'No changes pushed' -open 'https://mwinokan.github.io/ToiletFPL/index.html'")
+		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'No changes pushed' -open 'https://{DEPLOY_ROOT}/index.html'")
 		exit(code=70)
 
 def pull_changes():
@@ -4907,38 +4343,5 @@ if __name__ == '__main__':
 							^ Games Begin
 											^ Games End
 														^ Next Deadline
-
-	Pre-Season:
-
-	- Position
-	- Team Name
-	- Manager
-	* Previous Score
-	* Previous Rank			
-
-	GW1 Live:						GW1 not Live:
-									
-	- Position						- Position					
-	- Team Name						- Team Name					
-	- Manager						- Manager					
-	- GW Score						- GW Score					
-	- Rank							- Rank						
-	- Captain (Points)				- Captain (Points)			
-	* Fixtures Played				- Points/fixture						
-	- Points/fixture				* Average Player Selection
-	* Average Player Selection		* Team Value
-
-	GW1 Live:						GW1 not Live:
-									
-	* Position (Delta)				* Position (Delta)
-	- Team Name						- Team Name					
-	- Manager						- Manager					
-	* Total Score					* Total Score					
-	- GW Score						- GW Score					
-	- Rank							- Rank						
-	* GW Rank						* GW Rank						
-	- Captain (Points)				- Captain (Points)			
-	* Fixtures Played				- Points/fixture						
-	- Points/fixture 				* Team Value
 
 '''
