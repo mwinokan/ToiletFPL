@@ -1341,13 +1341,13 @@ def create_playerpage(api,player,leagues):
 		html_buffer += f'<h5>\n'
 
 		color = f'{player.team_obj.shortname.lower()}-inv'
-
-		if player.name in [p[0].name for p in risers]:
-			html_buffer += f'<span class="w3-tag w3-green">£{player.price}</span>\n'
-		elif player.name in [p[0].name for p in fallers]:
-			html_buffer += f'<span class="w3-tag w3-red">£{player.price}</span>\n'
-		else:
-			html_buffer += f'<span class="w3-tag w3-{color}">£{player.price}</span>\n'
+# 
+		# if player.name in [p[0].name for p in risers]:
+		# 	html_buffer += f'<span class="w3-tag w3-green">£{player.price}</span>\n'
+		# elif player.name in [p[0].name for p in fallers]:
+		# 	html_buffer += f'<span class="w3-tag w3-red">£{player.price}</span>\n'
+		# else:
+		html_buffer += f'<span class="w3-tag w3-{color}">£{player.price}</span>\n'
 
 		html_buffer += f'<span class="w3-tag w3-{color}">global {player.selected_by}%</span>\n'
 		
@@ -2065,12 +2065,12 @@ def create_picks_table(api,players,prev_gw_count=5,next_gw_count=5,manager=None)
 
 		###
 
-		if player.name in [p[0].name for p in risers]:
-			style_str = '"color:green;vertical-align:middle;"'
-		elif player.name in [p[0].name for p in fallers]:
-			style_str = '"color:red;vertical-align:middle;"'
-		else:
-			style_str = None
+		# if player.name in [p[0].name for p in risers]:
+		# 	style_str = '"color:green;vertical-align:middle;"'
+		# elif player.name in [p[0].name for p in fallers]:
+		# 	style_str = '"color:red;vertical-align:middle;"'
+		# else:
+		style_str = None
 
 		if style_str is None:
 			html_buffer += f'<td class="w3-center" style="vertical-align:middle;">£{player.price}</td>\n'
