@@ -3348,8 +3348,6 @@ def create_leaguepage(league,leagues,i):
 	md_buffer = ""
 	html_buffer = ""
 
-	file = f'{path}/{league.name.replace(" ","-")}.md'
-
 	gw = api.current_gw
 
 	mout.debugOut(f"create_leaguepage({league})::Awards")
