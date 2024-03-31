@@ -17,6 +17,10 @@ jobs:
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |
+            import os
             import sys
             import pprint
+            sys.path.append(os.path.join(os.path.dirname(__file__)))
             pprint.pprint(sys.path)
+            from wiki import main
+            main()
