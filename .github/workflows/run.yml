@@ -17,5 +17,5 @@ jobs:
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |
-            from .wiki import main
+            from wiki import main
             main()
