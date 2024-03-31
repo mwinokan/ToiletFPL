@@ -16,6 +16,4 @@ jobs:
           python-version: '3.10'
       - uses: jannekem/run-python-script-action@v1
         with:
-          script: |
-            from wiki import main
-            main()
+          script: wiki.py
