@@ -25,14 +25,14 @@ JSON_PATH = "data_wiki_2324.json" # store the award data in this JSON
 TAGLINE = "Home of the RBS Diamond Invitational and Tesco Bean Value Toilet League"
 
 # run options
-run_push_changes = True # push changes to github
+run_push_changes = False # push changes to github
 test = False # only run the 'run_test' function
 offline = False # use cached request data
 
 ### other options
 force_generate_kits = False # force the generation of manager's kits
 scrape_kits = False # scrape latest PL team jerseys and exit
-fetch_latest = True # pull latest changes from github before running
+fetch_latest = False # pull latest changes from github before running
 force_go_graphs = True # force update of Assets graph
 
 # gamestate options (to be automated)
