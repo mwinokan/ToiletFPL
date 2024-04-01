@@ -1,10 +1,8 @@
 name: Run Script
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  schedule:
+    - cron: '00 07 * * *'
 
 jobs:
   build:
@@ -24,7 +22,7 @@ jobs:
           pip install pytz mpytools pandas matplotlib numpy plotly markdown scipy requests
       - name: execute py script # run file
         run: |
-          python wiki.py --offline
+          python wiki.py
       - name: push changes
         run: |
           git config --global user.name 'Max Winokan'
