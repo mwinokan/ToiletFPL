@@ -22,4 +22,10 @@ jobs:
           pip install pytz mpytools pandas matplotlib numpy plotly markdown scipy requests
       - name: execute py script # run file
         run: |
-          python wiki.py --offline --push
+          python wiki.py --offline
+      - name: push changes
+        run: |
+          git config --global user.name 'Max Winokan'
+          git config --global user.email 'your-username@users.noreply.github.com'
+          git commit -am `date +%s`
+          git push
