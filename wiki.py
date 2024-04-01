@@ -2649,7 +2649,7 @@ def create_homepage(navbar):
 		html_buffer += '</div>\n'
 
 	style = api.create_team_styles_css()
-	html_page('index.html', html=html_buffer,title="toilet.football", gw=api._current_gw,bar_html=navbar,colour='aqua',extra_style=style)
+	html_page('index.html', html=html_buffer,title="toilet.football", gw=api._current_gw,bar_html=navbar,colour='aqua',extra_style=style, timestamp=True)
 
 def create_seasonpage(leagues):
 	mout.debugOut("create_seasonpage()")
