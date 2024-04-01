@@ -3,16 +3,12 @@ name: Run Script
 on:
   workflow_dispatch:
     inputs:
-      run_github_account:
-        description: 'GitHub Account Owner'
+      run_message:
+        description: 'This does nothing'
         required: true
-        default: 'mwinokan'
-      run_repo_github:
-        description: 'repo-name'
-        required: true
-        default: 'ToiletFPL' 
+        default: 'Manual run' 
   schedule:
-    - cron: '00 07 * * *'
+    - cron: '00 07-23 * * *'
 
 jobs:
   build:
