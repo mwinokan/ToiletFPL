@@ -1,6 +1,16 @@
 name: Run Script
 
 on:
+  workflow_dispatch:
+    inputs:
+      run_github_account:
+        description: 'GitHub Account Owner'
+        required: true
+        default: 'mwinokan'
+      run_repo_github:
+        description: 'repo-name'
+        required: true
+        default: 'ToiletFPL' 
   schedule:
     - cron: '00 07 * * *'
 
