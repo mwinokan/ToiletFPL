@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.TOILET_ACTION }}
       - name: setup python
         uses: actions/setup-python@v4
         with:
