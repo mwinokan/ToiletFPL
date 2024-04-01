@@ -13,6 +13,7 @@ from web import html_page, player_summary_cell_modal, get_style_from_event_score
 from squad import Squad
 import time
 from pprint import pprint
+from sys import argv
 
 # https://stackoverflow.com/questions/60598837/html-to-image-using-python
 
@@ -39,6 +40,10 @@ force_go_graphs = True # force update of Assets graph
 halfway_awards = False # generate half-season / christmas awards
 season_awards = False # generate full-season awards
 cup_active = False # activate the cup
+
+if '--push' in argv: run_push_changes = True
+if '--offline' in argv: offline = True
+if '--kits' in argv: scrape_kits = True
 
 # configure the leagues
 
