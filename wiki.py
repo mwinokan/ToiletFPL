@@ -39,7 +39,7 @@ force_go_graphs = True # force update of Assets graph
 # gamestate options (to be automated)
 halfway_awards = False # generate half-season / christmas awards
 season_awards = False # generate full-season awards
-cup_active = False # activate the cup
+cup_active = True # activate the cup
 
 if '--push' in argv: run_push_changes = True
 if '--offline' in argv: offline = True
