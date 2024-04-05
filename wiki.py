@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import pytz
 from league import League
@@ -680,7 +680,7 @@ def create_cup_page(api,league,leagues):
 
 	html_buffer = ""
 
-	prog_step = (50/len(gws))
+	# prog_step = (50/len(gws))
 
 	for i,gw in enumerate(sorted(gws,reverse=True)):
 
@@ -718,7 +718,7 @@ def create_cup_page(api,league,leagues):
 
 		for j,match in enumerate(matches):
 
-			mout.progress(i*prog_step + j*prog_step/len(matches),50,width=50)
+			# mout.progress(i*prog_step + j*prog_step/len(matches),50,width=50)
 
 			man1 = match['self']
 			man1_score = man1.get_event_score(gw)
@@ -819,7 +819,7 @@ def create_cup_page(api,league,leagues):
 		
 		html_buffer += '</table>\n'
 
-	mout.progress(50,50,width=50)
+	# mout.progress(50,50,width=50)
 
 	navbar = create_navbar(leagues, active='K', colour='black', active_colour='green')
 	html_page('html/toilet_cup.html',None,title=f"Tesco Value Cup", gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar)
