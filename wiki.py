@@ -215,6 +215,8 @@ def main():
 
 	for i,l in enumerate(leagues):
 		create_leaguepage(l,leagues,i)
+
+	generate_summary_template(api, leagues[1])
 	
 	create_teampage(api,leagues)
 
@@ -4278,6 +4280,64 @@ def league_differentials(league,gw):
 	json[str(league.id)][gw]['differentials'] = archive
 
 	return html_buffer
+
+def generate_summary_template(api, league):
+	mout.debugOut(f"generate_summary_template({league.name})")
+
+	# GW string
+	gw = api._current_gw
+	gw_str = "GW"
+	if gw in api._special_gws.keys():
+		gw_str = api._special_gws[gw]
+	gw_str = f'{gw_str}{gw}'
+	
+	data = json[str(league.id)][gw]['awards']
+
+	# aggregate by manager
+	by_manager = {}
+	for k,v in data.items():
+		m_id = v[0]
+		score = v[1]
+		if m_id not in by_manager:
+			by_manager[m_id] = []
+		by_manager[m_id].append((k,score))
+
+	with open('summary_template.txt','wt') as f:
+
+		f.write(f'{gw_str} Awards \n\n')
+
+		for m_id, awards in by_manager.items():
+
+			award_strings = []
+			for award_name, score in awards:
+				award_strings.append(f'{award_flavourtext[award_name]}')
+
+			m = api.get_manager(id=m_id)
+
+			f.write(f"{', '.join(award_strings)} {m.name}\n")
+
+		# cup summary
+
+		if cup_active:
+
+			round_size = pow(2, 38 - gw + 1)
+
+			if round_size > 8:
+				round_str = f'round of {round_size}'
+			elif round_size == 2:
+				round_str = f'Final'
+			elif round_size == 4:
+				round_str = f'Semi-Finals'
+			elif round_size == 8:
+				round_str = f'Quarter-Finals'
+
+			f.write(f'\nCup {round_str} \n\n')
+
+			# #managers
+			# #diamond managers
+			# highest and lowest ranked remaining in the cup
+
+			# raise NotImplementedError
 
 def push_changes():
 	mout.debugOut(f"push_changes()")
