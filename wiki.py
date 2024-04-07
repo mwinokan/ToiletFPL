@@ -691,10 +691,16 @@ def create_cup_page(api,league,leagues):
 
 		json[str(league.id)]['cup'][gw]['n_diamond_winners'] = 0
 		json[str(league.id)]['cup'][gw]['n_diamond_losers'] = 0
+		
 		json[str(league.id)]['cup'][gw]['lowest_winner_rank'] = (None, -1)
 		json[str(league.id)]['cup'][gw]['highest_winner_rank'] = (None, 1_000_000_000)
 		json[str(league.id)]['cup'][gw]['lowest_loser_rank'] = (None, -1)
 		json[str(league.id)]['cup'][gw]['highest_loser_rank'] = (None, 1_000_000_000)
+
+		json[str(league.id)]['cup'][gw]['lowest_winner_score'] = (None, 1_000_000_000)
+		json[str(league.id)]['cup'][gw]['highest_winner_score'] = (None, -1_000_000_000)
+		json[str(league.id)]['cup'][gw]['lowest_loser_score'] = (None, 1_000_000_000)
+		json[str(league.id)]['cup'][gw]['highest_loser_score'] = (None, -1_000_000_000)
 
 		matches = [m for m in all_matches if m['gw'] == gw]
 	
@@ -802,6 +808,12 @@ def create_cup_page(api,league,leagues):
 				if (r := man1.overall_rank) < json[str(league.id)]['cup'][gw]['highest_winner_rank'][1]:
 					json[str(league.id)]['cup'][gw]['highest_winner_rank'] = (man1.id, r)
 
+				if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_winner_score'][1]:
+					json[str(league.id)]['cup'][gw]['lowest_winner_score'] = (man1.id, s)
+
+				if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_winner_score'][1]:
+					json[str(league.id)]['cup'][gw]['highest_winner_score'] = (man1.id, s)
+
 			else:
 				html_buffer += f'<td class="w3-center">\n'
 
@@ -810,6 +822,12 @@ def create_cup_page(api,league,leagues):
 
 				if (r := man1.overall_rank) < json[str(league.id)]['cup'][gw]['highest_loser_rank'][1]:
 					json[str(league.id)]['cup'][gw]['highest_loser_rank'] = (man1.id, r)
+
+				if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_loser_score'][1]:
+					json[str(league.id)]['cup'][gw]['lowest_loser_score'] = (man1.id, s)
+
+				if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_loser_score'][1]:
+					json[str(league.id)]['cup'][gw]['highest_loser_score'] = (man1.id, s)
 
 			html_buffer += f'{man1_score}'
 			if gw == api._current_gw:
@@ -843,6 +861,12 @@ def create_cup_page(api,league,leagues):
 					if (r := man2.overall_rank) < json[str(league.id)]['cup'][gw]['highest_winner_rank'][1]:
 						json[str(league.id)]['cup'][gw]['highest_winner_rank'] = (man2.id, r)
 
+					if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_winner_score'][1]:
+						json[str(league.id)]['cup'][gw]['lowest_winner_score'] = (man1.id, s)
+
+					if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_winner_score'][1]:
+						json[str(league.id)]['cup'][gw]['highest_winner_score'] = (man1.id, s)
+
 				else:
 					html_buffer += f'<td class="w3-center">\n'
 
@@ -851,6 +875,12 @@ def create_cup_page(api,league,leagues):
 
 					if (r := man2.overall_rank) < json[str(league.id)]['cup'][gw]['highest_loser_rank'][1]:
 						json[str(league.id)]['cup'][gw]['highest_loser_rank'] = (man2.id, r)
+
+					if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_loser_score'][1]:
+						json[str(league.id)]['cup'][gw]['lowest_loser_score'] = (man1.id, s)
+
+					if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_loser_score'][1]:
+						json[str(league.id)]['cup'][gw]['highest_loser_score'] = (man1.id, s)
 
 				html_buffer += f'{man2_score}'
 				if gw == api._current_gw:
@@ -4368,6 +4398,7 @@ def generate_summary_template(api, league):
 			award_strings = []
 			for award_name, score in awards:
 				award_strings.append(f'{award_flavourtext[award_name]}')
+				# award_strings.append(f'{award_flavourtext[award_name]} {score}')
 
 			m = api.get_manager(id=m_id)
 
@@ -4404,6 +4435,20 @@ def generate_summary_template(api, league):
 
 			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['highest_winner_rank'][0])
 			f.write(f"Highest ranked winner: {m.name}\n")
+
+			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['highest_loser_score'][0])
+			f.write(f"Highest scoring loser: {m.name} {m.livescore}\n")
+
+			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['lowest_winner_score'][0])
+			f.write(f"Lowest scoring winner: {m.name} {m.livescore}\n")
+
+			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['lowest_loser_score'][0])
+			f.write(f"Lowest scoring loser: {m.name} {m.livescore}\n")
+
+			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['highest_winner_score'][0])
+			f.write(f"Highest scoring winner: {m.name} {m.livescore}\n")
+
+			f.write(f"\n({api._current_gw} {api._live_gw})\n")
 
 			# #managers
 			# #diamond managers
