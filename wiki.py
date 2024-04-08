@@ -803,31 +803,31 @@ def create_cup_page(api,league,leagues):
 				html_buffer += f'<td class="w3-green w3-center">\n'
 
 				if (r := man1.overall_rank) > json[str(league.id)]['cup'][gw]['lowest_winner_rank'][1]:
-					json[str(league.id)]['cup'][gw]['lowest_winner_rank'] = (man1.id, r)
+					json[str(league.id)]['cup'][gw]['lowest_winner_rank'] = (man1.id, r, man2.id if man2 else None)
 
 				if (r := man1.overall_rank) < json[str(league.id)]['cup'][gw]['highest_winner_rank'][1]:
-					json[str(league.id)]['cup'][gw]['highest_winner_rank'] = (man1.id, r)
+					json[str(league.id)]['cup'][gw]['highest_winner_rank'] = (man1.id, r, man2.id if man2 else None)
 
 				if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_winner_score'][1]:
-					json[str(league.id)]['cup'][gw]['lowest_winner_score'] = (man1.id, s)
+					json[str(league.id)]['cup'][gw]['lowest_winner_score'] = (man1.id, s, man2.id if man2 else None)
 
 				if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_winner_score'][1]:
-					json[str(league.id)]['cup'][gw]['highest_winner_score'] = (man1.id, s)
+					json[str(league.id)]['cup'][gw]['highest_winner_score'] = (man1.id, s, man2.id if man2 else None)
 
 			else:
 				html_buffer += f'<td class="w3-center">\n'
 
 				if (r := man1.overall_rank) > json[str(league.id)]['cup'][gw]['lowest_loser_rank'][1]:
-					json[str(league.id)]['cup'][gw]['lowest_loser_rank'] = (man1.id, r)
+					json[str(league.id)]['cup'][gw]['lowest_loser_rank'] = (man1.id, r, man2.id if man2 else None)
 
 				if (r := man1.overall_rank) < json[str(league.id)]['cup'][gw]['highest_loser_rank'][1]:
-					json[str(league.id)]['cup'][gw]['highest_loser_rank'] = (man1.id, r)
+					json[str(league.id)]['cup'][gw]['highest_loser_rank'] = (man1.id, r, man2.id if man2 else None)
 
 				if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_loser_score'][1]:
-					json[str(league.id)]['cup'][gw]['lowest_loser_score'] = (man1.id, s)
+					json[str(league.id)]['cup'][gw]['lowest_loser_score'] = (man1.id, s, man2.id if man2 else None)
 
 				if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_loser_score'][1]:
-					json[str(league.id)]['cup'][gw]['highest_loser_score'] = (man1.id, s)
+					json[str(league.id)]['cup'][gw]['highest_loser_score'] = (man1.id, s, man2.id if man2 else None)
 
 			html_buffer += f'{man1_score}'
 			if gw == api._current_gw:
@@ -856,31 +856,31 @@ def create_cup_page(api,league,leagues):
 					html_buffer += f'<td class="w3-green w3-center">\n'
 
 					if (r := man2.overall_rank) > json[str(league.id)]['cup'][gw]['lowest_winner_rank'][1]:
-						json[str(league.id)]['cup'][gw]['lowest_winner_rank'] = (man2.id, r)
+						json[str(league.id)]['cup'][gw]['lowest_winner_rank'] = (man2.id, r, man1.id)
 
 					if (r := man2.overall_rank) < json[str(league.id)]['cup'][gw]['highest_winner_rank'][1]:
-						json[str(league.id)]['cup'][gw]['highest_winner_rank'] = (man2.id, r)
+						json[str(league.id)]['cup'][gw]['highest_winner_rank'] = (man2.id, r, man1.id)
 
-					if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_winner_score'][1]:
-						json[str(league.id)]['cup'][gw]['lowest_winner_score'] = (man1.id, s)
+					if (s := man2.livescore) < json[str(league.id)]['cup'][gw]['lowest_winner_score'][1]:
+						json[str(league.id)]['cup'][gw]['lowest_winner_score'] = (man2.id, s, man1.id)
 
-					if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_winner_score'][1]:
-						json[str(league.id)]['cup'][gw]['highest_winner_score'] = (man1.id, s)
+					if (s := man2.livescore) > json[str(league.id)]['cup'][gw]['highest_winner_score'][1]:
+						json[str(league.id)]['cup'][gw]['highest_winner_score'] = (man2.id, s, man1.id)
 
 				else:
 					html_buffer += f'<td class="w3-center">\n'
 
 					if (r := man2.overall_rank) > json[str(league.id)]['cup'][gw]['lowest_loser_rank'][1]:
-						json[str(league.id)]['cup'][gw]['lowest_loser_rank'] = (man2.id, r)
+						json[str(league.id)]['cup'][gw]['lowest_loser_rank'] = (man2.id, r, man1.id)
 
 					if (r := man2.overall_rank) < json[str(league.id)]['cup'][gw]['highest_loser_rank'][1]:
-						json[str(league.id)]['cup'][gw]['highest_loser_rank'] = (man2.id, r)
+						json[str(league.id)]['cup'][gw]['highest_loser_rank'] = (man2.id, r, man1.id)
 
-					if (s := man1.livescore) < json[str(league.id)]['cup'][gw]['lowest_loser_score'][1]:
-						json[str(league.id)]['cup'][gw]['lowest_loser_score'] = (man1.id, s)
+					if (s := man2.livescore) < json[str(league.id)]['cup'][gw]['lowest_loser_score'][1]:
+						json[str(league.id)]['cup'][gw]['lowest_loser_score'] = (man2.id, s, man1.id)
 
-					if (s := man1.livescore) > json[str(league.id)]['cup'][gw]['highest_loser_score'][1]:
-						json[str(league.id)]['cup'][gw]['highest_loser_score'] = (man1.id, s)
+					if (s := man2.livescore) > json[str(league.id)]['cup'][gw]['highest_loser_score'][1]:
+						json[str(league.id)]['cup'][gw]['highest_loser_score'] = (man2.id, s, man1.id)
 
 				html_buffer += f'{man2_score}'
 				if gw == api._current_gw:
@@ -4391,7 +4391,22 @@ def generate_summary_template(api, league):
 
 	with open('summary_template.txt','wt') as f:
 
-		f.write(f'{gw_str} Awards \n\n')
+		if cup_active:
+			round_size = pow(2, 38 - gw + 1)
+
+			if round_size > 8:
+				round_str = f'round of {round_size}'
+			elif round_size == 2:
+				round_str = f'Final'
+			elif round_size == 4:
+				round_str = f'Semi-Finals'
+			elif round_size == 8:
+				round_str = f'Quarter-Finals'
+
+			f.write(f'{gw_str} Awards and Cup {round_str}\n\n')
+			f.write(f'Tesco Bean Value Toilet League \n\n')
+		else:
+			f.write(f'{gw_str} Awards \n\n')
 
 		for m_id, awards in by_manager.items():
 
@@ -4408,45 +4423,46 @@ def generate_summary_template(api, league):
 
 		if cup_active:
 
-			round_size = pow(2, 38 - gw + 1)
-
-			if round_size > 8:
-				round_str = f'round of {round_size}'
-			elif round_size == 2:
-				round_str = f'Final'
-			elif round_size == 4:
-				round_str = f'Semi-Finals'
-			elif round_size == 8:
-				round_str = f'Quarter-Finals'
-
-			f.write(f'\nCup {round_str} \n\n')
+			f.write(f'\nTesco Value Cup\n\n')
 
 			f.write(f"{json[str(league.id)]['cup'][gw]['n_diamond_winners']}💎 managers progress in the cup\n")
 			f.write(f"{json[str(league.id)]['cup'][gw]['n_diamond_losers']}💎 managers crash out of the cup\n")
 			
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['highest_loser_rank'][0])
-			f.write(f"Highest ranked loser: {m.name}\n")
+			m1,r,m2 = json[str(league.id)]['cup'][gw]['highest_loser_rank']
+			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+			f.write(f"Highest ranked loser: {m1.name} (vs {m2.name})\n")
 
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['lowest_winner_rank'][0])
-			f.write(f"Lowest ranked winner: {m.name}\n")
+			m1,r,m2 = json[str(league.id)]['cup'][gw]['lowest_winner_rank']
+			m1 = api.get_manager(id=m1)
+			m2 = api.get_manager(id=m2) if m2 else None
+			f.write(f"Lowest ranked winner: {m1.name} (vs {m2.name if m2 else 'BYE'})\n")
 
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['lowest_loser_rank'][0])
-			f.write(f"Lowest ranked loser: {m.name}\n")
+			m1,r,m2 = json[str(league.id)]['cup'][gw]['lowest_loser_rank']
+			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+			f.write(f"Lowest ranked loser: {m1.name} (vs {m2.name})\n")
 
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['highest_winner_rank'][0])
-			f.write(f"Highest ranked winner: {m.name}\n")
+			m1,r,m2 = json[str(league.id)]['cup'][gw]['highest_winner_rank']
+			m1 = api.get_manager(id=m1)
+			m2 = api.get_manager(id=m2) if m2 else None
+			f.write(f"Highest ranked winner: {m1.name} (vs {m2.name if m2 else 'BYE'})\n")
 
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['highest_loser_score'][0])
-			f.write(f"Highest scoring loser: {m.name} {m.livescore}\n")
+			m1,s,m2 = json[str(league.id)]['cup'][gw]['highest_loser_score']
+			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+			f.write(f"Highest scoring loser: {m1.name} {s} (vs {m2.name} w/ {m2.livescore})\n")
 
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['lowest_winner_score'][0])
-			f.write(f"Lowest scoring winner: {m.name} {m.livescore}\n")
+			m1,s,m2 = json[str(league.id)]['cup'][gw]['lowest_winner_score']
+			m1 = api.get_manager(id=m1)
+			m2 = api.get_manager(id=m2) if m2 else None
+			f.write(f"Lowest scoring winner: {m1.name} {s} (vs {m2.name if m2 else 'BYE'} w/ {m2.name if m2 else 'BYE'})\n")
 
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['lowest_loser_score'][0])
-			f.write(f"Lowest scoring loser: {m.name} {m.livescore}\n")
+			m1,s,m2 = json[str(league.id)]['cup'][gw]['lowest_loser_score']
+			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+			f.write(f"Lowest scoring loser: {m1.name} {s} (vs {m2.name} w/ {m2.livescore})\n")
 
-			m = api.get_manager(id=json[str(league.id)]['cup'][gw]['highest_winner_score'][0])
-			f.write(f"Highest scoring winner: {m.name} {m.livescore}\n")
+			m1,s,m2 = json[str(league.id)]['cup'][gw]['highest_winner_score']
+			m1 = api.get_manager(id=m1)
+			m2 = api.get_manager(id=m2) if m2 else None
+			f.write(f"Highest scoring winner: {m1.name} {s} (vs {m2.name if m2 else 'BYE'} w/ {m2.name if m2 else 'BYE'})\n")
 
 			f.write(f"\n({api._current_gw} {api._live_gw})\n")
 
