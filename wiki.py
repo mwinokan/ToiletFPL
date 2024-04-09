@@ -3993,7 +3993,19 @@ def league_table_html(league,gw,awardkey=None):
 			html_buffer += f'<td class="w3-center">{pos_str}</td>\n'
 
 		# team
-		html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a></td>\n'
+		html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a>'
+
+		if cup_active:
+			matches = m.get_cup_matches(league)
+			matches = [x for x in matches if x['gw'] == gw]
+			if matches:
+				match = matches[0]
+				if match['winner'] == m.id:
+					html_buffer += " 🏆✅"
+				else:
+					html_buffer += " 🏆❌"
+
+		html_buffer += '</td>\n'
 
 		# manager
 		html_buffer += f'<td><a href="{m.gui_url}">{m.name}</a>'
@@ -4001,7 +4013,7 @@ def league_table_html(league,gw,awardkey=None):
 			html_buffer += " 💎"
 		elif m.id == 3902717:
 			html_buffer += " 🚫"
-		
+
 		if awardkey is None:
 			awardkey = gw
 
