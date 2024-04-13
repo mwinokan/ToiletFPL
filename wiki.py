@@ -3595,12 +3595,11 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += floating_subtitle('League Template')
 		html_buffer += league_template(league, gw)
 
+	if awards:
 		mout.debugOut(f"create_leaguepage({league})::Differentials")
 		html_buffer += floating_subtitle('Killer Differentials')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
-
-	if awards:
 		html_buffer += league_differentials(league, gw)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -4002,7 +4001,7 @@ def league_table_html(league,gw,awardkey=None):
 				match = matches[0]
 				if match['winner'] == m.id:
 					html_buffer += " 🏆✅"
-				else:
+				elif match['winner'] is not None:
 					html_buffer += " 🏆❌"
 
 		html_buffer += '</td>\n'
