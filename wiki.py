@@ -1361,7 +1361,7 @@ def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 	if cup_active:
 		url = f'https://{DEPLOY_ROOT}/html/toilet_cup.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🏆</h3></a>\n'
-		
+
 	html_buffer += f'<a class="w3-bar-item w3-{colour} w3-text-{colour} w3-right"></a>\n'
 	url = f'https://{DEPLOY_ROOT}/html/Tesco-Bean-Value-Toilet-League.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>\n'
@@ -3968,7 +3968,7 @@ def league_table_html(league,gw,awardkey=None):
 
 		if 'Toilet' in league.name and m.is_diamond and m.id != 3902717:
 			diamond_count += 1
-		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 3 + diamond_count:
+		elif 'Toilet' in league.name and not m.is_diamond and m.id != 3902717 and i <= 2 + diamond_count:
 			html_buffer += '<tr class="w3-pale-green">\n'
 		elif 'Diamond' in league.name and i >= len(sorted_managers)-4:
 			html_buffer += '<tr class="w3-pale-red">\n'
