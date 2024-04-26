@@ -1351,16 +1351,17 @@ def create_navbar(leagues,active=None,colour='black',active_colour='aqua'):
 	url = f'https://{DEPLOY_ROOT}/html/teams.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>\n'
 
-	if cup_active:
-		url = f'https://{DEPLOY_ROOT}/html/toilet_cup.html'
-		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏆 Toilet Cup</a>\n'
-
 	for i,league in enumerate(leagues):
 		url = f'https://{DEPLOY_ROOT}/html/{league.name.replace(" ","-")}.html'
 		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">{league._icon} {league.name}</a>\n'
 
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
+
+	if cup_active:
+		url = f'https://{DEPLOY_ROOT}/html/toilet_cup.html'
+		html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🏆</h3></a>\n'
+		
 	html_buffer += f'<a class="w3-bar-item w3-{colour} w3-text-{colour} w3-right"></a>\n'
 	url = f'https://{DEPLOY_ROOT}/html/Tesco-Bean-Value-Toilet-League.html'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>\n'
