@@ -428,7 +428,7 @@ def create_comparison_page(api,leagues,prev_gw_count=5,next_gw_count=5):
 
 	now_gw = api._current_gw
 	start_gw = max(1,now_gw-prev_gw_count)
-	end_gw = min(38,now_gw+next_gw_count)
+	end_gw = min(37,now_gw+next_gw_count)
 
 	### HEADERS
 	html_buffer += f'<tr>\n'
