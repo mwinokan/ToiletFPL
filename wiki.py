@@ -216,7 +216,8 @@ def main():
 	if cup_active:
 		create_cup_page(api,leagues[1],leagues)
 
-	#generate_summary_template(api, leagues[1])
+	if not api._live_gw or any([f['started'] for f in api.get_gw_fixtures(api._current_gw)]):
+		generate_summary_template(api, leagues[1])
 	
 	create_teampage(api,leagues)
 
