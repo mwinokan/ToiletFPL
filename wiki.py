@@ -1793,7 +1793,7 @@ def create_managerpage(api,man,leagues):
 		html_buffer += '</div>\n'
 
 		now_gw = api._current_gw
-		end_gw = min(38,now_gw+5)
+		end_gw = min(37,now_gw+5)
 
 		### GRAPH
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
