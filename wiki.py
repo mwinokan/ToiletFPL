@@ -44,6 +44,7 @@ cup_active = True # activate the cup
 if '--push' in argv: run_push_changes = True
 if '--offline' in argv: offline = True
 if '--kits' in argv: scrape_kits = True
+if '--test' in argv: test = True
 
 # configure the leagues
 
@@ -319,11 +320,21 @@ def run_test():
 
 	# create_playerpage(api,p,[])
 
+	leagues = []
+	for icon,code,colour,shortname in zip(league_icons,league_codes,league_colours,league_shortnames):
+		try:
+			leagues.append(League(code,api))
+			leagues[-1]._icon = icon
+			leagues[-1]._shortname = shortname
+			leagues[-1]._colour_str = colour
+		except fpl_api.Request404:
+			mout.error(f'Could not init League({code},{shortname})')
+
 	# # p.expected_points(gw=2,use_official=True,debug=True)
 	# # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
 	# man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
 	man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
-	create_managerpage(api, man, [])
+	create_managerpage(api, man, leagues)
 
 	api.finish()
 	exit()
@@ -1831,6 +1842,11 @@ def create_managerpage(api,man,leagues):
 		html_buffer += f'	Plotly.newPlot( GRAPH, {js.dumps(plot_data)}'
 		html_buffer += ', {	title: "Expected Points", margin: { r:0 }, font: {size: 14}} , {responsive: true});\n'
 		html_buffer += '</script>\n'
+
+		if cup_active:
+
+			for league in leagues:
+				print(man.get_cup_matches(league))
 
 		html_buffer += floating_subtitle('History')
 
