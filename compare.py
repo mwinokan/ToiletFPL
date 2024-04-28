@@ -117,16 +117,16 @@ def compare_squads(m1, m2, interactive = False):
 	html_buffer += '<td class="w3-center">Projected</td>\n'
 
 	if m1_projected > m2_projected:
-		html_buffer += f'<th class="w3-center w3-green">{m1_projected:.1f}</th>\n'
-		html_buffer += f'<th class="w3-center">{m2_projected:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center w3-green">+{m1_projected-m1.livescore:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">+{m2_projected-m2.livescore:.1f}</th>\n'
 	
 	elif m1_projected < m2_projected:
-		html_buffer += f'<th class="w3-center">{m1_projected:.1f}</th>\n'
-		html_buffer += f'<th class="w3-center w3-green">{m2_projected:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">+{m1_projected-m1.livescore:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center w3-green">+{m2_projected-m2.livescore:.1f}</th>\n'
 
 	else:
-		html_buffer += f'<th class="w3-center">{m1_projected:.1f}</th>\n'
-		html_buffer += f'<th class="w3-center">{m2_projected:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">+{m1_projected-m1.livescore:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">+{m2_projected-m2.livescore:.1f}</th>\n'
 
 	html_buffer += '</tr>\n'
 	
