@@ -718,7 +718,7 @@ def create_cup_page(api,league,leagues):
 	
 		processed = []
 
-		html_buffer += floating_subtitle(f'GW{gw} Cup Matches: {matches[0]["title"]}',pad=0)
+		html_buffer += floating_subtitle(f'GW{gw}: {matches[0]["title"]}',pad=0)
 
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
