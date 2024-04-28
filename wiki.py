@@ -1868,18 +1868,18 @@ def create_managerpage(api,man,leagues):
 				for i,(league, matches) in enumerate(all_matches):
 
 					if i == 0:
-						html_buffer += f'<button class="w3-bar-item w3-button w3-mobile tablink2 w3-aqua" onclick="openLeague2(event,{league.id})">{league.name}</button>\n'
+						html_buffer += f'<button class="w3-bar-item w3-button w3-mobile tablink2 w3-aqua" onclick="openLeague2(event,{league.id+90000000})">{league.name}</button>\n'
 					else:
-						html_buffer += f'<button class="w3-bar-item w3-mobile w3-button tablink2" onclick="openLeague2(event,{league.id})">{league.name}</button>\n'
+						html_buffer += f'<button class="w3-bar-item w3-mobile w3-button tablink2" onclick="openLeague2(event,{league.id+90000000})">{league.name}</button>\n'
 				
 				html_buffer += '</div>\n'
 
 				for i,(league, matches) in enumerate(all_matches):
 
 					if i==0:
-						html_buffer += f'<div id="{league.id}" class="w3-container w3-{league._colour_str} league2">\n'
+						html_buffer += f'<div id="{league.id+90000000}" class="w3-container w3-{league._colour_str} league2">\n'
 					else:
-						html_buffer += f'<div id="{league.id}" class="w3-container w3-{league._colour_str} league2" style="display:none">\n'
+						html_buffer += f'<div id="{league.id+90000000}" class="w3-container w3-{league._colour_str} league2" style="display:none">\n'
 					
 					opponent = matches[0]['opponent']
 
