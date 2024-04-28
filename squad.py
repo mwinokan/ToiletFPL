@@ -25,6 +25,17 @@ class Squad():
 		self._players = arg
 
 	@property
+	def ids(self):
+		return [p.id for p in self.players]
+
+	@property
+	def player_multiplier_pairs(self):
+		result = []
+		for p in self.players:
+			result.append((p, p.multiplier))
+		return result
+
+	@property
 	def num_players(self):
 		return len(self._players)
 
@@ -183,7 +194,7 @@ class Squad():
 		# self.forwards.index(max([p.expected_points(gw) for p in self.forwards]))
 
 	def expected_points(self,gw):
-		return sum([p.multiplier*p.expected_points(gw=gw) for p in self.players])
+		return sum([p.multiplier*p.expected_points(gw=gw) for p in self.players])		
 
 	def __str__(self):
 		return str([p.name for p in self._players])
