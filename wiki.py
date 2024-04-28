@@ -1845,8 +1845,67 @@ def create_managerpage(api,man,leagues):
 
 		if cup_active:
 
+			all_matches = []
+
 			for league in leagues:
-				print(man.get_cup_matches(league))
+				matches = man.get_cup_matches(league)
+				if matches:
+					all_matches.append((league, matches))
+
+			if all_matches:
+				html_buffer += floating_subtitle(f'GW{gw} Cup Matches')
+
+				html_buffer += '<div class="w3-col s12 m12 l12">\n'
+				html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+
+				from compare import compare_squads
+
+
+				# html_buffer += compare_squads(man, )
+
+				html_buffer += '<div class="w3-bar w3-black">\n'
+				
+				for i,(league, matches) in enumerate(all_matches):
+
+					if i == 0:
+						html_buffer += f'<button class="w3-bar-item w3-button w3-mobile tablink2 w3-aqua" onclick="openLeague2(event,{league.id})">{league.name}</button>\n'
+					else:
+						html_buffer += f'<button class="w3-bar-item w3-mobile w3-button tablink2" onclick="openLeague2(event,{league.id})">{league.name}</button>\n'
+				
+				html_buffer += '</div>\n'
+
+				for i,(league, matches) in enumerate(all_matches):
+
+					if i==0:
+						html_buffer += f'<div id="{league.id}" class="w3-container w3-{league._colour_str} league2">\n'
+					else:
+						html_buffer += f'<div id="{league.id}" class="w3-container w3-{league._colour_str} league2" style="display:none">\n'
+					
+					opponent = matches[0]['opponent']
+
+					# print(matches)
+					html_buffer += compare_squads(man, opponent)
+
+					html_buffer += '</div>\n'
+
+				html_buffer += '</div>\n'
+				html_buffer += '</div>\n'
+
+				html_buffer += '<script>\n'
+				html_buffer += 'function openLeague2(evt, leagueName2) {\n'
+				html_buffer += 'var i, x, tablinks;\n'
+				html_buffer += 'x = document.getElementsByClassName("league2");\n'
+				html_buffer += 'for (i = 0; i < x.length; i++) {\n'
+				html_buffer += 'x[i].style.display = "none";\n'
+				html_buffer += '}\n'
+				html_buffer += 'tablinks = document.getElementsByClassName("tablink2");\n'
+				html_buffer += 'for (i = 0; i < x.length; i++) {\n'
+				html_buffer += 'tablinks[i].className = tablinks[i].className.replace(" w3-aqua", "");\n'
+				html_buffer += '}\n'
+				html_buffer += 'document.getElementById(leagueName2).style.display = "block";\n'
+				html_buffer += 'evt.currentTarget.className += " w3-aqua";\n'
+				html_buffer += '}\n'
+				html_buffer += '</script>\n'
 
 		html_buffer += floating_subtitle('History')
 
