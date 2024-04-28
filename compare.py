@@ -1,6 +1,6 @@
 
 import pandas as pd
-from IPython.core.display import HTML
+# from IPython.core.display import HTML
 from web import get_style_from_event_score
 
 DEPLOY_ROOT = 'mwinokan.github.io/ToiletFPL'
@@ -218,10 +218,10 @@ def compare_squads(m1, m2, interactive = False):
 		html_buffer += '</table>\n'
 		html_buffer += '<br>\n'
 	
-	if interactive:
-		return HTML(html_buffer)
-	else:
-		return html_buffer
+	# if interactive:
+		# return HTML(html_buffer)
+	# else:
+	return html_buffer
 
 def player_row(gw, p, m_diff = 1):
 	html_buffer = ""
