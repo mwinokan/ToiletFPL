@@ -7,6 +7,9 @@ DEPLOY_ROOT = 'mwinokan.github.io/ToiletFPL'
 
 def compare_squads(m1, m2, interactive = False):
 
+	if m1 is None or m2 is None:
+		return "BYE!"
+
 	s1 = m1.get_current_squad()
 	s2 = m2.get_current_squad()
 
