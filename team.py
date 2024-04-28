@@ -114,7 +114,7 @@ class Team():
 		for fix_d in self.fixtures:
 			if fix_d['event'] == gw:
 				fixs.append(fix_d)
-		
+
 		match len(fixs):
 			case 3:
 				self._api._special_gws[gw] = "TGW"
@@ -133,11 +133,16 @@ class Team():
 		else:
 			return fixs
 
-	def get_opponent(self,gw):
+	def get_opponent(self, gw, not_started_only=False):
+
+		# print(self, gw, not_started_only)
 
 		opps = []
 
 		for fix_d in self.fixtures:
+
+			if not_started_only and fix_d['started']:
+				continue
 
 			if fix_d['event'] != gw:
 				continue

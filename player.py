@@ -1076,22 +1076,25 @@ class Player():
 
 	"""
 
-	def expected_points(self,opponent=None,gw=None,debug=False,use_official=False,force=False):
+	def expected_points(self,opponent=None,gw=None,debug=False,use_official=False,force=False, not_started_only=False):
+
+		# print(self, gw, opponent, not_started_only)
 
 		if gw is None:
 			gw = self._api._current_gw
 		
-		if self.id in self._api._exp_archive.keys():
-			if gw in self._api._exp_archive[self.id].keys():
-				if not force:
-					return self._api._exp_archive[self.id][gw]
+		if not not_started_only:
+			if self.id in self._api._exp_archive.keys():
+				if gw in self._api._exp_archive[self.id].keys():
+					if not force:
+						return self._api._exp_archive[self.id][gw]
+				else:
+					self._api._exp_archive[self.id] = {}
 			else:
 				self._api._exp_archive[self.id] = {}
-		else:
-			self._api._exp_archive[self.id] = {}
 		
 		if opponent is None:
-			opponent = self.team_obj.get_opponent(gw)
+			opponent = self.team_obj.get_opponent(gw, not_started_only=not_started_only)			
 			if opponent is None:
 				self._api._exp_archive[self.id][gw] = 0
 				return 0
@@ -1108,7 +1111,8 @@ class Player():
 		if opponent is None:
 			if debug:
 				mout.out(f'no opponent (gw={gw})')
-			self._api._exp_archive[self.id][gw] = 0
+			if not not_started_only:
+				self._api._exp_archive[self.id][gw] = 0
 			return 0
 
 		# use flag status for prediction
@@ -1116,19 +1120,22 @@ class Player():
 		if debug:
 			mout.varOut('playing_chance',chance)
 		if chance == 0.0:
-			self._api._exp_archive[self.id][gw] = 0
-			return self._api._exp_archive[self.id][gw]
+			if not not_started_only:
+				self._api._exp_archive[self.id][gw] = 0
+			return 0
 
 		if use_official and gw == self._api._current_gw:
 			if debug:
 				mout.varOut('expected_points (official)',chance*self._exp_next_round)
-			self._api._exp_archive[self.id][gw] = chance*self._exp_this_round
-			return self._api._exp_archive[self.id][gw]
+			if not not_started_only:
+				self._api._exp_archive[self.id][gw] = (x := chance*self._exp_this_round)
+			return x
 		elif use_official and gw == self._api._current_gw + 1:
 			if debug:
 				mout.varOut('expected_points (official)',chance*self._exp_next_round)
-			self._api._exp_archive[self.id][gw] = chance*self._exp_next_round
-			return self._api._exp_archive[self.id][gw]
+			if not not_started_only:
+				self._api._exp_archive[self.id][gw] = (x := chance*self._exp_next_round)
+			return x
 		else:
 
 			expected_points = 0
@@ -1145,15 +1152,18 @@ class Player():
 
 			if 'minutes' not in self.history:
 				# mout.error(f'{self} has no minutes in self.history')
-				self._api._exp_archive[self.id][gw] = 0
-				return self._api._exp_archive[self.id][gw]
+				if not not_started_only:
+					self._api._exp_archive[self.id][gw] = 0
+				return 0
 
 			Ms = [float(x) for x in self.history['minutes']]
 			xM = self.expected_minutes(gw,Ms=Ms) # or 0.0
 
 			if xM < 1:
 				xMPts = 0.0
-				self._api._exp_archive[self.id][gw] = 0
+
+				if not not_started_only:
+					self._api._exp_archive[self.id][gw] = 0
 				return 0
 			else:
 				xMPts = 1 + min([1,xM/60])
@@ -1305,8 +1315,9 @@ class Player():
 				mout.varOut('xCSPts',xCSPts)
 				mout.varOut('expected_points',expected_points)
 
-			self._api._exp_archive[self.id][gw] = expected_points
-			return self._api._exp_archive[self.id][gw]
+			if not not_started_only:
+				self._api._exp_archive[self.id][gw] = expected_points
+			return expected_points
 
 	# @mout.debug_log
 	def old_expected_points(self,opponent=None,gw=None,fit_ratio=0.8,debug=False,use_official=False,force=False):

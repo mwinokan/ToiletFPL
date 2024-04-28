@@ -48,7 +48,7 @@ def compare_squads(m1, m2, interactive = False):
 
 		points = p.get_event_score() or None
 
-		if points is None:
+		if not p.has_fixture_finished:
 
 			if mult1 > mult2:
 				# print(f'{m1} will benefit from {p} points')
@@ -62,6 +62,13 @@ def compare_squads(m1, m2, interactive = False):
 				...
 
 			continue
+
+		# elif points is None:
+
+		# 	points = 0
+
+		if points is None:
+			points = 0
 
 		points1 = mult1 * points
 		points2 = mult2 * points
@@ -107,8 +114,8 @@ def compare_squads(m1, m2, interactive = False):
 	
 	html_buffer += '</tr>\n'
 
-	m1_exp_gain = sum([d["player"].expected_points(gw=gw) * d["m_diff"] for d in data["m1_outstanding"]])
-	m2_exp_gain = sum([d["player"].expected_points(gw=gw) * d["m_diff"] for d in data["m2_outstanding"]])
+	m1_exp_gain = sum([d["player"].expected_points(gw=gw, not_started_only=True) * d["m_diff"] for d in data["m1_outstanding"]])
+	m2_exp_gain = sum([d["player"].expected_points(gw=gw, not_started_only=True) * d["m_diff"] for d in data["m2_outstanding"]])
 
 	m1_projected = m1.livescore + m1_exp_gain
 	m2_projected = m2.livescore + m2_exp_gain
@@ -117,16 +124,16 @@ def compare_squads(m1, m2, interactive = False):
 	html_buffer += '<td class="w3-center">Projected</td>\n'
 
 	if m1_projected > m2_projected:
-		html_buffer += f'<th class="w3-center w3-green">+{m1_projected-m1.livescore:.1f}</th>\n'
-		html_buffer += f'<th class="w3-center">+{m2_projected-m2.livescore:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center w3-green">{m1_projected:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">{m2_projected:.1f}</th>\n'
 	
 	elif m1_projected < m2_projected:
-		html_buffer += f'<th class="w3-center">+{m1_projected-m1.livescore:.1f}</th>\n'
-		html_buffer += f'<th class="w3-center w3-green">+{m2_projected-m2.livescore:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">{m1_projected:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center w3-green">{m2_projected:.1f}</th>\n'
 
 	else:
-		html_buffer += f'<th class="w3-center">+{m1_projected-m1.livescore:.1f}</th>\n'
-		html_buffer += f'<th class="w3-center">+{m2_projected-m2.livescore:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">{m1_projected:.1f}</th>\n'
+		html_buffer += f'<th class="w3-center">{m2_projected:.1f}</th>\n'
 
 	html_buffer += '</tr>\n'
 	
@@ -191,11 +198,11 @@ def compare_squads(m1, m2, interactive = False):
 		html_buffer += f'<tr><th class="w3-center">You still have</th><th class="w3-center">Points</th><th class="w3-center">xPts</th><th class="w3-center">Fixture</th></tr>\n'
 		for d in data['m1_outstanding']:
 			p = d['player']
-			html_buffer += player_row(gw, p, d['m_diff'])
+			html_buffer += player_row(gw, p, d['m_diff'], not_started_only=True)
 		if len(data['m1_outstanding']) > 1:
 			html_buffer += '<tr>\n'
 			html_buffer += '<td class="w3-center">Total:</td>\n'
-			html_buffer += '<td class="w3-center"></td>\n'
+			html_buffer += f'<td class="w3-center">{sum([p["player"].get_event_score(gw=gw, not_playing_is_none=False) for p in data["m1_outstanding"]])}</td>\n'	
 			html_buffer += f'<td class="w3-center">{m1_exp_gain:.1f}</td>\n'	
 			html_buffer += '<td class="w3-center"></td>\n'
 			html_buffer += '</tr>\n'
@@ -209,11 +216,11 @@ def compare_squads(m1, m2, interactive = False):
 		html_buffer += f'<tr><th class="w3-center">Opponent still has</th><th class="w3-center">Points</th><th class="w3-center">xPts</th><th class="w3-center">Fixture</th></tr>\n'
 		for d in data['m2_outstanding']:
 			p = d['player']
-			html_buffer += player_row(gw, p, d['m_diff'])
+			html_buffer += player_row(gw, p, d['m_diff'], not_started_only=True)
 		if len(data['m2_outstanding']) > 1:
 			html_buffer += '<tr>\n'
 			html_buffer += '<td class="w3-center">Total:</td>\n'
-			html_buffer += '<td class="w3-center"></td>\n'
+			html_buffer += f'<td class="w3-center">{sum([p["player"].get_event_score(gw=gw, not_playing_is_none=False) for p in data["m2_outstanding"]])}</td>\n'	
 			html_buffer += f'<td class="w3-center">{m2_exp_gain:.1f}</td>\n'	
 			html_buffer += '<td class="w3-center"></td>\n'
 			html_buffer += '</tr>\n'
@@ -226,7 +233,7 @@ def compare_squads(m1, m2, interactive = False):
 	# else:
 	return html_buffer
 
-def player_row(gw, p, m_diff = 1):
+def player_row(gw, p, m_diff = 1, not_started_only=False):
 	html_buffer = ""
 	html_buffer += "<tr>\n"
 	if m_diff != 1:
@@ -239,12 +246,17 @@ def player_row(gw, p, m_diff = 1):
 
 	if score is None:
 		html_buffer += f'<td class="w3-center">-</td>\n'
+		score = 0
 	else:
 		style_str = get_style_from_event_score(score).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{score:.0f}</td>\n'
 
-	exp = p.expected_points(gw=gw)
+	exp = p.expected_points(gw=gw, not_started_only=not_started_only) # + score
+
+	# print(p, exp, score)
+
 	style_str = get_style_from_event_score(exp).rstrip('"')+';vertical-align:middle;"'
+	
 	html_buffer += f'<td class="w3-center" style={style_str}>{exp:.1f}</td>\n'
 
 	html_buffer += '<td class="w3-center">\n'
