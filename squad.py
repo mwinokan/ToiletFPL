@@ -196,6 +196,10 @@ class Squad():
 	def expected_points(self,gw):
 		return sum([p.multiplier*p.expected_points(gw=gw) for p in self.players])		
 
+	@property
+	def projected_points(self):
+		return sum([p.multiplier*p.projected_points for p in self.players])		
+
 	def __str__(self):
 		return str([p.name for p in self._players])
 

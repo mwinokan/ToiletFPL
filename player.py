@@ -112,6 +112,7 @@ class Player():
 		self.__bps = None
 		self.__fix_started = None
 		self.__fix_finished = None
+		self.__total_points = None
 
 		self._gui_url = f"https://mwinokan.github.io/ToiletFPL/html/player_{self.id}.html"
 
@@ -1157,6 +1158,8 @@ class Player():
 				return 0
 
 			Ms = [float(x) for x in self.history['minutes']]
+			if self._api._live_gw: Ms .pop()
+
 			xM = self.expected_minutes(gw,Ms=Ms) # or 0.0
 
 			if xM < 1:
@@ -1194,6 +1197,7 @@ class Player():
 			# xCSs = [int(int(x) < 1) for x in self.history['goals_conceded']]
 			# xGCs = [float(x) for x in self.history['expected_goals_conceded']]
 			xCSs = [int(float(x) < 0.5) for x in self.history['expected_goals_conceded']]
+			if self._api._live_gw: xCSs.pop()
 
 			self._xC_no_opponent = weighted_average(xCSs,None,self._prev_clean_sheets_per_90*self._prev_minutes/90,self._prev_minutes/90)
 			
@@ -1204,6 +1208,7 @@ class Player():
 			### GOALS
 
 			xGs = [float(x) for x in self.history['expected_goals']]
+			if self._api._live_gw: xGs.pop()
 		
 			# weighted average xG per game
 			xG_per_minute = weighted_average(xGs,Ms,self._prev_expected_goals,self._prev_minutes)
@@ -1211,6 +1216,7 @@ class Player():
 			### ASSISTS
 
 			xAs = [float(x) for x in self.history['expected_assists']]
+			if self._api._live_gw: xAs.pop()
 		
 			# weighted average xA per game
 			xA_per_minute = weighted_average(xAs,Ms,self._prev_expected_assists,self._prev_minutes)
@@ -1229,27 +1235,32 @@ class Player():
 			### BONUS POINTS
 
 			Bs = [float(x) for x in self.history['bonus']]
+			if self._api._live_gw: Bs.pop()
 
 			self._xBpts = weighted_average(Bs,None,self._prev_bonus,self._prev_minutes/90)
 
 			### YELLOW CARDS
 
 			YCs = [int(x) for x in self.history['yellow_cards']]
+			if self._api._live_gw: YCs.pop()
 			xYCPts = - weighted_average(YCs,None,self._prev_yellow_cards,self._prev_minutes/90)
 
 			### RED CARDS
 
 			RCs = [int(x) for x in self.history['red_cards']]
+			if self._api._live_gw: RCs.pop()
 			xRCPts = -3 * weighted_average(RCs,None,self._prev_red_cards,self._prev_minutes/90)
 
 			### OWN GOALS
 
 			OGs = [int(x) for x in self.history['own_goals']]
+			if self._api._live_gw: OGs.pop()
 			xOGPts = -2 * weighted_average(OGs,None,self._prev_own_goals,self._prev_minutes/90)
 
 			### PENALTY MISS
 
 			PMs = [int(x) for x in self.history['penalties_missed']]
+			if self._api._live_gw: PMs.pop()
 			xPMPts = -2 * weighted_average(PMs,None,self._prev_penalties_missed,self._prev_minutes/90)
 
 			if self.position_id == 1:
@@ -1257,11 +1268,13 @@ class Player():
 				### PENALTY SAVE
 
 				PSs = [int(x) for x in self.history['penalties_saved']]
+				if self._api._live_gw: PSs.pop()
 				xPSPts = 5 * weighted_average(PSs,None,self._prev_penalties_saved,self._prev_minutes/90)
 
 				### SAVES
 
 				Ss = [int(x) for x in self.history['saves']]
+				if self._api._live_gw: Ss.pop()
 				xSPts = 1/3 * weighted_average(Ss,None,self._prev_saves,self._prev_minutes/90)
 
 			else:
@@ -1618,6 +1631,7 @@ class Player():
 		self.__influence = event_stats["influence"]
 		self.__threat = event_stats["threat"]
 		self.__ict_index = event_stats["ict_index"]
+		self.__total_points = event_stats["total_points"]
 
 	def fetch_event_stats(self,gw):
 		gw = gw or self._api.current_gw
@@ -1705,12 +1719,20 @@ class Player():
 			if gw == r:
 				h_indices.append(i)
 
+		kwargs = dict(
+			md_bold=md_bold,
+			event_stats=event_stats,
+			pts_line=pts_line,
+			team_line=team_line,
+			html_highlight=html_highlight,
+		)
+
 		if len(h_indices)==1:
-			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold,event_stats=event_stats,pts_line=pts_line,team_line=team_line,html_highlight=html_highlight)
+			return self.get_event_strbuff(h_indices[0],gw,0,**kwargs)
 		elif len(h_indices)==2:
-			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold,html_highlight=html_highlight,player_lines=False) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,md_bold=md_bold,html_highlight=html_highlight)
+			return self.get_event_strbuff(h_indices[0],gw,0,**kwargs) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,**kwargs)
 		elif len(h_indices)==3:
-			return self.get_event_strbuff(h_indices[0],gw,0,md_bold=md_bold,html_highlight=html_highlight,player_lines=False) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,md_bold=md_bold,html_highlight=html_highlight,player_lines=False) + '\n\n' + self.get_event_strbuff(h_indices[2],gw,2,md_bold=md_bold,html_highlight=html_highlight)
+			return self.get_event_strbuff(h_indices[0],gw,0**kwargs) + '\n\n' + self.get_event_strbuff(h_indices[1],gw,1,**kwargs) + '\n\n' + self.get_event_strbuff(h_indices[2],gw,2,**kwargs)
 		else:
 
 			str_buffer = "No fixture."
@@ -1895,6 +1917,43 @@ class Player():
 		# 	return events.index(gw) + 1
 
 		# return relative_gw
+
+	@property
+	def projected_points(self):
+
+		gw = self._api._current_gw
+
+		# team fixtures
+		team_fixs = self.team_obj.get_gw_fixtures(gw)
+		if not isinstance(team_fixs, list):
+			team_fixs = [team_fixs]
+		team_fixs = [f for f in team_fixs if not f['finished']]
+
+		# player fixtures
+		df = self.fixtures
+		self_fixs = df[df['event'] == gw]
+
+		# start with achieved score
+		score = self.get_event_score(not_playing_is_none=False)
+		# print(f'starting with {score=}')
+
+		if len(team_fixs) > len(self_fixs):
+			return score
+
+		assert len(self_fixs) == len(team_fixs), (self, gw, len(self_fixs), len(team_fixs))
+
+		# add outstanding fixtures
+		for (i,p_fix), t_fix in zip(self_fixs.iterrows(), team_fixs):
+			if not t_fix['started']:
+				# print(f'{self} adding expected {p_fix["id"]}')
+				
+				# expected points
+				is_home = p_fix['is_home']
+				opp = t_fix['team_a'] if is_home else t_fix['team_h']
+				opp = self._api.get_player_team_obj(opp)
+				score += self.expected_points(opponent=opp, debug=False, force=False)
+
+		return score
 
 	@property
 	def net_transfers(self):

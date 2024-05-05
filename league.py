@@ -2,8 +2,10 @@
 import mout
 from manager import Manager
 import pandas as pd
+from tqdm import tqdm
 
 class League():
+	
 	def __init__(self,code,api,extra=None):
 		self._code = int(code)
 		self._name = None
@@ -289,3 +291,12 @@ class League():
 				plt.close()
 
 		self._graph_paths.append(f"graphs/{self.shortname}_points.png")
+
+	def get_cup_matches(self):
+		all_matches = []
+		mout.debugOut(f"Getting all cup matches in {self.name}...")
+		for i,manager in tqdm(enumerate(self.managers)):
+			matches = manager.get_cup_matches(self)
+			# print(i,manager.name,len(matches))
+			all_matches += manager.get_cup_matches(self)
+		return all_matches

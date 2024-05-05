@@ -162,9 +162,9 @@ def main():
 	mout.debugOut("main()")
 	import os
 	if offline:
-		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update [OFFLINE]' -open 'https://{DEPLOY_ROOT}/index.html'")
+		os.system(f"terminal-notifier -title 'ToiletFPL' -message 'Started Wiki Update [OFFLINE]' -open 'https://{DEPLOY_ROOT}/index.html'")
 	else:
-		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'Started Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'")
+		os.system(f"terminal-notifier -title 'ToiletFPL' -message 'Started Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'")
 
 	if fetch_latest:
 		pull_changes()
@@ -333,8 +333,8 @@ def run_test():
 	# # p.expected_points(gw=2,use_official=True,debug=True)
 	# # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
 	# man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
-	man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
-	create_managerpage(api, man, leagues)
+	# man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
+	# create_managerpage(api, man, leagues)
 
 	api.finish()
 	exit()
@@ -690,14 +690,46 @@ def create_cup_page(api,league,leagues):
 	# go by gameweek
 
 	gws = list(set([m['gw'] for m in all_matches]))
+
+	# gws = [gw for gw in gws if gw < 36]
 	
 	create_key(json[str(league.id)],'cup')
 
-	html_buffer = ""
+	total_buffer = ""
+
+	if api._current_gw > 35:
+
+		# total_buffer += floating_subtitle(f'Top 8 brackets',pad=0)
+				
+		print('brackets!')
+
+		from cup import process_matches, bracket_table
+
+		final = process_matches(api, [m for m in all_matches if m['gw'] == 38])
+		semi_finals = process_matches(api, [m for m in all_matches if m['gw'] == 37])
+		quarter_finals = process_matches(api, [m for m in all_matches if m['gw'] == 36])
+
+		### testing ##########
+
+		# def man(id):
+		#     return api.get_manager(id=id)
+
+		# final=(man(264578), man(660251))
+
+		# semi_finals=[
+		#    (man(264578), man(5983)),
+        #    (man(660251), man(566))
+        # ]
+
+        ######################
+
+		total_buffer += bracket_table(final=final, semis=semi_finals, quarters=quarter_finals)
 
 	# prog_step = (50/len(gws))
 
 	for i,gw in enumerate(sorted(gws,reverse=True)):
+
+		html_buffer = ""
 
 		create_key(json[str(league.id)]['cup'],gw)
 
@@ -809,7 +841,7 @@ def create_cup_page(api,league,leagues):
 			html_buffer += f'<br><a href="{man1.gui_url}">{man1.team_name}</a>\n'
 			html_buffer += '</td>\n'
 
-			html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man1._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
+			html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{man1._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
 			
 			if winner == 1:
 				html_buffer += f'<td class="w3-green w3-center">\n'
@@ -899,7 +931,7 @@ def create_cup_page(api,league,leagues):
 					html_buffer += f'<br>({man2.fixtures_played}/{man2.total_fixtures})\n'
 				html_buffer += '</td>\n'
 
-				html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man2._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
+				html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{man2._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
 
 				html_buffer += f'<td class="w3-left">\n'
 				html_buffer += f'<a href="{man2.gui_url}">{man2.name}</a>'
@@ -920,10 +952,13 @@ def create_cup_page(api,league,leagues):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
+		if gw < 36:
+			total_buffer += html_buffer
+
 	# mout.progress(50,50,width=50)
 
 	navbar = create_navbar(leagues, active='K', colour='black', active_colour='green')
-	html_page('html/toilet_cup.html',None,title=f"Tesco Value Cup", gw=api._current_gw, html=html_buffer, showtitle=True, bar_html=navbar, colour='amber')
+	html_page('html/toilet_cup.html',None,title=f"Tesco Value Cup", gw=api._current_gw, html=total_buffer, showtitle=True, bar_html=navbar, colour='amber')
 
 def create_teampage(api,leagues):
 	mout.debugOut(f"create_teampage()")
@@ -3822,7 +3857,7 @@ def league_chips(league,gw):
 		html_buffer += f'<td class="w3-{color}" style="text-align:center;">{man.get_event_chip(gw)}</td>\n'
 
 		# team
-		html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{man._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{man.gui_url}">{man.team_name}</a></td>\n'
+		html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{man._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{man.gui_url}">{man.team_name}</a></td>\n'
 
 		# manager
 		html_buffer += f'<td><a href="{man.gui_url}">{man.name}</a>\n'
@@ -3935,7 +3970,7 @@ def preseason_table(league):
 
 		html_buffer += '\t<tr>\n'
 		html_buffer += f'\t\t<td style="text-align:right;">{i+1}</td>\n'
-		html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></img>\n'
+		html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></img>\n'
 
 		html_buffer += f'\t\t<a href="{m.gui_url}">{m.team_name}</a></td>\n'
 		
@@ -3965,7 +4000,7 @@ def preseason_table(league):
 		else:
 			f.write(f"| {i+1} ")
 
-		f.write(f"| [[https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}]]")
+		f.write(f"| [[https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}]]")
 		f.write(f" [{m.team_name}]({m.gui_url})")
 		f.write(f"| [{m.name}]({m.gui_url}) ")
 
@@ -4075,7 +4110,7 @@ def league_table_html(league,gw,awardkey=None):
 			html_buffer += f'<td class="w3-center">{pos_str}</td>\n'
 
 		# team
-		html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a>'
+		html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a>'
 
 		if cup_active:
 			matches = m.get_cup_matches(league)
@@ -4293,7 +4328,7 @@ def ownership_template(league,title,gw):
 		html_buffer += f'<td style="vertical-align:middle;text-align:right;"><b>{ranks[i]}</b></td>'
 
 		html_buffer += f'<td style="vertical-align:middle;">'
-		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{d["kit_path"]}?raw=true" alt="Kit Icon" width="22" height="29">'
+		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{d["kit_path"]}?raw=true" alt="Kit Icon" width="22" height="29">'
 
 		html_buffer += f' {d["shortteam"]} \n'
 		html_buffer += f'{d["position"]}</td>\n'
@@ -4368,7 +4403,7 @@ def position_template(league,players,pos_str,gw):
 			html_buffer += f'<b>{ranks[i]}</b>\n'
 			html_buffer += f'</td>\n'
 			html_buffer += f'<td style="vertical-align:middle;text-align:right;">\n'
-			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
 			html_buffer += f'</td>\n'
 			html_buffer += f'<td style="vertical-align:middle;">\n'
 			html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
@@ -4424,7 +4459,7 @@ def league_differentials(league,gw):
 
 		html_buffer += f'<tr>\n'
 		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
-		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
 		html_buffer += f'</td>\n'
 		html_buffer += f'<td style="vertical-align:middle;">\n'
 		html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
@@ -4444,7 +4479,7 @@ def league_differentials(league,gw):
 		html_buffer += f'</td>\n'
 
 		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
-		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
 		html_buffer += f'</td>\n'
 		html_buffer += f'<td style="vertical-align:middle;">\n'
 		html_buffer += f'<a href="{m.gui_url}">{m.team_name}</a>\n'
@@ -4575,10 +4610,10 @@ def push_changes():
 	if num_changes > 0:
 	# os.system(f'cd {path}; git add *.md; git commit -m "auto-generated {timestamp}"; git push; cd {path.replace(".wiki","")}')
 		os.system(f'rm kits/*.webp; git add *.py go/*.html go/*.py graphs/*.png index.html html/*.html *.json kits/*.png; git commit -m "auto-generated {timestamp}"; git push')
-		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'Completed Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'")
+		os.system(f"terminal-notifier -title 'ToiletFPL' -message 'Completed Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'")
 		exit(code=69)
 	else:
-		os.system(f"terminal-notifier -title 'FPL_GUI' -message 'No changes pushed' -open 'https://{DEPLOY_ROOT}/index.html'")
+		os.system(f"terminal-notifier -title 'ToiletFPL' -message 'No changes pushed' -open 'https://{DEPLOY_ROOT}/index.html'")
 		exit(code=70)
 
 def pull_changes():

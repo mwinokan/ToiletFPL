@@ -47,6 +47,10 @@ class Manager():
 		self.get_team_shirt()
 
 	@property
+	def projected_points(self):
+		return self.squad.projected_points
+
+	@property
 	def leagues(self):
 		return self._leagues
 

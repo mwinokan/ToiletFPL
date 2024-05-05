@@ -26,10 +26,8 @@ def compare_squads(m1, m2, interactive = False):
 			m2_dict[p.id] = p
 
 	data = {
-		"m1_benefitted":[],
-		"m2_benefitted":[],
-		"m1_outstanding":[],
-		"m2_outstanding":[],
+		"m1":[],
+		"m2":[],
 		"common":[],
 	}
 
@@ -48,41 +46,10 @@ def compare_squads(m1, m2, interactive = False):
 
 		points = p.get_event_score() or None
 
-		if not p.has_fixture_finished:
-
-			if mult1 > mult2:
-				# print(f'{m1} will benefit from {p} points')
-				data['m1_outstanding'].append(dict(player=p, m_diff=mult1-mult2))
-			elif mult1 < mult2:
-				# print(f'{m2} will benefit from {p} points')
-				data['m2_outstanding'].append(dict(player=p, m_diff=mult2-mult1))
-
-			else:
-				# draw
-				...
-
-			continue
-
-		# elif points is None:
-
-		# 	points = 0
-
-		if points is None:
-			points = 0
-
-		points1 = mult1 * points
-		points2 = mult2 * points
-		diff = points1	- points2
-
-		if diff > 0:
-			# print(f'{m1} gained {diff} points from {p}')
-			data['m1_benefitted'].append(dict(player=p, m_diff=mult1-mult2, p_diff=diff))
-		elif diff < 0:
-			# print(f'{m2} gained {-diff} points from {p}')
-			data['m2_benefitted'].append(dict(player=p, m_diff=mult2-mult1, p_diff=-diff))
-		else:
-			# draw
-			...
+		if mult1 > mult2:
+			data['m1'].append(dict(player=p, m_diff=mult1-mult2))
+		elif mult1 < mult2:
+			data['m2'].append(dict(player=p, m_diff=mult2-mult1))
 
 	html_buffer = ""
 	
@@ -114,11 +81,8 @@ def compare_squads(m1, m2, interactive = False):
 	
 	html_buffer += '</tr>\n'
 
-	m1_exp_gain = sum([d["player"].expected_points(gw=gw, not_started_only=True) * d["m_diff"] for d in data["m1_outstanding"]])
-	m2_exp_gain = sum([d["player"].expected_points(gw=gw, not_started_only=True) * d["m_diff"] for d in data["m2_outstanding"]])
-
-	m1_projected = m1.livescore + m1_exp_gain
-	m2_projected = m2.livescore + m2_exp_gain
+	m1_projected = m1.squad.projected_points
+	m2_projected = m2.squad.projected_points
 
 	html_buffer += '<tr>\n'
 	html_buffer += '<td class="w3-center">Projected</td>\n'
@@ -144,93 +108,51 @@ def compare_squads(m1, m2, interactive = False):
 	html_buffer += '<table class="w3-table w3-hoverable w3-white">\n'
 
 	if data['common']:
-		html_buffer += f'<tr><th class="w3-center">Both have</th><th class="w3-center">Points</th><th class="w3-center">xPts</th><th class="w3-center">Fixture</th></tr>\n'
+		html_buffer += f'<tr><th class="w3-center">You both have</th><th class="w3-center">Points</th><th class="w3-center">Projected</th><th class="w3-center">Remaining</th></tr>\n'
 		for p in data['common']:
 			html_buffer += player_row(gw, p)
 		if len(data['common']) > 1:
 			html_buffer += '<tr>\n'
 			html_buffer += '<td class="w3-center">Total:</td>\n'
 			html_buffer += f'<td class="w3-center">{sum([p.get_event_score(gw=gw, not_playing_is_none=False) for p in data["common"]])}</td>\n'	
-			html_buffer += f'<td class="w3-center">{sum([p.expected_points(gw=gw) for p in data["common"]]):.1f}</td>\n'	
+			html_buffer += f'<td class="w3-center">{sum([p.projected_points for p in data["common"]]):.1f}</td>\n'	
 			html_buffer += '<td class="w3-center"></td>\n'
 			html_buffer += '</tr>\n'
 
 		html_buffer += '</table>\n'
 		html_buffer += '<br>\n'
 
-	if data['m1_benefitted']:
+	if data['m1']:
 		html_buffer += '<table class="w3-table w3-hoverable w3-white">\n'
-		html_buffer += f'<tr><th class="w3-center">You benefitted from</th><th class="w3-center">Points</th><th class="w3-center">xPts</th><th class="w3-center">Fixture</th></tr>\n'
-		for d in data['m1_benefitted']:
+		html_buffer += f'<tr><th class="w3-center">Only you have</th><th class="w3-center">Points</th><th class="w3-center">Projected</th><th class="w3-center">Remaining</th></tr>\n'
+		for d in data['m1']:
 			p = d['player']
 			html_buffer += player_row(gw, p, d['m_diff'])
-		if len(data['m1_benefitted']) > 1:
+		if len(data['m1']) > 1:
 			html_buffer += '<tr>\n'
 			html_buffer += '<td class="w3-center">Total:</td>\n'
-			html_buffer += f'<td class="w3-center">{sum([d["p_diff"] for d in data["m1_benefitted"]])}</td>\n'	
-			html_buffer += f'<td class="w3-center">{sum([d["player"].expected_points(gw=gw) * d["m_diff"] for d in data["m1_benefitted"]]):.1f}</td>\n'	
+			html_buffer += f'<td class="w3-center">{sum([d["player"].get_event_score(gw=gw, not_playing_is_none=False) * d["m_diff"] for d in data["m1"]])}</td>\n'	
+			html_buffer += f'<td class="w3-center">{sum([d["player"].projected_points * d["m_diff"] for d in data["m1"]]):.1f}</td>\n'	
+			html_buffer += '<td class="w3-center"></td>\n'
+			html_buffer += '</tr>\n'
+
+	if data['m2']:
+		html_buffer += '<table class="w3-table w3-hoverable w3-white">\n'
+		html_buffer += f'<tr><th class="w3-center">Only opponent has</th><th class="w3-center">Points</th><th class="w3-center">Projected</th><th class="w3-center">Remaining</th></tr>\n'
+		for d in data['m2']:
+			p = d['player']
+			html_buffer += player_row(gw, p, d['m_diff'])
+		if len(data['m2']) > 1:
+			html_buffer += '<tr>\n'
+			html_buffer += '<td class="w3-center">Total:</td>\n'
+			html_buffer += f'<td class="w3-center">{sum([d["player"].get_event_score(gw=gw, not_playing_is_none=False) * d["m_diff"] for d in data["m2"]])}</td>\n'	
+			html_buffer += f'<td class="w3-center">{sum([d["player"].projected_points * d["m_diff"] for d in data["m2"]]):.1f}</td>\n'	
 			html_buffer += '<td class="w3-center"></td>\n'
 			html_buffer += '</tr>\n'
 
 	html_buffer += '</table>\n'
 	html_buffer += '<br>\n'
 
-	if data['m2_benefitted']:
-		html_buffer += '<table class="w3-table w3-hoverable w3-white">\n'
-		html_buffer += f'<tr><th class="w3-center">Oppenent benefitted from</th><th class="w3-center">Points</th><th class="w3-center">xPts</th><th class="w3-center">Fixture</th></tr>\n'
-		for d in data['m2_benefitted']:
-			p = d['player']
-			html_buffer += player_row(gw, p, d['m_diff'])
-		if len(data['m2_benefitted']) > 1:
-			html_buffer += '<tr>\n'
-			html_buffer += '<td class="w3-center">Total:</td>\n'
-			html_buffer += f'<td class="w3-center">{sum([d["p_diff"] for d in data["m2_benefitted"]])}</td>\n'	
-			html_buffer += f'<td class="w3-center">{sum([d["player"].expected_points(gw=gw) * d["m_diff"] for d in data["m2_benefitted"]]):.1f}</td>\n'	
-			html_buffer += '<td class="w3-center"></td>\n'
-			html_buffer += '</tr>\n'
-
-		html_buffer += '</table>\n'
-		html_buffer += '<br>\n'
-
-
-	if data['m1_outstanding']:
-		html_buffer += '<table class="w3-table w3-hoverable w3-white">\n'
-		html_buffer += f'<tr><th class="w3-center">You still have</th><th class="w3-center">Points</th><th class="w3-center">xPts</th><th class="w3-center">Fixture</th></tr>\n'
-		for d in data['m1_outstanding']:
-			p = d['player']
-			html_buffer += player_row(gw, p, d['m_diff'], not_started_only=True)
-		if len(data['m1_outstanding']) > 1:
-			html_buffer += '<tr>\n'
-			html_buffer += '<td class="w3-center">Total:</td>\n'
-			html_buffer += f'<td class="w3-center">{sum([p["player"].get_event_score(gw=gw, not_playing_is_none=False) for p in data["m1_outstanding"]])}</td>\n'	
-			html_buffer += f'<td class="w3-center">{m1_exp_gain:.1f}</td>\n'	
-			html_buffer += '<td class="w3-center"></td>\n'
-			html_buffer += '</tr>\n'
-
-		html_buffer += '</table>\n'
-		html_buffer += '<br>\n'
-
-
-	if data['m2_outstanding']:
-		html_buffer += '<table class="w3-table w3-hoverable w3-white">\n'
-		html_buffer += f'<tr><th class="w3-center">Opponent still has</th><th class="w3-center">Points</th><th class="w3-center">xPts</th><th class="w3-center">Fixture</th></tr>\n'
-		for d in data['m2_outstanding']:
-			p = d['player']
-			html_buffer += player_row(gw, p, d['m_diff'], not_started_only=True)
-		if len(data['m2_outstanding']) > 1:
-			html_buffer += '<tr>\n'
-			html_buffer += '<td class="w3-center">Total:</td>\n'
-			html_buffer += f'<td class="w3-center">{sum([p["player"].get_event_score(gw=gw, not_playing_is_none=False) for p in data["m2_outstanding"]])}</td>\n'	
-			html_buffer += f'<td class="w3-center">{m2_exp_gain:.1f}</td>\n'	
-			html_buffer += '<td class="w3-center"></td>\n'
-			html_buffer += '</tr>\n'
-
-		html_buffer += '</table>\n'
-		html_buffer += '<br>\n'
-	
-	# if interactive:
-		# return HTML(html_buffer)
-	# else:
 	return html_buffer
 
 def player_row(gw, p, m_diff = 1, not_started_only=False):
@@ -251,7 +173,8 @@ def player_row(gw, p, m_diff = 1, not_started_only=False):
 		style_str = get_style_from_event_score(score).rstrip('"')+';vertical-align:middle;"'
 		html_buffer += f'<td class="w3-center" style={style_str}>{score:.0f}</td>\n'
 
-	exp = p.expected_points(gw=gw, not_started_only=not_started_only) # + score
+	# exp = p.expected_points(gw=gw, not_started_only=not_started_only) # + score
+	exp = p.projected_points
 
 	# print(p, exp, score)
 
