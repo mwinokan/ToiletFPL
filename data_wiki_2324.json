@@ -14613,7 +14613,7 @@
 				],
 				"smooth_brain": [
 					114074,
-					15
+					16
 				],
 				"chair": [
 					7425798,
@@ -14624,7 +14624,7 @@
 					"\ud83d\udfe8 \ud83d\udfe8"
 				],
 				"fortune": [
-					475362,
+					786203,
 					21
 				],
 				"clown": [
@@ -14869,8 +14869,8 @@
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
 						"kit_path": "kits/Liverpool.png",
-						"points": 0.0,
-						"started": false
+						"points": 0.5,
+						"started": true
 					},
 					{
 						"shortteam": "MUN",
@@ -14902,7 +14902,7 @@
 						"multiplier": 0.08333333333333333,
 						"kit_path": "kits/Liverpool.png",
 						"points": 0.0,
-						"started": false
+						"started": true
 					},
 					{
 						"shortteam": "LUT",
@@ -35969,7 +35969,7 @@
 				],
 				"lowest_loser_score": [
 					1973224,
-					26,
+					27,
 					660251
 				],
 				"highest_loser_score": [
@@ -36003,7 +36003,7 @@
 				],
 				"lowest_winner_score": [
 					1973224,
-					26,
+					27,
 					3766320
 				],
 				"highest_winner_score": [
@@ -36013,7 +36013,7 @@
 				],
 				"lowest_loser_score": [
 					2675834,
-					32,
+					37,
 					554798
 				],
 				"highest_loser_score": [
@@ -36047,7 +36047,7 @@
 				],
 				"lowest_winner_score": [
 					1973224,
-					26,
+					27,
 					5434316
 				],
 				"highest_winner_score": [
@@ -36057,7 +36057,7 @@
 				],
 				"lowest_loser_score": [
 					5434316,
-					20,
+					21,
 					1973224
 				],
 				"highest_loser_score": [
@@ -39332,7 +39332,7 @@
 				],
 				"cock": [
 					417434,
-					30
+					33
 				],
 				"goals": [
 					59634,
@@ -39346,7 +39346,7 @@
 				],
 				"hot_stuff": [
 					3763762,
-					0.6097454861866435
+					0.5967638918458591
 				],
 				"soggy_biscuit": [
 					266517,
@@ -39370,7 +39370,7 @@
 				],
 				"chair": [
 					859189,
-					597
+					618
 				],
 				"asbo": [
 					1045956,
@@ -39378,7 +39378,7 @@
 				],
 				"fortune": [
 					157079,
-					30
+					29
 				],
 				"clown": [
 					2822979,
@@ -39410,7 +39410,7 @@
 					[
 						308,
 						0.043859649122807015,
-						null
+						1
 					]
 				],
 				"goalkeeper": [
@@ -39518,7 +39518,7 @@
 					[
 						60,
 						0.19298245614035087,
-						null
+						1
 					]
 				],
 				"ownership": [
@@ -39623,16 +39623,16 @@
 						"position": "Attack",
 						"multiplier": 0.32456140350877194,
 						"kit_path": "kits/Liverpool.png",
-						"points": 0.0,
-						"started": false
+						"points": 0.6216216216216216,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Attack",
 						"multiplier": 0.2631578947368421,
 						"kit_path": "kits/Aston Villa.png",
-						"points": 0.0,
-						"started": false
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "BOU",
@@ -39647,8 +39647,8 @@
 						"position": "Defence",
 						"multiplier": 0.18421052631578946,
 						"kit_path": "kits/Liverpool.png",
-						"points": 0.0,
-						"started": false
+						"points": 0.7619047619047619,
+						"started": true
 					},
 					{
 						"shortteam": "CRY",
@@ -39687,8 +39687,8 @@
 						"position": "Defence",
 						"multiplier": 0.10526315789473684,
 						"kit_path": "kits/Aston Villa.png",
-						"points": 0.0,
-						"started": false
+						"points": 0.16666666666666666,
+						"started": true
 					},
 					{
 						"shortteam": "FUL",
@@ -39905,10 +39905,10 @@
 				"3331654": 41,
 				"118952": 1,
 				"927208": 1,
+				"417434": 44,
+				"864102": 45,
 				"266517": 0,
-				"2786749": 45,
-				"864102": 46,
-				"417434": 47,
+				"2786749": 47,
 				"6959557": 1,
 				"778734": 49,
 				"7171275": 50,
@@ -39916,17 +39916,17 @@
 				"6074556": 52,
 				"621667": 53,
 				"1016971": 54,
-				"3536344": 55,
-				"2344525": 56,
+				"2344525": 55,
+				"3536344": 56,
 				"1034581": 57,
-				"2425614": 58,
-				"4771057": 59,
-				"225523": 60,
+				"225523": 58,
+				"2425614": 59,
+				"4771057": 60,
 				"7083500": 61,
 				"1221993": 62,
 				"4650311": 63,
-				"59634": 64,
-				"1623852": 65,
+				"1623852": 64,
+				"59634": 65,
 				"1428358": 66,
 				"622861": 67,
 				"629923": 68,
@@ -53294,11 +53294,11 @@
 			"awards": {
 				"king": [
 					3956421,
-					83
+					84
 				],
 				"cock": [
 					927208,
-					42
+					43
 				],
 				"goals": [
 					927208,
@@ -53312,7 +53312,7 @@
 				],
 				"hot_stuff": [
 					3956421,
-					0.4963043086352984
+					0.48751549495307245
 				],
 				"soggy_biscuit": [
 					7411754,
@@ -53328,7 +53328,7 @@
 				],
 				"boner": [
 					3956421,
-					281
+					284
 				],
 				"smooth_brain": [
 					927208,
@@ -53336,7 +53336,7 @@
 				],
 				"chair": [
 					927208,
-					867
+					874
 				],
 				"asbo": [
 					7411754,
@@ -53554,8 +53554,8 @@
 						"position": "Attack",
 						"multiplier": 0.3333333333333333,
 						"kit_path": "kits/Liverpool.png",
-						"points": 0.0,
-						"started": false
+						"points": 0.5,
+						"started": true
 					},
 					{
 						"shortteam": "WOL",
@@ -53570,16 +53570,16 @@
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
 						"kit_path": "kits/Aston Villa.png",
-						"points": 0.0,
-						"started": false
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
 						"kit_path": "kits/Aston Villa.png",
-						"points": 0.0,
-						"started": false
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
@@ -53641,5 +53641,5 @@
 			}
 		}
 	},
-	"timestamp": "2024-05-13 18:16:17"
+	"timestamp": "2024-05-13 19:10:54"
 }
