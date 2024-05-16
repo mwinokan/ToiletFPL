@@ -2542,7 +2542,7 @@ def get_manager_json_awards(api,leagues):
 						if key == 'scientist':
 							if data[0] in api._managers.keys():
 								m = api.get_manager(id=data[0])
-								m._awards.append(dict(key=key,player=data[1],is_captain=data[2],score=data[3],gw=gw_id,league=l_name))
+								m._awards.append(dict(key=key,player=data[1],multiplier=data[2],score=data[3],gw=gw_id,league=l_name))
 						else:
 							subset = data[0:-1]
 							for id in subset:
@@ -3611,12 +3611,14 @@ def create_leaguepage(league,leagues,i):
 
 			m = p._parent_manager
 			p_str = p.name
-			if p.is_captain:
+			if p.multiplier == 3:
+				p_str += " (TC)"
+			elif p.multiplier == 2:
 				p_str += " (C)"
-			elif p.is_vice_captain:
-				p_str += " (VC)"
+			# elif p.is_vice_captain:
+				# p_str += " (VC)"
 			html_buffer += award_panel('🧑‍🔬','Scientist','Best Differential',p_str,m,colour=award_colour['scientist'],value_class='h3',name_class="h2")
-			json[str(league.id)][gw]['awards']['scientist'] = [m.id,p.id,p.is_captain,int(p.multiplier*p.get_event_score(not_playing_is_none=False))]
+			json[str(league.id)][gw]['awards']['scientist'] = [m.id,p.id,p.multiplier,int(p.multiplier*p.get_event_score(not_playing_is_none=False))]
 
 			### HOT STUFF
 
@@ -4468,7 +4470,9 @@ def league_differentials(league,gw):
 			html_buffer += f'⚠️ '
 		elif p.is_yellow_flagged:
 			html_buffer += f'⛔️ '
-		if p.is_captain:
+		if p.multiplier == 3:
+			html_buffer += f" (TC) "
+		elif p.multiplier == 2:
 			html_buffer += f" (C) "
 
 		html_buffer += f'</td>\n'
