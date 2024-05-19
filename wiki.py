@@ -1853,23 +1853,37 @@ def create_managerpage(api,man,leagues):
 
 		### BUILD THE PLOTTING DATA
 		gw_indices = [i+1 for i in range(now_gw,end_gw+1)]
-		gw_strs = [f'GW{i+1}' for i in range(now_gw,end_gw+1)]
 
-		plot_data = []
-		player_id_to_trace_id = {}
-		for i,p in enumerate(man.squad.sorted_players):
+		if len(gw_indices) == 1:
+		
+			gw = gw_indices[0]
 
-			player_id_to_trace_id[p.id] = i
+			players = man.squad.sorted_players
 
-			plot_y = [round(p.expected_points(gw=i),1) for i in gw_indices]
+			plot_data = [{
+				'x' : [p.name for p in players],
+				'y' : [round(p.expected_points(gw=gw),1) for p in players],
+				'type' : 'bar',
+			}]
 
-			plot_data.append(dict(
-				name=p.name,
-				x=gw_strs,
-				y=plot_y,
-				visible=True,
-				mode='lines+markers',
-			))
+		else:
+
+			gw_strs = [f'GW{i+1}' for i in range(now_gw,end_gw+1)]
+			plot_data = []
+			player_id_to_trace_id = {}
+			for i,p in enumerate(man.squad.sorted_players):
+
+				player_id_to_trace_id[p.id] = i
+
+				plot_y = [round(p.expected_points(gw=i),1) for i in gw_indices]
+
+				plot_data.append(dict(
+					name=p.name,
+					x=gw_strs,
+					y=plot_y,
+					visible=True,
+					mode='lines+markers',
+				))
 
 		### CREATE THE GRAPH
 		html_buffer += '<script>\n'
