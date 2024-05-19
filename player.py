@@ -1931,27 +1931,35 @@ class Player():
 
 		# player fixtures
 		df = self.fixtures
-		self_fixs = df[df['event'] == gw]
 
-		# start with achieved score
 		score = self.get_event_score(not_playing_is_none=False)
-		# print(f'starting with {score=}')
 
-		if len(team_fixs) > len(self_fixs):
-			return score
+		try:
+			# print(self_fixs)
 
-		assert len(self_fixs) == len(team_fixs), (self, gw, len(self_fixs), len(team_fixs))
+			# start with achieved score
+			# print(f'starting with {score=}')
 
-		# add outstanding fixtures
-		for (i,p_fix), t_fix in zip(self_fixs.iterrows(), team_fixs):
-			if not t_fix['started']:
-				# print(f'{self} adding expected {p_fix["id"]}')
-				
-				# expected points
-				is_home = p_fix['is_home']
-				opp = t_fix['team_a'] if is_home else t_fix['team_h']
-				opp = self._api.get_player_team_obj(opp)
-				score += self.expected_points(opponent=opp, debug=False, force=False)
+			self_fixs = df[df['event'] == gw]
+			if len(team_fixs) > len(self_fixs):
+				return score
+
+			assert len(self_fixs) == len(team_fixs), (self, gw, len(self_fixs), len(team_fixs))
+
+			# add outstanding fixtures
+			for (i,p_fix), t_fix in zip(self_fixs.iterrows(), team_fixs):
+				if not t_fix['started']:
+					# print(f'{self} adding expected {p_fix["id"]}')
+					
+					# expected points
+					is_home = p_fix['is_home']
+					opp = t_fix['team_a'] if is_home else t_fix['team_h']
+					opp = self._api.get_player_team_obj(opp)
+					score += self.expected_points(opponent=opp, debug=False, force=False)
+
+		except Exception as e:
+			mout.error(f'something went wrong with calculating projected points for {self} {gw=}')
+			mout.error(str(e))
 
 		return score
 

@@ -1934,7 +1934,12 @@ def create_managerpage(api,man,leagues):
 					opponent = matches[0]['opponent']
 
 					# print(matches)
-					html_buffer += compare_squads(man, opponent)
+					try:
+						html_buffer += compare_squads(man, opponent)
+					except Exception as e:
+						html_buffer += 'Something went wrong!'
+						mout.error(f'something went wrong with squad comparison {(man, opponent)}')
+						mout.error(str(e))
 
 					html_buffer += '</div>\n'
 
@@ -4569,50 +4574,56 @@ def generate_summary_template(api, league):
 
 		# cup summary
 
-		if cup_active:
+		try:
 
-			f.write(f'\nTesco Value Cup\n\n')
+			if cup_active:
 
-			f.write(f"{json[str(league.id)]['cup'][gw]['n_diamond_winners']}💎 managers progress in the cup\n")
-			f.write(f"{json[str(league.id)]['cup'][gw]['n_diamond_losers']}💎 managers crash out of the cup\n")
-			
-			m1,r,m2 = json[str(league.id)]['cup'][gw]['highest_loser_rank']
-			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
-			f.write(f"Highest ranked loser: {m1.name} (vs {m2.name})\n")
+				f.write(f'\nTesco Value Cup\n\n')
 
-			m1,r,m2 = json[str(league.id)]['cup'][gw]['lowest_winner_rank']
-			m1 = api.get_manager(id=m1)
-			m2 = api.get_manager(id=m2) if m2 else None
-			f.write(f"Lowest ranked winner: {m1.name} (vs {m2.name if m2 else 'BYE'})\n")
+				f.write(f"{json[str(league.id)]['cup'][gw]['n_diamond_winners']}💎 managers progress in the cup\n")
+				f.write(f"{json[str(league.id)]['cup'][gw]['n_diamond_losers']}💎 managers crash out of the cup\n")
+				
+				m1,r,m2 = json[str(league.id)]['cup'][gw]['highest_loser_rank']
+				m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+				f.write(f"Highest ranked loser: {m1.name} (vs {m2.name})\n")
 
-			m1,r,m2 = json[str(league.id)]['cup'][gw]['lowest_loser_rank']
-			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
-			f.write(f"Lowest ranked loser: {m1.name} (vs {m2.name})\n")
+				m1,r,m2 = json[str(league.id)]['cup'][gw]['lowest_winner_rank']
+				m1 = api.get_manager(id=m1)
+				m2 = api.get_manager(id=m2) if m2 else None
+				f.write(f"Lowest ranked winner: {m1.name} (vs {m2.name if m2 else 'BYE'})\n")
 
-			m1,r,m2 = json[str(league.id)]['cup'][gw]['highest_winner_rank']
-			m1 = api.get_manager(id=m1)
-			m2 = api.get_manager(id=m2) if m2 else None
-			f.write(f"Highest ranked winner: {m1.name} (vs {m2.name if m2 else 'BYE'})\n")
+				m1,r,m2 = json[str(league.id)]['cup'][gw]['lowest_loser_rank']
+				m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+				f.write(f"Lowest ranked loser: {m1.name} (vs {m2.name})\n")
 
-			m1,s,m2 = json[str(league.id)]['cup'][gw]['highest_loser_score']
-			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
-			f.write(f"Highest scoring loser: {m1.name} {s} (vs {m2.name} w/ {m2.livescore})\n")
+				m1,r,m2 = json[str(league.id)]['cup'][gw]['highest_winner_rank']
+				m1 = api.get_manager(id=m1)
+				m2 = api.get_manager(id=m2) if m2 else None
+				f.write(f"Highest ranked winner: {m1.name} (vs {m2.name if m2 else 'BYE'})\n")
 
-			m1,s,m2 = json[str(league.id)]['cup'][gw]['lowest_winner_score']
-			m1 = api.get_manager(id=m1)
-			m2 = api.get_manager(id=m2) if m2 else None
-			f.write(f"Lowest scoring winner: {m1.name} {s} (vs {m2.name if m2 else 'BYE'} w/ {m2.name if m2 else 'BYE'})\n")
+				m1,s,m2 = json[str(league.id)]['cup'][gw]['highest_loser_score']
+				m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+				f.write(f"Highest scoring loser: {m1.name} {s} (vs {m2.name} w/ {m2.livescore})\n")
 
-			m1,s,m2 = json[str(league.id)]['cup'][gw]['lowest_loser_score']
-			m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
-			f.write(f"Lowest scoring loser: {m1.name} {s} (vs {m2.name} w/ {m2.livescore})\n")
+				m1,s,m2 = json[str(league.id)]['cup'][gw]['lowest_winner_score']
+				m1 = api.get_manager(id=m1)
+				m2 = api.get_manager(id=m2) if m2 else None
+				f.write(f"Lowest scoring winner: {m1.name} {s} (vs {m2.name if m2 else 'BYE'} w/ {m2.name if m2 else 'BYE'})\n")
 
-			m1,s,m2 = json[str(league.id)]['cup'][gw]['highest_winner_score']
-			m1 = api.get_manager(id=m1)
-			m2 = api.get_manager(id=m2) if m2 else None
-			f.write(f"Highest scoring winner: {m1.name} {s} (vs {m2.name if m2 else 'BYE'} w/ {m2.name if m2 else 'BYE'})\n")
+				m1,s,m2 = json[str(league.id)]['cup'][gw]['lowest_loser_score']
+				m1, m2 = api.get_manager(id=m1), api.get_manager(id=m2)
+				f.write(f"Lowest scoring loser: {m1.name} {s} (vs {m2.name} w/ {m2.livescore})\n")
 
-			f.write(f"\n({api._current_gw} {api._live_gw})\n")
+				m1,s,m2 = json[str(league.id)]['cup'][gw]['highest_winner_score']
+				m1 = api.get_manager(id=m1)
+				m2 = api.get_manager(id=m2) if m2 else None
+				f.write(f"Highest scoring winner: {m1.name} {s} (vs {m2.name if m2 else 'BYE'} w/ {m2.name if m2 else 'BYE'})\n")
+
+				f.write(f"\n({api._current_gw} {api._live_gw})\n")
+
+		except Exception as e:
+			mout.error('Something went wrong with the cup summary')
+			mout.error(str(e))
 
 			# #managers
 			# #diamond managers
