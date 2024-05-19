@@ -246,7 +246,7 @@ def get_player_history_table(player):
 		# end_gw = min(38,now_gw+next_gw_count)
 
 		# for gw in range(1,now_gw+1):
-		for gw in range(1,38):
+		for gw in range(1,39):
 
 			if gw == now_gw:
 				html_buffer += f'<tr class="w3-green">\n'
