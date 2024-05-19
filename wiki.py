@@ -205,7 +205,8 @@ def main():
 		except fpl_api.Request404:
 			mout.error(f'Could not init League({code},{shortname})')
 
-	create_comparison_page(api,leagues)
+	if api._current_gw < 38:
+		create_comparison_page(api,leagues)
 
 	navbar = create_navbar(leagues)
 
