@@ -2840,8 +2840,8 @@ def create_homepage(navbar):
 	# external links
 	html_buffer += '<div class="w3-col s12 m6 l4">\n'
 	html_buffer += '<div class="w3-panel w3-center w3-indigo w3-padding shadow89">\n'
-	url = 'https://www.facebook.com/groups/1488748394903477/'
-	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">🗯️ Facebook Group</a>\n'
+	# url = 'https://www.facebook.com/groups/1488748394903477/'
+	# html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">🗯️ Facebook Group</a>\n'
 	url = 'https://github.com/mwinokan/ToiletFPL/issues/new'
 	html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">❓ Feature Request</a>\n'
 	html_buffer += '</div>\n'
