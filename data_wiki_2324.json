@@ -39965,27 +39965,27 @@
 						"started": true
 					},
 					{
-						"shortteam": "TOT",
-						"position": "Defence",
-						"multiplier": 0.6403508771929824,
-						"kit_path": "kits/Spurs.png",
-						"points": 11.095890410958905,
-						"started": true
-					},
-					{
 						"shortteam": "NEW",
 						"position": "Attack",
-						"multiplier": 0.631578947368421,
+						"multiplier": 0.6842105263157895,
 						"kit_path": "kits/Newcastle.png",
-						"points": 11.972222222222221,
+						"points": 11.051282051282051,
 						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
-						"multiplier": 0.6140350877192983,
+						"multiplier": 0.6754385964912281,
 						"kit_path": "kits/Arsenal.png",
-						"points": 5.442857142857143,
+						"points": 4.9480519480519485,
+						"started": true
+					},
+					{
+						"shortteam": "TOT",
+						"position": "Defence",
+						"multiplier": 0.6403508771929824,
+						"kit_path": "kits/Spurs.png",
+						"points": 11.095890410958905,
 						"started": true
 					},
 					{
@@ -40151,9 +40151,9 @@
 					{
 						"shortteam": "WHU",
 						"position": "Attack",
-						"multiplier": 0.06140350877192982,
+						"multiplier": 0.07017543859649122,
 						"kit_path": "kits/West Ham.png",
-						"points": 2.4285714285714284,
+						"points": 2.125,
 						"started": true
 					},
 					{
@@ -40256,7 +40256,7 @@
 				[
 					353,
 					864102,
-					false,
+					true,
 					30
 				],
 				[
@@ -54539,6 +54539,14 @@
 						"started": true
 					},
 					{
+						"shortteam": "NEW",
+						"position": "Attack",
+						"multiplier": 1.0,
+						"kit_path": "kits/Newcastle.png",
+						"points": 11.666666666666666,
+						"started": true
+					},
+					{
 						"shortteam": "TOT",
 						"position": "Attack",
 						"multiplier": 1.0,
@@ -54560,14 +54568,6 @@
 						"multiplier": 0.8333333333333334,
 						"kit_path": "kits/Man Utd.png",
 						"points": 2.6,
-						"started": true
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Attack",
-						"multiplier": 0.8333333333333334,
-						"kit_path": "kits/Newcastle.png",
-						"points": 14.0,
 						"started": true
 					},
 					{
@@ -55074,5 +55074,5 @@
 			}
 		}
 	},
-	"timestamp": "2024-05-20 06:23:07"
+	"timestamp": "2024-05-20 08:18:03"
 }
