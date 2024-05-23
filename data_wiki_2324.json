@@ -6833,6 +6833,46 @@
 					-74.99034066220064,
 					2557668
 				]
+			},
+			"bb": {
+				"best": [
+					34,
+					3674681
+				],
+				"worst": [
+					0,
+					7425798
+				]
+			},
+			"tc": {
+				"best": [
+					10,
+					1408554
+				],
+				"worst": [
+					4,
+					7425798
+				]
+			},
+			"fh": {
+				"best": [
+					217434,
+					475362
+				],
+				"worst": [
+					3276052,
+					80434
+				]
+			},
+			"wc2": {
+				"best": [
+					51.25655924437505,
+					236891
+				],
+				"worst": [
+					-128.77993144948113,
+					554798
+				]
 			}
 		},
 		"half": {
@@ -14941,6 +14981,52 @@
 				"904172": 9,
 				"7425798": 10,
 				"2557668": 11
+			}
+		},
+		"season": {
+			"awards": {
+				"king": [
+					236891,
+					2489
+				],
+				"cock": [
+					475362,
+					2444
+				],
+				"fortune": [
+					114074,
+					210
+				],
+				"clown": [
+					786203,
+					82
+				],
+				"kneejerker": [
+					80434,
+					45,
+					13
+				],
+				"iceman": [
+					7425798,
+					33,
+					3
+				],
+				"oligarch": [
+					1408554,
+					107.2
+				],
+				"peasant": [
+					7425798,
+					102.0
+				],
+				"glow_up": [
+					1408554,
+					0.9358570461782595
+				],
+				"has_been": [
+					786203,
+					2.262807581026199
+				]
 			}
 		},
 		"38": {
@@ -26644,28 +26730,28 @@
 		"chips": {
 			"bb": {
 				"best": [
-					12,
-					3415845
+					34,
+					3674681
 				],
 				"worst": [
-					4,
-					927208
+					0,
+					6944
 				]
 			},
 			"tc": {
 				"best": [
-					13,
-					4650311
+					17,
+					6959557
 				],
 				"worst": [
-					3,
-					59634
+					2,
+					6944
 				]
 			},
 			"fh": {
 				"best": [
-					343826,
-					118952
+					30238,
+					266517
 				],
 				"worst": [
 					8730402,
@@ -26680,6 +26766,16 @@
 				"worst": [
 					-153.52512348293206,
 					579933
+				]
+			},
+			"wc2": {
+				"best": [
+					79.88853071031885,
+					660251
+				],
+				"worst": [
+					-165.832051132181,
+					59634
 				]
 			}
 		},
@@ -39965,27 +40061,27 @@
 						"started": true
 					},
 					{
-						"shortteam": "TOT",
-						"position": "Defence",
-						"multiplier": 0.6403508771929824,
-						"kit_path": "kits/Spurs.png",
-						"points": 11.095890410958905,
-						"started": true
-					},
-					{
 						"shortteam": "NEW",
 						"position": "Attack",
-						"multiplier": 0.631578947368421,
+						"multiplier": 0.6842105263157895,
 						"kit_path": "kits/Newcastle.png",
-						"points": 11.972222222222221,
+						"points": 11.051282051282051,
 						"started": true
 					},
 					{
 						"shortteam": "ARS",
 						"position": "Attack",
-						"multiplier": 0.6140350877192983,
+						"multiplier": 0.6754385964912281,
 						"kit_path": "kits/Arsenal.png",
-						"points": 5.442857142857143,
+						"points": 4.9480519480519485,
+						"started": true
+					},
+					{
+						"shortteam": "TOT",
+						"position": "Defence",
+						"multiplier": 0.6403508771929824,
+						"kit_path": "kits/Spurs.png",
+						"points": 11.095890410958905,
 						"started": true
 					},
 					{
@@ -40151,9 +40247,9 @@
 					{
 						"shortteam": "WHU",
 						"position": "Attack",
-						"multiplier": 0.06140350877192982,
+						"multiplier": 0.07017543859649122,
 						"kit_path": "kits/West Ham.png",
-						"points": 2.4285714285714284,
+						"points": 2.125,
 						"started": true
 					},
 					{
@@ -40256,7 +40352,7 @@
 				[
 					353,
 					864102,
-					false,
+					true,
 					30
 				],
 				[
@@ -40393,6 +40489,52 @@
 				"1025346": 111,
 				"10217879": 112,
 				"7393593": 113
+			}
+		},
+		"season": {
+			"awards": {
+				"king": [
+					6944,
+					2348
+				],
+				"cock": [
+					5235889,
+					1833
+				],
+				"fortune": [
+					660251,
+					233
+				],
+				"clown": [
+					462518,
+					13
+				],
+				"kneejerker": [
+					464110,
+					64,
+					34
+				],
+				"iceman": [
+					5235889,
+					10,
+					0
+				],
+				"oligarch": [
+					69814,
+					107.4
+				],
+				"peasant": [
+					5055400,
+					98.4
+				],
+				"glow_up": [
+					660251,
+					0.9382878289941381
+				],
+				"has_been": [
+					6944,
+					9.893211492604513
+				]
 			}
 		},
 		"38": {
@@ -54539,6 +54681,14 @@
 						"started": true
 					},
 					{
+						"shortteam": "NEW",
+						"position": "Attack",
+						"multiplier": 1.0,
+						"kit_path": "kits/Newcastle.png",
+						"points": 11.666666666666666,
+						"started": true
+					},
+					{
 						"shortteam": "TOT",
 						"position": "Attack",
 						"multiplier": 1.0,
@@ -54560,14 +54710,6 @@
 						"multiplier": 0.8333333333333334,
 						"kit_path": "kits/Man Utd.png",
 						"points": 2.6,
-						"started": true
-					},
-					{
-						"shortteam": "NEW",
-						"position": "Attack",
-						"multiplier": 0.8333333333333334,
-						"kit_path": "kits/Newcastle.png",
-						"points": 14.0,
 						"started": true
 					},
 					{
@@ -55074,5 +55216,5 @@
 			}
 		}
 	},
-	"timestamp": "2024-05-20 06:23:07"
+	"timestamp": "2024-05-23 22:05:16"
 }
