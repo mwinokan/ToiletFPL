@@ -930,6 +930,10 @@ class Manager():
 		i = self._active_gws.index(gw)
 		return self._overall_rank[i]
 
+	def get_specific_event_rank(self,gw=None):
+		i = self._active_gws.index(gw)
+		return self._event_rank[i]
+
 	def get_transfer_cost(self,gw):
 
 		if gw == 1:
