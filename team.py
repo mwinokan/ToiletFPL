@@ -14,11 +14,13 @@ class Team():
 		self._badge_url = None
 		for i,name in api._scrape_team_pairs:
 			if name == self._name:
-				self._badge_url = f"https://resources.premierleague.com/premierleague/badges/25/t{i+1}@x2.png"
+				# self._badge_url = f"https://resources.premierleague.com/premierleague/badges/25/t{i+1}@x2.png"
+				self._badge_url = f"https://resources.premierleague.com/premierleague/badges/50/t{i+1}@x2.png"
+				# https://resources.premierleague.com/premierleague/badges/50/t40@x2.png
 				break
 
 		if self._badge_url is None:
-			mout.error(f'No badge url for Team: {self.name}')
+			mout.error(f'No badge url for Team: {self.name} {self.id}')
 
 		self._fixtures = None
 

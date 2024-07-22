@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Benjamin Williams's "Zagadododo FC"</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}body {font-family: "Open Sans"}
+h5.double {line-height: 2}
+/*drop shadow*/
+.shadow10 {box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+/*drop shadow*/
+.shadow20 {box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+/*inner shadow*/
+.shadow25 {box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;}
+/*pink effect*/
+.shadow50 {box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}
+/*soft inner and outer*/
+.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}
+/*button shadow*/
+.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}
+@media screen and (min-width: 601px) { .responsive-text { font-size: 16px;  } }@media screen and (max-width: 600px) { .responsive-text { font-size: 12px;  } }@media screen and (max-width: 600px) { .hide-if-narrow { display: none !important; } }.w3-ars{color:white !important; background-color:#B7272E !important}
+.w3-ars-inv{color:#B7272E !important; background-color:white !important}
+.w3-ars-border-inv{border: 1px white solid !important; }
+.w3-avl{color:#91B6E4 !important; background-color:#5D1133 !important}
+.w3-avl-inv{color:#5D1133 !important; background-color:#91B6E4 !important}
+.w3-avl-border-inv{border: 1px #91B6E4 solid !important; }
+.w3-bou{color:#BF3B33 !important; background-color:black !important}
+.w3-bou-inv{color:black !important; background-color:#BF3B33 !important}
+.w3-bou-border-inv{border: 1px #BF3B33 solid !important; }
+.w3-bre{color:white !important; background-color:#A22621 !important}
+.w3-bre-inv{color:#A22621 !important; background-color:white !important}
+.w3-bre-border-inv{border: 1px white solid !important; }
+.w3-bha{color:#2253A0 !important; background-color:white !important}
+.w3-bha-inv{color:white !important; background-color:#2253A0 !important}
+.w3-bha-border-inv{border: 1px #2253A0 solid !important; }
+.w3-bur{color:#CCDCF3 !important; background-color:#9D3E45 !important}
+.w3-bur-inv{color:#9D3E45 !important; background-color:#CCDCF3 !important}
+.w3-bur-border-inv{border: 1px #CCDCF3 solid !important; }
+.w3-che{color:white !important; background-color:#051383 !important}
+.w3-che-inv{color:#051383 !important; background-color:white !important}
+.w3-che-border-inv{border: 1px white solid !important; }
+.w3-cry{color:#2C67A9 !important; background-color:#BE2C2A !important}
+.w3-cry-inv{color:#BE2C2A !important; background-color:#2C67A9 !important}
+.w3-cry-border-inv{border: 1px #2C67A9 solid !important; }
+.w3-eve{color:white !important; background-color:#3A83E2 !important}
+.w3-eve-inv{color:#3A83E2 !important; background-color:white !important}
+.w3-eve-border-inv{border: 1px white solid !important; }
+.w3-ful{color:black !important; background-color:white !important}
+.w3-ful-inv{color:white !important; background-color:black !important}
+.w3-ful-border-inv{border: 1px black solid !important; }
+.w3-liv{color:white !important; background-color:#AF2532 !important}
+.w3-liv-inv{color:#AF2532 !important; background-color:white !important}
+.w3-liv-border-inv{border: 1px white solid !important; }
+.w3-lut{color:white !important; background-color:#E6552F !important}
+.w3-lut-inv{color:#E6552F !important; background-color:white !important}
+.w3-lut-border-inv{border: 1px white solid !important; }
+.w3-mci{color:#061736 !important; background-color:#A1C2E7 !important}
+.w3-mci-inv{color:#A1C2E7 !important; background-color:#061736 !important}
+.w3-mci-border-inv{border: 1px #061736 solid !important; }
+.w3-mun{color:black !important; background-color:#D1443F !important}
+.w3-mun-inv{color:#D1443F !important; background-color:black !important}
+.w3-mun-border-inv{border: 1px black solid !important; }
+.w3-new{color:black !important; background-color:WhiteSmoke !important}
+.w3-new-inv{color:WhiteSmoke !important; background-color:black !important}
+.w3-new-border-inv{border: 1px black solid !important; }
+.w3-nfo{color:white !important; background-color:#DF4148 !important}
+.w3-nfo-inv{color:#DF4148 !important; background-color:white !important}
+.w3-nfo-border-inv{border: 1px white solid !important; }
+.w3-shu{color:#EA4D43 !important; background-color:white !important}
+.w3-shu-inv{color:white !important; background-color:#EA4D43 !important}
+.w3-shu-border-inv{border: 1px #EA4D43 solid !important; }
+.w3-tot{color:#212935 !important; background-color:white !important}
+.w3-tot-inv{color:white !important; background-color:#212935 !important}
+.w3-tot-border-inv{border: 1px #212935 solid !important; }
+.w3-whu{color:#95CDFA !important; background-color:#7A2E3D !important}
+.w3-whu-inv{color:#7A2E3D !important; background-color:#95CDFA !important}
+.w3-whu-border-inv{border: 1px #95CDFA solid !important; }
+.w3-wol{color:black !important; background-color:#F2BC44 !important}
+.w3-wol-inv{color:#F2BC44 !important; background-color:black !important}
+.w3-wol-border-inv{border: 1px black solid !important; }
+</style>
+</head>
+
+<div class="w3-bar w3-black shadow89">
+<a class="w3-bar-item w3-black w3-text-black"></a>
+<div class="w3-dropdown-hover">
+<button class="w3-button w3-hover-aqua"><h3><span class="w3-tag w3-white">toilet.football</span></h3></button>
+<div class="w3-dropdown-content w3-bar-block w3-card-4">
+<a href="https://mwinokan.github.io/ToiletFPL/index.html" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/comparison.html" class="w3-bar-item w3-button w3-hover-aqua">📊 Comparison Tool</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/assets.html" class="w3-bar-item w3-button w3-hover-aqua">📈 Asset Graphs</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/season.html" class="w3-bar-item w3-button w3-hover-aqua">🏁 End of season</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/christmas.html" class="w3-bar-item w3-button w3-hover-aqua">🎄 Christmas</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/teams.html" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua">💎 The RBS Diamond Invitational</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua">🚽 Tesco Bean Value Toilet League</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/Super-Dinner-League.html" class="w3-bar-item w3-button w3-hover-aqua">🍝 Super Dinner League</a>
+</div>
+</div>
+<a class="w3-bar-item w3-black w3-text-black w3-right"></a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/toilet_cup.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🏆</h3></a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>
+</div>
+<div class="w3-bar w3-black">
+</div>
+<body class="w3-blue-gray shadow25">
+<div class="w3-content" style="max-width:1400px;min-height:1200px;">
+<div class="w3-center w3-padding-large">
+	<h1><span class="w3-tag w3-white shadow50">Benjamin Williams's "Zagadododo FC"</span></h1>
+</div>
+<div class="w3-row-padding" style="padding-left:0px;padding-right:0px">
+<div class="w3-col s12 m12 l12">
+<div class="w3-center w3-padding">
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p121160.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_352.html">Ederson M.</a></b>
+<br>
+⛔️ <b>-</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p169187.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#52BE80;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_290.html">Alexander-Arnold</a></b>
+<br>
+🛡️ <b>6pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p487053.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_519.html">Udogie</a></b>
+<br>
+⛔️ <b>-</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p101188.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#901517;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_42.html">Digne</a></b>
+<br>
+🟨 <b>-1pts</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p184029.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#196F3D;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_14.html">Ødegaard</a></b>
+<br>
+🅰️🅰️2️⃣ <b>10pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p209244.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#196F3D;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_353.html">Foden</a></b>
+<br>
+⚽️⚽️3️⃣ <b>15pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p212319.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_509.html">Richarlison</a></b>
+<br>
+⛔️ <b>-</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p222531.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#DC7633;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_447.html">Gibbs-White</a></b>
+<br>
+ <b>2pts</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p223094.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#DC7633;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_355.html">Haaland</a> (VC)</b>
+<br>
+ <b>2pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p447203.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#CB4335;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_293.html">Darwin</a> (C)</b>
+<br>
+ <b>2pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p216646.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#52BE80;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_119.html">Wissa</a></b>
+<br>
+⚽️🅰️1️⃣🟨 <b>9pts</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p138001.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_564.html">King</a></b>
+<br>
+ <b>-</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p225796.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_206.html">James</a></b>
+<br>
+⛔️ <b>-</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p214285.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_311.html">Tsimikas</a></b>
+<br>
+ <b>-</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p451340.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_143.html">Mitoma</a></b>
+<br>
+⛔️ <b>-</b>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-center w3-white w3-padding shadow89">
+<h2>23/24 Season</h2>
+<span class="w3-tag" style="margin-bottom:4px">Total Score: 1760</span>
+<span class="w3-tag" style="margin-bottom:4px">Overall Rank: 7.7M</span>
+<span class="w3-tag" style="margin-bottom:4px">Avg. Player Selection: 12.5%</span>
+<span class="w3-tag" style="margin-bottom:4px">Team Value: £100.4M</span>
+<span class="w3-tag" style="margin-bottom:4px">#hits: 0</span>
+<span class="w3-tag" style="margin-bottom:4px">#transfers: 4</span>
+<span class="w3-tag" style="margin-bottom:4px">Total Transfer Gain: 14</span>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-center w3-white w3-padding shadow89">
+<h2>GW38</h2>
+<span class="w3-tag" style="margin-bottom:4px">Score: 45</span>
+<span class="w3-tag" style="margin-bottom:4px">Rank: 6.8M</span>
+<span class="w3-tag" style="margin-bottom:4px">Rank Gain: 34.1%</span>
+<span class="w3-tag" style="margin-bottom:4px">xG: 2.4</span>
+<span class="w3-tag" style="margin-bottom:4px">xA: 1.7</span>
+<span class="w3-tag" style="margin-bottom:4px">Performed xPts: 31.6</span>
+</div>
+</div>
+<div class="w3-col s12 m12 l4">
+<div class="w3-panel w3-center w3-indigo w3-padding shadow89">
+<a href="https://fantasy.premierleague.com/entry/4694555/event/38" class="w3-bar-item w3-button w3-hover-blue">🗓️ FPL Event</a>
+<a href="https://fantasy.premierleague.com/entry/4694555/history" class="w3-bar-item w3-button w3-hover-blue">📈 FPL GW History</a>
+<a class="w3-bar-item w3-button w3-hover-blue">ID: 4694555</a>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">🏆 Trophy Cabinet</h1>
+</div>
+<div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;">
+<div class="w3-bar w3-black">
+<button class="w3-bar-item w3-button w3-mobile tablink w3-aqua" onclick="openLeague(event,121011)">Tesco Bean Value Toilet League</button>
+</div>
+<div id="121011" class="w3-container w3-dark-grey league">
+<div class="w3-justify w3-row-padding">
+<div class="w3-justify"><div class="w3-row-padding"><div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-green w3-card shadow89">
+<table class="w3-table">
+<tr>
+<td style="text-align:left;vertical-align:middle;">
+<h1> 🧑‍🔬 Scientist</h1>
+</td>
+<td style="text-align:right;vertical-align:middle;">
+<h2><span class="w3-tag">GW13</span></h2>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+function openLeague(evt, leagueName) {
+var i, x, tablinks;
+x = document.getElementsByClassName("league");
+for (i = 0; i < x.length; i++) {
+x[i].style.display = "none";
+}
+tablinks = document.getElementsByClassName("tablink");
+for (i = 0; i < x.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" w3-aqua", "");
+}
+document.getElementById(leagueName).style.display = "block";
+evt.currentTarget.className += " w3-aqua";
+}
+</script>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">History</h1>
+</div>
+<div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div class="w3-responsive">
+<table class="w3-table w3-hoverable">
+<tr>
+<th class="w3-center">GW</th>
+<th class="w3-center">Score</th>
+<th class="w3-center">Overall Rank</th>
+<th class="w3-center">GW Score</th>
+<th class="w3-center">GW Rank</th>
+<th class="w3-center">Transfers Taken</th>
+<th class="w3-center">Total Value</th>
+</tr>
+<tr>
+<td class="w3-center">38</td>
+<td class="w3-center">1760</td>
+<td class="w3-center">7.7M</td>
+<td class="w3-center">45</td>
+<td class="w3-center">6.8M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">37</td>
+<td class="w3-center">1715</td>
+<td class="w3-center">7.7M</td>
+<td class="w3-center">68</td>
+<td class="w3-center">7.5M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">36</td>
+<td class="w3-center">1647</td>
+<td class="w3-center">7.7M</td>
+<td class="w3-center">52</td>
+<td class="w3-center">9.2M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">35</td>
+<td class="w3-center">1595</td>
+<td class="w3-center">7.5M</td>
+<td class="w3-center">19</td>
+<td class="w3-center">10.7M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">34</td>
+<td class="w3-center">1576</td>
+<td class="w3-center">7.1M</td>
+<td class="w3-center">75</td>
+<td class="w3-center">5.4M</td>
+<td></td>
+<td class="w3-center">£100.5</td>
+</tr>
+<tr>
+<td class="w3-center">33</td>
+<td class="w3-center">1501</td>
+<td class="w3-center">7.3M</td>
+<td class="w3-center">40</td>
+<td class="w3-center">8.8M</td>
+<td></td>
+<td class="w3-center">£100.6</td>
+</tr>
+<tr>
+<td class="w3-center">32</td>
+<td class="w3-center">1461</td>
+<td class="w3-center">7.1M</td>
+<td class="w3-center">30</td>
+<td class="w3-center">10.6M</td>
+<td></td>
+<td class="w3-center">£100.5</td>
+</tr>
+<tr>
+<td class="w3-center">31</td>
+<td class="w3-center">1431</td>
+<td class="w3-center">6.8M</td>
+<td class="w3-center">61</td>
+<td class="w3-center">2.5M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">30</td>
+<td class="w3-center">1370</td>
+<td class="w3-center">7.1M</td>
+<td class="w3-center">23</td>
+<td class="w3-center">10.3M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">29</td>
+<td class="w3-center">1347</td>
+<td class="w3-center">6.8M</td>
+<td class="w3-center">12</td>
+<td class="w3-center">4.6M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">28</td>
+<td class="w3-center">1335</td>
+<td class="w3-center">6.9M</td>
+<td class="w3-center">29</td>
+<td class="w3-center">9.3M</td>
+<td></td>
+<td class="w3-center">£100.5</td>
+</tr>
+<tr>
+<td class="w3-center">27</td>
+<td class="w3-center">1306</td>
+<td class="w3-center">6.7M</td>
+<td class="w3-center">60</td>
+<td class="w3-center">6.2M</td>
+<td></td>
+<td class="w3-center">£100.7</td>
+</tr>
+<tr>
+<td class="w3-center">26</td>
+<td class="w3-center">1246</td>
+<td class="w3-center">6.7M</td>
+<td class="w3-center">45</td>
+<td class="w3-center">5.4M</td>
+<td></td>
+<td class="w3-center">£100.5</td>
+</tr>
+<tr>
+<td class="w3-center">25</td>
+<td class="w3-center">1201</td>
+<td class="w3-center">6.8M</td>
+<td class="w3-center">57</td>
+<td class="w3-center">9.3M</td>
+<td></td>
+<td class="w3-center">£100.6</td>
+</tr>
+<tr>
+<td class="w3-center">24</td>
+<td class="w3-center">1144</td>
+<td class="w3-center">6.5M</td>
+<td class="w3-center">59</td>
+<td class="w3-center">6.4M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">23</td>
+<td class="w3-center">1085</td>
+<td class="w3-center">6.4M</td>
+<td class="w3-center">51</td>
+<td class="w3-center">6.3M</td>
+<td></td>
+<td class="w3-center">£99.9</td>
+</tr>
+<tr>
+<td class="w3-center">22</td>
+<td class="w3-center">1034</td>
+<td class="w3-center">6.4M</td>
+<td class="w3-center">34</td>
+<td class="w3-center">8.7M</td>
+<td></td>
+<td class="w3-center">£99.9</td>
+</tr>
+<tr>
+<td class="w3-center">21</td>
+<td class="w3-center">1000</td>
+<td class="w3-center">6.1M</td>
+<td class="w3-center">37</td>
+<td class="w3-center">7.7M</td>
+<td></td>
+<td class="w3-center">£99.6</td>
+</tr>
+<tr>
+<td class="w3-center">20</td>
+<td class="w3-center">963</td>
+<td class="w3-center">6.0M</td>
+<td class="w3-center">49</td>
+<td class="w3-center">7.1M</td>
+<td></td>
+<td class="w3-center">£99.5</td>
+</tr>
+<tr>
+<td class="w3-center">19</td>
+<td class="w3-center">914</td>
+<td class="w3-center">5.8M</td>
+<td class="w3-center">47</td>
+<td class="w3-center">1.9M</td>
+<td></td>
+<td class="w3-center">£99.5</td>
+</tr>
+<tr>
+<td class="w3-center">18</td>
+<td class="w3-center">867</td>
+<td class="w3-center">6.1M</td>
+<td class="w3-center">37</td>
+<td class="w3-center">4.7M</td>
+<td></td>
+<td class="w3-center">£99.5</td>
+</tr>
+<tr>
+<td class="w3-center">17</td>
+<td class="w3-center">830</td>
+<td class="w3-center">6.2M</td>
+<td class="w3-center">45</td>
+<td class="w3-center">5.0M</td>
+<td></td>
+<td class="w3-center">£99.6</td>
+</tr>
+<tr>
+<td class="w3-center">16</td>
+<td class="w3-center">785</td>
+<td class="w3-center">6.4M</td>
+<td class="w3-center">45</td>
+<td class="w3-center">4.0M</td>
+<td></td>
+<td class="w3-center">£99.7</td>
+</tr>
+<tr>
+<td class="w3-center">15</td>
+<td class="w3-center">740</td>
+<td class="w3-center">6.7M</td>
+<td class="w3-center">36</td>
+<td class="w3-center">4.3M</td>
+<td></td>
+<td class="w3-center">£99.4</td>
+</tr>
+<tr>
+<td class="w3-center">14</td>
+<td class="w3-center">704</td>
+<td class="w3-center">6.7M</td>
+<td class="w3-center">53</td>
+<td class="w3-center">5.8M</td>
+<td></td>
+<td class="w3-center">£99.2</td>
+</tr>
+<tr>
+<td class="w3-center">13</td>
+<td class="w3-center">651</td>
+<td class="w3-center">6.8M</td>
+<td class="w3-center">38</td>
+<td class="w3-center">8.1M</td>
+<td></td>
+<td class="w3-center">£99.2</td>
+</tr>
+<tr>
+<td class="w3-center">12</td>
+<td class="w3-center">613</td>
+<td class="w3-center">6.5M</td>
+<td class="w3-center">65</td>
+<td class="w3-center">5.0M</td>
+<td></td>
+<td class="w3-center">£99.0</td>
+</tr>
+<tr>
+<td class="w3-center">11</td>
+<td class="w3-center">548</td>
+<td class="w3-center">6.6M</td>
+<td class="w3-center">20</td>
+<td class="w3-center">9.3M</td>
+<td></td>
+<td class="w3-center">£99.0</td>
+</tr>
+<tr>
+<td class="w3-center">10</td>
+<td class="w3-center">528</td>
+<td class="w3-center">6.1M</td>
+<td class="w3-center">71</td>
+<td class="w3-center">3.5M</td>
+<td></td>
+<td class="w3-center">£99.3</td>
+</tr>
+<tr>
+<td class="w3-center">9</td>
+<td class="w3-center">457</td>
+<td class="w3-center">6.4M</td>
+<td class="w3-center">48</td>
+<td class="w3-center">8.9M</td>
+<td>Giles (0) → Tsimikas (6)<br>gain= 6<br></td>
+<td class="w3-center">£99.2</td>
+</tr>
+<tr>
+<td class="w3-center">8</td>
+<td class="w3-center">409</td>
+<td class="w3-center">5.5M</td>
+<td class="w3-center">32</td>
+<td class="w3-center">8.7M</td>
+<td></td>
+<td class="w3-center">£99.4</td>
+</tr>
+<tr>
+<td class="w3-center">7</td>
+<td class="w3-center">377</td>
+<td class="w3-center">4.8M</td>
+<td class="w3-center">36</td>
+<td class="w3-center">8.2M</td>
+<td>Chilwell (0) → Digne (1)<br>Gross (0) → Foden (2)<br>gain= 3<br></td>
+<td class="w3-center">£99.5</td>
+</tr>
+<tr>
+<td class="w3-center">6</td>
+<td class="w3-center">341</td>
+<td class="w3-center">3.8M</td>
+<td class="w3-center">44</td>
+<td class="w3-center">9.4M</td>
+<td></td>
+<td class="w3-center">£99.7</td>
+</tr>
+<tr>
+<td class="w3-center">5</td>
+<td class="w3-center">297</td>
+<td class="w3-center">1.2M</td>
+<td class="w3-center">42</td>
+<td class="w3-center">6.1M</td>
+<td>Johnson (1) → Gross (10)<br>Martinez (4) → Giles (0)<br>gain= 5<br></td>
+<td class="w3-center">£99.8</td>
+</tr>
+<tr>
+<td class="w3-center">4</td>
+<td class="w3-center">255</td>
+<td class="w3-center">937k</td>
+<td class="w3-center">87</td>
+<td class="w3-center">900k</td>
+<td></td>
+<td class="w3-center">£100.0</td>
+</tr>
+<tr>
+<td class="w3-center">3</td>
+<td class="w3-center">168</td>
+<td class="w3-center">2.0M</td>
+<td class="w3-center">55</td>
+<td class="w3-center">1.4M</td>
+<td></td>
+<td class="w3-center">£100.0</td>
+</tr>
+<tr>
+<td class="w3-center">2</td>
+<td class="w3-center">113</td>
+<td class="w3-center">3.5M</td>
+<td class="w3-center">57</td>
+<td class="w3-center">1.3M</td>
+<td>Eze (2) → Johnson (2)<br>gain= 0<br></td>
+<td class="w3-center">£100.1</td>
+</tr>
+<tr>
+<td class="w3-center">1</td>
+<td class="w3-center">56</td>
+<td class="w3-center">6.1M</td>
+<td class="w3-center">56</td>
+<td class="w3-center">6.1M</td>
+<td></td>
+<td class="w3-center">£100.0</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">Graphs</h1>
+</div>
+<div class="w3-col s12 m12 l6">
+<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div>                            <div id="aad6d4dd-79c9-4fa3-acbf-d88a0a551332" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("aad6d4dd-79c9-4fa3-acbf-d88a0a551332")) {                    Plotly.newPlot(                        "aad6d4dd-79c9-4fa3-acbf-d88a0a551332",                        [{"customdata":["https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html"],"mode":"markers+lines+text","name":"Overall Rank","opacity":1.0,"text":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"Benjamin Williams"],"textposition":"middle right","visible":true,"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],"y":[6055817,3467695,2017823,937122,1172993,3778802,4782826,5536018,6372013,6121614,6643895,6489072,6758995,6742664,6692255,6370770,6213760,6094313,5771502,5957899,6121805,6404115,6428312,6504917,6791344,6722071,6693542,6905369,6845164,7132418,6761459,7113531,7261115,7136350,7463342,7679791,7695808,7669581],"type":"scatter"},{"customdata":["https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html"],"mode":"markers","name":"GW Rank","opacity":1.0,"textposition":"middle right","visible":true,"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],"y":[6055816,1285852,1397702,900908,6081360,9401809,8205539,8656106,8942534,3525146,9295062,4977360,8130691,5760136,4346306,3985339,4990816,4724615,1878222,7137648,7682333,8748150,6341119,6377118,9286585,5435204,6161857,9326993,4587823,10275610,2480275,10565849,8751750,5416828,10724536,9189891,7510727,6766489],"type":"scatter"}],                        {"autosize":true,"legend":{"title":{"text":"Benjamin Williams"}},"margin":{"b":20,"l":20,"r":20,"t":20},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"title":{"text":"Gameweek"}},"yaxis":{"autorange":"reversed","title":{"text":"Overall Rank"},"type":"log"}},                        {"responsive": true}                    )                };                            </script>        </div>
+	
+	<script>
+	var plot_element = document.getElementById("aad6d4dd-79c9-4fa3-acbf-d88a0a551332");
+	plot_element.on('plotly_click', function(data){
+	    console.log(data);
+	    var point = data.points[0];
+	    if (point) {
+	        console.log(point.customdata);
+	        window.open(point.customdata);
+	    }
+	})
+	</script>
+	
+	</div>
+</div>
+<div class="w3-col s12 m12 l6">
+<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div>                            <div id="a60673d4-8265-44ec-809b-af0a082ac04d" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("a60673d4-8265-44ec-809b-af0a082ac04d")) {                    Plotly.newPlot(                        "a60673d4-8265-44ec-809b-af0a082ac04d",                        [{"connector":{"line":{"color":"rgb(63, 63, 63)"}},"decreasing":{"marker":{"color":"green"}},"increasing":{"marker":{"color":"red"}},"measure":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],"name":"Rank","orientation":"v","text":["GW1: 6.1M","GW2: 1.3M","GW3: 1.4M","GW4: 900k","GW5: 6.1M","GW6: 9.4M","GW7: 8.2M","GW8: 8.7M","GW9: 8.9M","GW10: 3.5M","GW11: 9.3M","GW12: 5.0M","GW13: 8.1M","GW14: 5.8M","GW15: 4.3M","GW16: 4.0M","GW17: 5.0M","GW18: 4.7M","GW19: 1.9M","GW20: 7.1M","GW21: 7.7M","GW22: 8.7M","GW23: 6.3M","GW24: 6.4M","GW25: 9.3M","GW26: 5.4M","GW27: 6.2M","GW28: 9.3M","GW29: 4.6M","GW30: 10.3M","GW31: 2.5M","GW32: 10.6M","GW33: 8.8M","GW34: 5.4M","GW35: 10.7M","GW36: 9.2M","GW37: 7.5M","GW38: 6.8M"],"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],"y":[6055817,-2588122,-1449872,-1080701,235871,2605809,1004024,753192,835995,-250399,522281,-154823,269923,-16331,-50409,-321485,-157010,-119447,-322811,186397,163906,282310,24197,76605,286427,-69273,-28529,211827,-60205,287254,-370959,352072,147584,-124765,326992,216449,16017,-26227],"type":"waterfall"}],                        {"showlegend":false,"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"yaxis":{"autorange":"reversed","title":{"text":"Overall Rank"},"type":"log"}},                        {"responsive": true}                    )                };                            </script>        </div>
+	
+	<script>
+	var plot_element = document.getElementById("a60673d4-8265-44ec-809b-af0a082ac04d");
+	plot_element.on('plotly_click', function(data){
+	    console.log(data);
+	    var point = data.points[0];
+	    if (point) {
+	        console.log(point.customdata);
+	        window.open(point.customdata);
+	    }
+	})
+	</script>
+	
+	</div>
+</div>
+<div class="w3-col s12 m12 l6">
+<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div>                            <div id="115d2614-d9d2-4d63-a4de-0d8cb80b6b61" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("115d2614-d9d2-4d63-a4de-0d8cb80b6b61")) {                    Plotly.newPlot(                        "115d2614-d9d2-4d63-a4de-0d8cb80b6b61",                        [{"customdata":["https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_4694555.html"],"mode":"markers+lines+text","name":"Overall Rank","opacity":1.0,"text":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"Benjamin Williams"],"textposition":"middle right","visible":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],"y":[0,-8,5,16,31,29,5,-8,-20,-39,-34,-46,-45,-53,-54,-53,-48,-47,-46,-37,-47,-57,-71,-77,-80,-96,-97,-100,-115,-115,-139,-124,-150,-168,-169,-202,-221,-236,-243],"type":"scatter"}],                        {"autosize":true,"legend":{"title":{"text":"Benjamin Williams"}},"margin":{"b":20,"l":20,"r":20,"t":20},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"title":{"text":"Gameweek"}},"yaxis":{"title":{"text":"Total points relative to global average"},"zeroline":true,"zerolinecolor":"Black","zerolinewidth":2}},                        {"responsive": true}                    )                };                            </script>        </div>
+	
+	<script>
+	var plot_element = document.getElementById("115d2614-d9d2-4d63-a4de-0d8cb80b6b61");
+	plot_element.on('plotly_click', function(data){
+	    console.log(data);
+	    var point = data.points[0];
+	    if (point) {
+	        console.log(point.customdata);
+	        window.open(point.customdata);
+	    }
+	})
+	</script>
+	
+	</div>
+</div>
+</div>
+</div>
+<div class="w3-center" style="padding:32px">
+<p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>
+</div>
+</body>
+</html>

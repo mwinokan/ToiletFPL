@@ -22,7 +22,7 @@ timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
 
 # deployment configuration
 DEPLOY_ROOT = 'mwinokan.github.io/ToiletFPL'
-JSON_PATH = "data_wiki_2324.json" # store the award data in this JSON
+JSON_PATH = "data_wiki_2425.json" # store the award data in this JSON
 TAGLINE = "Home of the RBS Diamond Invitational and Tesco Bean Value Toilet League"
 
 # run options
@@ -38,8 +38,8 @@ force_go_graphs = True # force update of Assets graph
 
 # gamestate options (to be automated)
 halfway_awards = False # generate half-season / christmas awards
-season_awards = True # generate full-season awards
-cup_active = True # activate the cup
+season_awards = False # generate full-season awards
+cup_active = False # activate the cup
 
 if '--push' in argv: run_push_changes = True
 if '--offline' in argv: offline = True
@@ -49,7 +49,7 @@ if '--test' in argv: test = True
 # configure the leagues
 
 # 23/24
-league_codes = [146330,121011,114707]
+league_codes = [146330,241682,352258]
 league_icons = ["💎","🚽","🍝"]
 league_shortnames = ['Diamond','Toilet','Dinner']
 league_colours = ['aqua','dark-grey','dark-grey']
@@ -1773,34 +1773,35 @@ def create_managerpage(api,man,leagues):
 	
 	title_str = f"{man.name}'s " f'"{man.team_name}"'
 
-	html_buffer += create_manager_formation(man,gw)
+	if gw > 0:
+		html_buffer += create_manager_formation(man,gw)
 
-	# season stats
-	html_buffer += '<div class="w3-col s12 m6 l4">\n'
-	html_buffer += '<div class="w3-panel w3-center w3-white w3-padding shadow89">\n'
-	html_buffer += f'<h2>{api._season_str_fmt} Season</h2>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Total Score: {man.total_livescore}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Overall Rank: {api.big_number_format(man.overall_rank)}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Avg. Player Selection: {man.avg_selection:.1f}%</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Team Value: £{man.team_value}M</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">#hits: {man.num_hits}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">#transfers: {man.num_nonwc_transfers}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Total Transfer Gain: {man.total_transfer_gain}</span>\n'
-	html_buffer += '</div>\n'
-	html_buffer += '</div>\n'
+		# season stats
+		html_buffer += '<div class="w3-col s12 m6 l4">\n'
+		html_buffer += '<div class="w3-panel w3-center w3-white w3-padding shadow89">\n'
+		html_buffer += f'<h2>{api._season_str_fmt} Season</h2>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Total Score: {man.total_livescore}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Overall Rank: {api.big_number_format(man.overall_rank)}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Avg. Player Selection: {man.avg_selection:.1f}%</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Team Value: £{man.team_value}M</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">#hits: {man.num_hits}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">#transfers: {man.num_nonwc_transfers}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Total Transfer Gain: {man.total_transfer_gain}</span>\n'
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
 
-	# gw
-	html_buffer += '<div class="w3-col s12 m6 l4">\n'
-	html_buffer += '<div class="w3-panel w3-center w3-white w3-padding shadow89">\n'
-	html_buffer += f'<h2>GW{gw}</h2>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Score: {man.livescore}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank: {api.big_number_format(man.gw_rank)}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank Gain: {man.gw_rank_gain:.1%}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xG: {man.gw_xg:.1f}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xA: {man.gw_xa:.1f}</span>\n'
-	html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Performed xPts: {man.gw_performed_xpts:.1f}</span>\n'
-	html_buffer += '</div>\n'
-	html_buffer += '</div>\n'
+		# gw
+		html_buffer += '<div class="w3-col s12 m6 l4">\n'
+		html_buffer += '<div class="w3-panel w3-center w3-white w3-padding shadow89">\n'
+		html_buffer += f'<h2>GW{gw}</h2>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Score: {man.livescore}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank: {api.big_number_format(man.gw_rank)}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Rank Gain: {man.gw_rank_gain:.1%}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xG: {man.gw_xg:.1f}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">xA: {man.gw_xa:.1f}</span>\n'
+		html_buffer += f'<span class="w3-tag" style="margin-bottom:4px">Performed xPts: {man.gw_performed_xpts:.1f}</span>\n'
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
 	
 	# external links
 	html_buffer += '<div class="w3-col s12 m12 l4">\n'
@@ -1813,22 +1814,23 @@ def create_managerpage(api,man,leagues):
 	html_buffer += '</div>\n'
 	html_buffer += '</div>\n'
 
-	html_buffer += floating_subtitle('🏆 Trophy Cabinet',pad=1)
-	
-	html_buffer += '<div class="w3-col s12 m12 l12">\n'
-	html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;">\n'
-	html_buffer += create_trophycabinet(api, man)
-	html_buffer += '</div>\n'
-	html_buffer += '</div>\n'
-	
-	if any(man._chip_dict.values()):
-		html_buffer += floating_subtitle('Chips')
-
+	if gw > 0:
+		html_buffer += floating_subtitle('🏆 Trophy Cabinet',pad=1)
+		
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
-		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
-		html_buffer += create_chip_table(api,man)
+		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;">\n'
+		html_buffer += create_trophycabinet(api, man)
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
+	
+		if any(man._chip_dict.values()):
+			html_buffer += floating_subtitle('Chips')
+
+			html_buffer += '<div class="w3-col s12 m12 l12">\n'
+			html_buffer += '<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+			html_buffer += create_chip_table(api,man)
+			html_buffer += '</div>\n'
+			html_buffer += '</div>\n'
 		
 	if gw > 0 and not (gw == 38 and not api._live_gw):
 		html_buffer += floating_subtitle('Picks')
@@ -3598,7 +3600,7 @@ def create_leaguepage(league,leagues,i):
 	create_key(json[str(league.id)], gw)
 	create_key(json[str(league.id)][gw], 'awards')
 
-	awards = not api._live_gw or any([f['started'] for f in api.get_gw_fixtures(gw)])
+	awards = gw > 0 and (not api._live_gw or any([f['started'] for f in api.get_gw_fixtures(gw)]))
 	
 	if awards:
 

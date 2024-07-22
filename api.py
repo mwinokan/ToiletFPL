@@ -19,55 +19,49 @@ from pprint import pprint
 url = 'https://fantasy.premierleague.com/api/'
 
 GC_DICT = {
-	"MCI":33,
-	"ARS":43,
-	"MUN":43,
-	"NEW":33,
-	"LIV":47,
-	"BHA":53,
-	"AVL":46,
-	"TOT":63,
-	"BRE":46,
-	"FUL":53,
-	"CRY":49,
-	"CHE":47,
-	"WOL":58,
-	"WHU":55,
-	"BOU":71,
-	"NFO":68,
-	"EVE":57,
-	"LEI":68,
-	"LEE":78,
-	"SOU":73,
-	"BUR":35*2,
-	"SHU":39*2,
-	"LUT":39*2,
+	"MCI":34,
+	"ARS":29,
+	"MUN":58,
+	"NEW":62,
+	"LIV":41,
+	"BHA":62,
+	"AVL":61,
+	"TOT":61,
+	"BRE":65,
+	"FUL":61,
+	"CRY":58,
+	"CHE":63,
+	"WOL":65,
+	"WHU":74,
+	"BOU":67,
+	"NFO":67,
+	"EVE":51,
+	"IPS":57*2,
+	"LEI":41*2,
+	"SOU":63*2,
 }
 
 GF_DICT = {
-	"MCI":94,
-	"ARS":88,
-	"MUN":58,
-	"NEW":68,
-	"LIV":75,
-	"BHA":72,
-	"AVL":51,
-	"TOT":70,
-	"BRE":58,
+	"MCI":96,
+	"ARS":91,
+	"MUN":57,
+	"NEW":85,
+	"LIV":86,
+	"BHA":55,
+	"AVL":76,
+	"TOT":74,
+	"BRE":56,
 	"FUL":55,
-	"CRY":40,
-	"CHE":38,
-	"WOL":31,
-	"WHU":42,
-	"BOU":37,
-	"NFO":38,
-	"EVE":34,
-	"LEI":51,
-	"LEE":48,
-	"SOU":36,
-	"BUR":87/2,
-	"SHU":73/2,
-	"LUT":57/2,
+	"CRY":57,
+	"CHE":77,
+	"WOL":50,
+	"WHU":60,
+	"BOU":54,
+	"NFO":49,
+	"EVE":40,
+	"IPS":92/2,
+	"LEI":89/2,
+	"SOU":87/2,
 }
 
 class Request404(Exception):
@@ -93,9 +87,9 @@ class FPL_API():
 	_skip_gws = []
 	_wc_cutoff = 16
 
-	_season_str = 2324
-	_season_str_fmt = '23/24'
-	_last_season_str = 2223
+	_season_str = 2425
+	_season_str_fmt = '24/25'
+	_last_season_str = 2324
 
 	_prev_element_dict = None
 
@@ -139,6 +133,7 @@ class FPL_API():
 			[30,'Crystal Palace'],
 			[35,'Brighton'],
 			[38,'Wolves'],
+			[40,'Ipswich'],
 			[42,'Man City'],
 			[48,'Sheffield Utd'],
 			[53,'Fulham'],
@@ -165,6 +160,7 @@ class FPL_API():
 			30:'CRY',
 			35:'BHA',
 			38:'WOL',
+			40:'IPS',
 			42:'MCI',
 			48:'SHU',
 			53:'FUL',
@@ -185,6 +181,7 @@ class FPL_API():
 			"Crystal Palace": {"background-color": "#BE2C2A","color": "#2C67A9","accent":"white"},
 			"Everton": {"background-color": "#3A83E2","color": "white","accent":"#0F276C"},
 			"Fulham": {"background-color": "white","color": "black","accent":"#A6271E"},
+			"Ipswich": {"background-color": "#1E2F75","color": "white","accent":"#BA423A"},
 			"Leicester": {"background-color": "SteelBlue","color": "white","accent":"GoldenRod"},
 			"Leeds": {"background-color": "white","color": "GoldenRod","accent":"black"},
 			"Liverpool": {"background-color": "#AF2532","color": "white","accent":"#75151A"},
@@ -1098,7 +1095,8 @@ class FPL_API():
 		from PIL import Image
 		# im = Image.open(path).convert("RGB")
 		im = Image.open(path)
-		im.thumbnail((size,size), Image.ANTIALIAS)
+		im.thumbnail((size,size))
+		# im.thumbnail((size,size), Image.ANTIALIAS)
 		im.save(new,"png")
 
 	def webp2png(self,path,new,size=87):
