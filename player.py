@@ -1091,7 +1091,7 @@ class Player():
 
 	"""
 
-	def expected_points(self,opponent=None,gw=None,debug=False,use_official=False,force=False, not_started_only=False):
+	def expected_points(self,opponent=None,gw=None,debug=False,use_official=False,force=False, not_started_only=False, summary=False):
 
 		"""not_started_only: for gameweeks with multiple matches only return expected points for games that have not started yet"""
 
@@ -1229,7 +1229,7 @@ class Player():
 			
 			opp_GC_ratio = opp_GC_per_game/avg_GC_per_game
 			opp_GC_ratio = opp_GC_ratio or 1.0
-			opp_GC_ratio = scale_by_sample_size(opp_GC_ratio,opponent.games_played)
+			# opp_GC_ratio = scale_by_sample_size(opp_GC_ratio,opponent.games_played)
 			
 			if debug: mout.varOut('opp_GC_ratio',opp_GC_ratio)
 			
@@ -1244,7 +1244,7 @@ class Player():
 			
 			opp_GF_ratio = opp_GF_per_game/avg_GF_per_game
 			opp_GF_ratio = opp_GF_ratio or 1.0
-			opp_GF_ratio = scale_by_sample_size(opp_GF_ratio,opponent.games_played)
+			# opp_GF_ratio = scale_by_sample_size(opp_GF_ratio,opponent.games_played)
 			
 			if debug: mout.varOut('opp_GF_ratio',opp_GF_ratio)
 			
@@ -1453,10 +1453,17 @@ class Player():
 			# 	mout.varOut('xG',xG)
 			# 	mout.varOut('xA',xA)
 
-			# 	mout.varOut('xBPts',self._xBpts)
-			# 	mout.varOut('xMPts',xMPts)
-			# 	mout.varOut('xGIPts',xGIPts)
-			# 	mout.varOut('xCSPts',xCSPts)
+			if summary:
+				mout.varOut('xMPts',xMPts)
+				mout.varOut('xCSPts',xCSPts)
+				mout.varOut('xGIPts',xGIPts)
+				mout.varOut('xBPts',self._xBpts)
+				mout.varOut('xYCPts',xYCPts)
+				mout.varOut('xRCPts',xRCPts)
+				mout.varOut('xOGPts',xOGPts)
+				mout.varOut('xPMPts',xPMPts)
+				mout.varOut('xPSPts',xPSPts)
+				mout.varOut('xSPts',xSPts)
 
 			if debug: mout.varOut('expected_points',expected_points)
 

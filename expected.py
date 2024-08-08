@@ -74,5 +74,7 @@ def weighted_average(this_season_by_gw,this_season_minutes_by_gw=None,last_seaso
 
 
 def scale_by_sample_size(value,samples,default=1.0,steepness=5):
+	if samples < 1:
+		samples = 1
 	scaled =  value - np.exp((1.0-samples)/steepness)*(value-default)
 	return scaled
