@@ -1220,19 +1220,21 @@ def create_teampage(api,leagues):
 
 		### team assets
 
+		# if api._current_gw > 0:
+
+		html_buffer += '<br>\n'
+		html_buffer += '<table class="w3-table">\n'
+
+		def player_name_str(p):
+			str_buffer = ""
+			if p.is_yellow_flagged:
+				str_buffer += f'⚠️ '
+			elif p.is_red_flagged:
+				str_buffer += f'⛔️ '
+			str_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>\n'
+			return str_buffer
+		
 		if api._current_gw > 0:
-
-			html_buffer += '<br>\n'
-			html_buffer += '<table class="w3-table">\n'
-
-			def player_name_str(p):
-				str_buffer = ""
-				if p.is_yellow_flagged:
-					str_buffer += f'⚠️ '
-				elif p.is_red_flagged:
-					str_buffer += f'⛔️ '
-				str_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>\n'
-				return str_buffer
 
 			# Top scoring assets
 			html_buffer += '<tr>\n'
@@ -1269,18 +1271,18 @@ def create_teampage(api,leagues):
 					html_buffer += '</td>\n'
 				html_buffer += '</tr>\n'
 
-			# Top predicted points assets
-			html_buffer += '<tr>\n'
-			html_buffer += f'<th style={team_style_str}>Next 5 xPts</th>\n'
-			sorted_players = sorted(players,key=lambda x: x.next5_expected,reverse=True)
-			for p in sorted_players[:5]:
-				style_str = get_style_from_event_score(p.next5_expected/5)
-				html_buffer += f'<td class="w3-center" style={style_str}>'
-				html_buffer += f'{player_name_str(p)} {p.next5_expected:.1f}'
-				html_buffer += '</td>\n'
-			html_buffer += '</tr>\n'
-		
-			html_buffer += '</table>\n'
+		# Top predicted points assets
+		html_buffer += '<tr>\n'
+		html_buffer += f'<th style={team_style_str}>Next 5 xPts</th>\n'
+		sorted_players = sorted(players,key=lambda x: x.next5_expected,reverse=True)
+		for p in sorted_players[:5]:
+			style_str = get_style_from_event_score(p.next5_expected/5)
+			html_buffer += f'<td class="w3-center" style={style_str}>'
+			html_buffer += f'{player_name_str(p)} {p.next5_expected:.1f}'
+			html_buffer += '</td>\n'
+		html_buffer += '</tr>\n'
+	
+		html_buffer += '</table>\n'
 
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
@@ -1341,16 +1343,17 @@ def create_assetpage(leagues):
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 		
+		html_buffer += floating_subtitle('Best Value: Next 5 GWs')
+		html_buffer += '<div class="w3-col s12 m12 l12">\n'
+		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		html_buffer += '<div class="w3-padding">\n'
+		html_buffer += "<p>Expected points over the next five gameweeks per player price. Expected poins from Max's algorithm</p>"
+		html_buffer += '</div>\n'
+		html_buffer += create_value_figure(api,players)
+		html_buffer += '</div>\n'
+		html_buffer += '</div>\n'
+		
 		if gw > 0:
-			html_buffer += floating_subtitle('Best Value: Next 5 GWs')
-			html_buffer += '<div class="w3-col s12 m12 l12">\n'
-			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
-			html_buffer += '<div class="w3-padding">\n'
-			html_buffer += "<p>Expected points over the next five gameweeks per player price. Expected poins from Max's algorithm</p>"
-			html_buffer += '</div>\n'
-			html_buffer += create_value_figure(api,players)
-			html_buffer += '</div>\n'
-			html_buffer += '</div>\n'
 
 			html_buffer += floating_subtitle(f'Best GW{gw+1} Assets')
 			html_buffer += '<div class="w3-col s12 m12 l12">\n'
@@ -1361,7 +1364,7 @@ def create_assetpage(leagues):
 			html_buffer += create_gwexp_figure(api,players)
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
-			
+				
 		# navbar = None
 		navbar = create_navbar(leagues)
 		html_page('html/assets.html',None,title=f"Asset Analysis", gw=gw, html=html_buffer, showtitle=True, bar_html=navbar,colour='aqua', plotly=True)
@@ -1545,7 +1548,8 @@ def create_playerpage(api,player,leagues):
 		html_buffer += f'</div>\n'
 		html_buffer += f'</div>\n'
 		
-		if api._current_gw > 0 and (force_go_graphs or not api._live_gw):
+		# if api._current_gw > 0 and (force_go_graphs or not api._live_gw):
+		if (force_go_graphs or not api._live_gw):
 
 			html_buffer += '<div class="w3-col s12 m12 l8">\n'
 			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
@@ -1557,11 +1561,11 @@ def create_playerpage(api,player,leagues):
 		
 			html_buffer += f'</div>\n'
 
-		if api._current_gw > 0:
-			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
-			html_buffer += get_player_history_table(player)
-			html_buffer += f'</div>\n'
-			html_buffer += f'</div>\n'
+		# if api._current_gw > 0:
+		html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+		html_buffer += get_player_history_table(player)
+		html_buffer += f'</div>\n'
+		html_buffer += f'</div>\n'
 
 		navbar = create_navbar(leagues, active=None, colour='black')
 
