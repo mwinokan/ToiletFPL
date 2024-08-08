@@ -279,6 +279,10 @@ class Player():
 				self._prev_starts_per_90 = pd['starts_per_90']
 				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
 				self._prev_appearances = self._prev_minutes/90 * self._prev_starts_per_90
+				if self._prev_appearances:
+					self._prev_mins_per_start = self._prev_minutes/self._prev_appearances
+				else:
+					self._prev_mins_per_start = 0
 
 				return True
 				# print(pd['web_name'],self._name)
@@ -326,6 +330,10 @@ class Player():
 				self._prev_starts_per_90 = pd['starts_per_90']
 				self._prev_clean_sheets_per_90 = pd['clean_sheets_per_90']
 				self._prev_appearances = self._prev_minutes/90 * self._prev_starts_per_90
+				if self._prev_appearances:
+					self._prev_mins_per_start = self._prev_minutes/self._prev_appearances
+				else:
+					self._prev_mins_per_start = 0
 
 			else:
 
@@ -366,6 +374,7 @@ class Player():
 				self._prev_starts_per_90 = 0.0
 				self._prev_clean_sheets_per_90 = 0.0
 				self._prev_appearances = 0.0
+				self._prev_mins_per_start = 0.0
 
 			return True
 
@@ -1003,8 +1012,13 @@ class Player():
 			gw = self._api._current_gw+1
 		if gw > 38:
 			return None
+
 		if 'minutes' not in self.history:
-			return None
+			if self._prev_mins_per_start:
+				# return prev_minutes
+				return self._prev_mins_per_start
+			else:
+				return None
 
 		Ms = Ms or [float(x) for x in self.history['minutes']]
 
@@ -1079,7 +1093,7 @@ class Player():
 
 	def expected_points(self,opponent=None,gw=None,debug=False,use_official=False,force=False, not_started_only=False):
 
-		# print(self, gw, opponent, not_started_only)
+		"""not_started_only: for gameweeks with multiple matches only return expected points for games that have not started yet"""
 
 		if gw is None:
 			gw = self._api._current_gw
@@ -1115,6 +1129,8 @@ class Player():
 			if not not_started_only:
 				self._api._exp_archive[self.id][gw] = 0
 			return 0
+
+		if debug: mout.varOut('opponent',str(opponent))
 
 		# use flag status for prediction
 		chance = self.get_playing_chance(gw)
@@ -1152,17 +1168,24 @@ class Player():
 			### MINUTES
 
 			if 'minutes' not in self.history:
-				# mout.error(f'{self} has no minutes in self.history')
-				if not not_started_only:
-					self._api._exp_archive[self.id][gw] = 0
-				return 0
+				if debug: mout.error(f'{self} has no minutes in self.history')
+				if not self._prev_minutes:
+					if not not_started_only:
+						self._api._exp_archive[self.id][gw] = 0
+					return 0
+				else:
+					Ms = []
+			else:
+				Ms = [float(x) for x in self.history['minutes']]
 
-			Ms = [float(x) for x in self.history['minutes']]
-			if self._api._live_gw: Ms .pop()
+			if debug: mout.varOut('Ms',Ms)
+
+			if self._api._live_gw: Ms.pop()
 
 			xM = self.expected_minutes(gw,Ms=Ms) # or 0.0
 
-			if xM < 1:
+			if not xM:
+				if debug: mout.error(f'{self} has no xM < 1')
 				xMPts = 0.0
 
 				if not not_started_only:
@@ -1170,56 +1193,119 @@ class Player():
 				return 0
 			else:
 				xMPts = 1 + min([1,xM/60])
+			
+			if debug: mout.varOut('xM',xM)
+			if debug: mout.varOut('xMPts',xMPts)
 
 			### OPPONENT GOALS CONCEDED
 
 			if opponent._prev_obj is None:
-				opp_GF_per_game = opponent.goals_scored/opponent.games_played
-				opp_GC_per_game = opponent.goals_conceded/opponent.games_played
+				if self._api._current_gw == 0:
+					from api import GC_DICT, GF_DICT
+					# mout.error(f"{opponent} has no prev_obj and the game hasn't started yet (assuming promoted)")
+					opp_GF_per_game = GF_DICT[opponent.shortname]/46
+					opp_GC_per_game = GC_DICT[opponent.shortname]/46
+				else:
+					opp_GF_per_game = opponent.goals_scored/opponent.games_played
+					opp_GC_per_game = opponent.goals_conceded/opponent.games_played
+
+			elif self._api._current_gw == 0:				
+				opp_GF_per_game = (opponent._prev_obj.goals_scored/38)/2
+				opp_GC_per_game = (opponent._prev_obj.goals_conceded/38)/2
+
 			else:
 				opp_GF_per_game = (opponent.goals_scored/opponent.games_played + opponent._prev_obj.goals_scored/38)/2
 				opp_GC_per_game = (opponent.goals_conceded/opponent.games_played + opponent._prev_obj.goals_conceded/38)/2
+			
+			if debug: mout.varOut('opp_GC_per_game',opp_GC_per_game)
+			if debug: mout.varOut('opp_GF_per_game',opp_GF_per_game)
 
-			avg_GC_per_game = (sum([t.goals_conceded/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gc_per_game )/2
+			if self._api._current_gw == 0:				
+				avg_GC_per_game = self._api._prev_avg_gc_per_game
+			else:
+				avg_GC_per_game = (sum([t.goals_conceded/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gc_per_game )/2
+			
+			if debug: mout.varOut('avg_GC_per_game',avg_GC_per_game)
+			
 			opp_GC_ratio = opp_GC_per_game/avg_GC_per_game
 			opp_GC_ratio = opp_GC_ratio or 1.0
 			opp_GC_ratio = scale_by_sample_size(opp_GC_ratio,opponent.games_played)
 			
+			if debug: mout.varOut('opp_GC_ratio',opp_GC_ratio)
+			
 			### OPPONENT GOALS THREAT
 
-			avg_GF_per_game = (sum([t.goals_scored/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gf_per_game )/2
+			if self._api._current_gw == 0:				
+				avg_GF_per_game = self._api._prev_avg_gf_per_game
+			else:
+				avg_GF_per_game = (sum([t.goals_scored/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gf_per_game )/2
+			
+			if debug: mout.varOut('avg_GF_per_game',avg_GF_per_game)
+			
 			opp_GF_ratio = opp_GF_per_game/avg_GF_per_game
 			opp_GF_ratio = opp_GF_ratio or 1.0
 			opp_GF_ratio = scale_by_sample_size(opp_GF_ratio,opponent.games_played)
+			
+			if debug: mout.varOut('opp_GF_ratio',opp_GF_ratio)
+			
 
 			### CLEAN SHEETS
 			
 			# xCSs = [int(int(x) < 1) for x in self.history['goals_conceded']]
 			# xGCs = [float(x) for x in self.history['expected_goals_conceded']]
-			xCSs = [int(float(x) < 0.5) for x in self.history['expected_goals_conceded']]
-			if self._api._live_gw: xCSs.pop()
+			if self._api._current_gw == 0:
+				xCSs = []
+			else:
+				xCSs = [int(float(x) < 0.5) for x in self.history['expected_goals_conceded']]
+				if self._api._live_gw: xCSs.pop()
 
-			self._xC_no_opponent = weighted_average(xCSs,None,self._prev_clean_sheets_per_90*self._prev_minutes/90,self._prev_minutes/90)
+			if debug: mout.var('xCSs',xCSs)
+			
+
+			self._xC_no_opponent = weighted_average(
+										xCSs,
+										None,
+										last_season_total=self._prev_clean_sheets_per_90*self._prev_minutes/90,
+										last_season_minutes=self._prev_minutes/90
+									)
+
+			if debug: mout.var('self._xC_no_opponent',self._xC_no_opponent)
 			
 			xCSPts = self._xC_no_opponent * self.clean_sheet_multiplier / opp_GF_ratio
 
 			xCSPts *= min([1,xM/60])
 
+			if debug: mout.var('xCSPts',xCSPts)
+
 			### GOALS
 
-			xGs = [float(x) for x in self.history['expected_goals']]
-			if self._api._live_gw: xGs.pop()
-		
+			if self._api._current_gw == 0:
+				xGs = []
+			else:
+				xGs = [float(x) for x in self.history['expected_goals']]
+				if self._api._live_gw: xGs.pop()
+			
+			if debug: mout.varOut('xGs',xGs)
 			# weighted average xG per game
 			xG_per_minute = weighted_average(xGs,Ms,self._prev_expected_goals,self._prev_minutes)
 
+			if debug: mout.varOut('xG_per_minute',xG_per_minute)
+
 			### ASSISTS
 
-			xAs = [float(x) for x in self.history['expected_assists']]
-			if self._api._live_gw: xAs.pop()
+
+			if self._api._current_gw == 0:
+				xAs = []
+			else:
+				xAs = [float(x) for x in self.history['expected_assists']]
+				if self._api._live_gw: xAs.pop()
+
+			if debug: mout.varOut('xAs',xAs)
 		
 			# weighted average xA per game
 			xA_per_minute = weighted_average(xAs,Ms,self._prev_expected_assists,self._prev_minutes)
+
+			if debug: mout.varOut('xA_per_minute',xA_per_minute)
 
 			### ATTACKING POINTS
 
@@ -1228,54 +1314,99 @@ class Player():
 			self._xG_no_opponent = xG_per_minute * xM * scale_by_sample_size(self.G_per_xG,n)
 			self._xA_no_opponent = xA_per_minute * xM * scale_by_sample_size(self.A_per_xA,n)
 
+			if debug: mout.varOut('_xG_no_opponent',self._xG_no_opponent)
+			if debug: mout.varOut('_xA_no_opponent',self._xA_no_opponent)
+			
+			if debug: mout.varOut('G_per_xG',self.G_per_xG)
+			if debug: mout.varOut('A_per_xA',self.A_per_xA)
+		
 			xG = self._xG_no_opponent * opp_GC_ratio
 			xA = self._xA_no_opponent * opp_GC_ratio
 			xGIPts = self.goal_multiplier * xG + 3 * xA
+			
+			if debug: mout.varOut('xGIPts',xGIPts)
+			if debug: mout.varOut('xG',xG)
+			if debug: mout.varOut('xA',xA)
 
 			### BONUS POINTS
 
-			Bs = [float(x) for x in self.history['bonus']]
-			if self._api._live_gw: Bs.pop()
+			if self._api._current_gw == 0:
+				Bs = []
+			else:
+				Bs = [float(x) for x in self.history['bonus']]
+				if self._api._live_gw: Bs.pop()
+
+			if debug: mout.varOut('Bs',Bs)
 
 			self._xBpts = weighted_average(Bs,None,self._prev_bonus,self._prev_minutes/90)
+			
+			if debug: mout.varOut('xBPts',self._xBpts)
 
 			### YELLOW CARDS
 
-			YCs = [int(x) for x in self.history['yellow_cards']]
-			if self._api._live_gw: YCs.pop()
+			if self._api._current_gw == 0:
+				YCs = []
+			else:
+				YCs = [int(x) for x in self.history['yellow_cards']]
+				if self._api._live_gw: YCs.pop()
+
 			xYCPts = - weighted_average(YCs,None,self._prev_yellow_cards,self._prev_minutes/90)
 
 			### RED CARDS
 
-			RCs = [int(x) for x in self.history['red_cards']]
-			if self._api._live_gw: RCs.pop()
+			if self._api._current_gw == 0:
+				RCs = []
+			else:
+				RCs = [int(x) for x in self.history['red_cards']]
+				if self._api._live_gw: RCs.pop()
+
 			xRCPts = -3 * weighted_average(RCs,None,self._prev_red_cards,self._prev_minutes/90)
 
 			### OWN GOALS
 
-			OGs = [int(x) for x in self.history['own_goals']]
-			if self._api._live_gw: OGs.pop()
+			if self._api._current_gw == 0:
+				OGs = []
+			else:
+				OGs = [int(x) for x in self.history['own_goals']]
+				if self._api._live_gw: OGs.pop()
+
 			xOGPts = -2 * weighted_average(OGs,None,self._prev_own_goals,self._prev_minutes/90)
 
 			### PENALTY MISS
 
-			PMs = [int(x) for x in self.history['penalties_missed']]
-			if self._api._live_gw: PMs.pop()
+			if self._api._current_gw == 0:
+				PMs = []
+			else:
+				PMs = [int(x) for x in self.history['penalties_missed']]
+				if self._api._live_gw: PMs.pop()
+
 			xPMPts = -2 * weighted_average(PMs,None,self._prev_penalties_missed,self._prev_minutes/90)
 
 			if self.position_id == 1:
 				
 				### PENALTY SAVE
 
-				PSs = [int(x) for x in self.history['penalties_saved']]
-				if self._api._live_gw: PSs.pop()
+				if self._api._current_gw == 0:
+					PSs = []
+				else:
+					PSs = [int(x) for x in self.history['penalties_saved']]
+					if self._api._live_gw: PSs.pop()
+
 				xPSPts = 5 * weighted_average(PSs,None,self._prev_penalties_saved,self._prev_minutes/90)
+				
+				if debug: mout.varOut('xPSPts',xPSPts)
 
 				### SAVES
 
-				Ss = [int(x) for x in self.history['saves']]
-				if self._api._live_gw: Ss.pop()
+				if self._api._current_gw == 0:
+					Ss = []
+				else:
+					Ss = [int(x) for x in self.history['saves']]
+					if self._api._live_gw: Ss.pop()
+
 				xSPts = 1/3 * weighted_average(Ss,None,self._prev_saves,self._prev_minutes/90)
+
+				if debug: mout.varOut('xSPts',xSPts)
 
 			else:
 
@@ -1286,47 +1417,48 @@ class Player():
 
 			expected_points = xMPts + xCSPts + xGIPts + self._xBpts + xYCPts + xRCPts + xOGPts + xPMPts + xPSPts + xSPts
 						
-			if debug: 
-				mout.varOut('opponent',str(opponent))
-				mout.varOut('opp_GC_per_game',opp_GC_per_game)
-				mout.varOut('avg_GC_per_game',avg_GC_per_game)
-				mout.varOut('opp_GC_ratio',opp_GC_ratio)
+			# if debug: 
+			# 	mout.varOut('opponent',str(opponent))
+			# 	mout.varOut('opp_GC_per_game',opp_GC_per_game)
+			# 	mout.varOut('avg_GC_per_game',avg_GC_per_game)
+			# 	mout.varOut('opp_GC_ratio',opp_GC_ratio)
 
-				mout.varOut('opp_GF_per_game',opp_GF_per_game)
-				mout.varOut('avg_GF_per_game',avg_GF_per_game)
-				mout.varOut('opp_GF_ratio',opp_GF_ratio)
+			# 	mout.varOut('opp_GF_per_game',opp_GF_per_game)
+			# 	mout.varOut('avg_GF_per_game',avg_GF_per_game)
+			# 	mout.varOut('opp_GF_ratio',opp_GF_ratio)
 				
-				mout.var('xCSs',xCSs)
-				mout.var('self._xC_no_opponent',self._xC_no_opponent)
-				mout.var('xCSPts',xCSPts)
+			# 	mout.var('xCSs',xCSs)
+			# 	mout.var('self._xC_no_opponent',self._xC_no_opponent)
+			# 	mout.var('xCSPts',xCSPts)
 				
-				mout.varOut('xGs',xGs)
-				mout.varOut('_prev_expected_goals',self._prev_expected_goals)
-				mout.varOut('_xG_no_opponent',self._xG_no_opponent)
+			# 	mout.varOut('xGs',xGs)
+			# 	mout.varOut('_prev_expected_goals',self._prev_expected_goals)
+			# 	mout.varOut('_xG_no_opponent',self._xG_no_opponent)
 
-				mout.varOut('xAs',xAs)
-				mout.varOut('_prev_expected_assists',self._prev_expected_goals)
-				mout.varOut('self._xA_no_opponent',self._xA_no_opponent)
+			# 	mout.varOut('xAs',xAs)
+			# 	mout.varOut('_prev_expected_assists',self._prev_expected_goals)
+			# 	mout.varOut('self._xA_no_opponent',self._xA_no_opponent)
 				
-				mout.varOut('Bs',Bs)
+			# 	mout.varOut('Bs',Bs)
 
-				mout.varOut('Ms',Ms)
-				mout.varOut('xM',xM)
+			# 	mout.varOut('Ms',Ms)
+			# 	mout.varOut('xM',xM)
 				
-				mout.varOut('xG_per_minute',xG_per_minute)
-				mout.varOut('xA_per_minute',xA_per_minute)
+			# 	mout.varOut('xG_per_minute',xG_per_minute)
+			# 	mout.varOut('xA_per_minute',xA_per_minute)
 				
-				mout.varOut('G_per_xG',self.G_per_xG)
-				mout.varOut('A_per_xA',self.A_per_xA)
+			# 	mout.varOut('G_per_xG',self.G_per_xG)
+			# 	mout.varOut('A_per_xA',self.A_per_xA)
 				
-				mout.varOut('xG',xG)
-				mout.varOut('xA',xA)
+			# 	mout.varOut('xG',xG)
+			# 	mout.varOut('xA',xA)
 
-				mout.varOut('xBPts',self._xBpts)
-				mout.varOut('xMPts',xMPts)
-				mout.varOut('xGIPts',xGIPts)
-				mout.varOut('xCSPts',xCSPts)
-				mout.varOut('expected_points',expected_points)
+			# 	mout.varOut('xBPts',self._xBpts)
+			# 	mout.varOut('xMPts',xMPts)
+			# 	mout.varOut('xGIPts',xGIPts)
+			# 	mout.varOut('xCSPts',xCSPts)
+
+			if debug: mout.varOut('expected_points',expected_points)
 
 			if not not_started_only:
 				self._api._exp_archive[self.id][gw] = expected_points
