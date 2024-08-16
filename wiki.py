@@ -242,7 +242,8 @@ def main():
 	maximum = len(api._managers)
 	for i,m in enumerate(api._managers.values()):
 		mout.progress(i,maximum)
-		create_managerpage(api, m, leagues)
+		if m.valid:
+			create_managerpage(api, m, leagues)
 	mout.progress(maximum,maximum)
 	mout.showDebug()
 

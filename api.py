@@ -419,11 +419,11 @@ class FPL_API():
 			if team_name is None or name is None:
 				mout.warningOut(f"Warning: Manager with id {id} was not found in dictionary and no details were passed!")
 			m = Manager(name, id, self, team_name=team_name, authenticate=authenticate)
-			if m.valid:
-				self._managers[id] = m
-		else:
-			m = self._managers[id]
-		return m
+			# if m.valid:
+			self._managers[id] = m
+		# else:
+			# m = self._managers[id]
+		return self._managers[id]
 
 	@property
 	def _element_types(self):
@@ -1133,7 +1133,12 @@ class FPL_API():
 
 		json = self.request(f"{url}leagues-classic/{code}/standings/")
 
+		# print(f"{url}leagues-classic/{code}/standings/")
+
+		# print(json.keys())
+
 		if json['standings']['has_next']:
+			print(f'{json["standings"]["page"]=}')
 			# # print(f"{url}leagues-classic/{code}/standings/?page_standings=2")
 			# r = requests.get(f"{url}leagues-classic/{code}/standings/?page_standings=2")
 			# self._request_log.append(f"{url}leagues-classic/{code}/standings/?page_standings=2")
@@ -1142,6 +1147,7 @@ class FPL_API():
 			json2 = self.request(f"{url}leagues-classic/{code}/standings/?page_standings=2")
 
 			if json2['standings']['has_next']:
+				# print(f'{json2["standings"]["page"]=}')
 				json3 = self.request(f"{url}leagues-classic/{code}/standings/?page_standings=3")
 
 		if isinstance(json,str):
@@ -1155,16 +1161,13 @@ class FPL_API():
 
 		if json2 is not None:
 			df2 = pd.DataFrame(json2['standings']['results'])
-			# print(len(df),len(df2))
 			# print(df.columns,df2.columns)
 			df = pd.concat([df,df2])
 
 		if json3 is not None:
 			df3 = pd.DataFrame(json3['standings']['results'])
-			# print(len(df),len(df2))
 			# print(df.columns,df2.columns)
 			df = pd.concat([df,df3])
-			# print(len(df))
 
 		# PRESEASON
 		if len(df) == 0:
@@ -1184,7 +1187,7 @@ class FPL_API():
 				json2 = self.request(f"{url}leagues-classic/{code}/standings/?page_new_entries=2")
 
 				if json2['new_entries']['has_next']:
-					json3 = self.request(f"{url}leagues-classic/{code}/standings/?page_new_entries=2")
+					json3 = self.request(f"{url}leagues-classic/{code}/standings/?page_new_entries=3")
 		
 			if json2 is not None:
 				df2 = pd.DataFrame(json2['new_entries']['results'])
@@ -1193,8 +1196,10 @@ class FPL_API():
 
 			if json3 is not None:
 				df3 = pd.DataFrame(json3['new_entries']['results'])
-				# print(len(df),len(df2))
-				df = pd.concat([df,df3])				
+				# print(len(df),len(df3))
+				df = pd.concat([df,df3])	
+
+		# print(df['player_last_name'].values)			
 
 		name = json['league']['name']
 		# print(name)

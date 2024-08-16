@@ -1200,7 +1200,7 @@ class Player():
 			### OPPONENT GOALS CONCEDED
 
 			if opponent._prev_obj is None:
-				if self._api._current_gw == 0:
+				if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 					from api import GC_DICT, GF_DICT
 					# mout.error(f"{opponent} has no prev_obj and the game hasn't started yet (assuming promoted)")
 					opp_GF_per_game = GF_DICT[opponent.shortname]/46
@@ -1209,7 +1209,7 @@ class Player():
 					opp_GF_per_game = opponent.goals_scored/opponent.games_played
 					opp_GC_per_game = opponent.goals_conceded/opponent.games_played
 
-			elif self._api._current_gw == 0:				
+			elif self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				opp_GF_per_game = (opponent._prev_obj.goals_scored/38)/2
 				opp_GC_per_game = (opponent._prev_obj.goals_conceded/38)/2
 
@@ -1220,7 +1220,7 @@ class Player():
 			if debug: mout.varOut('opp_GC_per_game',opp_GC_per_game)
 			if debug: mout.varOut('opp_GF_per_game',opp_GF_per_game)
 
-			if self._api._current_gw == 0:				
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				avg_GC_per_game = self._api._prev_avg_gc_per_game
 			else:
 				avg_GC_per_game = (sum([t.goals_conceded/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gc_per_game )/2
@@ -1235,7 +1235,7 @@ class Player():
 			
 			### OPPONENT GOALS THREAT
 
-			if self._api._current_gw == 0:				
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):				
 				avg_GF_per_game = self._api._prev_avg_gf_per_game
 			else:
 				avg_GF_per_game = (sum([t.goals_scored/t.games_played for t in self._api.teams])/20 + self._api._prev_avg_gf_per_game )/2
@@ -1253,7 +1253,7 @@ class Player():
 			
 			# xCSs = [int(int(x) < 1) for x in self.history['goals_conceded']]
 			# xGCs = [float(x) for x in self.history['expected_goals_conceded']]
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				xCSs = []
 			else:
 				xCSs = [int(float(x) < 0.5) for x in self.history['expected_goals_conceded']]
@@ -1279,7 +1279,7 @@ class Player():
 
 			### GOALS
 
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				xGs = []
 			else:
 				xGs = [float(x) for x in self.history['expected_goals']]
@@ -1294,7 +1294,7 @@ class Player():
 			### ASSISTS
 
 
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				xAs = []
 			else:
 				xAs = [float(x) for x in self.history['expected_assists']]
@@ -1330,7 +1330,7 @@ class Player():
 
 			### BONUS POINTS
 
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				Bs = []
 			else:
 				Bs = [float(x) for x in self.history['bonus']]
@@ -1344,7 +1344,7 @@ class Player():
 
 			### YELLOW CARDS
 
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				YCs = []
 			else:
 				YCs = [int(x) for x in self.history['yellow_cards']]
@@ -1354,7 +1354,7 @@ class Player():
 
 			### RED CARDS
 
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				RCs = []
 			else:
 				RCs = [int(x) for x in self.history['red_cards']]
@@ -1364,7 +1364,7 @@ class Player():
 
 			### OWN GOALS
 
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				OGs = []
 			else:
 				OGs = [int(x) for x in self.history['own_goals']]
@@ -1374,7 +1374,7 @@ class Player():
 
 			### PENALTY MISS
 
-			if self._api._current_gw == 0:
+			if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 				PMs = []
 			else:
 				PMs = [int(x) for x in self.history['penalties_missed']]
@@ -1386,7 +1386,7 @@ class Player():
 				
 				### PENALTY SAVE
 
-				if self._api._current_gw == 0:
+				if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 					PSs = []
 				else:
 					PSs = [int(x) for x in self.history['penalties_saved']]
@@ -1398,7 +1398,7 @@ class Player():
 
 				### SAVES
 
-				if self._api._current_gw == 0:
+				if self._api._current_gw == 0 or (self._api._current_gw == 1 and self._api._live_gw):
 					Ss = []
 				else:
 					Ss = [int(x) for x in self.history['saves']]

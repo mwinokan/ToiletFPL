@@ -20,6 +20,7 @@ class League():
 		self._all_players = None
 
 	def get_stats(self):
+		# mout.debug(f'{self.name}.get_stats()')
 		name, manager_df = self._api.get_league_stats(self._code)
 
 		if self._api._current_gw < 2:
@@ -28,6 +29,9 @@ class League():
 		else:
 			# print(manager_df)
 			manager_df = manager_df.drop(columns=['id', 'event_total', 'rank', 'last_rank', 'rank_sort', 'total'])
+
+		# print(manager_df)
+		# print(len(manager_df))
 
 		if self._extra_managers is not None:
 			data = []
@@ -61,6 +65,7 @@ class League():
 			for c,n,t in zip(manager_df['entry'],manager_df['player_name'],manager_df['entry_name']):
 				mout.progress(count,maximum)
 
+
 				m = self._api.get_manager(f"{n}", c, t, authenticate=False)
 				# m = Manager(f"{n}",c,self._api,team_name=t)
 				if m.valid:
@@ -68,7 +73,9 @@ class League():
 				else:
 					mout.warningOut(f"Skipping invalid manager '{m.name}' with ID: {m.id}")
 				
+				# print(f'adding {m} [1]')
 				count += 1
+
 		else:
 
 			for c,f,l,t in zip(manager_df['entry'],manager_df['player_first_name'],manager_df['player_last_name'],manager_df['entry_name']):
@@ -81,6 +88,7 @@ class League():
 				else:
 					mout.warningOut(f"Skipping invalid manager '{m.name}' with ID: {m.id}")
 				
+				# print(f'adding {m} [2]')
 				count += 1
 		mout.progress(maximum,maximum)
 		mout.showDebug()
