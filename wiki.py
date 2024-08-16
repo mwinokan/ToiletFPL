@@ -4076,6 +4076,7 @@ def league_table_html(league,gw,awardkey=None, seasontable=False):
 	show_transfers = gw > 1
 	show_gw_score = True
 	show_captain = True
+	show_transfer_summary = False
 
 	if seasontable:
 		show_gw_rank = False
