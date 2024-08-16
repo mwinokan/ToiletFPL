@@ -418,8 +418,12 @@ class FPL_API():
 		if id not in self._managers.keys():
 			if team_name is None or name is None:
 				mout.warningOut(f"Warning: Manager with id {id} was not found in dictionary and no details were passed!")
-			self._managers[id] = Manager(name, id, self, team_name=team_name, authenticate=authenticate)
-		return self._managers[id]
+			m = Manager(name, id, self, team_name=team_name, authenticate=authenticate)
+			if m.valid:
+				self._managers[id] = m
+		else:
+			m = self._managers[id]
+		return m
 
 	@property
 	def _element_types(self):
@@ -924,7 +928,12 @@ class FPL_API():
 			# self._request_log.append(this_url)
 			# json = r.json()
 			
-			json = self.request(this_url)
+			try:
+				json = self.request(this_url)
+			except Request404 as e:
+				print(e)
+				mout.error(f'Could not get GW{gw} picks for {id=}')
+				raise
 
 			if 'picks' not in json.keys():
 				print(this_url)
