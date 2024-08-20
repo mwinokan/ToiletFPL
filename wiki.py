@@ -62,6 +62,7 @@ award_flavourtext = dict(
 	scientist="🧑‍🔬 Scientist",
 	smooth_brain="🧠 Smooth Brain",
 	chair="🪑 Chair",
+	minutes="👹 Minutes Monster",
 	asbo="🥊 ASBO",
 	nerd="🤓 Nerd",
 	hot_stuff="🥵 Hot Stuff",
@@ -97,6 +98,7 @@ award_unittext = dict(
 	scientist="points",
 	smooth_brain="points on the bench",
 	chair="'",
+	minutes="'",
 	asbo="cards",
 	nerd="%",
 	innovator="%",
@@ -115,6 +117,7 @@ award_colour = dict(king="amber",
 	boner="grey",
 	smooth_brain="pale-red",
 	chair="light-blue",
+	minutes="deep-orange",
 	asbo="yellow",
 	fortune="purple",
 	clown="pink",
@@ -3619,7 +3622,7 @@ def create_leaguepage(league,leagues,i):
 			html_buffer += floating_subtitle(f'🏆 {gw_str} Awards',pad=0)
 
 			### KING
-			sorted_managers = sorted(league.active_managers, key=lambda x: (x.livescore, x.gw_rank_gain), reverse=True)
+			sorted_managers = sorted(league.active_managers, key=lambda x: (x.livescore, x.gw_rank_gain, x.gw_performed_xpts), reverse=True)
 			m = sorted_managers[0]
 			score = m.livescore
 			html_buffer += award_panel('👑','King','Best GW',f'{score} pts',m,colour=award_colour['king'],name_class="h2")
@@ -3665,20 +3668,20 @@ def create_leaguepage(league,leagues,i):
 
 			### HOT STUFF
 
-			sorted_managers = sorted([m for m in league.active_managers if m.gw_performed_xpts > 0], key=lambda x: ((x.livescore - x.gw_performed_xpts)/x.gw_performed_xpts, x.gw_performed_xpts), reverse=True)
-			if len(sorted_managers) > 0:
-				m = sorted_managers[0]
-				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
+			# sorted_managers = sorted([m for m in league.active_managers if m.gw_performed_xpts > 0], key=lambda x: ((x.livescore - x.gw_performed_xpts)/x.gw_performed_xpts, x.gw_performed_xpts), reverse=True)
+			# if len(sorted_managers) > 0:
+			# 	m = sorted_managers[0]
+			# 	score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
 
-				html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1%}',m,colour=award_colour['hot_stuff'],name_class="h2")
-				json[str(league.id)][gw]['awards']['hot_stuff'] = [m.id,score]
+			# 	html_buffer += award_panel('🥵','Hot Stuff','xGI Overperformer',f'{score:+.1%}',m,colour=award_colour['hot_stuff'],name_class="h2")
+			# 	json[str(league.id)][gw]['awards']['hot_stuff'] = [m.id,score]
 
-				### SOGGY BISCUIT
+			# 	### SOGGY BISCUIT
 
-				m = sorted_managers[-1]
-				score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
-				html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
-				json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
+			# 	m = sorted_managers[-1]
+			# 	score = (m.livescore - m.gw_performed_xpts)/m.gw_performed_xpts
+			# 	html_buffer += award_panel('🍪','Soggy Biscuit','xGI Underperformer',f'{score:+.1%}',m,colour=award_colour['soggy_biscuit'],name_class="h3")
+			# 	json[str(league.id)][gw]['awards']['soggy_biscuit'] = [m.id,score]
 
 			if gw > 1:
 
@@ -3712,9 +3715,16 @@ def create_leaguepage(league,leagues,i):
 
 			### CHAIR
 
-			m = sorted(league.active_managers, key=lambda x: x.minutes, reverse=False)[0]
-			html_buffer += award_panel('🪑',f'Chair','Least Minutes Played',f"{m.minutes}'",m,colour=award_colour['chair'],name_class="h2")
-			json[str(league.id)][gw]['awards']['chair'] = [m.id,m.minutes]
+			sorted_managers = sorted(league.active_managers, key=lambda x: x.minutes, reverse=False)
+			# m = sorted_managers[0]
+			# html_buffer += award_panel('🪑',f'Chair','Least Minutes Played',f"{m.minutes}'",m,colour=award_colour['chair'],name_class="h2")
+			# json[str(league.id)][gw]['awards']['chair'] = [m.id,m.minutes]
+
+			### CHAIR
+
+			m = sorted_managers[-1]
+			html_buffer += award_panel('👹',f'Minutes Monster','Most Minutes Played',f"{m.minutes}'",m,colour=award_colour['minutes'],name_class="h3")
+			json[str(league.id)][gw]['awards']['minutes'] = [m.id,m.minutes]
 
 			### ASBO
 
@@ -4500,14 +4510,15 @@ def position_template(league,players,pos_str,gw):
 
 def effective_points_gained(player,n):
 	# return player.multiplier*player.get_event_score(not_playing_is_none=False)/player.league_count
-	return player.get_event_score(not_playing_is_none=False) * (player.multiplier - player.league_count/n)
+	# return player.get_event_score(not_playing_is_none=False) * (player.multiplier - player.league_count/n)
+	return player.get_event_score(not_playing_is_none=False) * (player.multiplier - player.league_multiplier_count/n)
 
 def league_differentials(league,gw):
 	global json
 
 	html_buffer = ""
 
-	players = league.get_starting_players(unique=False)
+	players = league.get_starting_players(unique=False, active_only=False)
 
 	n = league.num_managers
 
@@ -4516,47 +4527,62 @@ def league_differentials(league,gw):
 	html_buffer += f'<table class="w3-table responsive-text">\n'
 
 	archive = []
+	ids_so_far = []
 
-	for p in sorted_players[:5]:
-		m = p._parent_manager
-		score, summary = p.get_event_score(summary=True,not_playing_is_none=False,team_line=False)
-		summary = summary.replace("\n","<br>")
+	for p in sorted_players:
 
-		html_buffer += f'<tr>\n'
-		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
-		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
-		html_buffer += f'</td>\n'
-		html_buffer += f'<td style="vertical-align:middle;">\n'
-		html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
+		if len(ids_so_far) > 4:
+			break
 
-		if p.is_yellow_flagged:
-			html_buffer += f'⚠️ '
-		elif p.is_yellow_flagged:
-			html_buffer += f'⛔️ '
-		if p.multiplier == 3:
-			html_buffer += f" (TC) "
-		elif p.multiplier == 2:
-			html_buffer += f" (C) "
+		if p.id not in ids_so_far:
 
-		html_buffer += f'</td>\n'
+			pts_gain = effective_points_gained(p,n)
 
-		html_buffer += f'<td style="vertical-align:middle;">\n'
-		style_str = get_style_from_event_score(score).rstrip('"')+';text-align:right;vertical-align:middle;"'
-		html_buffer += f'<span class="w3-tag" style={style_str}>{p.multiplier*score}pts</span>\n'
-		html_buffer += f'</td>\n'
+			# print(p.name, effective_points_gained(p,n), p.league_count, p.league_multiplier_count)
 
-		html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
-		html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
-		html_buffer += f'</td>\n'
-		html_buffer += f'<td style="vertical-align:middle;">\n'
-		html_buffer += f'<a href="{m.gui_url}">{m.team_name}</a>\n'
-		html_buffer += f'<br><a href="{m.gui_url}">{m.name}</a>\n'
-		html_buffer += f'</td>\n'
-		html_buffer += f'<td style="vertical-align:middle;">\n'
-		html_buffer += f"{summary}\n"
-		html_buffer += f'</td>\n'
-		html_buffer += f'</tr>\n'
-		archive.append([p.id,m.id,p.is_captain,p.multiplier*score])
+			ids_so_far.append(p.id)
+		
+			m = p._parent_manager
+			score, summary = p.get_event_score(summary=True,not_playing_is_none=False,team_line=False)
+			summary = summary.replace("\n","<br>")
+
+			html_buffer += f'<tr>\n'
+			html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
+			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+			html_buffer += f'</td>\n'
+			html_buffer += f'<td style="vertical-align:middle;">\n'
+			html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
+
+			if p.is_yellow_flagged:
+				html_buffer += f'⚠️ '
+			elif p.is_yellow_flagged:
+				html_buffer += f'⛔️ '
+			if p.multiplier == 3:
+				html_buffer += f" (TC) "
+			elif p.multiplier == 2:
+				html_buffer += f" (C) "
+
+			html_buffer += f'</td>\n'
+
+			html_buffer += f'<td style="vertical-align:middle;">\n'
+			style_str = get_style_from_event_score(pts_gain).rstrip('"')+';text-align:right;vertical-align:middle;"'
+			html_buffer += f'<span class="w3-tag" style={style_str}>{pts_gain:+.1f}pts</span>\n'
+			html_buffer += f'</td>\n'
+
+			html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
+			html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+			html_buffer += f'</td>\n'
+			html_buffer += f'<td style="vertical-align:middle;">\n'
+			html_buffer += f'<a href="{m.gui_url}">{m.team_name}</a>\n'
+			html_buffer += f'<br><a href="{m.gui_url}">{m.name}</a>\n'
+			html_buffer += f'</td>\n'
+			html_buffer += f'<td style="vertical-align:middle;">\n'
+			style_str = get_style_from_event_score(score).rstrip('"')+';text-align:right"'
+			html_buffer += f'<span class="w3-tag" style={style_str}>{p.multiplier*score}pts</span>\n'
+			html_buffer += f": {summary}"
+			html_buffer += f'</td>\n'
+			html_buffer += f'</tr>\n'
+			archive.append([p.id,m.id,p.is_captain,p.multiplier*score,pts_gain])
 	
 	html_buffer += f'</table>\n'
 

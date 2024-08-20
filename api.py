@@ -1138,7 +1138,7 @@ class FPL_API():
 		# print(json.keys())
 
 		if json['standings']['has_next']:
-			print(f'{json["standings"]["page"]=}')
+			# print(f'{json["standings"]["page"]=}')
 			# # print(f"{url}leagues-classic/{code}/standings/?page_standings=2")
 			# r = requests.get(f"{url}leagues-classic/{code}/standings/?page_standings=2")
 			# self._request_log.append(f"{url}leagues-classic/{code}/standings/?page_standings=2")

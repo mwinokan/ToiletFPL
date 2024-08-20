@@ -176,13 +176,15 @@ class League():
 				lst += m.squad.starting_players
 
 		new_set = []
-		names = []
+		ids = []
 		for p in lst:
-			if p.name not in names:
+			if p.id not in ids:
 				new_set.append(p)
-				names.append(p.name)
+				ids.append(p.id)
+				p.league_multiplier_count = p.multiplier
 			else:
 				p.league_count += 1
+				p.league_multiplier_count += p.multiplier
 		if unique:
 			return new_set
 		else:

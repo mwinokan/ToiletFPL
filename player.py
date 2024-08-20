@@ -25,6 +25,7 @@ To-Do's
 class Player():
 
 	_league_count = {}
+	_league_multiplier_count = {}
 
 	def __init__(self, name, api, index=None, shortname=None):
 			
@@ -73,6 +74,7 @@ class Player():
 
 		self._parent_manager = None
 		self._league_count[self._id] = 1
+		self._league_multiplier_count[self._id] = None
 		self._is_captain = False
 		self._multiplier = 1
 
@@ -2168,6 +2170,14 @@ class Player():
 	@league_count.setter
 	def league_count(self,arg):
 		self._league_count[self._id] = arg
+
+	@property
+	def league_multiplier_count(self):
+		return self._league_multiplier_count[self._id]
+
+	@league_multiplier_count.setter
+	def league_multiplier_count(self,arg):
+		self._league_multiplier_count[self._id] = arg
 	
 	@property
 	def kit_path(self):
