@@ -3715,16 +3715,16 @@ def create_leaguepage(league,leagues,i):
 
 			### CHAIR
 
-			sorted_managers = sorted(league.active_managers, key=lambda x: x.minutes, reverse=False)
+			sorted_managers = sorted(league.active_managers, key=lambda x: x.minutes_per_player, reverse=False)
 			# m = sorted_managers[0]
-			# html_buffer += award_panel('🪑',f'Chair','Least Minutes Played',f"{m.minutes}'",m,colour=award_colour['chair'],name_class="h2")
-			# json[str(league.id)][gw]['awards']['chair'] = [m.id,m.minutes]
+			# html_buffer += award_panel('🪑',f'Chair','Least Minutes Played',f"{m.minutes_per_player}'",m,colour=award_colour['chair'],name_class="h2")
+			# json[str(league.id)][gw]['awards']['chair'] = [m.id,m.minutes_per_player]
 
 			### CHAIR
 
 			m = sorted_managers[-1]
-			html_buffer += award_panel('👹',f'Minutes Monster','Most Minutes Played',f"{m.minutes}'",m,colour=award_colour['minutes'],name_class="h3")
-			json[str(league.id)][gw]['awards']['minutes'] = [m.id,m.minutes]
+			html_buffer += award_panel('👹',f'Minutes Monster','Best Avg. Minutes',f"{m.minutes_per_player:.1f}'",m,colour=award_colour['minutes'],name_class="h3")
+			json[str(league.id)][gw]['awards']['minutes'] = [m.id,m.minutes_per_player]
 
 			### ASBO
 

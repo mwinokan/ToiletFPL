@@ -732,6 +732,11 @@ class Manager():
 		return sum([p.event_minutes*p.multiplier for p in self.players])
 
 	@property
+	def minutes_per_player(self):
+		ms = [p.event_minutes for p in self.players if p.multiplier]
+		return sum(ms)/len(ms)
+
+	@property
 	def bench_points(self):
 		return sum([p.get_event_score(not_playing_is_none=False) for p in self.players if p.multiplier == 0])
 
