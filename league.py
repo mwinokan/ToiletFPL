@@ -18,6 +18,8 @@ class League():
 		self._graph_paths = []
 		self._active_managers = None
 		self._all_players = None
+		self._last_gw_position_dict = None
+		self._position_change_dict = None
 
 	def get_stats(self):
 		# mout.debug(f'{self.name}.get_stats()')
@@ -190,6 +192,36 @@ class League():
 		else:
 			return lst
 	
+	@property
+	def last_gw_position_dict(self) -> dict[int,int]:
+
+		"""Returns a dictionary with:
+
+		- key: manager ID
+		- value: previous GW position
+
+		"""
+
+		if not self._last_gw_position_dict:
+			pairs = [(m.id, sum(m._event_points[:-1])) for m in self.managers]
+			self._last_gw_position_dict = { id:i+1 for i,(id,pts) in enumerate(sorted(pairs, key=lambda x: x[1], reverse=True)) }
+		return self._last_gw_position_dict
+
+	@property
+	def position_change_dict(self) -> dict[int,int]:
+		"""Returns a dictionary with:
+
+		- key: manager ID
+		- value: change in position since last week
+
+		"""
+
+		if not self._position_change_dict:
+			pairs = [(m.id, m.total_livescore) for m in self.managers]
+			position_dict = { id:i+1 for i,(id,pts) in enumerate(sorted(pairs, key=lambda x: x[1], reverse=True)) }
+			self._position_change_dict = { id:(self.last_gw_position_dict[id] - value) for id,value in position_dict.items() }
+		return self._position_change_dict
+
 	@property
 	def id(self):
 		return self._code

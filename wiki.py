@@ -317,7 +317,9 @@ def run_test():
 
 	# create_comparison_page(api,[])
 
-	# l = League(146330,api)
+	l = League(352961,api)
+
+	print(l.last_gw_position_dict)
 
 	# create_leaguepage(l,[],0)
 
@@ -325,15 +327,15 @@ def run_test():
 
 	# create_playerpage(api,p,[])
 
-	leagues = []
-	for icon,code,colour,shortname in zip(league_icons,league_codes,league_colours,league_shortnames):
-		try:
-			leagues.append(League(code,api))
-			leagues[-1]._icon = icon
-			leagues[-1]._shortname = shortname
-			leagues[-1]._colour_str = colour
-		except fpl_api.Request404:
-			mout.error(f'Could not init League({code},{shortname})')
+	# leagues = []
+	# for icon,code,colour,shortname in zip(league_icons,league_codes,league_colours,league_shortnames):
+	# 	try:
+	# 		leagues.append(League(code,api))
+	# 		leagues[-1]._icon = icon
+	# 		leagues[-1]._shortname = shortname
+	# 		leagues[-1]._colour_str = colour
+	# 	except fpl_api.Request404:
+	# 		mout.error(f'Could not init League({code},{shortname})')
 
 	# # p.expected_points(gw=2,use_official=True,debug=True)
 	# # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
@@ -3685,20 +3687,24 @@ def create_leaguepage(league,leagues,i):
 
 			if gw > 1:
 
-				sorted_managers = sorted(league.active_managers, key=lambda x: x.gw_rank_gain, reverse=True)
+				# sorted_managers = sorted(league.active_managers, key=lambda x: x.gw_rank_gain, reverse=True)
+
+				pairs = sorted(league.position_change_dict.items(), key=lambda x: (x[1], -api.get_manager(id=x[0]).gw_rank_gain), reverse=False)
 
 				### rocketeer
 
-				m = sorted_managers[0]
+				m = api.get_manager(id=pairs[-1][0])
+				delta = pairs[-1][-1]
 				score = m.gw_rank_gain
-				html_buffer += award_panel('🚀','Rocketeer','Best Rank Gain',f'{score:+.1f}%',m,colour=award_colour['rocket'],name_class="h2")
+				html_buffer += award_panel('🚀','Rocketeer','Best Rank Gain',f'{delta:+} places',m,colour=award_colour['rocket'],name_class="h2")
 				json[str(league.id)][gw]['awards']['rocket'] = [m.id,score]
 
 				### down the toilet
 
-				m = sorted_managers[-1]
+				m = api.get_manager(id=pairs[0][0])
+				delta = pairs[0][-1]
 				score = m.gw_rank_gain
-				html_buffer += award_panel('🚽','#DownTheToilet','Worst Rank Loss',f'{score:.1f}%',m,colour=award_colour['flushed'],name_class="h3")
+				html_buffer += award_panel('🚽','#DownTheToilet','Worst Rank Loss',f'{delta:+} places',m,colour=award_colour['flushed'],name_class="h3")
 				json[str(league.id)][gw]['awards']['flushed'] = [m.id,score]
 
 			### BONER
@@ -4081,13 +4087,15 @@ def league_table_html(league,gw,awardkey=None, seasontable=False):
 	show_fix_played = api._live_gw
 	show_avg_select = gw == 1
 	show_team_value = False
-	show_pos_delta = False
+	show_pos_delta = True
 	show_tot_score = gw > 1
 	show_gw_rank = gw > 1
 	show_transfers = gw > 1
 	show_gw_score = True
 	show_captain = True
 	show_transfer_summary = False
+
+	last_gw_position_dict = league.last_gw_position_dict
 
 	if seasontable:
 		show_gw_rank = False
@@ -4159,20 +4167,21 @@ def league_table_html(league,gw,awardkey=None, seasontable=False):
 		else:
 			pos_str = f'{i+1}'
 
-		if show_pos_delta: 
-			if league.name in m._league_positions.keys() and str(int(gw-1)) in m._league_positions[league.name].keys():
-				delta = m._league_positions[league.name][str(int(gw-1))] - i
-				if delta != 0:
-					if delta < 0:
-						color='red'
-					else:
-						color='green'
-					html_buffer += f'<td class="w3-center"><span class="w3-tag w3-{color}">'
-					html_buffer += f'{pos_str}</span></td>\n'
-				else:
-					html_buffer += f'<td class="w3-center">{pos_str}</td>\n'
+		
+		if not show_pos_delta: 
+			delta = 0
+		else:
+			now_gw_position = i+1
+			last_gw_position = last_gw_position_dict[m.id]
+			delta = last_gw_position - now_gw_position
+
+		if delta != 0:
+			if delta < 0:
+				color='red'
 			else:
-				html_buffer += f'<td class="w3-center">{pos_str}</td>\n'
+				color='green'
+			html_buffer += f'<td class="w3-center">{pos_str} <span class="w3-text-{color}">'
+			html_buffer += f'({delta:+})</span></td>\n'
 		else:
 			html_buffer += f'<td class="w3-center">{pos_str}</td>\n'
 
