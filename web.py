@@ -49,7 +49,7 @@ def fix_table_classes(html):
 	return html
 
 # @mout.debug_time
-def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False,plotly=False, text_colour='black', timestamp=False):
+def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,html=None,showtitle=True,bar_html=None,extra_style=None,colour='white',nonw3_colour=False,plotly=False, text_colour='black', timestamp=False, live=None):
 	mout.debugOut(f"html_page({target})")
 
 	if mdfile is None:
@@ -139,7 +139,11 @@ def html_page(target,mdfile=None,title="FPL_GUI",sidebar_content=None,gw=None,ht
 	if timestamp:
 		from datetime import datetime
 		timestamp = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-		fout_buffer.append(f'<p>Accurate as of {timestamp}, (GW{gw})</p>\n')
+		if live:
+			live = ' live'
+		else:
+			live = ''
+		fout_buffer.append(f'<p>Accurate as of {timestamp}, (GW{gw}{live})</p>\n')
 	fout_buffer.append('<p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>\n')
 	# fout_buffer.append('</footer>\n')
 	fout_buffer.append('</div>\n')
