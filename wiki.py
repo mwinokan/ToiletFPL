@@ -1336,6 +1336,7 @@ def create_assetpage(leagues):
 		from gwexp import create_gwexp_figure
 		from bonus import create_bonus_figure
 		from xgi import create_xgi_figure
+		from vapm import create_vapm_figure
 
 		html_buffer = ""
 
@@ -1368,6 +1369,16 @@ def create_assetpage(leagues):
 			html_buffer += "<p>Next gameweek expected points (official FPL source) versus player form.</p>"
 			html_buffer += '</div>\n'
 			html_buffer += create_gwexp_figure(api,players)
+			html_buffer += '</div>\n'
+			html_buffer += '</div>\n'
+
+			html_buffer += floating_subtitle(f'Value added per million (form)')
+			html_buffer += '<div class="w3-col s12 m12 l12">\n'
+			html_buffer += f'<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">\n'
+			html_buffer += '<div class="w3-padding">\n'
+			html_buffer += "<p>Form versus spend above position minimum.</p>"
+			html_buffer += '</div>\n'
+			html_buffer += create_vapm_figure(api,players)
 			html_buffer += '</div>\n'
 			html_buffer += '</div>\n'
 				
