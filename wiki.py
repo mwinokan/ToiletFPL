@@ -3632,7 +3632,10 @@ def create_leaguepage(league,leagues,i):
 				gw_str = api._special_gws[gw]
 			gw_str = f'{gw_str}{gw}'
 
-			html_buffer += floating_subtitle(f'🏆 {gw_str} Awards',pad=0)
+			if api._live_gw:
+				html_buffer += floating_subtitle(f'🏆 {gw_str} Awards (Live)',pad=0)
+			else:
+				html_buffer += floating_subtitle(f'🏆 {gw_str} Awards',pad=0)
 
 			### KING
 			sorted_managers = sorted(league.active_managers, key=lambda x: (x.livescore, x.gw_rank_gain, x.gw_performed_xpts), reverse=True)
