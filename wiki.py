@@ -2178,8 +2178,6 @@ def create_chip_table(api,man):
 
 	chips = sorted(chips,key=lambda x: x[1])
 
-	logger.debug(f"create_chip_table({man})")
-
 	if len(chips) > 0:
 
 		html_buffer += '<div class="w3-responsive">\n'
