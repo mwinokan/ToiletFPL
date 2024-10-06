@@ -208,6 +208,8 @@ def main():
 		except fpl_api.Request404:
 			mout.error(f'Could not init League({code},{shortname})')
 
+	leagues[1]._skip_awards.append(3900121)
+
 	if api._current_gw < 38:
 		create_comparison_page(api,leagues)
 
@@ -2176,6 +2178,8 @@ def create_chip_table(api,man):
 
 	chips = sorted(chips,key=lambda x: x[1])
 
+	logger.debug(f"create_chip_table({man})")
+
 	if len(chips) > 0:
 
 		html_buffer += '<div class="w3-responsive">\n'
@@ -2242,11 +2246,16 @@ def create_chip_table(api,man):
 						detail = f"-"
 						break
 
-					pts_delta = squad.captain.get_event_score(gw=chip[1],not_playing_is_none=False)
+					# mout.out(f"{man} TC{chip[1]}")
+
+					# pts_delta = squad.captain.get_event_score(gw=chip[1],not_playing_is_none=False)
+
+					pts_delta = man._tc_ptsgain
+
 					if pts_delta > 0:
-						detail = f"+{pts_delta} points gained"
+						detail = f"+{pts_delta} points gained "
 					else:
-						detail = f"{pts_delta} points lost"
+						detail = f"{pts_delta} points lost "
 
 					detail += f'with {man._tc_name}'
 
@@ -3704,6 +3713,8 @@ def create_leaguepage(league,leagues,i):
 				# sorted_managers = sorted(league.active_managers, key=lambda x: x.gw_rank_gain, reverse=True)
 
 				pairs = sorted(league.position_change_dict.items(), key=lambda x: (x[1], -api.get_manager(id=x[0]).gw_rank_gain), reverse=False)
+
+				pairs = [(m,delta) for m,delta in pairs if m not in league._skip_awards]
 
 				### rocketeer
 

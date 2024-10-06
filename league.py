@@ -20,6 +20,7 @@ class League():
 		self._all_players = None
 		self._last_gw_position_dict = None
 		self._position_change_dict = None
+		self._skip_awards = []
 
 	def get_stats(self):
 		# mout.debug(f'{self.name}.get_stats()')
@@ -110,7 +111,7 @@ class League():
 	@property
 	def active_managers(self):
 		if self._active_managers is None:
-			self._active_managers = [m for m in self.managers if not m.is_dead]
+			self._active_managers = [m for m in self.managers if not m.is_dead and not m.id in self._skip_awards]
 		return self._active_managers
 	
 	@property

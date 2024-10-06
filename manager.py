@@ -277,6 +277,10 @@ class Manager():
 
 			if chip['name'] == '3xc':
 				self._tc_week = chip['event']
+				# self._tc_name = self.get_current_squad(gw = self._tc_week).captain
+				# self._squad = None
+				self._tc_ptsgain
+
 			elif chip['name'] == 'bboost':
 				self._bb_week = chip['event']
 				# rel_gw = self.active_gws.index(self._bb_week)
@@ -345,6 +349,7 @@ class Manager():
 			self.get_current_squad(gw=self._tc_week,force=True)
 			self.__tc_ptsgain = self._squad.captain.get_event_score(gw=self._tc_week)
 			self._tc_name = self._squad.captain.name
+			# mout.out(f"{self} {self._squad.captain} {self._tc_week}")
 			self._squad = None
 		return self.__tc_ptsgain
 
