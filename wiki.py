@@ -2250,10 +2250,13 @@ def create_chip_table(api,man):
 
 					pts_delta = man._tc_ptsgain
 
-					if pts_delta > 0:
-						detail = f"+{pts_delta} points gained "
-					else:
-						detail = f"{pts_delta} points lost "
+					try:
+						if pts_delta > 0:
+							detail = f"+{pts_delta} points gained "
+						else:
+							detail = f"{pts_delta} points lost "
+					except TypeError:
+						detail = ""
 
 					detail += f'with {man._tc_name}'
 
