@@ -3624,11 +3624,15 @@ def create_leaguepage(league,leagues,i):
 	html_buffer = ""
 
 	gw = api.current_gw
+	
+	create_key(json,str(league.id))
+	create_key(json[str(league.id)], gw)
+
+	mout.debugOut(f"create_leaguepage({league})::differential_buffer")
+	differential_buffer = league_differentials(league, gw)
 
 	mout.debugOut(f"create_leaguepage({league})::Awards")
 
-	create_key(json,str(league.id))
-	create_key(json[str(league.id)], gw)
 	create_key(json[str(league.id)][gw], 'awards')
 
 	awards = gw > 0 and (not api._live_gw or any([f['started'] for f in api.get_gw_fixtures(gw)]))
@@ -3675,22 +3679,25 @@ def create_leaguepage(league,leagues,i):
 
 			### SCIENTIST
 
-			players = league.get_starting_players(unique=False)
+			p_id, m_id, p_is_captain, score, pts_gain = json[str(league.id)][gw]['differentials'][0]
 
-			n = league.num_managers
+			# print(p_id, m_id, p_is_captain, score, pts_gain)
 
-			p = sorted(players, key=lambda p: (effective_points_gained(p,n), -p._parent_manager.avg_selection), reverse=True)[0]
+			m = api.get_manager(id=m_id)
 
-			m = p._parent_manager
+			squad = m.get_current_squad(gw=gw)
+
+			p = [p for p in squad.players if p.id == p_id][0]
+
 			p_str = p.name
 			if p.multiplier == 3:
 				p_str += " (TC)"
 			elif p.multiplier == 2:
 				p_str += " (C)"
-			# elif p.is_vice_captain:
-				# p_str += " (VC)"
+
 			html_buffer += award_panel('🧑‍🔬','Scientist','Best Differential',p_str,m,colour=award_colour['scientist'],value_class='h3',name_class="h2")
-			json[str(league.id)][gw]['awards']['scientist'] = [m.id,p.id,p.multiplier,int(p.multiplier*p.get_event_score(not_playing_is_none=False))]
+
+			json[str(league.id)][gw]['awards']['scientist'] = [m_id,p_id,p.multiplier,score]
 
 			### HOT STUFF
 
@@ -3805,7 +3812,7 @@ def create_leaguepage(league,leagues,i):
 		html_buffer += floating_subtitle('Killer Differentials')
 		html_buffer += '<div class="w3-col s12 m12 l12">\n'
 		html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
-		html_buffer += league_differentials(league, gw)
+		html_buffer += differential_buffer
 		html_buffer += '</div>\n'
 		html_buffer += '</div>\n'
 
@@ -4573,7 +4580,7 @@ def league_differentials(league,gw):
 
 			pts_gain = effective_points_gained(p,n)
 
-			# print(p.name, effective_points_gained(p,n), p.league_count, p.league_multiplier_count)
+			# print(p.name, pts_gain, p.league_count, p.league_multiplier_count, p._parent_manager)
 
 			ids_so_far.append(p.id)
 		
@@ -4622,6 +4629,8 @@ def league_differentials(league,gw):
 	html_buffer += f'</table>\n'
 
 	json[str(league.id)][gw]['differentials'] = archive
+
+	# print(archive)
 
 	return html_buffer
 
