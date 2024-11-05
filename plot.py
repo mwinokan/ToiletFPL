@@ -1,237 +1,312 @@
-
 import plotly.graph_objects as go
 
-def event_points(managers,api,show=True,relative=False):
 
-	traces = []
-	
-	avgs = api.get_event_averages()
-	x = [i+1 for i in range(len(avgs))]
+def event_points(managers, api, show=True, relative=False):
 
-	if not relative:
-		traces.append(go.Scatter(x=x,y=avgs,name="Average",mode="lines"))
+    traces = []
 
-	for manager in managers:
+    avgs = api.get_event_averages()
+    x = [i + 1 for i in range(len(avgs))]
 
-		text = manager.chip_text_list()
+    if not relative:
+        traces.append(go.Scatter(x=x, y=avgs, name="Average", mode="lines"))
 
-		if not relative:
-			y = manager._event_points
-		else:
-			y = []
-			for avg,pts in zip(avgs,manager._event_points):
-				y.append(pts-avg)
+    for manager in managers:
 
-		traces.append(go.Scatter(x=x,y=y,text=text,textposition="bottom center",
-									name=manager.name,mode="lines+markers+text"))
+        text = manager.chip_text_list()
 
-	# api.get_event_averages()
+        if not relative:
+            y = manager._event_points
+        else:
+            y = []
+            for avg, pts in zip(avgs, manager._event_points):
+                y.append(pts - avg)
 
-	fig = go.Figure(data=traces)
+        traces.append(
+            go.Scatter(
+                x=x,
+                y=y,
+                text=text,
+                textposition="bottom center",
+                name=manager.name,
+                mode="lines+markers+text",
+            )
+        )
 
-	fig.update_xaxes(title=dict(text="Gameweek"))
-	if not relative:
-		# fig.update_yaxes(title=dict(text="Event Points"),range=[0,100])
-		fig.update_yaxes(title=dict(text="Event Points"))
-	else:
-		fig.update_yaxes(title=dict(text="Event Points (Relative)"))
+    # api.get_event_averages()
 
-	if not relative:
-		write_image(fig,"event_points.png")
-	else:
-		write_image(fig,"event_points_relative.png")
+    fig = go.Figure(data=traces)
 
-	if show:
-		fig.show()
+    fig.update_xaxes(title=dict(text="Gameweek"))
+    if not relative:
+        # fig.update_yaxes(title=dict(text="Event Points"),range=[0,100])
+        fig.update_yaxes(title=dict(text="Event Points"))
+    else:
+        fig.update_yaxes(title=dict(text="Event Points (Relative)"))
 
-def total_points(managers,api,show=True,relative=False):
+    if not relative:
+        write_image(fig, "event_points.png")
+    else:
+        write_image(fig, "event_points_relative.png")
 
-	traces = []
+    if show:
+        fig.show()
 
-	avgs = api.get_event_averages()
 
+def total_points(managers, api, show=True, relative=False):
 
-	new_avgs = []
-	for i,avg in enumerate(avgs):
-		new_avgs.append(sum(avgs[0:i+1]))
-	avgs = new_avgs
+    traces = []
 
-	x = [i+1 for i in range(len(avgs))]
+    avgs = api.get_event_averages()
 
-	if not relative:
-		traces.append(go.Scatter(x=x,y=avgs,name="Average",mode="lines"))
+    new_avgs = []
+    for i, avg in enumerate(avgs):
+        new_avgs.append(sum(avgs[0 : i + 1]))
+    avgs = new_avgs
 
-	for manager in managers:
-		
-		text = [None]+manager.chip_text_list()
+    x = [i + 1 for i in range(len(avgs))]
 
-		if not relative:
-			y = manager._total_points
-		else:
-			y = []
-			for avg,pts in zip(avgs,manager._total_points):
-				y.append(pts-avg)
+    if not relative:
+        traces.append(go.Scatter(x=x, y=avgs, name="Average", mode="lines"))
 
-		traces.append(go.Scatter(x=[0]+x,y=[0]+y,text=text,textposition="bottom center",
-									name=manager.name,mode="lines+markers+text"))
+    for manager in managers:
 
-		# traces.append(go.Scatter(x=[0]+x,y=[0]+y,name=manager.name,mode="lines+markers"))
+        text = [None] + manager.chip_text_list()
 
-	fig = go.Figure(data=traces)
+        if not relative:
+            y = manager._total_points
+        else:
+            y = []
+            for avg, pts in zip(avgs, manager._total_points):
+                y.append(pts - avg)
 
-	fig.update_xaxes(title=dict(text="Gameweek"))
-	if not relative:
-		fig.update_yaxes(title=dict(text="Total Points"))
-	else:
-		fig.update_yaxes(title=dict(text="Total Points (Relative)"))
+        traces.append(
+            go.Scatter(
+                x=[0] + x,
+                y=[0] + y,
+                text=text,
+                textposition="bottom center",
+                name=manager.name,
+                mode="lines+markers+text",
+            )
+        )
 
-	if not relative:
-		write_image(fig,"total_points.png")
-	else:
-		write_image(fig,"total_points_relative.png")
+        # traces.append(go.Scatter(x=[0]+x,y=[0]+y,name=manager.name,mode="lines+markers"))
 
-	if show:
-		fig.show()
+    fig = go.Figure(data=traces)
 
-def overall_rank(managers,show=True):
+    fig.update_xaxes(title=dict(text="Gameweek"))
+    if not relative:
+        fig.update_yaxes(title=dict(text="Total Points"))
+    else:
+        fig.update_yaxes(title=dict(text="Total Points (Relative)"))
 
-	traces = []
+    if not relative:
+        write_image(fig, "total_points.png")
+    else:
+        write_image(fig, "total_points_relative.png")
 
-	for manager in managers:
+    if show:
+        fig.show()
 
-		text = manager.chip_text_list()
 
-		y = manager._overall_rank
-		x = [i+1 for i in range(len(y))]
+def overall_rank(managers, show=True):
 
-		traces.append(go.Scatter(x=x,y=y,text=text,textposition="bottom center",
-							name=manager.name,mode="lines+markers+text"))
+    traces = []
 
-		# traces.append(go.Scatter(x=x,y=y,name=manager.name,mode="lines+markers"))
+    for manager in managers:
 
-	fig = go.Figure(data=traces)
+        text = manager.chip_text_list()
 
-	fig.update_xaxes(title=dict(text="Gameweek"))
-	fig.update_yaxes(title=dict(text="Overall Rank"),type="log",autorange="reversed")
+        y = manager._overall_rank
+        x = [i + 1 for i in range(len(y))]
 
-	write_image(fig,"overall_rank.png")
+        traces.append(
+            go.Scatter(
+                x=x,
+                y=y,
+                text=text,
+                textposition="bottom center",
+                name=manager.name,
+                mode="lines+markers+text",
+            )
+        )
 
-	if show:
-		fig.show()
+        # traces.append(go.Scatter(x=x,y=y,name=manager.name,mode="lines+markers"))
 
-def gameweek_rank(managers,show=True):
+    fig = go.Figure(data=traces)
 
-	traces = []
+    fig.update_xaxes(title=dict(text="Gameweek"))
+    fig.update_yaxes(title=dict(text="Overall Rank"), type="log", autorange="reversed")
 
-	for manager in managers:
+    write_image(fig, "overall_rank.png")
 
-		text = manager.chip_text_list()
+    if show:
+        fig.show()
 
-		y = manager._event_rank
-		x = [i+1 for i in range(len(y))]
 
-		traces.append(go.Scatter(x=x,y=y,text=text,textposition="bottom center",
-							name=manager.name,mode="lines+markers+text"))
+def gameweek_rank(managers, show=True):
 
-	fig = go.Figure(data=traces)
+    traces = []
 
-	fig.update_xaxes(title=dict(text="Gameweek"))
-	fig.update_yaxes(title=dict(text="Gameweek Rank"),type="log",autorange="reversed")
+    for manager in managers:
 
-	write_image(fig,"gameweek_rank.png")
+        text = manager.chip_text_list()
 
-	if show:
-		fig.show()
+        y = manager._event_rank
+        x = [i + 1 for i in range(len(y))]
 
-def squad_value(managers,show=True):
+        traces.append(
+            go.Scatter(
+                x=x,
+                y=y,
+                text=text,
+                textposition="bottom center",
+                name=manager.name,
+                mode="lines+markers+text",
+            )
+        )
 
-	traces = []
+    fig = go.Figure(data=traces)
 
-	for manager in managers:
+    fig.update_xaxes(title=dict(text="Gameweek"))
+    fig.update_yaxes(title=dict(text="Gameweek Rank"), type="log", autorange="reversed")
 
-		text = manager.chip_text_list()
+    write_image(fig, "gameweek_rank.png")
 
-		y = manager._squad_value
-		x = [i+1 for i in range(len(y))]
+    if show:
+        fig.show()
 
-		traces.append(go.Scatter(x=x,y=y,text=text,textposition="bottom center",
-							name=manager.name,mode="lines+markers+text"))
 
-	fig = go.Figure(data=traces)
+def squad_value(managers, show=True):
 
-	fig.update_xaxes(title=dict(text="Gameweek"))
-	fig.update_yaxes(title=dict(text="Squad Value"))
+    traces = []
 
-	write_image(fig,"squad_value.png")
+    for manager in managers:
 
-	if show:
-		fig.show()
+        text = manager.chip_text_list()
 
-def rank_history(managers,key,show=False):
+        y = manager._squad_value
+        x = [i + 1 for i in range(len(y))]
 
-	traces = []
+        traces.append(
+            go.Scatter(
+                x=x,
+                y=y,
+                text=text,
+                textposition="bottom center",
+                name=manager.name,
+                mode="lines+markers+text",
+            )
+        )
 
-	sorted_managers = sorted(managers, key=lambda x: x.last_season_score, reverse=True)
+    fig = go.Figure(data=traces)
 
-	for manager in sorted_managers:
+    fig.update_xaxes(title=dict(text="Gameweek"))
+    fig.update_yaxes(title=dict(text="Squad Value"))
 
-		text = manager._past_points
+    write_image(fig, "squad_value.png")
 
-		t = manager._past_seasons
-		x = [int(T.split("/")[0]) for T in t]
-		y = manager._past_ranks
+    if show:
+        fig.show()
 
-		# traces.append(go.Scatter(x=x,y=y,text=text,textposition="bottom center",name=manager.name,mode="lines+markers+text"))
-		traces.append(go.Scatter(x=x,y=y,name=manager.name,mode="lines+markers"))
 
-		# traces.append(go.Scatter(x=x,y=y,name=manager.name,mode="lines+markers"))
+def rank_history(managers, key, show=False):
 
-	fig = go.Figure(data=traces)
+    traces = []
 
-	fig.update_xaxes(title=dict(text="Year"))
-	fig.update_yaxes(title=dict(text="Rank History"),type="log",autorange="reversed")
+    sorted_managers = sorted(managers, key=lambda x: x.last_season_score, reverse=True)
 
-	fig.update_layout(autosize=False,width=900,height=600)
+    for manager in sorted_managers:
 
-	write_image(fig,f"{key}_rank_history.png")
+        text = manager._past_points
 
-	if show:
-		fig.show()
+        t = manager._past_seasons
+        x = [int(T.split("/")[0]) for T in t]
+        y = manager._past_ranks
 
-	return f"{key}_rank_history.png"
+        # traces.append(go.Scatter(x=x,y=y,text=text,textposition="bottom center",name=manager.name,mode="lines+markers+text"))
+        traces.append(go.Scatter(x=x, y=y, name=manager.name, mode="lines+markers"))
+
+        # traces.append(go.Scatter(x=x,y=y,name=manager.name,mode="lines+markers"))
+
+    fig = go.Figure(data=traces)
+
+    fig.update_xaxes(title=dict(text="Year"))
+    fig.update_yaxes(title=dict(text="Rank History"), type="log", autorange="reversed")
+
+    fig.update_layout(autosize=False, width=900, height=600)
+
+    write_image(fig, f"{key}_rank_history.png")
+
+    if show:
+        fig.show()
+
+    return f"{key}_rank_history.png"
+
 
 def team_strength(teams):
-	# print([t.strength(overall=True) for t in teams])
+    # print([t.strength(overall=True) for t in teams])
 
-	names = [t._name for t in teams]
+    names = [t._name for t in teams]
 
-	traces = []
+    traces = []
 
-	traces.append(go.Scatter(x=names, y=[t.strength(overall=True) for t in teams],
-							 name="Overall, Home"))
+    traces.append(
+        go.Scatter(
+            x=names, y=[t.strength(overall=True) for t in teams], name="Overall, Home"
+        )
+    )
 
-	traces.append(go.Scatter(x=names, y=[t.strength(overall=True,is_home=False) for t in teams],
-							 name="Overall, Away"))
+    traces.append(
+        go.Scatter(
+            x=names,
+            y=[t.strength(overall=True, is_home=False) for t in teams],
+            name="Overall, Away",
+        )
+    )
 
-	traces.append(go.Scatter(x=names, y=[t.strength(defence=False,is_home=True) for t in teams],
-							 name="Attack, Home"))
+    traces.append(
+        go.Scatter(
+            x=names,
+            y=[t.strength(defence=False, is_home=True) for t in teams],
+            name="Attack, Home",
+        )
+    )
 
-	traces.append(go.Scatter(x=names, y=[t.strength(defence=False,is_home=False) for t in teams],
-							 name="Attack, Away"))
+    traces.append(
+        go.Scatter(
+            x=names,
+            y=[t.strength(defence=False, is_home=False) for t in teams],
+            name="Attack, Away",
+        )
+    )
 
-	traces.append(go.Scatter(x=names, y=[t.strength(defence=True,is_home=True) for t in teams],
-							 name="Defence, Home"))
+    traces.append(
+        go.Scatter(
+            x=names,
+            y=[t.strength(defence=True, is_home=True) for t in teams],
+            name="Defence, Home",
+        )
+    )
 
-	traces.append(go.Scatter(x=names, y=[t.strength(defence=True,is_home=False) for t in teams],
-							 name="Defence, Away"))
+    traces.append(
+        go.Scatter(
+            x=names,
+            y=[t.strength(defence=True, is_home=False) for t in teams],
+            name="Defence, Away",
+        )
+    )
 
-	fig = go.Figure(data=traces)
-	write_image(fig,"team_strengths.png")
-	# fig.show()
+    fig = go.Figure(data=traces)
+    write_image(fig, "team_strengths.png")
+    # fig.show()
 
-def write_image(figure,filename):
-	import os
-	if not os.path.exists("images"):
-	    os.mkdir("images")
 
-	figure.write_image("images/"+filename)
+def write_image(figure, filename):
+    import os
+
+    if not os.path.exists("images"):
+        os.mkdir("images")
+
+    figure.write_image("images/" + filename)
