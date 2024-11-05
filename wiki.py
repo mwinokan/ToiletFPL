@@ -247,8 +247,10 @@ def main():
 	maximum = len(api._managers)
 	for i,m in enumerate(api._managers.values()):
 		mout.progress(i,maximum)
+
 		if m.valid:
 			create_managerpage(api, m, leagues)
+
 	mout.progress(maximum,maximum)
 	mout.showDebug()
 
@@ -2158,9 +2160,10 @@ def create_manager_history_table(api,man):
 		else:
 			html_buffer += f'<td class="w3-center">{man._event_points[j-1]}</td>\n'
 		html_buffer += f'<td class="w3-center">{api.big_number_format(man._event_rank[j-1])}</td>\n'
-		transfer_str = man.get_transfer_str(j).replace("\n","<br>").replace('**WC**','<strong>WC</strong>')
+		transfer_str = man.get_transfer_str(i).replace("\n","<br>").replace('**WC**','<strong>WC</strong>')
 		if transfer_str.startswith('<br>'):
 			transfer_str = transfer_str[4:]
+
 		html_buffer += f'<td>{transfer_str}</td>\n'
 		html_buffer += f'<td class="w3-center">£{man._squad_value[j-1]:.1f}</td>\n'
 		html_buffer += '</tr>\n'

@@ -835,7 +835,7 @@ class Manager():
 			total += self.calculate_transfer_gain(gw=i)
 		return total
 
-	def calculate_transfer_gain(self,gw=None):
+	def calculate_transfer_gain(self,gw=None, debug=False):
 
 		if gw is None:
 			gw = self._api.current_gw
@@ -859,6 +859,9 @@ class Manager():
 
 		transfer_uniqueness = 0.0
 
+		if debug:
+			print(self)
+
 		for d in transfers:
 			p_out = Player(None,self._api,index=self._api.get_player_index(d['element_out']))
 			p_in = Player(None,self._api,index=self._api.get_player_index(d['element_in']))
@@ -871,6 +874,9 @@ class Manager():
 
 			if p_in_score is None: p_in_score = 0
 			if p_out_score is None: p_out_score = 0
+
+			if debug:
+				print(p_out, p_in, p_in_score, p_out_score)
 
 			score += -p_out_score
 			score += p_in_score
@@ -915,6 +921,7 @@ class Manager():
 			str_buff += f"**FH** "
 		if not short:
 			str_buff += f"\n"
+		
 		for i,d in enumerate(transfers):
 			p_out = Player(None,self._api,index=self._api.get_player_index(d['element_out']))
 			p_in = Player(None,self._api,index=self._api.get_player_index(d['element_in']))
@@ -926,7 +933,9 @@ class Manager():
 			score += p_in_score
 			if not short:
 				str_buff += f"{p_out.name} ({p_out_score}) → {p_in.name} ({p_in_score})\n"
+		
 		score -= self.get_transfer_cost(gw)
+
 		if short:
 			str_buff += f"{len(transfers)} "
 			str_buff += f"({score})\n"
@@ -934,6 +943,7 @@ class Manager():
 			str_buff += f"gain= {score}\n"
 
 		self._transfer_gain[gw] = score
+
 		return str_buff
 
 	def get_specific_overall_rank(self,gw=None):
