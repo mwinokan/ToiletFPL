@@ -1008,7 +1008,7 @@ class FPL_API:
 
         player_stats = df[df["id"] == player_id]["stats"].values
 
-        if not player_stats:
+        if not len(player_stats):
             if gw == self._current_gw:
                 mout.warningOut(
                     f"Could not retrieve stats for player {player_id} (GW:{gw}, {len(player_stats)=})"
