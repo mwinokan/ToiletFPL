@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>James Leaper's "enter shaqiri"</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open Sans">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+h1,h2,h3,h4,h5,h6 {font-family: "Oswald"}body {font-family: "Open Sans"}
+h5.double {line-height: 2}
+/*drop shadow*/
+.shadow10 {box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;}
+/*drop shadow*/
+.shadow20 {box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;}
+/*inner shadow*/
+.shadow25 {box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;}
+/*pink effect*/
+.shadow50 {box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;}
+/*soft inner and outer*/
+.shadow87 {box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;}
+/*button shadow*/
+.shadow89 {box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;}
+@media screen and (min-width: 601px) { .responsive-text { font-size: 16px;  } }@media screen and (max-width: 600px) { .responsive-text { font-size: 12px;  } }@media screen and (max-width: 600px) { .hide-if-narrow { display: none !important; } }.w3-ars{color:white !important; background-color:#B7272E !important}
+.w3-ars-inv{color:#B7272E !important; background-color:white !important}
+.w3-ars-border-inv{border: 1px white solid !important; }
+.w3-avl{color:#91B6E4 !important; background-color:#5D1133 !important}
+.w3-avl-inv{color:#5D1133 !important; background-color:#91B6E4 !important}
+.w3-avl-border-inv{border: 1px #91B6E4 solid !important; }
+.w3-bou{color:#BF3B33 !important; background-color:black !important}
+.w3-bou-inv{color:black !important; background-color:#BF3B33 !important}
+.w3-bou-border-inv{border: 1px #BF3B33 solid !important; }
+.w3-bre{color:white !important; background-color:#A22621 !important}
+.w3-bre-inv{color:#A22621 !important; background-color:white !important}
+.w3-bre-border-inv{border: 1px white solid !important; }
+.w3-bha{color:#2253A0 !important; background-color:white !important}
+.w3-bha-inv{color:white !important; background-color:#2253A0 !important}
+.w3-bha-border-inv{border: 1px #2253A0 solid !important; }
+.w3-che{color:white !important; background-color:#051383 !important}
+.w3-che-inv{color:#051383 !important; background-color:white !important}
+.w3-che-border-inv{border: 1px white solid !important; }
+.w3-cry{color:#2C67A9 !important; background-color:#BE2C2A !important}
+.w3-cry-inv{color:#BE2C2A !important; background-color:#2C67A9 !important}
+.w3-cry-border-inv{border: 1px #2C67A9 solid !important; }
+.w3-eve{color:white !important; background-color:#3A83E2 !important}
+.w3-eve-inv{color:#3A83E2 !important; background-color:white !important}
+.w3-eve-border-inv{border: 1px white solid !important; }
+.w3-ful{color:black !important; background-color:white !important}
+.w3-ful-inv{color:white !important; background-color:black !important}
+.w3-ful-border-inv{border: 1px black solid !important; }
+.w3-ips{color:white !important; background-color:#1E2F75 !important}
+.w3-ips-inv{color:#1E2F75 !important; background-color:white !important}
+.w3-ips-border-inv{border: 1px white solid !important; }
+.w3-lei{color:white !important; background-color:SteelBlue !important}
+.w3-lei-inv{color:SteelBlue !important; background-color:white !important}
+.w3-lei-border-inv{border: 1px white solid !important; }
+.w3-liv{color:white !important; background-color:#AF2532 !important}
+.w3-liv-inv{color:#AF2532 !important; background-color:white !important}
+.w3-liv-border-inv{border: 1px white solid !important; }
+.w3-mci{color:#061736 !important; background-color:#A1C2E7 !important}
+.w3-mci-inv{color:#A1C2E7 !important; background-color:#061736 !important}
+.w3-mci-border-inv{border: 1px #061736 solid !important; }
+.w3-mun{color:black !important; background-color:#D1443F !important}
+.w3-mun-inv{color:#D1443F !important; background-color:black !important}
+.w3-mun-border-inv{border: 1px black solid !important; }
+.w3-new{color:black !important; background-color:WhiteSmoke !important}
+.w3-new-inv{color:WhiteSmoke !important; background-color:black !important}
+.w3-new-border-inv{border: 1px black solid !important; }
+.w3-nfo{color:white !important; background-color:#DF4148 !important}
+.w3-nfo-inv{color:#DF4148 !important; background-color:white !important}
+.w3-nfo-border-inv{border: 1px white solid !important; }
+.w3-sou{color:FireBrick !important; background-color:white !important}
+.w3-sou-inv{color:white !important; background-color:FireBrick !important}
+.w3-sou-border-inv{border: 1px FireBrick solid !important; }
+.w3-tot{color:#212935 !important; background-color:white !important}
+.w3-tot-inv{color:white !important; background-color:#212935 !important}
+.w3-tot-border-inv{border: 1px #212935 solid !important; }
+.w3-whu{color:#95CDFA !important; background-color:#7A2E3D !important}
+.w3-whu-inv{color:#7A2E3D !important; background-color:#95CDFA !important}
+.w3-whu-border-inv{border: 1px #95CDFA solid !important; }
+.w3-wol{color:black !important; background-color:#F2BC44 !important}
+.w3-wol-inv{color:#F2BC44 !important; background-color:black !important}
+.w3-wol-border-inv{border: 1px black solid !important; }
+</style>
+</head>
+
+<div class="w3-bar w3-black shadow89">
+<a class="w3-bar-item w3-black w3-text-black"></a>
+<div class="w3-dropdown-hover">
+<button class="w3-button w3-hover-aqua"><h3><span class="w3-tag w3-white">toilet.football</span></h3></button>
+<div class="w3-dropdown-content w3-bar-block w3-card-4">
+<a href="https://mwinokan.github.io/ToiletFPL/index.html" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/comparison.html" class="w3-bar-item w3-button w3-hover-aqua">📊 Comparison Tool</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/assets.html" class="w3-bar-item w3-button w3-hover-aqua">📈 Asset Graphs</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/teams.html" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua">💎 The RBS Diamond Invitational</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua">🚽 Tesco Bean Value Toilet League</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/SOLENT-FPL.html" class="w3-bar-item w3-button w3-hover-aqua">🧭 SOLENT FPL</a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/Super-Dinner-League.html" class="w3-bar-item w3-button w3-hover-aqua">🍝 Super Dinner League</a>
+</div>
+</div>
+<a class="w3-bar-item w3-black w3-text-black w3-right"></a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/Tesco-Bean-Value-Toilet-League.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>
+<a href="https://mwinokan.github.io/ToiletFPL/html/The-RBS-Diamond-Invitational.html" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>
+</div>
+<div class="w3-bar w3-black">
+</div>
+<body class="w3-blue-gray shadow25">
+<div class="w3-content" style="max-width:1400px;min-height:1200px;">
+<div class="w3-center w3-padding-large">
+	<h1><span class="w3-tag w3-white shadow50">James Leaper's "enter shaqiri"</span></h1>
+</div>
+<div class="w3-row-padding" style="padding-left:0px;padding-right:0px">
+<div class="w3-col s12 m12 l12">
+<div class="w3-center w3-padding">
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p154561.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#DC7633;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_15.html">Raya</a></b>
+<br>
+ <b>2pts</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p441164.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#F4D03F;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_495.html">Pedro Porro</a></b>
+<br>
+🅰️ <b>3pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p216051.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#CB4335;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_369.html">Dalot</a></b>
+<br>
+ <b>1pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p169528.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#CB4335;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_255.html">Robinson</a></b>
+<br>
+🟨 <b>1pts</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p223340.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#DC7633;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_17.html">Saka</a> (C)</b>
+<br>
+ <b>4pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p446008.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#196F3D;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_99.html">Mbeumo</a></b>
+<br>
+⚽️🅰️3️⃣ <b>13pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p493105.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#F4D03F;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_372.html">Garnacho</a></b>
+<br>
+🅰️ <b>4pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p209289.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#CB4335;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_19.html">Smith Rowe</a></b>
+<br>
+ <b>1pts</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p517052.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#DC7633;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_180.html">N.Jackson</a></b>
+<br>
+ <b>2pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p430871.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_541.html">Cunha</a></b>
+<br>
+ <b>-</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p102057.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#52BE80;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_252.html">Raúl</a></b>
+<br>
+⚽️3️⃣🟨🔄 <b>8pts</b>
+</div>
+</div>
+</div>
+<div style="text-align:center;width:90%;max-width:900px;display:block;margin-left:auto;margin-right:auto;">
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p224068.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_445.html">Turner</a></b>
+<br>
+ <b>-</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p491279.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#CB4335;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_506.html">Van de Ven</a></b>
+<br>
+⛔️ <b>1pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p245719.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#DC7633;color:black;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_461.html">Harwood-Bellis</a></b>
+<br>
+ <b>2pts</b>
+</div>
+</div>
+<div style="width:18%;display:inline-block;text-align:center;vertical-align:top;padding:0px;padding-top:16px;padding-left:2px;padding-right:2px;">
+<img class="w3-image" style="width:80%;display:block;margin-left:auto;margin-right:auto;" src="https://resources.premierleague.com/premierleague/photos/players/110x140/p118748.png?raw=true"></img>
+<div class="w3-tag shadow89 w3-reponsive responsive-text" style="background-color:#17202A;color:white;width:100%;padding:0px;padding-top:2px;padding-bottom:6px;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_328.html">M.Salah</a></b>
+<br>
+ <b>-</b>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-center w3-white w3-padding shadow89">
+<h2>24/25 Season</h2>
+<span class="w3-tag" style="margin-bottom:4px">Total Score: 782</span>
+<span class="w3-tag" style="margin-bottom:4px">Overall Rank: 5.1M</span>
+<span class="w3-tag" style="margin-bottom:4px">Avg. Player Selection: 16.3%</span>
+<span class="w3-tag" style="margin-bottom:4px">Team Value: £100.3M</span>
+<span class="w3-tag" style="margin-bottom:4px">#hits: 2</span>
+<span class="w3-tag" style="margin-bottom:4px">#transfers: 13</span>
+<span class="w3-tag" style="margin-bottom:4px">Total Transfer Gain: 12</span>
+</div>
+</div>
+<div class="w3-col s12 m6 l4">
+<div class="w3-panel w3-center w3-white w3-padding shadow89">
+<h2>GW15</h2>
+<span class="w3-tag" style="margin-bottom:4px">Score: 39</span>
+<span class="w3-tag" style="margin-bottom:4px">Rank: 8.8M</span>
+<span class="w3-tag" style="margin-bottom:4px">Rank Gain: -1145.4%</span>
+<span class="w3-tag" style="margin-bottom:4px">xG: 1.4</span>
+<span class="w3-tag" style="margin-bottom:4px">xA: 0.8</span>
+<span class="w3-tag" style="margin-bottom:4px">Performed xPts: 32.0</span>
+</div>
+</div>
+<div class="w3-col s12 m12 l4">
+<div class="w3-panel w3-center w3-indigo w3-padding shadow89">
+<a href="https://fantasy.premierleague.com/entry/7812242/event/15" class="w3-bar-item w3-button w3-hover-blue">🗓️ FPL Event</a>
+<a href="https://fantasy.premierleague.com/entry/7812242/history" class="w3-bar-item w3-button w3-hover-blue">📈 FPL GW History</a>
+<a class="w3-bar-item w3-button w3-hover-blue">ID: 7812242</a>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">🏆 Trophy Cabinet</h1>
+</div>
+<div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;">
+<div class="w3-bar w3-black">
+<button class="w3-bar-item w3-button w3-mobile tablink w3-aqua" onclick="openLeague(event,241682)">Tesco Bean Value Toilet League</button>
+</div>
+<div id="241682" class="w3-container w3-dark-grey league">
+<div class="w3-justify w3-row-padding">
+<p> Empty, no league awards to be found :(</p>
+</div>
+</div>
+<script>
+function openLeague(evt, leagueName) {
+var i, x, tablinks;
+x = document.getElementsByClassName("league");
+for (i = 0; i < x.length; i++) {
+x[i].style.display = "none";
+}
+tablinks = document.getElementsByClassName("tablink");
+for (i = 0; i < x.length; i++) {
+tablinks[i].className = tablinks[i].className.replace(" w3-aqua", "");
+}
+document.getElementById(leagueName).style.display = "block";
+evt.currentTarget.className += " w3-aqua";
+}
+</script>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">Picks</h1>
+</div>
+<div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div class="w3-responsive">
+<table class="w3-table responsive-text">
+<tr>
+<th class="w3-center">Pos</th>
+<th class="w3-center">Team</th>
+<th>Name</th>
+<th class="w3-center">Price</th>
+<th class="w3-center">ΣPts</th>
+<th class="w3-center">Trans.</th>
+<th class="w3-center">GW10</th>
+<th class="w3-center">GW11</th>
+<th class="w3-center">GW12</th>
+<th class="w3-center">GW13</th>
+<th class="w3-center">GW14</th>
+<th class="w3-center">GW15</th>
+<th class="w3-center">Form</th>
+<th class="w3-center">GW16</th>
+<th class="w3-center">GW17</th>
+<th class="w3-center">GW18</th>
+<th class="w3-center">GW19</th>
+<th class="w3-center">GW20</th>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#B7272E;color:white;vertical-align:middle;"><b>GKP</b></td>
+<td class="w3-center" style="background-color:#B7272E;color:white;vertical-align:middle;"><b>ARS</b></td>
+<td style="background-color:#B7272E;color:white;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_15.html">Raya</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£5.5</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">58</td>
+<td class="w3-center" style="color:green;vertical-align:middle;">0.5%</td>
+<td onclick="document.getElementById('id15_10').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">3</td><div id="id15_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id15_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW10</h3><p>Arsenal: Lost 1-0 away to Newcastle.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">3 Saves</span> </p></div></div></div><td onclick="document.getElementById('id15_11').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id15_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id15_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW11</h3><p>Arsenal: Drew 1-1 away to Chelsea.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id15_12').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id15_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id15_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW12</h3><p>Arsenal: Won 3-0 at home to Nott'm Forest.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id15_13').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id15_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id15_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW13</h3><p>Arsenal: Won 2-5 away to West Ham.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">2 Goals Conceded</span> <span class="w3-tag w3-blue">3 Saves</span> </p></div></div></div><td onclick="document.getElementById('id15_14').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id15_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id15_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW14</h3><p>Arsenal: Won 2-0 at home to Man Utd.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id15_15').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id15_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id15_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raya in GW15</h3><p>Arsenal: Drew 1-1 away to Fulham.</p>
+<p>Raya: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">3.6</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">EVE</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">cry</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">IPS</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">bre</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">bha</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#BE2C2A;color:#2C67A9;vertical-align:middle;"><b>GKP</b></td>
+<td class="w3-center" style="background-color:#BE2C2A;color:#2C67A9;vertical-align:middle;"><b>CRY</b></td>
+<td style="background-color:#BE2C2A;color:#2C67A9;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_445.html">Turner</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£4.0</td>
+<td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">0</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-0.3%</td>
+<td onclick="document.getElementById('id445_10').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id445_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id445_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Turner in GW10</h3><p>Crystal Palace: Drew 2-2 away to Wolves.</p>
+<p>Turner: Did not play.</p></div></div></div><td onclick="document.getElementById('id445_11').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id445_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id445_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Turner in GW11</h3><p>Crystal Palace: Lost 0-2 at home to Fulham.</p>
+<p>Turner: Did not play.</p></div></div></div><td onclick="document.getElementById('id445_12').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id445_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id445_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Turner in GW12</h3><p>Crystal Palace: Drew 2-2 away to Aston Villa.</p>
+<p>Turner: Did not play.</p></div></div></div><td onclick="document.getElementById('id445_13').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id445_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id445_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Turner in GW13</h3><p>Crystal Palace: Drew 1-1 at home to Newcastle.</p>
+<p>Turner: Did not play.</p></div></div></div><td onclick="document.getElementById('id445_14').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id445_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id445_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Turner in GW14</h3><p>Crystal Palace: Won 0-1 away to Ipswich.</p>
+<p>Turner: Did not play.</p></div></div></div><td onclick="document.getElementById('id445_15').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id445_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id445_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Turner in GW15</h3><p>Crystal Palace: Drew 2-2 at home to Man City.</p>
+<p>Turner: Did not play.</p></div></div></div><td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">0.0</td>
+<td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">bha</td>
+<td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">ARS</td>
+<td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">bou</td>
+<td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">SOU</td>
+<td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">CHE</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:white;color:#212935;vertical-align:middle;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:white;color:#212935;vertical-align:middle;"><b>TOT</b></td>
+<td style="background-color:white;color:#212935;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_495.html">Pedro Porro</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£5.6</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">55</td>
+<td class="w3-center" style="color:green;vertical-align:middle;">0.2%</td>
+<td onclick="document.getElementById('id495_10').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id495_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id495_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Pedro Porro in GW10</h3><p>Spurs: Won 4-1 at home to Aston Villa.</p>
+<p>Pedro Porro: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id495_11').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">4</td><div id="id495_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id495_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Pedro Porro in GW11</h3><p>Spurs: Lost 1-2 at home to Ipswich.</p>
+<p>Pedro Porro: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-orange">2 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id495_12').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">14</td><div id="id495_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id495_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Pedro Porro in GW12</h3><p>Spurs: Won 0-4 away to Man City.</p>
+<p>Pedro Porro: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">2 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id495_13').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id495_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id495_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Pedro Porro in GW13</h3><p>Spurs: Drew 1-1 at home to Fulham.</p>
+<p>Pedro Porro: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id495_14').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id495_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id495_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Pedro Porro in GW14</h3><p>Spurs: Lost 1-0 away to Bournemouth.</p>
+<p>Pedro Porro: <span class="w3-tag w3-dark-grey">28 mins</span> </p></div></div></div><td onclick="document.getElementById('id495_15').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">3</td><div id="id495_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id495_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Pedro Porro in GW15</h3><p>Spurs: Lost 3-4 at home to Chelsea.</p>
+<p>Pedro Porro: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-orange">4 Goals Conceded</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">4.8</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">sou</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">LIV</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">nfo</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">WOL</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">NEW</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#D1443F;color:black;vertical-align:middle;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:#D1443F;color:black;vertical-align:middle;"><b>MUN</b></td>
+<td style="background-color:#D1443F;color:black;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_369.html">Dalot</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£5.2</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">49</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-1.5%</td>
+<td onclick="document.getElementById('id369_10').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id369_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id369_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Dalot in GW10</h3><p>Man Utd: Drew 1-1 at home to Chelsea.</p>
+<p>Dalot: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id369_11').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id369_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id369_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Dalot in GW11</h3><p>Man Utd: Won 3-0 at home to Leicester.</p>
+<p>Dalot: <span class="w3-tag w3-dark-grey">56 mins</span> </p></div></div></div><td onclick="document.getElementById('id369_12').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id369_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id369_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Dalot in GW12</h3><p>Man Utd: Drew 1-1 away to Ipswich.</p>
+<p>Dalot: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id369_13').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id369_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id369_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Dalot in GW13</h3><p>Man Utd: Won 4-0 at home to Everton.</p>
+<p>Dalot: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id369_14').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id369_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id369_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Dalot in GW14</h3><p>Man Utd: Lost 2-0 away to Arsenal.</p>
+<p>Dalot: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">2 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id369_15').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id369_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id369_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Dalot in GW15</h3><p>Man Utd: Lost 2-3 at home to Nott'm Forest.</p>
+<p>Dalot: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">3 Goals Conceded</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">2.2</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">mci</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">BOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">wol</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">NEW</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">liv</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:white;color:black;vertical-align:middle;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:white;color:black;vertical-align:middle;"><b>FUL</b></td>
+<td style="background-color:white;color:black;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_255.html">Robinson</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£4.7</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">49</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-0.3%</td>
+<td onclick="document.getElementById('id255_10').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id255_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id255_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Robinson in GW10</h3><p>Fulham: Won 2-1 at home to Brentford.</p>
+<p>Robinson: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">1 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id255_11').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id255_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id255_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Robinson in GW11</h3><p>Fulham: Won 0-2 away to Crystal Palace.</p>
+<p>Robinson: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id255_12').style.display='block'" class="w3-center"  style="background-color:#901517;color:white;vertical-align:middle;">0</td><div id="id255_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id255_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Robinson in GW12</h3><p>Fulham: Lost 1-4 at home to Wolves.</p>
+<p>Robinson: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">4 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id255_13').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id255_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id255_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Robinson in GW13</h3><p>Fulham: Drew 1-1 away to Spurs.</p>
+<p>Robinson: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id255_14').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id255_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id255_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Robinson in GW14</h3><p>Fulham: Won 3-1 at home to Brighton.</p>
+<p>Robinson: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">1 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id255_15').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id255_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id255_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Robinson in GW15</h3><p>Fulham: Drew 1-1 at home to Arsenal.</p>
+<p>Robinson: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">3.0</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">liv</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">SOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">che</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">BOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">IPS</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:white;color:#212935;vertical-align:middle;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:white;color:#212935;vertical-align:middle;"><b>TOT</b></td>
+<td style="background-color:white;color:#212935;vertical-align:middle;"><b>⛔️ <a href="https://mwinokan.github.io/ToiletFPL/html/player_506.html">Van de Ven</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£4.5</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">28</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-0.8%</td>
+<td onclick="document.getElementById('id506_10').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id506_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id506_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Van de Ven in GW10</h3><p>Spurs: Won 4-1 at home to Aston Villa.</p>
+<p>Van de Ven: Did not play.</p></div></div></div><td onclick="document.getElementById('id506_11').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id506_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id506_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Van de Ven in GW11</h3><p>Spurs: Lost 1-2 at home to Ipswich.</p>
+<p>Van de Ven: Did not play.</p></div></div></div><td onclick="document.getElementById('id506_12').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id506_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id506_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Van de Ven in GW12</h3><p>Spurs: Won 0-4 away to Man City.</p>
+<p>Van de Ven: Did not play.</p></div></div></div><td onclick="document.getElementById('id506_13').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id506_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id506_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Van de Ven in GW13</h3><p>Spurs: Drew 1-1 at home to Fulham.</p>
+<p>Van de Ven: Did not play.</p></div></div></div><td onclick="document.getElementById('id506_14').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id506_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id506_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Van de Ven in GW14</h3><p>Spurs: Lost 1-0 away to Bournemouth.</p>
+<p>Van de Ven: Did not play.</p></div></div></div><td onclick="document.getElementById('id506_15').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id506_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id506_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Van de Ven in GW15</h3><p>Spurs: Lost 3-4 at home to Chelsea.</p>
+<p>Van de Ven: <span class="w3-tag w3-dark-grey">78 mins</span> <span class="w3-tag w3-orange">3 Goals Conceded</span> </p></div></div></div><td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">0.2</td>
+<td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">⛔️ sou</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">LIV</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">nfo</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">WOL</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">NEW</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:white;color:FireBrick;vertical-align:middle;"><b>DEF</b></td>
+<td class="w3-center" style="background-color:white;color:FireBrick;vertical-align:middle;"><b>SOU</b></td>
+<td style="background-color:white;color:FireBrick;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_461.html">Harwood-Bellis</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£4.1</td>
+<td class="w3-center" style="background-color:#CB4335;color:black;vertical-align:middle;">26</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-0.0%</td>
+<td onclick="document.getElementById('id461_10').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id461_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id461_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Harwood-Bellis in GW10</h3><p>Southampton: Won 1-0 at home to Everton.</p>
+<p>Harwood-Bellis: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id461_11').style.display='block'" class="w3-center"  style="background-color:#901517;color:white;vertical-align:middle;">0</td><div id="id461_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id461_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Harwood-Bellis in GW11</h3><p>Southampton: Lost 2-0 away to Wolves.</p>
+<p>Harwood-Bellis: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-orange">2 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id461_12').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id461_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id461_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Harwood-Bellis in GW12</h3><p>Southampton: Lost 2-3 at home to Liverpool.</p>
+<p>Harwood-Bellis: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-orange">3 Goals Conceded</span> </p></div></div></div><td onclick="document.getElementById('id461_13').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id461_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id461_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Harwood-Bellis in GW13</h3><p>Southampton: Drew 1-1 away to Brighton.</p>
+<p>Harwood-Bellis: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id461_14').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id461_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id461_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Harwood-Bellis in GW14</h3><p>Southampton: Lost 1-5 at home to Chelsea.</p>
+<p>Harwood-Bellis: Did not play.</p></div></div></div><td onclick="document.getElementById('id461_15').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id461_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id461_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Harwood-Bellis in GW15</h3><p>Southampton: Lost 1-0 away to Aston Villa.</p>
+<p>Harwood-Bellis: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td class="w3-center" style="background-color:#901517;color:white;vertical-align:middle;">0.8</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">TOT</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">ful</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">WHU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">cry</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">BRE</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#AF2532;color:white;vertical-align:middle;"><b>MID</b></td>
+<td class="w3-center" style="background-color:#AF2532;color:white;vertical-align:middle;"><b>LIV</b></td>
+<td style="background-color:#AF2532;color:white;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_328.html">M.Salah</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£13.3</td>
+<td class="w3-center" style="background-color:#196F3D;color:white;vertical-align:middle;">151</td>
+<td class="w3-center" style="color:green;vertical-align:middle;">0.9%</td>
+<td onclick="document.getElementById('id328_10').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">9</td><div id="id328_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id328_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>M.Salah in GW10</h3><p>Liverpool: Won 2-1 at home to Brighton.</p>
+<p>M.Salah: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">2 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id328_11').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">14</td><div id="id328_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id328_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>M.Salah in GW11</h3><p>Liverpool: Won 2-0 at home to Aston Villa.</p>
+<p>M.Salah: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id328_12').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">13</td><div id="id328_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id328_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>M.Salah in GW12</h3><p>Liverpool: Won 2-3 away to Southampton.</p>
+<p>M.Salah: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">2 Goals</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-aqua">2 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id328_13').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">13</td><div id="id328_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id328_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>M.Salah in GW13</h3><p>Liverpool: Won 2-0 at home to Man City.</p>
+<p>M.Salah: <span class="w3-tag w3-dark-grey">83 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">2 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id328_14').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">18</td><div id="id328_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id328_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>M.Salah in GW14</h3><p>Liverpool: Drew 3-3 away to Newcastle.</p>
+<p>M.Salah: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">2 Goals</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id328_15').style.display='block'" class="w3-center"  style="vertical-align:middle;">-</td><div id="id328_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id328_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>M.Salah in GW15</h3><p>No fixture.</p></div></div></div><td class="w3-center" style="background-color:#196F3D;color:white;vertical-align:middle;">14.5</td>
+<td class="w3-center" style="background-color:#196F3D;color:white;vertical-align:middle;">FUL</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">tot</td>
+<td class="w3-center" style="background-color:#196F3D;color:white;vertical-align:middle;">LEI</td>
+<td class="w3-center" style="background-color:#196F3D;color:white;vertical-align:middle;">whu</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">MUN</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#B7272E;color:white;vertical-align:middle;"><b>MID</b></td>
+<td class="w3-center" style="background-color:#B7272E;color:white;vertical-align:middle;"><b>ARS</b></td>
+<td style="background-color:#B7272E;color:white;vertical-align:middle;"><b>(C) <a href="https://mwinokan.github.io/ToiletFPL/html/player_17.html">Saka</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£10.5</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">103</td>
+<td class="w3-center" style="color:green;vertical-align:middle;">0.7%</td>
+<td onclick="document.getElementById('id17_10').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id17_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id17_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Saka in GW10</h3><p>Arsenal: Lost 1-0 away to Newcastle.</p>
+<p>Saka: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id17_11').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id17_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id17_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Saka in GW11</h3><p>Arsenal: Drew 1-1 away to Chelsea.</p>
+<p>Saka: <span class="w3-tag w3-dark-grey">80 mins</span> </p></div></div></div><td onclick="document.getElementById('id17_12').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">13</td><div id="id17_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id17_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Saka in GW12</h3><p>Arsenal: Won 3-0 at home to Nott'm Forest.</p>
+<p>Saka: <span class="w3-tag w3-dark-grey">82 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id17_13').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">18</td><div id="id17_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id17_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Saka in GW13</h3><p>Arsenal: Won 2-5 away to West Ham.</p>
+<p>Saka: <span class="w3-tag w3-dark-grey">73 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">3 Assists</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id17_14').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">3</td><div id="id17_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id17_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Saka in GW14</h3><p>Arsenal: Won 2-0 at home to Man Utd.</p>
+<p>Saka: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id17_15').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id17_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id17_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Saka in GW15</h3><p>Arsenal: Drew 1-1 away to Fulham.</p>
+<p>Saka: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">7.6</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">EVE</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">cry</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">IPS</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">bre</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">bha</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#A22621;color:white;vertical-align:middle;"><b>MID</b></td>
+<td class="w3-center" style="background-color:#A22621;color:white;vertical-align:middle;"><b>BRE</b></td>
+<td style="background-color:#A22621;color:white;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_99.html">Mbeumo</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£7.6</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">96</td>
+<td class="w3-center" style="color:green;vertical-align:middle;">0.1%</td>
+<td onclick="document.getElementById('id99_10').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">3</td><div id="id99_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id99_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mbeumo in GW10</h3><p>Brentford: Lost 2-1 away to Fulham.</p>
+<p>Mbeumo: <span class="w3-tag w3-dark-grey">86 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id99_11').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">5</td><div id="id99_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id99_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mbeumo in GW11</h3><p>Brentford: Won 3-2 at home to Bournemouth.</p>
+<p>Mbeumo: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> </p></div></div></div><td onclick="document.getElementById('id99_12').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">3</td><div id="id99_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id99_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mbeumo in GW12</h3><p>Brentford: Drew 0-0 away to Everton.</p>
+<p>Mbeumo: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id99_13').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id99_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id99_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mbeumo in GW13</h3><p>Brentford: Won 4-1 at home to Leicester.</p>
+<p>Mbeumo: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id99_14').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id99_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id99_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mbeumo in GW14</h3><p>Brentford: Lost 3-1 away to Aston Villa.</p>
+<p>Mbeumo: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id99_15').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">13</td><div id="id99_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id99_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Mbeumo in GW15</h3><p>Brentford: Won 4-2 at home to Newcastle.</p>
+<p>Mbeumo: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">5.0</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">che</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">NFO</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">bha</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">ARS</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">sou</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#D1443F;color:black;vertical-align:middle;"><b>MID</b></td>
+<td class="w3-center" style="background-color:#D1443F;color:black;vertical-align:middle;"><b>MUN</b></td>
+<td style="background-color:#D1443F;color:black;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_372.html">Garnacho</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£6.3</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">48</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-2.1%</td>
+<td onclick="document.getElementById('id372_10').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id372_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id372_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Garnacho in GW10</h3><p>Man Utd: Drew 1-1 at home to Chelsea.</p>
+<p>Garnacho: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id372_11').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id372_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id372_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Garnacho in GW11</h3><p>Man Utd: Won 3-0 at home to Leicester.</p>
+<p>Garnacho: <span class="w3-tag w3-dark-grey">33 mins</span> <span class="w3-tag w3-green">Goal</span> </p></div></div></div><td onclick="document.getElementById('id372_12').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id372_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id372_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Garnacho in GW12</h3><p>Man Utd: Drew 1-1 away to Ipswich.</p>
+<p>Garnacho: <span class="w3-tag w3-dark-grey">85 mins</span> </p></div></div></div><td onclick="document.getElementById('id372_13').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id372_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id372_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Garnacho in GW13</h3><p>Man Utd: Won 4-0 at home to Everton.</p>
+<p>Garnacho: <span class="w3-tag w3-dark-grey">24 mins</span> </p></div></div></div><td onclick="document.getElementById('id372_14').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id372_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id372_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Garnacho in GW14</h3><p>Man Utd: Lost 2-0 away to Arsenal.</p>
+<p>Garnacho: <span class="w3-tag w3-dark-grey">58 mins</span> </p></div></div></div><td onclick="document.getElementById('id372_15').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">4</td><div id="id372_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id372_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Garnacho in GW15</h3><p>Man Utd: Lost 2-3 at home to Nott'm Forest.</p>
+<p>Garnacho: <span class="w3-tag w3-dark-grey">58 mins</span> <span class="w3-tag w3-blue">Assist</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">2.8</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">mci</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">BOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">wol</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">NEW</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">liv</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:white;color:black;vertical-align:middle;"><b>MID</b></td>
+<td class="w3-center" style="background-color:white;color:black;vertical-align:middle;"><b>FUL</b></td>
+<td style="background-color:white;color:black;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_19.html">Smith Rowe</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£5.6</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">60</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-2.1%</td>
+<td onclick="document.getElementById('id19_10').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id19_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Smith Rowe in GW10</h3><p>Fulham: Won 2-1 at home to Brentford.</p>
+<p>Smith Rowe: <span class="w3-tag w3-dark-grey">81 mins</span> </p></div></div></div><td onclick="document.getElementById('id19_11').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">11</td><div id="id19_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Smith Rowe in GW11</h3><p>Fulham: Won 0-2 away to Crystal Palace.</p>
+<p>Smith Rowe: <span class="w3-tag w3-dark-grey">88 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-aqua">3 Bonus</span> <span class="w3-tag w3-purple">Clean Sheet</span> </p></div></div></div><td onclick="document.getElementById('id19_12').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id19_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Smith Rowe in GW12</h3><p>Fulham: Lost 1-4 at home to Wolves.</p>
+<p>Smith Rowe: <span class="w3-tag w3-dark-grey">58 mins</span> </p></div></div></div><td onclick="document.getElementById('id19_13').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id19_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Smith Rowe in GW13</h3><p>Fulham: Drew 1-1 away to Spurs.</p>
+<p>Smith Rowe: <span class="w3-tag w3-dark-grey">85 mins</span> </p></div></div></div><td onclick="document.getElementById('id19_14').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id19_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Smith Rowe in GW14</h3><p>Fulham: Won 3-1 at home to Brighton.</p>
+<p>Smith Rowe: <span class="w3-tag w3-dark-grey">70 mins</span> </p></div></div></div><td onclick="document.getElementById('id19_15').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id19_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id19_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Smith Rowe in GW15</h3><p>Fulham: Drew 1-1 at home to Arsenal.</p>
+<p>Smith Rowe: <span class="w3-tag w3-dark-grey">59 mins</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">3.4</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">liv</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">SOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">che</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">BOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">IPS</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#051383;color:white;vertical-align:middle;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:#051383;color:white;vertical-align:middle;"><b>CHE</b></td>
+<td style="background-color:#051383;color:white;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_180.html">N.Jackson</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£8.2</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">80</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-0.1%</td>
+<td onclick="document.getElementById('id180_10').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id180_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id180_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>N.Jackson in GW10</h3><p>Chelsea: Drew 1-1 away to Man Utd.</p>
+<p>N.Jackson: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-yellow">Yellow Card</span> </p></div></div></div><td onclick="document.getElementById('id180_11').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id180_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id180_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>N.Jackson in GW11</h3><p>Chelsea: Drew 1-1 at home to Arsenal.</p>
+<p>N.Jackson: <span class="w3-tag w3-dark-grey">87 mins</span> </p></div></div></div><td onclick="document.getElementById('id180_12').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">12</td><div id="id180_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id180_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>N.Jackson in GW12</h3><p>Chelsea: Won 1-2 away to Leicester.</p>
+<p>N.Jackson: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id180_13').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id180_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id180_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>N.Jackson in GW13</h3><p>Chelsea: Won 3-0 at home to Aston Villa.</p>
+<p>N.Jackson: <span class="w3-tag w3-dark-grey">70 mins</span> <span class="w3-tag w3-green">Goal</span> </p></div></div></div><td onclick="document.getElementById('id180_14').style.display='block'" class="w3-center"  style="vertical-align:middle;">x</td><div id="id180_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id180_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>N.Jackson in GW14</h3><p>Chelsea: Won 1-5 away to Southampton.</p>
+<p>N.Jackson: Did not play.</p></div></div></div><td onclick="document.getElementById('id180_15').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id180_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id180_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>N.Jackson in GW15</h3><p>Chelsea: Won 3-4 away to Spurs.</p>
+<p>N.Jackson: <span class="w3-tag w3-dark-grey">75 mins</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">4.4</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">BRE</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">eve</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">FUL</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">ips</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">cry</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:#F2BC44;color:black;vertical-align:middle;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:#F2BC44;color:black;vertical-align:middle;"><b>WOL</b></td>
+<td style="background-color:#F2BC44;color:black;vertical-align:middle;"><b><a href="https://mwinokan.github.io/ToiletFPL/html/player_541.html">Cunha</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£7.1</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">79</td>
+<td class="w3-center" style="color:green;vertical-align:middle;">0.4%</td>
+<td onclick="document.getElementById('id541_10').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">6</td><div id="id541_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id541_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cunha in GW10</h3><p>Wolves: Drew 2-2 at home to Crystal Palace.</p>
+<p>Cunha: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">1 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id541_11').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">12</td><div id="id541_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id541_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cunha in GW11</h3><p>Wolves: Won 2-0 at home to Southampton.</p>
+<p>Cunha: <span class="w3-tag w3-dark-grey">89 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id541_12').style.display='block'" class="w3-center"  style="background-color:#196F3D;color:white;vertical-align:middle;">16</td><div id="id541_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id541_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cunha in GW12</h3><p>Wolves: Won 1-4 away to Fulham.</p>
+<p>Cunha: <span class="w3-tag w3-dark-grey">90 mins</span> <span class="w3-tag w3-green">2 Goals</span> <span class="w3-tag w3-blue">Assist</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td onclick="document.getElementById('id541_13').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id541_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id541_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cunha in GW13</h3><p>Wolves: Lost 2-4 at home to Bournemouth.</p>
+<p>Cunha: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id541_14').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id541_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id541_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cunha in GW14</h3><p>Wolves: Lost 4-0 away to Everton.</p>
+<p>Cunha: <span class="w3-tag w3-dark-grey">90 mins</span> </p></div></div></div><td onclick="document.getElementById('id541_15').style.display='block'" class="w3-center"  style="vertical-align:middle;">-</td><div id="id541_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id541_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Cunha in GW15</h3><p>Wolves: Away to West Ham.</p>
+<p>Cunha: Upcoming fixture.</p></div></div></div><td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">6.4</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">IPS</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">lei</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">MUN</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">tot</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">NFO</td>
+</tr>
+<tr>
+<td class="w3-center" style="background-color:white;color:black;vertical-align:middle;"><b>FWD</b></td>
+<td class="w3-center" style="background-color:white;color:black;vertical-align:middle;"><b>FUL</b></td>
+<td style="background-color:white;color:black;vertical-align:middle;"><b>🔄 <a href="https://mwinokan.github.io/ToiletFPL/html/player_252.html">Raúl</a></b></td>
+<td class="w3-center" style="vertical-align:middle;">£5.5</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">61</td>
+<td class="w3-center" style="color:red;vertical-align:middle;">-1.5%</td>
+<td onclick="document.getElementById('id252_10').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id252_10" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id252_10').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raúl in GW10</h3><p>Fulham: Won 2-1 at home to Brentford.</p>
+<p>Raúl: <span class="w3-tag w3-dark-grey">72 mins</span> </p></div></div></div><td onclick="document.getElementById('id252_11').style.display='block'" class="w3-center"  style="background-color:#F4D03F;color:black;vertical-align:middle;">5</td><div id="id252_11" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id252_11').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raúl in GW11</h3><p>Fulham: Won 0-2 away to Crystal Palace.</p>
+<p>Raúl: <span class="w3-tag w3-dark-grey">74 mins</span> <span class="w3-tag w3-blue">Assist</span> </p></div></div></div><td onclick="document.getElementById('id252_12').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id252_12" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id252_12').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raúl in GW12</h3><p>Fulham: Lost 1-4 at home to Wolves.</p>
+<p>Raúl: <span class="w3-tag w3-dark-grey">70 mins</span> </p></div></div></div><td onclick="document.getElementById('id252_13').style.display='block'" class="w3-center"  style="background-color:#DC7633;color:black;vertical-align:middle;">2</td><div id="id252_13" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id252_13').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raúl in GW13</h3><p>Fulham: Drew 1-1 away to Spurs.</p>
+<p>Raúl: <span class="w3-tag w3-dark-grey">77 mins</span> </p></div></div></div><td onclick="document.getElementById('id252_14').style.display='block'" class="w3-center"  style="background-color:#CB4335;color:black;vertical-align:middle;">1</td><div id="id252_14" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id252_14').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raúl in GW14</h3><p>Fulham: Won 3-1 at home to Brighton.</p>
+<p>Raúl: <span class="w3-tag w3-dark-grey">10 mins</span> </p></div></div></div><td onclick="document.getElementById('id252_15').style.display='block'" class="w3-center"  style="background-color:#52BE80;color:black;vertical-align:middle;">8</td><div id="id252_15" class="w3-modal"><div class="w3-modal-content"><div class="w3-container"><span onclick="document.getElementById('id252_15').style.display='none'" class="w3-button w3-display-topright">&times;</span><h3>Raúl in GW15</h3><p>Fulham: Drew 1-1 at home to Arsenal.</p>
+<p>Raúl: <span class="w3-tag w3-dark-grey">79 mins</span> <span class="w3-tag w3-green">Goal</span> <span class="w3-tag w3-yellow">Yellow Card</span> <span class="w3-tag w3-aqua">3 Bonus</span> </p></div></div></div><td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">3.6</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">liv</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">SOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">che</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">BOU</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">IPS</td>
+</tr>
+<tr>
+<td class="w3-center" style="vertical-align:middle;"></td>
+<td class="w3-center" style="vertical-align:middle;"></td>
+<td class="w3-center" style="vertical-align:middle;">James Leaper</td>
+<td class="w3-center" style="vertical-align:middle;">£100.3</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">772</td>
+<td class="w3-center" style="vertical-align:middle;"> </td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">40</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">63</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">63</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">74</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">46</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">39</td>
+<td class="w3-center" style="background-color:#F4D03F;color:black;vertical-align:middle;">62.3</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">64.7</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">64.0</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">67.1</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">64.2</td>
+<td class="w3-center" style="background-color:#52BE80;color:black;vertical-align:middle;">62.0</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89 w3-responsive w3-padding" id="graphDiv" style="display:block;">
+<div id="comparisonGraph" style="width:100%;height:500px">
+</div>
+</div>
+</div>
+<script>
+	GRAPH = document.getElementById("comparisonGraph");
+	Plotly.newPlot( GRAPH, [{"name": "Raya", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [4.8, 5.3, 5.4, 4.3, 4.4, 4.1], "visible": true, "mode": "lines+markers"}, {"name": "Turner", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [0, 0, 0, 0, 0, 0], "visible": true, "mode": "lines+markers"}, {"name": "Pedro Porro", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [4.2, 3.4, 3.6, 4.0, 3.5, 3.0], "visible": true, "mode": "lines+markers"}, {"name": "Dalot", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [3.0, 3.3, 3.5, 3.2, 3.2, 4.1], "visible": true, "mode": "lines+markers"}, {"name": "Robinson", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [3.2, 4.1, 3.1, 3.3, 3.7, 3.5], "visible": true, "mode": "lines+markers"}, {"name": "Van de Ven", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [0, 3.3, 3.6, 3.6, 3.2, 2.8], "visible": true, "mode": "lines+markers"}, {"name": "Harwood-Bellis", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [2.5, 2.9, 2.8, 2.9, 2.7, 2.7], "visible": true, "mode": "lines+markers"}, {"name": "M.Salah", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [10.0, 8.3, 10.3, 10.0, 8.2, 8.6], "visible": true, "mode": "lines+markers"}, {"name": "Saka", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [6.5, 6.2, 7.2, 6.8, 6.4, 6.1], "visible": true, "mode": "lines+markers"}, {"name": "Mbeumo", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [4.9, 5.1, 5.2, 4.1, 6.2, 4.6], "visible": true, "mode": "lines+markers"}, {"name": "Garnacho", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [3.4, 3.8, 4.3, 3.7, 3.6, 4.6], "visible": true, "mode": "lines+markers"}, {"name": "Smith Rowe", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [3.8, 4.9, 3.8, 4.1, 4.5, 4.4], "visible": true, "mode": "lines+markers"}, {"name": "N.Jackson", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [4.7, 4.4, 4.9, 4.8, 4.2, 4.4], "visible": true, "mode": "lines+markers"}, {"name": "Cunha", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [5.6, 5.9, 4.9, 5.0, 5.1, 5.1], "visible": true, "mode": "lines+markers"}, {"name": "Ra\u00fal", "x": ["GW16", "GW17", "GW18", "GW19", "GW20", "GW21"], "y": [3.9, 4.7, 3.9, 4.2, 4.4, 4.6], "visible": true, "mode": "lines+markers"}], {	title: "Expected Points", margin: { r:0 }, font: {size: 14}} , {responsive: true});
+</script>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">History</h1>
+</div>
+<div class="w3-col s12 m12 l12">
+<div class="w3-panel w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div class="w3-responsive">
+<table class="w3-table w3-hoverable">
+<tr>
+<th class="w3-center">GW</th>
+<th class="w3-center">Score</th>
+<th class="w3-center">Overall Rank</th>
+<th class="w3-center">GW Score</th>
+<th class="w3-center">GW Rank</th>
+<th class="w3-center">Transfers Taken</th>
+<th class="w3-center">Total Value</th>
+</tr>
+<tr>
+<td class="w3-center">15</td>
+<td class="w3-center">782</td>
+<td class="w3-center">5.1M</td>
+<td class="w3-center">39</td>
+<td class="w3-center">8.8M</td>
+<td></td>
+<td class="w3-center">£100.3</td>
+</tr>
+<tr>
+<td class="w3-center">14</td>
+<td class="w3-center">743</td>
+<td class="w3-center">4.6M</td>
+<td class="w3-center">46</td>
+<td class="w3-center">8.6M</td>
+<td></td>
+<td class="w3-center">£100.4</td>
+</tr>
+<tr>
+<td class="w3-center">13</td>
+<td class="w3-center">697</td>
+<td class="w3-center">4.0M</td>
+<td class="w3-center">74</td>
+<td class="w3-center">2.5M</td>
+<td>Haaland (2) → N.Jackson (6)<br>Hudson-Odoi (3) → M.Salah (13)<br>gain= 14<br></td>
+<td class="w3-center">£100.2</td>
+</tr>
+<tr>
+<td class="w3-center">12</td>
+<td class="w3-center">623</td>
+<td class="w3-center">4.6M</td>
+<td class="w3-center">63</td>
+<td class="w3-center">1.9M</td>
+<td></td>
+<td class="w3-center">£100.1</td>
+</tr>
+<tr>
+<td class="w3-center">11</td>
+<td class="w3-center">560</td>
+<td class="w3-center">5.4M</td>
+<td class="w3-center">63</td>
+<td class="w3-center">1.8M</td>
+<td>Eze (0) → Garnacho (6)<br>gain= 6<br></td>
+<td class="w3-center">£100.0</td>
+</tr>
+<tr>
+<td class="w3-center">10</td>
+<td class="w3-center">497</td>
+<td class="w3-center">6.2M</td>
+<td class="w3-center">40</td>
+<td class="w3-center">4.9M</td>
+<td>Watkins (2) → Raúl (2)<br>Madueke (2) → Mbeumo (3)<br>gain= -3<br></td>
+<td class="w3-center">£99.9</td>
+</tr>
+<tr>
+<td class="w3-center">9</td>
+<td class="w3-center">461</td>
+<td class="w3-center">6.1M</td>
+<td class="w3-center">43</td>
+<td class="w3-center">9.0M</td>
+<td>Saliba (0) → Robinson (2)<br>Vestergaard (0) → Van de Ven (1)<br>gain= 3<br></td>
+<td class="w3-center">£99.6</td>
+</tr>
+<tr>
+<td class="w3-center">8</td>
+<td class="w3-center">418</td>
+<td class="w3-center">5.5M</td>
+<td class="w3-center">23</td>
+<td class="w3-center">9.5M</td>
+<td></td>
+<td class="w3-center">£99.8</td>
+</tr>
+<tr>
+<td class="w3-center">7</td>
+<td class="w3-center">395</td>
+<td class="w3-center">4.6M</td>
+<td class="w3-center">48</td>
+<td class="w3-center">4.5M</td>
+<td>Maatsen (1) → Dalot (6)<br>gain= 5<br></td>
+<td class="w3-center">£99.8</td>
+</tr>
+<tr>
+<td class="w3-center">6</td>
+<td class="w3-center">347</td>
+<td class="w3-center">4.8M</td>
+<td class="w3-center">36</td>
+<td class="w3-center">8.4M</td>
+<td>Gordon (9) → Saka (3)<br>Isak (0) → Cunha (2)<br>Garnacho (2) → Hudson-Odoi (1)<br>gain= -9<br></td>
+<td class="w3-center">£100.0</td>
+</tr>
+<tr>
+<td class="w3-center">5</td>
+<td class="w3-center">315</td>
+<td class="w3-center">3.2M</td>
+<td class="w3-center">48</td>
+<td class="w3-center">8.0M</td>
+<td></td>
+<td class="w3-center">£99.8</td>
+</tr>
+<tr>
+<td class="w3-center">4</td>
+<td class="w3-center">267</td>
+<td class="w3-center">2.1M</td>
+<td class="w3-center">71</td>
+<td class="w3-center">651k</td>
+<td>Nkunku (7) → Madueke (3)<br>Mykolenko (1) → Harwood-Bellis (1)<br>gain= -4<br></td>
+<td class="w3-center">£99.5</td>
+</tr>
+<tr>
+<td class="w3-center">3</td>
+<td class="w3-center">196</td>
+<td class="w3-center">4.0M</td>
+<td class="w3-center">60</td>
+<td class="w3-center">6.4M</td>
+<td></td>
+<td class="w3-center">£99.7</td>
+</tr>
+<tr>
+<td class="w3-center">2</td>
+<td class="w3-center">136</td>
+<td class="w3-center">3.0M</td>
+<td class="w3-center">83</td>
+<td class="w3-center">1.9M</td>
+<td>Barco (0) → Vestergaard (0)<br>gain= 0<br></td>
+<td class="w3-center">£100.0</td>
+</tr>
+<tr>
+<td class="w3-center">1</td>
+<td class="w3-center">53</td>
+<td class="w3-center">5.4M</td>
+<td class="w3-center">53</td>
+<td class="w3-center">5.4M</td>
+<td></td>
+<td class="w3-center">£100.0</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="w3-col s12 m12 l12">
+<br>
+	<h1 class="w3-tag shadow89">Graphs</h1>
+</div>
+<div class="w3-col s12 m12 l6">
+<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div>                            <div id="3e607cfb-f4a3-4287-b48c-d35e71f1c1e6" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("3e607cfb-f4a3-4287-b48c-d35e71f1c1e6")) {                    Plotly.newPlot(                        "3e607cfb-f4a3-4287-b48c-d35e71f1c1e6",                        [{"customdata":["https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html"],"mode":"markers+lines+text","name":"Overall Rank","opacity":1.0,"text":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,"James Leaper"],"textposition":"middle right","visible":true,"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"y":[5385246,2967854,3965870,2054729,3208529,4806680,4641276,5537460,6145854,6207480,5394693,4643330,4048619,4610420,5138494],"type":"scatter"},{"customdata":["https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html"],"mode":"markers","name":"GW Rank","opacity":1.0,"textposition":"middle right","visible":true,"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"y":[5385248,1859077,6379941,651422,8034506,8410435,4468030,9512609,8968213,4921762,1829724,1896616,2450959,8635595,8831892],"type":"scatter"}],                        {"autosize":true,"legend":{"title":{"text":"James Leaper"}},"margin":{"b":20,"l":20,"r":20,"t":20},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"title":{"text":"Gameweek"}},"yaxis":{"autorange":"reversed","title":{"text":"Overall Rank"},"type":"log"}},                        {"responsive": true}                    )                };                            </script>        </div>
+	
+	<script>
+	var plot_element = document.getElementById("3e607cfb-f4a3-4287-b48c-d35e71f1c1e6");
+	plot_element.on('plotly_click', function(data){
+	    console.log(data);
+	    var point = data.points[0];
+	    if (point) {
+	        console.log(point.customdata);
+	        window.open(point.customdata);
+	    }
+	})
+	</script>
+	
+	</div>
+</div>
+<div class="w3-col s12 m12 l6">
+<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div>                            <div id="f58ae1ab-a481-4b70-ab33-d86e73ae26f7" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("f58ae1ab-a481-4b70-ab33-d86e73ae26f7")) {                    Plotly.newPlot(                        "f58ae1ab-a481-4b70-ab33-d86e73ae26f7",                        [{"connector":{"line":{"color":"rgb(63, 63, 63)"}},"decreasing":{"marker":{"color":"green"}},"increasing":{"marker":{"color":"red"}},"measure":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"name":"Rank","orientation":"v","text":["GW1: 5.4M","GW2: 1.9M","GW3: 6.4M","GW4: 651k","GW5: 8.0M","GW6: 8.4M","GW7: 4.5M","GW8: 9.5M","GW9: 9.0M","GW10: 4.9M","GW11: 1.8M","GW12: 1.9M","GW13: 2.5M","GW14: 8.6M","GW15: 8.8M"],"x":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"y":[5385246,-2417392,998016,-1911141,1153800,1598151,-165404,896184,608394,61626,-812787,-751363,-594711,561801,528074],"type":"waterfall"}],                        {"showlegend":false,"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"yaxis":{"autorange":"reversed","title":{"text":"Overall Rank"},"type":"log"}},                        {"responsive": true}                    )                };                            </script>        </div>
+	
+	<script>
+	var plot_element = document.getElementById("f58ae1ab-a481-4b70-ab33-d86e73ae26f7");
+	plot_element.on('plotly_click', function(data){
+	    console.log(data);
+	    var point = data.points[0];
+	    if (point) {
+	        console.log(point.customdata);
+	        window.open(point.customdata);
+	    }
+	})
+	</script>
+	
+	</div>
+</div>
+<div class="w3-col s12 m12 l6">
+<div class="w3-panel w3-center w3-white shadow89" style="padding:0px;padding-bottom:4px;">
+<div>                            <div id="f5c388f5-06d3-4e9a-8638-3ba924773056" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("f5c388f5-06d3-4e9a-8638-3ba924773056")) {                    Plotly.newPlot(                        "f5c388f5-06d3-4e9a-8638-3ba924773056",                        [{"customdata":["https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html","https:\u002f\u002fmwinokan.github.io\u002fToiletFPL\u002fhtml\u002fman_7812242.html"],"mode":"markers+lines+text","name":"Overall Rank","opacity":1.0,"text":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"James Leaper"],"textposition":"middle right","visible":true,"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"y":[0,-4,10,6,26,16,-2,0,-13,-24,-27,-13,1,15,3,-8],"type":"scatter"}],                        {"autosize":true,"legend":{"title":{"text":"James Leaper"}},"margin":{"b":20,"l":20,"r":20,"t":20},"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmapgl":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmapgl"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"title":{"text":"Gameweek"}},"yaxis":{"title":{"text":"Total points relative to global average"},"zeroline":true,"zerolinecolor":"Black","zerolinewidth":2}},                        {"responsive": true}                    )                };                            </script>        </div>
+	
+	<script>
+	var plot_element = document.getElementById("f5c388f5-06d3-4e9a-8638-3ba924773056");
+	plot_element.on('plotly_click', function(data){
+	    console.log(data);
+	    var point = data.points[0];
+	    if (point) {
+	        console.log(point.customdata);
+	        window.open(point.customdata);
+	    }
+	})
+	</script>
+	
+	</div>
+</div>
+</div>
+</div>
+<div class="w3-center" style="padding:32px">
+<p>Max Winokan <span class="w3-tag w3-black">mwinokan@me.com</span></a></p>
+</div>
+</body>
+</html>
