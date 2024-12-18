@@ -51,6 +51,8 @@ halfway_awards = False  # generate half-season / christmas awards
 season_awards = False  # generate full-season awards
 cup_active = False  # activate the cup
 
+christmas_gw = 16
+
 if "--push" in argv:
     run_push_changes = True
 if "--offline" in argv:
@@ -165,12 +167,12 @@ _league_table_html = {}
 brk = "</p><p>"
 
 league_halfway_text = {
-    146330: f"The RBS Diamond Invitational has proved to be a wild ride so far, in which our 12 elite members saw ups and downs; triumphs and tragedies; hauls and blanks. This special festive summary, will recount some of the notable events, and award the second annual Christmas awards to a lucky few recipients.{brk}Ed Lees saw himself off to a strong start, rocketing up to top of the league and a 33k overall rank by gameweek 3, partly thanks to transferring in Gusto for his 14-pointer. So far, Ed has gained a healthy 61 points from his transfers, and earns the Christmas 🔮 Fortune Teller award. It would take another five game weeks to unseat Ed from the top, as many wildcarding managers shook up the template. At this point Nye Johnson took the lead, gaining only five points over his GW7 squad with his wildcard, but picks such as Maddison, Son, and Watkins saw him improve his rank by 95% within five weeks. A tragic Tsimikas (15) to Lascelles (0)  move in GW12 marked the end of his tenure at the top as Tanya Fozzard’s took over with a steady climb that earn’s her this season’s Christmas 👑 King award.{brk}Newly promoted Kajan Kugananthajothy did not take last year’s form into the new season and despite many attempts to fix his squad - taking a whopping 20 non-wildcard transfers including 10 hits - he is this Christmas’ 🔨 Kneejerker, 🐓 Cock and 🤡 Clown. 🥶 Iceman and 🏚 Peasant Rob Sutton on the other hand kept a cool head, taking only a single hit and making 12 transfers so far, that’s probably why his team value is only £101 million, the lowest in the league. Rob’s season wasn’t always bad though, in GW6 he was second in the table and almost breached the top 250k, several red arrows has earned him the 👨‍🦳 Has-Been award for his -122% OR drop between GW9 and GW18. Can Rob save his season and escape the four relegation spots?",
-    121011: "",
+    352961: f"PLACEHOLDER DIAMOND CHRISTMAS REVIEW",
+    241682: f"PLACEHOLDER TOILET CHRISTMAS REVIEW",
 }
 league_season_text = {
-    146330: f"PLACEHOLDER DIAMOND SEASON REVIEW",
-    121011: f"PLACEHOLDER TOILET SEASON REVIEW",
+    352961: f"PLACEHOLDER DIAMOND SEASON REVIEW",
+    241682: f"PLACEHOLDER TOILET SEASON REVIEW",
 }
 
 preseason = False
@@ -3543,6 +3545,7 @@ def create_christmaspage(leagues):
             subset = []
             subset += [d[0] for d in json[str(league.id)]["half"]["awards"].values()]
             subset += [d[-1] for d in json[str(league.id)]["chips"]["wc1"].values()]
+            subset += json[str(league.id)][christmas_gw].get("promotion", [])
         else:
             subset = None
 
@@ -4339,8 +4342,6 @@ def christmas_awards(league):
         halfonly=True,
     )
 
-    christmas_gw = 18
-
     # glow-up (best improvement in the quarter season (GW8-GW16))
     sorted_managers = sorted(
         league.active_managers,
@@ -4846,6 +4847,7 @@ def create_leaguepage(league, leagues, i):
     if league.num_managers > 20 and awards:
         subset = []
         subset += [d[0] for d in json[str(league.id)][gw]["awards"].values()]
+        subset += json[str(league.id)][gw].get("promotion", [])
     else:
         subset = None
 
@@ -5210,10 +5212,12 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
         elif (
             "Toilet" in league.name
             and not m.is_diamond
-            and m.id != 3902717
             and i <= 2 + diamond_count
         ):
             html_buffer += '<tr class="w3-pale-green">\n'
+            l = json[str(league.id)][gw].get("promotion", [])
+            l.append(m.id)
+            json[str(league.id)][gw]["promotion"] = l
         elif "Diamond" in league.name and i >= len(sorted_managers) - 4:
             html_buffer += '<tr class="w3-pale-red">\n'
         elif i == 0:
