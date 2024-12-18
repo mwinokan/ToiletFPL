@@ -3597,7 +3597,7 @@ def create_christmaspage(leagues):
     html_page(
         f"html/christmas.html",
         None,
-        title="2023 Christmas Review",
+        title="2024 Christmas Review",
         gw=api._current_gw,
         html=html_buffer,
         bar_html=navbar,
