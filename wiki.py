@@ -47,11 +47,11 @@ fetch_latest = False  # pull latest changes from github before running
 force_go_graphs = True  # force update of Assets graph
 
 # gamestate options (to be automated)
-halfway_awards = False  # generate half-season / christmas awards
+halfway_awards = True  # generate half-season / christmas awards
 season_awards = False  # generate full-season awards
 cup_active = False  # activate the cup
 
-christmas_gw = 16
+christmas_gw = 17
 
 if "--push" in argv:
     run_push_changes = True
@@ -104,6 +104,7 @@ award_flavourtext = dict(
     bb_worst="Worst Bench Boost",
     fh_best="Best Free Hit",
     fh_worst="Worst Free Hit",
+    zombie="Best Dead Team",
 )
 
 award_unittext = dict(
@@ -124,6 +125,7 @@ award_unittext = dict(
     clown="points lost",
     hot_stuff="points overperformed",
     soggy_biscuit="points underperformed",
+    zombie="th place",
 )
 
 award_colour = dict(
@@ -160,6 +162,7 @@ award_colour = dict(
     soggy_biscuit="teal",
     rocket="lime",
     flushed="brown",
+    zombie="teal",
 )
 
 _league_table_html = {}
@@ -3497,10 +3500,10 @@ def create_christmaspage(leagues):
 
     html_buffer = ""
 
-    html_buffer += '<div class="w3-center">\n'
+    html_buffer += '<div class="w3-center" style="padding-bottom:0px">\n'
     html_buffer += floating_subtitle(title)
     # html_buffer += f"<h2>{title}</h2>\n"
-    html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/images/christmas.png?raw=true" alt="Banner" width="1320" height="702">\n'
+    html_buffer += f'<img class="w3-image" src="../images/christmas2024.png" alt="Banner" width="1320" height="702">\n'
     html_buffer += "</div>\n"
 
     html_buffer += '<div class="w3-col s12 m12 l12">\n'
@@ -3508,7 +3511,7 @@ def create_christmaspage(leagues):
 
     html_buffer += '<div class="w3-bar w3-black">\n'
 
-    for i, league in enumerate(leagues[:2]):
+    for i, league in enumerate(reversed(leagues[:2])):
 
         if i == 0:
             html_buffer += f'<button class="w3-bar-item w3-button w3-mobile tablink w3-red" onclick="openLeague(event,{league.id})">{league.name}</button>\n'
@@ -3517,7 +3520,7 @@ def create_christmaspage(leagues):
 
     html_buffer += "</div>\n"
 
-    for i, league in enumerate(leagues[:2]):
+    for i, league in enumerate(reversed(leagues[:2])):
 
         if i == 0:
             html_buffer += f'<div id="{league.id}" class="w3-container league">\n'
@@ -3526,9 +3529,9 @@ def create_christmaspage(leagues):
 
         html_buffer += '<div class="w3-justify w3-row-padding">\n'
 
-        html_buffer += "<p>\n"
-        html_buffer += league_halfway_text[league.id]
-        html_buffer += "</p>\n"
+        # html_buffer += "<p>\n"
+        # html_buffer += league_halfway_text[league.id]
+        # html_buffer += "</p>\n"
 
         # html_buffer += "<h3>Chip Usage</h3>\n"
         html_buffer += floating_subtitle("Chip Usage")
@@ -3563,7 +3566,7 @@ def create_christmaspage(leagues):
         html_buffer += floating_subtitle("League Table")
         md_buffer = ""
         # md_buffer += f"\n## League Table:\n"
-        md_buffer += f"Is your team's kit the boring default? Design it [here](https://fantasy.premierleague.com/entry-update)\n\n"
+        # md_buffer += f"Is your team's kit the boring default? Design it [here](https://fantasy.premierleague.com/entry-update)\n\n"
         html_buffer += md2html(md_buffer)
         html_buffer += "</div>\n"
         html_buffer += _league_table_html[league.id]
@@ -4227,6 +4230,27 @@ def christmas_awards(league):
     )
     json[str(league.id)]["half"]["awards"]["cock"] = [man.id, score]
 
+    result = json[str(league.id)][api._current_gw]["awards"].get("zombie", None)
+    print("zombie", result)
+    if result:
+        m_id, place = result
+        m = api.get_manager(id=m_id)
+        html_buffer += award_panel(
+            "🧟",
+            f"Zombie",
+            "Best Dead Team",
+            f"{place}th place, {api.big_number_format(m.overall_rank)} OR",
+            m,
+            colour="teal",
+            border="green",
+            name_class="h2",
+            halfonly=True,
+        )
+        json[str(league.id)]["half"]["awards"]["zombie"] = [
+            m_id,
+            place,
+        ]
+
     ### FORTUNE TELLER
     sorted_managers = sorted(
         league.active_managers,
@@ -4346,23 +4370,23 @@ def christmas_awards(league):
     sorted_managers = sorted(
         league.active_managers,
         key=lambda x: (
-            x.get_specific_overall_rank(christmas_gw / 2)
+            x.get_specific_overall_rank(christmas_gw // 2)
             - x.get_specific_overall_rank(christmas_gw)
         )
-        / x.get_specific_overall_rank(christmas_gw / 2),
+        / x.get_specific_overall_rank(christmas_gw // 2),
         reverse=True,
     )
     m = sorted_managers[0]
     s = (
-        m.get_specific_overall_rank(christmas_gw / 2)
+        m.get_specific_overall_rank(christmas_gw // 2)
         - m.get_specific_overall_rank(christmas_gw)
-    ) / m.get_specific_overall_rank(christmas_gw / 2)
+    ) / m.get_specific_overall_rank(christmas_gw // 2)
     json[str(league.id)]["half"]["awards"]["glow_up"] = [m.id, s]
     html_buffer += award_panel(
         "💡",
         f"Glow-Up",
-        f"Best {int(christmas_gw/2):d}GW improvement",
-        f"{api.big_number_format(m.get_specific_overall_rank(christmas_gw/2))}→{api.big_number_format(m.get_specific_overall_rank(christmas_gw))} = {100*s:+.1f}%",
+        f"Best {int(christmas_gw // 2):d}GW improvement",
+        f"{api.big_number_format(m.get_specific_overall_rank(christmas_gw // 2))}→{api.big_number_format(m.get_specific_overall_rank(christmas_gw))} = {100*s:+.1f}%",
         m,
         colour="pale-yellow",
         border="green",
@@ -4373,15 +4397,15 @@ def christmas_awards(league):
     # has-been
     m = sorted_managers[-1]
     s = m.get_specific_overall_rank(christmas_gw) - m.get_specific_overall_rank(
-        christmas_gw / 2
+        christmas_gw // 2
     )
-    s = -s / m.get_specific_overall_rank(christmas_gw / 2)
+    s = -s / m.get_specific_overall_rank(christmas_gw // 2)
     json[str(league.id)]["half"]["awards"]["has_been"] = [m.id, s]
     html_buffer += award_panel(
         "👨‍🦳",
         f"Has-Been",
-        f"Worst {int(christmas_gw/2):d}GW improvement",
-        f"{api.big_number_format(m.get_specific_overall_rank(christmas_gw/2))}→{api.big_number_format(m.get_specific_overall_rank(christmas_gw))} = {100*s:+.1f}%",
+        f"Worst {int(christmas_gw // 2):d}GW improvement",
+        f"{api.big_number_format(m.get_specific_overall_rank(christmas_gw // 2))}→{api.big_number_format(m.get_specific_overall_rank(christmas_gw))} = {100*s:+.1f}%",
         m,
         colour="grey",
         border="green",
@@ -5202,6 +5226,7 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
     )
 
     diamond_count = 0
+    zombie = None
 
     for i, m in enumerate(sorted_managers):
 
@@ -5380,6 +5405,10 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
 
         if show_transfers:
             if m.is_dead:
+                if zombie is None:
+                    json[str(league.id)][awardkey]["awards"]["zombie"] = (m.id, i+1)
+                    zombie = m
+                    print("zombie", awardkey, (m.id, i+1))
                 html_buffer += (
                     f'<td class="w3-black" style="text-align:center;">💀</td>\n'
                 )
