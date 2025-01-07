@@ -5688,7 +5688,7 @@ def league_differentials(league, gw):
 
     html_buffer = ""
 
-    players = league.get_starting_players(unique=False, active_only=False)
+    players = league.get_starting_players(unique=False, active_only=True)
 
     n = league.num_managers
 
