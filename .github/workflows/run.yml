@@ -25,7 +25,7 @@ jobs:
       - name: install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytz mpytools pandas matplotlib numpy plotly markdown scipy requests tqdm cairosvg
+          pip install pytz mpytools pandas matplotlib numpy plotly markdown scipy requests tqdm IPython cairosvg
       - name: execute py script # run file
         run: |
           python wiki.py
