@@ -23,6 +23,7 @@ from squad import Squad
 import time
 from pprint import pprint
 from sys import argv
+import mrich
 
 # https://stackoverflow.com/questions/60598837/html-to-image-using-python
 
@@ -1591,6 +1592,9 @@ def create_assetpage(leagues):
             if mins > minutes:
                 index = api.get_player_index(pid)
                 p = Player(None, api, index=index)
+                if p.position_id == 5:
+                    mrich.warning(f"Excluding manager {p.name} from asset page graphs")
+                    continue
                 players.append(p)
 
         import sys

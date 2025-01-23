@@ -228,6 +228,8 @@ class Player:
 
             self._position_id = elements["element_type"][i]
 
+            assert self._position_id in [1,2,3,4,5]
+
             self._transfers_in = elements["transfers_in_event"][i]
             self._transfers_out = elements["transfers_out_event"][i]
 
@@ -1044,15 +1046,15 @@ class Player:
 
     @property
     def goal_multiplier(self):
-        return [6, 6, 5, 4][self.position_id - 1]
+        return [6, 6, 5, 4, 1][self.position_id - 1]
 
     @property
     def clean_sheet_multiplier(self):
-        return [4, 4, 1, 0][self.position_id - 1]
+        return [4, 4, 1, 0, 2][self.position_id - 1]
 
     @property
     def assist_multiplier(self):
-        return 3
+        return [3, 3, 3, 3, 0][self.position_id - 1]
 
     @property
     def performed_expected_attacking_points(self):
