@@ -835,17 +835,20 @@ class Player:
 
         event_stats = self._api.get_player_event_stats(gw, self._id)
 
+        self.extract_event_stats(event_stats)
+
         if debug:
             pprint(event_stats)
 
-        score = int(event_stats["total_points"])
+        score = int(self.__total_points)
 
         if debug:
             print(f"{score=}")
+        
         if debug:
-            print(f'{event_stats["minutes"]=}')
+            print(f'{self.__minutes=}')
 
-        if not_playing_is_none and event_stats["minutes"] == 0:
+        if not_playing_is_none and self.__minutes == 0:
             if not return_str:
                 score = None
             else:
@@ -2091,11 +2094,27 @@ class Player:
                     return False
 
     def extract_event_stats(self, event_stats):
+
+        if self.is_manager:
+            self.__clean_sheets = event_stats.get('mng_clean_sheets')
+            self.__goals_scored = event_stats.get('mng_goals_scored')
+            self.__manager_draw = event_stats.get('mng_draw')
+            self.__manager_loss = event_stats.get('mng_loss')
+            self.__manager_win = event_stats.get('mng_win')
+            self.__manager_underdog_draw = event_stats.get('mng_underdog_draw')
+            self.__manager_underdog_win = event_stats.get('mng_underdog_win')
+            if self.__manager_draw is None:
+                self.__minutes = 0
+            else:
+                self.__minutes = 90
+
+        else:
+            self.__goals_scored = event_stats["goals_scored"]
+            self.__clean_sheets = event_stats["clean_sheets"]
+            self.__minutes = event_stats["minutes"]
+
         # print(event_stats.keys())
-        self.__minutes = event_stats["minutes"]
-        self.__goals_scored = event_stats["goals_scored"]
         self.__assists = event_stats["assists"]
-        self.__clean_sheets = event_stats["clean_sheets"]
         self.__goals_conceded = event_stats["goals_conceded"]
         self.__own_goals = event_stats["own_goals"]
         self.__penalties_saved = event_stats["penalties_saved"]
@@ -2205,6 +2224,9 @@ class Player:
             if gw == r:
                 h_indices.append(i)
 
+        if len(h_indices) > 1:
+            event_stats = None
+
         kwargs = dict(
             md_bold=md_bold,
             event_stats=event_stats,
@@ -2215,6 +2237,7 @@ class Player:
 
         if len(h_indices) == 1:
             return self.get_event_strbuff(h_indices[0], gw, 0, **kwargs)
+
         elif len(h_indices) == 2:
             return (
                 self.get_event_strbuff(h_indices[0], gw, 0, **kwargs)
@@ -2316,13 +2339,54 @@ class Player:
 
         ### general
 
-        if self.__minutes > 0:
+        if self.is_manager:
+
+            ### MANAGER STUFF
+
+            if html_highlight:
+                if self.__manager_draw:
+                    text = "Draw"
+                    color = "pale-blue"
+                elif self.__manager_win:
+                    text = "Win"
+                    color = "pale-green"
+                elif self.__manager_loss:
+                    text = "Loss"
+                    color = "dark-grey"
+                elif self.__manager_underdog_win:
+                    text = "Underdog Win"
+                    color = "green"
+                elif self.__manager_underdog_draw:
+                    text = "Underdog Draw"
+                    color = "blue"
+                else:
+                    text = None
+
+                if text:
+                    str_buffer += (
+                        f'<span class="w3-tag w3-{color}">{text}</span> '
+                    )
+
+            else:
+                if self.__manager_draw:
+                    str_buffer += "Draw, "
+                elif self.__manager_win:
+                    str_buffer += "Win, "
+                elif self.__manager_loss:
+                    str_buffer += "Loss, "
+                elif self.__manager_underdog_win:
+                    str_buffer += "Underdog Win, "
+                elif self.__manager_underdog_draw:
+                    str_buffer += "Underdog Draw, "
+
+        elif self.__minutes > 0:
             if html_highlight:
                 str_buffer += (
                     f'<span class="w3-tag w3-dark-grey">{self.__minutes} mins</span> '
                 )
             else:
                 str_buffer += f"{self.__minutes} Minutes, "
+
         else:
             if self.has_fixture_finished:
                 str_buffer += "Did not play."
@@ -2397,7 +2461,7 @@ class Player:
 
         ### non-attackers
 
-        if self.position_id < 4 and self.__clean_sheets > 0:
+        if self.position_id != 4 and self.__clean_sheets > 0:
             if html_highlight:
                 str_buffer += f'<span class="w3-tag w3-purple">Clean Sheet</span> '
             else:

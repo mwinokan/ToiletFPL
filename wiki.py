@@ -364,17 +364,22 @@ def run_test():
 
     # print(p,s)
 
-    # p = Player('Ward-Prowse',api)
+    p = Player('Iraola',api)
 
-    # s = p.get_event_score(8,debug=True)
+    s = p.get_event_score(23,debug=True)
 
-    # print(p,s)
+    s2 = p.get_event_summary(23, html_highlight=False)
+
+    create_playerpage(api, p, [])
+
+    print(p,s)
+    print(s2)
 
     # create_comparison_page(api,[])
 
-    l = League(352961, api)
+    # l = League(352961, api)
 
-    print(l.last_gw_position_dict)
+    # print(l.last_gw_position_dict)
 
     # create_leaguepage(l,[],0)
 
