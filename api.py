@@ -1252,40 +1252,55 @@ class FPL_API:
         # not_found = [5,9,10,12,15,16,18,19,22]
 
         count = 0
-        i = 1
-        i = 89
+        i = 0
+        # i = 39
         while True:
             print(i, count)
             try:
                 urllib.request.urlretrieve(
-                    f"{url}shirt_{i+1}-66.webp", f"kits/{i}.webp"
+                    f"{url}shirt_{i+1}-66.png", f"kits/{i}.png"
                 )
-                i += 1
                 count += 1
+            
+                urllib.request.urlretrieve(
+                    f"{url}shirt_{i+1}_1-66.png", f"kits/{i}_gkp.png"
+                )
+                count += 1
+                i += 1
+            
             except urllib.error.HTTPError:
                 i += 1
                 if i > 200:
                     break
                 continue
 
-            # if count == 19:
-            # break
+            if count == 19:
+            break
 
-        return
+        # return
+
+        from pathlib import Path
+        import shutil
 
         for i, name in self._scrape_team_pairs:
             try:
-                urllib.request.urlretrieve(
-                    f"{url}shirt_{i+1}-66.webp", f"kits/{i}.webp"
-                )
-                self.webp2png(f"kits/{i}.webp", f"kits/{name}.png")
-                urllib.request.urlretrieve(
-                    f"{url}shirt_{i+1}_1-66.webp", f"kits/{i}_gkp.webp"
-                )
-                self.webp2png(f"kits/{i}_gkp.webp", f"kits/{name}_gkp.png")
-            except urllib.error.HTTPError:
-                # print(i+1,name)
-                mout.errorOut(f"Problem accessing {url}shirt_{i+1}-66.webp")
+                shutil.copy(f"kits/{i}.png", f"kits/{name}.png")
+            except FileNotFoundError:
+                continue
+
+        # for i, name in self._scrape_team_pairs:
+        #     try:
+        #         urllib.request.urlretrieve(
+        #             f"{url}shirt_{i+1}-66.webp", f"kits/{i}.webp"
+        #         )
+        #         self.webp2png(f"kits/{i}.webp", f"kits/{name}.png")
+        #         urllib.request.urlretrieve(
+        #             f"{url}shirt_{i+1}_1-66.webp", f"kits/{i}_gkp.webp"
+        #         )
+        #         self.webp2png(f"kits/{i}_gkp.webp", f"kits/{name}_gkp.png")
+        #     except urllib.error.HTTPError:
+        #         # print(i+1,name)
+        #         mout.errorOut(f"Problem accessing {url}shirt_{i+1}-66.webp")
 
         # print(f"{url}shirt_{i+1}-66.webp", f"kits/{i}.webp")
 

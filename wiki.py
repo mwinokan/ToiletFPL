@@ -5580,7 +5580,7 @@ def ownership_template(league, title, gw):
         html_buffer += f'<td style="vertical-align:middle;text-align:right;"><b>{ranks[i]}</b></td>'
 
         html_buffer += f'<td style="vertical-align:middle;">'
-        html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{d["kit_path"]}?raw=true" alt="Kit Icon" width="22" height="29">'
+        html_buffer += f'<img class="w3-image" src="../{d["kit_path"]}" alt="Kit Icon" width="22" height="29">'
 
         html_buffer += f' {d["shortteam"]} \n'
         html_buffer += f'{d["position"]}</td>\n'
@@ -5661,7 +5661,7 @@ def position_template(league, players, pos_str, gw):
             html_buffer += f"<b>{ranks[i]}</b>\n"
             html_buffer += f"</td>\n"
             html_buffer += f'<td style="vertical-align:middle;text-align:right;">\n'
-            html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+            html_buffer += f'<img class="w3-image" src="../{p.kit_path}" alt="Kit Icon" width="22" height="29">'
             html_buffer += f"</td>\n"
             html_buffer += f'<td style="vertical-align:middle;">\n'
             html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
@@ -5746,7 +5746,7 @@ def league_differentials(league, gw):
 
             html_buffer += f"<tr>\n"
             html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
-            html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{p.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+            html_buffer += f'<img class="w3-image" src="../{p.kit_path}" alt="Kit Icon" width="22" height="29">'
             html_buffer += f"</td>\n"
             html_buffer += f'<td style="vertical-align:middle;">\n'
             html_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
