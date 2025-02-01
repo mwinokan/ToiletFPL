@@ -121,9 +121,7 @@ class Player:
         self.__fix_finished = None
         self.__total_points = None
 
-        self._gui_url = (
-            f"player_{self.id}.html"
-        )
+        self._gui_url = f"player_{self.id}.html"
 
         if int(self.id) not in self._api._loaded_players:
             self._api._loaded_players.append(int(self.id))
@@ -226,15 +224,13 @@ class Player:
 
             self._position_id = elements["element_type"][i]
 
-            assert self._position_id in [1,2,3,4,5]
-
+            assert self._position_id in [1, 2, 3, 4, 5]
 
             if self.is_manager:
                 # https://resources.premierleague.com/premierleague/photos/players/110x140/man85.png
                 self._photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/{elements["opta_code"][i]}.png'
             else:
                 self._photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/p{elements["photo"][i].replace(".jpg",".png")}'
-
 
             self._transfers_in = elements["transfers_in_event"][i]
             self._transfers_out = elements["transfers_out_event"][i]
@@ -844,9 +840,9 @@ class Player:
 
         if debug:
             print(f"{score=}")
-        
+
         if debug:
-            print(f'{self.__minutes=}')
+            print(f"{self.__minutes=}")
 
         if not_playing_is_none and self.__minutes == 0:
             if not return_str:
@@ -1137,12 +1133,11 @@ class Player:
 
     def expected_minutes(self, gw=None, Ms=None):
 
-
         if gw is None:
             gw = self._api._current_gw + 1
         if gw > 38:
             return None
-        
+
         if self.is_manager:
             return 90 * self.num_gwfix(gw)
 
@@ -2096,13 +2091,13 @@ class Player:
     def extract_event_stats(self, event_stats):
 
         if self.is_manager:
-            self.__clean_sheets = event_stats.get('mng_clean_sheets')
-            self.__goals_scored = event_stats.get('mng_goals_scored')
-            self.__manager_draw = event_stats.get('mng_draw')
-            self.__manager_loss = event_stats.get('mng_loss')
-            self.__manager_win = event_stats.get('mng_win')
-            self.__manager_underdog_draw = event_stats.get('mng_underdog_draw')
-            self.__manager_underdog_win = event_stats.get('mng_underdog_win')
+            self.__clean_sheets = event_stats.get("mng_clean_sheets")
+            self.__goals_scored = event_stats.get("mng_goals_scored")
+            self.__manager_draw = event_stats.get("mng_draw")
+            self.__manager_loss = event_stats.get("mng_loss")
+            self.__manager_win = event_stats.get("mng_win")
+            self.__manager_underdog_draw = event_stats.get("mng_underdog_draw")
+            self.__manager_underdog_win = event_stats.get("mng_underdog_win")
             if self.__manager_draw is None:
                 self.__minutes = 0
             else:
@@ -2363,9 +2358,7 @@ class Player:
                     text = None
 
                 if text:
-                    str_buffer += (
-                        f'<span class="w3-tag w3-{color}">{text}</span> '
-                    )
+                    str_buffer += f'<span class="w3-tag w3-{color}">{text}</span> '
 
             else:
                 if self.__manager_draw:

@@ -4,6 +4,7 @@ from squad import Squad
 import pandas as pd
 import mrich
 
+
 class Manager:
 
     def __init__(self, name, id, api, team_name=None, authenticate=False):

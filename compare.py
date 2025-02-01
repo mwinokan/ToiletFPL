@@ -206,9 +206,7 @@ def player_name_cell(p, prepend=None):
     if prepend:
         html_buffer += prepend
     html_buffer += f'<img class="w3-image" src="{p.team_obj._badge_url}" alt="{p.team_obj.shortname}" width="20" height="20">\n'
-    html_buffer += (
-        f'<a href="{p._gui_url}"><b> {p.name}</a>\n'
-    )
+    html_buffer += f'<a href="{p._gui_url}"><b> {p.name}</a>\n'
     if p.is_yellow_flagged:
         html_buffer += f" ⚠️"
     elif p.is_red_flagged:

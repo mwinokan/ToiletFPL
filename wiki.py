@@ -256,7 +256,7 @@ def main():
     navbar = create_navbar(leagues, path_root="html/")
 
     create_homepage(navbar)
-    
+
     navbar = create_navbar(leagues)
 
     for i, l in enumerate(leagues):
@@ -273,7 +273,7 @@ def main():
     create_teampage(api, leagues)
 
     if halfway_awards:
-        #create_christmaspage(leagues)
+        # create_christmaspage(leagues)
         pass
 
     if season_awards:
@@ -364,15 +364,15 @@ def run_test():
 
     # print(p,s)
 
-    p = Player('Iraola',api)
+    p = Player("Iraola", api)
 
-    s = p.get_event_score(23,debug=True)
+    s = p.get_event_score(23, debug=True)
 
     s2 = p.get_event_summary(23, html_highlight=False)
 
     create_playerpage(api, p, [])
 
-    print(p,s)
+    print(p, s)
     print(s2)
 
     # create_comparison_page(api,[])
@@ -1672,7 +1672,9 @@ def create_assetpage(leagues):
         )
 
 
-def create_navbar(leagues, active=None, colour="black", active_colour="aqua", path_root=""):
+def create_navbar(
+    leagues, active=None, colour="black", active_colour="aqua", path_root=""
+):
 
     html_buffer = ""
 
@@ -2735,7 +2737,9 @@ def create_picks_table(api, players, prev_gw_count=5, next_gw_count=5, manager=N
             html_buffer += f"⛔️ "
         if player.was_subbed:
             html_buffer += f"🔄 "
-        html_buffer += f'<a href="html/player_{player.id}.html">{player.name}</a></b></td>\n'
+        html_buffer += (
+            f'<a href="html/player_{player.id}.html">{player.name}</a></b></td>\n'
+        )
 
         ###
 
@@ -5255,11 +5259,7 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
 
         if "Toilet" in league.name and m.is_diamond and m.id != 3902717:
             diamond_count += 1
-        elif (
-            "Toilet" in league.name
-            and not m.is_diamond
-            and i <= 2 + diamond_count
-        ):
+        elif "Toilet" in league.name and not m.is_diamond and i <= 2 + diamond_count:
             html_buffer += '<tr class="w3-pale-green">\n'
             l = json[str(league.id)][gw].get("promotion", [])
             l.append(m.id)
@@ -5429,9 +5429,9 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
         if show_transfers:
             if m.is_dead:
                 if zombie is None:
-                    json[str(league.id)][awardkey]["awards"]["zombie"] = (m.id, i+1)
+                    json[str(league.id)][awardkey]["awards"]["zombie"] = (m.id, i + 1)
                     zombie = m
-                    print("zombie", awardkey, (m.id, i+1))
+                    print("zombie", awardkey, (m.id, i + 1))
                 html_buffer += (
                     f'<td class="w3-black" style="text-align:center;">💀</td>\n'
                 )

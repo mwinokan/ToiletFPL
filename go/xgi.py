@@ -3,149 +3,216 @@
 import api as fpl_api
 from player import Player
 import plotly.graph_objects as go
-# import plotly.io as pio 
+
+# import plotly.io as pio
 from plotly.offline import plot
 import re
 import mout
 
+
 def main():
 
-	api = fpl_api.FPL_API()
+    api = fpl_api.FPL_API()
 
-	players = []
+    players = []
 
-	player_ids = api._elements['id']
-	for i,pid in enumerate(player_ids):
-		if i%50 == 0:
-			print(i)
+    player_ids = api._elements["id"]
+    for i, pid in enumerate(player_ids):
+        if i % 50 == 0:
+            print(i)
 
-		if api._elements['minutes'][i] < minutes:
-			continue
+        if api._elements["minutes"][i] < minutes:
+            continue
 
-		index = api.get_player_index(pid)
-		p = Player(None, api, index=index)
-		players.append(p)
+        index = api.get_player_index(pid)
+        p = Player(None, api, index=index)
+        players.append(p)
 
-	create_xgi_figure(api,players,show=True)
+    create_xgi_figure(api, players, show=True)
 
-def create_xgi_figure(api,players,show=False):
 
-	xdata_gkp = []
-	ydata_gkp = []
-	tdata_gkp = []
-	sdata_gkp = []
-	udata_gkp = []
-	ndata_gkp = []
-	xdata_def = []
-	ydata_def = []
-	tdata_def = []
-	sdata_def = []
-	udata_def = []
-	ndata_def = []
-	xdata_mid = []
-	ydata_mid = []
-	tdata_mid = []
-	sdata_mid = []
-	udata_mid = []
-	ndata_mid = []
-	xdata_fwd = []
-	ydata_fwd = []
-	tdata_fwd = []
-	sdata_fwd = []
-	udata_fwd = []
-	ndata_fwd = []
+def create_xgi_figure(api, players, show=False):
 
-	gw = api._current_gw
+    xdata_gkp = []
+    ydata_gkp = []
+    tdata_gkp = []
+    sdata_gkp = []
+    udata_gkp = []
+    ndata_gkp = []
+    xdata_def = []
+    ydata_def = []
+    tdata_def = []
+    sdata_def = []
+    udata_def = []
+    ndata_def = []
+    xdata_mid = []
+    ydata_mid = []
+    tdata_mid = []
+    sdata_mid = []
+    udata_mid = []
+    ndata_mid = []
+    xdata_fwd = []
+    ydata_fwd = []
+    tdata_fwd = []
+    sdata_fwd = []
+    udata_fwd = []
+    ndata_fwd = []
 
-	maximum = len(players)
+    gw = api._current_gw
 
-	# hival = 0.0
+    maximum = len(players)
 
-	for i,p in enumerate(players):
-		mout.progress(i,maximum)
+    # hival = 0.0
 
-		size = p.selected_by/2+5
+    for i, p in enumerate(players):
+        mout.progress(i, maximum)
 
-		x = p.performed_expected_attacking_points_wPrev
-		y = p.attacking_points_wPrev
+        size = p.selected_by / 2 + 5
 
-		# val = max([x,y])
-		# if val > hival:
-		# 	hival = val
+        x = p.performed_expected_attacking_points_wPrev
+        y = p.attacking_points_wPrev
 
-		if p.position_id == 1:
-			xdata_gkp.append(x)
-			ydata_gkp.append(y)
-			tdata_gkp.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
-			sdata_gkp.append(size)
-			udata_gkp.append(f'{p._gui_url}')
-			if p.selected_by > 29:
-				ndata_gkp.append(p.name)
-			else:
-				ndata_gkp.append(None)
+        # val = max([x,y])
+        # if val > hival:
+        # 	hival = val
 
-		elif p.position_id == 2:
-			xdata_def.append(x)
-			ydata_def.append(y)
-			tdata_def.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
-			sdata_def.append(size)
-			udata_def.append(f'{p._gui_url}')
-			if p.selected_by > 29:
-				ndata_def.append(p.name)
-			else:
-				ndata_def.append(None)
+        if p.position_id == 1:
+            xdata_gkp.append(x)
+            ydata_gkp.append(y)
+            tdata_gkp.append(f"{p.name}, {p.team_obj.shortname}, {p.selected_by}%")
+            sdata_gkp.append(size)
+            udata_gkp.append(f"{p._gui_url}")
+            if p.selected_by > 29:
+                ndata_gkp.append(p.name)
+            else:
+                ndata_gkp.append(None)
 
-		elif p.position_id == 3:
-			xdata_mid.append(x)
-			ydata_mid.append(y)
-			tdata_mid.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
-			sdata_mid.append(size)
-			udata_mid.append(f'{p._gui_url}')
-			if p.selected_by > 29:
-				ndata_mid.append(p.name)
-			else:
-				ndata_mid.append(None)
+        elif p.position_id == 2:
+            xdata_def.append(x)
+            ydata_def.append(y)
+            tdata_def.append(f"{p.name}, {p.team_obj.shortname}, {p.selected_by}%")
+            sdata_def.append(size)
+            udata_def.append(f"{p._gui_url}")
+            if p.selected_by > 29:
+                ndata_def.append(p.name)
+            else:
+                ndata_def.append(None)
 
-		elif p.position_id == 4:
-			xdata_fwd.append(x)
-			ydata_fwd.append(y)
-			tdata_fwd.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
-			sdata_fwd.append(size)
-			udata_fwd.append(f'{p._gui_url}')
-			if p.selected_by > 29:
-				ndata_fwd.append(p.name)
-			else:
-				ndata_fwd.append(None)
+        elif p.position_id == 3:
+            xdata_mid.append(x)
+            ydata_mid.append(y)
+            tdata_mid.append(f"{p.name}, {p.team_obj.shortname}, {p.selected_by}%")
+            sdata_mid.append(size)
+            udata_mid.append(f"{p._gui_url}")
+            if p.selected_by > 29:
+                ndata_mid.append(p.name)
+            else:
+                ndata_mid.append(None)
 
-	mout.progress(maximum,maximum)
+        elif p.position_id == 4:
+            xdata_fwd.append(x)
+            ydata_fwd.append(y)
+            tdata_fwd.append(f"{p.name}, {p.team_obj.shortname}, {p.selected_by}%")
+            sdata_fwd.append(size)
+            udata_fwd.append(f"{p._gui_url}")
+            if p.selected_by > 29:
+                ndata_fwd.append(p.name)
+            else:
+                ndata_fwd.append(None)
 
-	fig = go.Figure()
+    mout.progress(maximum, maximum)
 
-	# x=y line
-	fig.update_layout(shapes = [{'type': 'line', 'yref': 'paper', 'xref': 'paper', 'y0': 0, 'y1': 1, 'x0': 0, 'x1': 1}])
+    fig = go.Figure()
 
-	fig.add_trace(go.Scatter(name="Goalkeepers",opacity=0.8,x=xdata_gkp, y=ydata_gkp, text=tdata_gkp, marker_size=sdata_gkp, customdata=udata_gkp, textposition='middle right', mode='markers'))
-	fig.add_trace(go.Scatter(name="Defenders",opacity=0.8,x=xdata_def, y=ydata_def, text=tdata_def, marker_size=sdata_def, customdata=udata_def, textposition='middle right', mode='markers'))
-	fig.add_trace(go.Scatter(name="Midfielders",opacity=0.8,x=xdata_mid, y=ydata_mid, text=tdata_mid, marker_size=sdata_mid, customdata=udata_mid, textposition='middle right', mode='markers'))
-	fig.add_trace(go.Scatter(name="Forwards",opacity=0.8,x=xdata_fwd, y=ydata_fwd, text=tdata_fwd, marker_size=sdata_fwd, customdata=udata_fwd, textposition='middle right', mode='markers'))
+    # x=y line
+    fig.update_layout(
+        shapes=[
+            {
+                "type": "line",
+                "yref": "paper",
+                "xref": "paper",
+                "y0": 0,
+                "y1": 1,
+                "x0": 0,
+                "x1": 1,
+            }
+        ]
+    )
 
-	fig.update_traces(marker=dict(line=dict(width=1,color='Black')),selector=dict(mode='markers'))
+    fig.add_trace(
+        go.Scatter(
+            name="Goalkeepers",
+            opacity=0.8,
+            x=xdata_gkp,
+            y=ydata_gkp,
+            text=tdata_gkp,
+            marker_size=sdata_gkp,
+            customdata=udata_gkp,
+            textposition="middle right",
+            mode="markers",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Defenders",
+            opacity=0.8,
+            x=xdata_def,
+            y=ydata_def,
+            text=tdata_def,
+            marker_size=sdata_def,
+            customdata=udata_def,
+            textposition="middle right",
+            mode="markers",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Midfielders",
+            opacity=0.8,
+            x=xdata_mid,
+            y=ydata_mid,
+            text=tdata_mid,
+            marker_size=sdata_mid,
+            customdata=udata_mid,
+            textposition="middle right",
+            mode="markers",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            name="Forwards",
+            opacity=0.8,
+            x=xdata_fwd,
+            y=ydata_fwd,
+            text=tdata_fwd,
+            marker_size=sdata_fwd,
+            customdata=udata_fwd,
+            textposition="middle right",
+            mode="markers",
+        )
+    )
 
-	fig.update_layout(legend_title_text = "Position",autosize=True,margin=dict(l=20, r=20, t=20, b=20))
-	fig.update_xaxes(title_text="Expected Attacking Points (m*xG + 3*xA)")
-	fig.update_yaxes(title_text="Returned Attacked Points (m*G + 3*A)")
+    fig.update_traces(
+        marker=dict(line=dict(width=1, color="Black")), selector=dict(mode="markers")
+    )
 
-	# Get HTML representation of plotly.js and this figure
-	plot_div = plot(fig, output_type='div', include_plotlyjs=False)
+    fig.update_layout(
+        legend_title_text="Position", autosize=True, margin=dict(l=20, r=20, t=20, b=20)
+    )
+    fig.update_xaxes(title_text="Expected Attacking Points (m*xG + 3*xA)")
+    fig.update_yaxes(title_text="Returned Attacked Points (m*G + 3*A)")
 
-	# Get id of html div element that looks like
-	# <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >
-	res = re.search('<div id="([^"]*)"', plot_div)
-	div_id = res.groups()[0]
+    # Get HTML representation of plotly.js and this figure
+    plot_div = plot(fig, output_type="div", include_plotlyjs=False)
 
-	# Build JavaScript callback for handling clicks
-	# and opening the URL in the trace's customdata 
-	js_callback = """
+    # Get id of html div element that looks like
+    # <div id="301d22ab-bfba-4621-8f5d-dc4fd855bb33" ... >
+    res = re.search('<div id="([^"]*)"', plot_div)
+    div_id = res.groups()[0]
+
+    # Build JavaScript callback for handling clicks
+    # and opening the URL in the trace's customdata
+    js_callback = """
 	<script>
 	var plot_element = document.getElementById("{div_id}");
 	plot_element.on('plotly_click', function(data){{
@@ -157,21 +224,26 @@ def create_xgi_figure(api,players,show=False):
 	    }}
 	}})
 	</script>
-	""".format(div_id=div_id)
+	""".format(
+        div_id=div_id
+    )
 
-	# Build HTML string
-	html_str = """{plot_div}
+    # Build HTML string
+    html_str = """{plot_div}
 	{js_callback}
-	""".format(plot_div=plot_div, js_callback=js_callback)
+	""".format(
+        plot_div=plot_div, js_callback=js_callback
+    )
 
-	# # Write out HTML file
-	# with open('go/value.html', 'w') as f:
-	#     f.write(html_str)
+    # # Write out HTML file
+    # with open('go/value.html', 'w') as f:
+    #     f.write(html_str)
 
-	return html_str
+    return html_str
 
-	# pio.write_html(fig, file='go/value.html', auto_open=show)
-	# fig.show()
+    # pio.write_html(fig, file='go/value.html', auto_open=show)
+    # fig.show()
 
-if __name__ == '__main__':
-	main()
+
+if __name__ == "__main__":
+    main()
