@@ -14,6 +14,7 @@ from plot import team_strength
 from collections import Counter
 
 from pprint import pprint
+import mrich
 
 url = "https://fantasy.premierleague.com/api/"
 
@@ -1229,9 +1230,14 @@ class FPL_API:
 
         svg_buffer += "</svg>"
 
-        svg2png(bytestring=svg_buffer, write_to=path)
+        path = path.removeprefix("../")
 
-        self.png2png(path, path, size=87)
+        try:
+            svg2png(bytestring=svg_buffer, write_to=path)
+            self.png2png(path, path, size=87)
+        except Exception as e:
+            mrich.error(e)
+            mrich.error("Error generating kit", path)
 
         # exit()
 

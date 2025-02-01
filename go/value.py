@@ -76,28 +76,28 @@ def create_value_figure(api,players,show=False, return_fig=False):
 			ydata_gkp.append(next5_sum)
 			tdata_gkp.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_gkp.append(size)
-			udata_gkp.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_gkp.append(f'{p._gui_url}')
 		elif p.position_id == 2:
 			# xdata_def.append(p.price-4.0)
 			xdata_def.append(p.price)
 			ydata_def.append(next5_sum)
 			tdata_def.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_def.append(size)
-			udata_def.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_def.append(f'{p._gui_url}')
 		elif p.position_id == 3:
 			# xdata_mid.append(p.price-4.5)
 			xdata_mid.append(p.price)
 			ydata_mid.append(next5_sum)
 			tdata_mid.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_mid.append(size)
-			udata_mid.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_mid.append(f'{p._gui_url}')
 		elif p.position_id == 4:
 			# xdata_fwd.append(p.price-4.5)
 			xdata_fwd.append(p.price)
 			ydata_fwd.append(next5_sum)
 			tdata_fwd.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_fwd.append(size)
-			udata_fwd.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_fwd.append(f'{p._gui_url}')
 
 	mout.progress(maximum,maximum)
 

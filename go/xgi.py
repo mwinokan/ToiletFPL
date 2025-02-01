@@ -78,7 +78,7 @@ def create_xgi_figure(api,players,show=False):
 			ydata_gkp.append(y)
 			tdata_gkp.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_gkp.append(size)
-			udata_gkp.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_gkp.append(f'{p._gui_url}')
 			if p.selected_by > 29:
 				ndata_gkp.append(p.name)
 			else:
@@ -89,7 +89,7 @@ def create_xgi_figure(api,players,show=False):
 			ydata_def.append(y)
 			tdata_def.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_def.append(size)
-			udata_def.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_def.append(f'{p._gui_url}')
 			if p.selected_by > 29:
 				ndata_def.append(p.name)
 			else:
@@ -100,7 +100,7 @@ def create_xgi_figure(api,players,show=False):
 			ydata_mid.append(y)
 			tdata_mid.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_mid.append(size)
-			udata_mid.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_mid.append(f'{p._gui_url}')
 			if p.selected_by > 29:
 				ndata_mid.append(p.name)
 			else:
@@ -111,7 +111,7 @@ def create_xgi_figure(api,players,show=False):
 			ydata_fwd.append(y)
 			tdata_fwd.append(f'{p.name}, {p.team_obj.shortname}, {p.selected_by}%')
 			sdata_fwd.append(size)
-			udata_fwd.append(f'https://mwinokan.github.io/ToiletFPL/html/player_{p.id}.html')
+			udata_fwd.append(f'{p._gui_url}')
 			if p.selected_by > 29:
 				ndata_fwd.append(p.name)
 			else:

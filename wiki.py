@@ -195,11 +195,11 @@ def main():
 
     if offline:
         os.system(
-            f"terminal-notifier -title 'ToiletFPL' -message 'Started Wiki Update [OFFLINE]' -open 'https://{DEPLOY_ROOT}/index.html'"
+            f"terminal-notifier -title 'ToiletFPL' -message 'Started Wiki Update [OFFLINE]' -open 'index.html'"
         )
     else:
         os.system(
-            f"terminal-notifier -title 'ToiletFPL' -message 'Started Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'"
+            f"terminal-notifier -title 'ToiletFPL' -message 'Started Wiki Update' -open 'index.html'"
         )
 
     if fetch_latest:
@@ -253,9 +253,11 @@ def main():
     if api._current_gw < 38:
         create_comparison_page(api, leagues)
 
-    navbar = create_navbar(leagues)
+    navbar = create_navbar(leagues, path_root="html/")
 
     create_homepage(navbar)
+    
+    navbar = create_navbar(leagues)
 
     for i, l in enumerate(leagues):
         create_leaguepage(l, leagues, i)
@@ -546,7 +548,7 @@ def create_comparison_page(api, leagues, prev_gw_count=5, next_gw_count=5):
         )
         html_buffer += f"<td style={style_str}>\n"
         html_buffer += f'<img class="w3-image" src="{p.team_obj._badge_url}" alt="{p.team_obj.shortname}" width="20" height="20">\n'
-        html_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html"><b> {p.name}</a>\n'
+        html_buffer += f'<a href="player_{p.id}.html"><b> {p.name}</a>\n'
         if p.is_yellow_flagged:
             html_buffer += f" ⚠️"
         elif p.is_red_flagged:
@@ -960,7 +962,7 @@ def create_cup_page(api, league, leagues):
             html_buffer += f'<br><a href="{man1.gui_url}">{man1.team_name}</a>\n'
             html_buffer += "</td>\n"
 
-            html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{man1._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
+            html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man1._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
 
             if winner == 1:
                 html_buffer += f'<td class="w3-green w3-center">\n'
@@ -1148,7 +1150,7 @@ def create_cup_page(api, league, leagues):
                     )
                 html_buffer += "</td>\n"
 
-                html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{man2._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></td>\n'
+                html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man2._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
 
                 html_buffer += f'<td class="w3-left">\n'
                 html_buffer += f'<a href="{man2.gui_url}">{man2.name}</a>'
@@ -1487,7 +1489,7 @@ def create_teampage(api, leagues):
                 str_buffer += f"⚠️ "
             elif p.is_red_flagged:
                 str_buffer += f"⛔️ "
-            str_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>\n'
+            str_buffer += f'<a href="{p._gui_url}">{p.name}</a>\n'
             return str_buffer
 
         if api._current_gw > 0:
@@ -1665,7 +1667,7 @@ def create_assetpage(leagues):
         )
 
 
-def create_navbar(leagues, active=None, colour="black", active_colour="aqua"):
+def create_navbar(leagues, active=None, colour="black", active_colour="aqua", path_root=""):
 
     html_buffer = ""
 
@@ -1677,30 +1679,34 @@ def create_navbar(leagues, active=None, colour="black", active_colour="aqua"):
     html_buffer += '<button class="w3-button w3-hover-aqua"><h3><span class="w3-tag w3-white">toilet.football</span></h3></button>\n'
     html_buffer += '<div class="w3-dropdown-content w3-bar-block w3-card-4">\n'
 
-    url = f"https://{DEPLOY_ROOT}/index.html"
+    if not path_root:
+        url = f"../index.html"
+    else:
+        url = f"index.html"
+        # url = f"{DEPLOY_ROOT}/index.html"
     html_buffer += (
         f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏠 Home</a>\n'
     )
 
-    url = f"https://{DEPLOY_ROOT}/html/comparison.html"
+    url = f"{path_root}comparison.html"
     html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📊 Comparison Tool</a>\n'
 
-    url = f"https://{DEPLOY_ROOT}/html/assets.html"
+    url = f"{path_root}assets.html"
     html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">📈 Asset Graphs</a>\n'
 
     if season_awards:
-        url = f"https://{DEPLOY_ROOT}/html/season.html"
+        url = f"{path_root}season.html"
         html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🏁 End of season</a>\n'
 
     if halfway_awards or api._current_gw > 18:
-        url = f"https://{DEPLOY_ROOT}/html/christmas.html"
+        url = f"{path_root}christmas.html"
         html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">🎄 Christmas</a>\n'
 
-    url = f"https://{DEPLOY_ROOT}/html/teams.html"
+    url = f"{path_root}teams.html"
     html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">👨‍👨‍👦‍👦 Teams</a>\n'
 
     for i, league in enumerate(leagues):
-        url = f'https://{DEPLOY_ROOT}/html/{league.name.replace(" ","-")}.html'
+        url = f'{path_root}{league.name.replace(" ","-")}.html'
         html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua">{league._icon} {league.name}</a>\n'
 
     html_buffer += "</div>\n"
@@ -1711,11 +1717,11 @@ def create_navbar(leagues, active=None, colour="black", active_colour="aqua"):
     )
 
     if cup_active:
-        url = f"https://{DEPLOY_ROOT}/html/toilet_cup.html"
+        url = f"{path_root}toilet_cup.html"
         html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🏆</h3></a>\n'
-    url = f"https://{DEPLOY_ROOT}/html/Tesco-Bean-Value-Toilet-League.html"
+    url = f"{path_root}Tesco-Bean-Value-Toilet-League.html"
     html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>\n'
-    url = f"https://{DEPLOY_ROOT}/html/The-RBS-Diamond-Invitational.html"
+    url = f"{path_root}The-RBS-Diamond-Invitational.html"
     html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>\n'
     html_buffer += "</div>\n"
 
@@ -2385,7 +2391,7 @@ def create_managerpage(api, man, leagues):
 
     style = api.create_team_styles_css()
     html_page(
-        man.gui_path,
+        f"html/{man.gui_path}",
         None,
         title=title_str,
         gw=gw,
@@ -2436,7 +2442,7 @@ def create_manager_formation(man, gw):
         else:
             c_str = ""
 
-        html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
+        html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="{p._gui_url}">{p.name}</a>{c_str}</b>\n'
 
         html_buffer += f"<br>\n"
         style_str = (
@@ -2477,7 +2483,7 @@ def create_manager_formation(man, gw):
 
             c_str = ""
 
-            html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="https://{DEPLOY_ROOT}/html/player_{p.id}.html">{p.name}</a>{c_str}</b>\n'
+            html_buffer += f'<div class="w3-tag shadow89 w3-reponsive responsive-text" style={style_str}><b><a href="{p._gui_url}">{p.name}</a>{c_str}</b>\n'
 
             html_buffer += f"<br>\n"
             style_str = (
@@ -2711,7 +2717,7 @@ def create_picks_table(api, players, prev_gw_count=5, next_gw_count=5, manager=N
             f'"background-color:{bg_color};color:{text_color};vertical-align:middle;"'
         )
 
-        html_buffer += f'<td class="w3-center" style={style_str}><b>{["GKP","DEF","MID","FWD"][player.position_id-1]}</b></td>\n'
+        html_buffer += f'<td class="w3-center" style={style_str}><b>{["GKP","DEF","MID","FWD","MAN"][player.position_id-1]}</b></td>\n'
         html_buffer += (
             f'<td class="w3-center" style={style_str}><b>{player.shortteam}</b></td>\n'
         )
@@ -2724,7 +2730,7 @@ def create_picks_table(api, players, prev_gw_count=5, next_gw_count=5, manager=N
             html_buffer += f"⛔️ "
         if player.was_subbed:
             html_buffer += f"🔄 "
-        html_buffer += f'<a href="https://{DEPLOY_ROOT}/html/player_{player.id}.html">{player.name}</a></b></td>\n'
+        html_buffer += f'<a href="html/player_{player.id}.html">{player.name}</a></b></td>\n'
 
         ###
 
@@ -4984,11 +4990,16 @@ def league_chips(league, gw):
             color = "blue"
         elif chip == "FH":
             color = "green"
+        elif chip.startswith("AM"):
+            color = "purple"
+            chip = "AM"
+        else:
+            mrich.error("Unsupported chip:", chip)
 
         html_buffer += f'<td class="w3-{color}" style="text-align:center;">{man.get_event_chip(gw)}</td>\n'
 
         # team
-        html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{man._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{man.gui_url}">{man.team_name}</a></td>\n'
+        html_buffer += f'<td><img class="w3-image" src="{man._kit_path}" alt="Kit Icon" width="22" height="29"> <a href="{man.gui_url}">{man.team_name}</a></td>\n'
 
         # manager
         html_buffer += f'<td><a href="{man.gui_url}">{man.name}</a>\n'
@@ -5111,7 +5122,7 @@ def preseason_table(league):
 
         html_buffer += "\t<tr>\n"
         html_buffer += f'\t\t<td style="text-align:right;">{i+1}</td>\n'
-        html_buffer += f'\t\t<td><img src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"></img>\n'
+        html_buffer += f'\t\t<td><img src="{m._kit_path}" alt="Kit Icon" width="22" height="29"></img>\n'
 
         html_buffer += f'\t\t<a href="{m.gui_url}">{m.team_name}</a></td>\n'
 
@@ -5143,7 +5154,7 @@ def preseason_table(league):
         else:
             f.write(f"| {i+1} ")
 
-        f.write(f"| [[https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}]]")
+        f.write(f"| [[{m._kit_path}]]")
         f.write(f" [{m.team_name}]({m.gui_url})")
         f.write(f"| [{m.name}]({m.gui_url}) ")
 
@@ -5280,7 +5291,7 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
             html_buffer += f'<td class="w3-center">{pos_str}</td>\n'
 
         # team
-        html_buffer += f'<td><img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a>'
+        html_buffer += f'<td><img class="w3-image" src="{m._kit_path}" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a>'
 
         if cup_active:
             matches = m.get_cup_matches(league)
@@ -5381,6 +5392,8 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
             html_buffer += f'<td class="w3-blue" style="text-align:center;"><strong>BB</strong> {m.livescore}</td>\n'
         elif m._fh_week == gw:
             html_buffer += f'<td class="w3-green" style="text-align:center;"><strong>FH</strong> {m.livescore}</td>\n'
+        elif gw in [m._am1_week, m._am2_week, m._am3_week]:
+            html_buffer += f'<td class="w3-purple" style="text-align:center;"><strong>AM</strong> {m.livescore}</td>\n'
         else:
             html_buffer += f'<td style="text-align:center;">{m.livescore}</td>\n'
 
@@ -5755,7 +5768,7 @@ def league_differentials(league, gw):
             html_buffer += f"</td>\n"
 
             html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
-            html_buffer += f'<img class="w3-image" src="https://github.com/mwinokan/ToiletFPL/blob/main/{m._kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+            html_buffer += f'<img class="w3-image" src="{m._kit_path}" alt="Kit Icon" width="22" height="29">'
             html_buffer += f"</td>\n"
             html_buffer += f'<td style="vertical-align:middle;">\n'
             html_buffer += f'<a href="{m.gui_url}">{m.team_name}</a>\n'
@@ -5920,12 +5933,12 @@ def push_changes():
             f'rm kits/*.webp; git add *.py go/*.html go/*.py graphs/*.png index.html html/*.html *.json kits/*.png; git commit -m "auto-generated {timestamp}"; git push'
         )
         os.system(
-            f"terminal-notifier -title 'ToiletFPL' -message 'Completed Wiki Update' -open 'https://{DEPLOY_ROOT}/index.html'"
+            f"terminal-notifier -title 'ToiletFPL' -message 'Completed Wiki Update' -open 'index.html'"
         )
         exit(code=69)
     else:
         os.system(
-            f"terminal-notifier -title 'ToiletFPL' -message 'No changes pushed' -open 'https://{DEPLOY_ROOT}/index.html'"
+            f"terminal-notifier -title 'ToiletFPL' -message 'No changes pushed' -open 'index.html'"
         )
         exit(code=70)
 

@@ -2,7 +2,7 @@ import mout
 from player import Player
 from squad import Squad
 import pandas as pd
-
+import mrich
 
 class Manager:
 
@@ -38,9 +38,9 @@ class Manager:
         self._active_gws = None
         self._nonwc_transfers = None
 
-        self._kit_path = f"kits/man_{self.id}.png"
-        self._gui_url = f"https://mwinokan.github.io/ToiletFPL/html/man_{self.id}.html"
-        self._gui_path = f"html/man_{self.id}.html"
+        self._kit_path = f"../kits/man_{self.id}.png"
+        self._gui_url = f"man_{self.id}.html"
+        self._gui_path = f"man_{self.id}.html"
 
         self.get_stats()
         self.get_chips()
@@ -243,7 +243,7 @@ class Manager:
 
         if self._api._skip_kits:
             if not Path(self._kit_path).is_file():
-                self._kit_path = f"kits/blank_kit.png"
+                self._kit_path = f"../kits/blank_kit.png"
             return
 
         force_generate = self._api._force_generate_kits
@@ -258,7 +258,7 @@ class Manager:
                 self._kit_json = self._api.get_manager_team_shirt(self._id)
 
             if self._kit_json is None:
-                self._kit_path = f"kits/blank_kit.png"
+                self._kit_path = f"../kits/blank_kit.png"
                 # self._kit_json = {'kit_shirt_type': 'plain', 'kit_shirt_base': '#E1E1E1', 'kit_shirt_sleeves': '#E1E1E1', 'kit_shirt_secondary': '#E1E1E1'}
             else:
                 if not path.is_file() or force_generate:
@@ -274,6 +274,9 @@ class Manager:
         self._fh_week = None
         self._wc1_week = None
         self._wc2_week = None
+        self._am1_week = None
+        self._am2_week = None
+        self._am3_week = None
 
         self.__bb_ptsgain = None
         # self._bb_total = None
@@ -338,6 +341,11 @@ class Manager:
                         100 * self._wc2_ordelta / self._overall_rank[rel_gw1]
                     )
 
+            elif chip["name"] == "manager":
+                self._am1_week = chip["event"]
+                self._am2_week = chip["event"] + 1
+                self._am3_week = chip["event"] + 2
+
             else:
                 print("Unrecognised chip: " + chip["name"])
 
@@ -347,6 +355,9 @@ class Manager:
             fh=self._fh_week,
             wc1=self._wc1_week,
             wc2=self._wc2_week,
+            am1=self._am1_week,
+            am2=self._am2_week,
+            am3=self._am3_week,
         )
         self._chip_names = dict(
             tc="Triple Captain",
@@ -354,6 +365,9 @@ class Manager:
             fh="Free Hit",
             wc1="First Wildcard",
             wc2="Second Wildcard",
+            am1="Ass. Man. 1",
+            am2="Ass. Man. 2",
+            am3="Ass. Man. 3",
         )
 
     @property
@@ -408,6 +422,12 @@ class Manager:
             return "WC1"
         elif self._wc2_week == gw:
             return "WC2"
+        elif self._am1_week == gw:
+            return "AM1"
+        elif self._am2_week == gw:
+            return "AM2"
+        elif self._am3_week == gw:
+            return "AM3"
         else:
             return None
 

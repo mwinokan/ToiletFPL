@@ -122,7 +122,7 @@ class Player:
         self.__total_points = None
 
         self._gui_url = (
-            f"https://mwinokan.github.io/ToiletFPL/html/player_{self.id}.html"
+            f"player_{self.id}.html"
         )
 
         if int(self.id) not in self._api._loaded_players:
@@ -153,8 +153,6 @@ class Player:
             i = matches[0]
 
             # print(elements.keys())
-
-            self._photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/p{elements["photo"][i].replace(".jpg",".png")}'
 
             self._name = elements["web_name"][i]
             self._first_name = elements["first_name"][i]
@@ -229,6 +227,14 @@ class Player:
             self._position_id = elements["element_type"][i]
 
             assert self._position_id in [1,2,3,4,5]
+
+
+            if self.is_manager:
+                # https://resources.premierleague.com/premierleague/photos/players/110x140/man85.png
+                self._photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/{elements["opta_code"][i]}.png'
+            else:
+                self._photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/p{elements["photo"][i].replace(".jpg",".png")}'
+
 
             self._transfers_in = elements["transfers_in_event"][i]
             self._transfers_out = elements["transfers_out_event"][i]
@@ -679,6 +685,10 @@ class Player:
     def position_id(self):
         return self._position_id
 
+    @property
+    def is_manager(self) -> bool:
+        return self.position_id == 5
+
     def get_fixture_str(self, gw, short=False, old=False, lower_away=False):
 
         relative_gw = self.get_relative_gw(gw, allow_dwg=True)
@@ -1123,10 +1133,15 @@ class Player:
         return self._xBpts
 
     def expected_minutes(self, gw=None, Ms=None):
+
+
         if gw is None:
             gw = self._api._current_gw + 1
         if gw > 38:
             return None
+        
+        if self.is_manager:
+            return 90 * self.num_gwfix(gw)
 
         if "minutes" not in self.history:
             if self._prev_mins_per_start:
@@ -2608,7 +2623,8 @@ class Player:
 
     @property
     def kit_name_html(self):
-        html_buffer = f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{self.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+        # html_buffer = f'<img class="w3-image" src="https://github.com/mwinokan/FPL_GUI/blob/main/{self.kit_path}?raw=true" alt="Kit Icon" width="22" height="29">'
+        html_buffer = f'<img class="w3-image" src="{self.kit_path}" alt="Kit Icon" width="22" height="29">'
         html_buffer += f' <a href="{self._gui_url}">{self.name}</a> '
         if self.is_yellow_flagged:
             html_buffer += f"⚠️"
