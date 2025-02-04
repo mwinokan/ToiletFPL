@@ -1351,6 +1351,9 @@ class Player:
 
             if debug:
                 mout.varOut("Ms", Ms)
+                
+            if not Ms:
+                return 0
 
             if self._api._live_gw:
                 Ms.pop()
