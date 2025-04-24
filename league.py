@@ -32,7 +32,7 @@ class League:
         else:
             # print(manager_df)
             manager_df = manager_df.drop(
-                columns=["id", "event_total", "rank", "last_rank", "rank_sort", "total"]
+                columns=["id", "event_total", "rank_sort", "total"]
             )
 
         # print(manager_df)
@@ -72,8 +72,12 @@ class League:
 
         count = 0
         if "player_name" in manager_df.keys():
-            for c, n, t in zip(
-                manager_df["entry"], manager_df["player_name"], manager_df["entry_name"]
+            for c, n, t, rank, last_rank in zip(
+                manager_df["entry"], 
+                manager_df["player_name"], 
+                manager_df["entry_name"],
+                manager_df["rank"],
+                manager_df["last_rank"],
             ):
                 mout.progress(count, maximum)
 
@@ -85,22 +89,29 @@ class League:
                     mout.warningOut(
                         f"Skipping invalid manager '{m.name}' with ID: {m.id}"
                     )
+                
+                m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
 
                 # print(f'adding {m} [1]')
                 count += 1
 
         else:
 
-            for c, f, l, t in zip(
+            for c, f, l, t, rank, last_rank in zip(
                 manager_df["entry"],
                 manager_df["player_first_name"],
                 manager_df["player_last_name"],
                 manager_df["entry_name"],
+                manager_df["rank"],
+                manager_df["last_rank"],
             ):
                 mout.progress(count, maximum)
 
                 m = self._api.get_manager(f"{f} {l}", c, t, authenticate=False)
                 # m = Manager(f"{f} {l}",c,self._api,team_name=t)
+
+                m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
+
                 if m.valid:
                     self._managers.append(m)
                 else:

@@ -248,6 +248,7 @@ def main():
         except fpl_api.Request404:
             mout.error(f"Could not init League({code},{shortname})")
 
+    # hookins was doing weird stuff
     leagues[1]._skip_awards.append(3900121)
 
     if api._current_gw < 38:
@@ -4664,23 +4665,12 @@ def create_leaguepage(league, leagues, i):
 
             if gw > 1:
 
-                # sorted_managers = sorted(league.active_managers, key=lambda x: x.gw_rank_gain, reverse=True)
-
-                pairs = sorted(
-                    league.position_change_dict.items(),
-                    key=lambda x: (x[1], -api.get_manager(id=x[0]).gw_rank_gain),
-                    reverse=False,
-                )
-
-                pairs = [
-                    (m, delta) for m, delta in pairs if m not in league._skip_awards
-                ]
+                sorted_managers = sorted(league.active_managers, key=lambda x: (x.league_rank_diff(league.id), x.gw_rank_gain), reverse=True)
 
                 ### rocketeer
 
-                m = api.get_manager(id=pairs[-1][0])
-                delta = pairs[-1][-1]
-                score = m.gw_rank_gain
+                m = sorted_managers[0]
+                delta = m.league_rank_diff(league.id)
                 html_buffer += award_panel(
                     "🚀",
                     "Rocketeer",
@@ -4690,13 +4680,12 @@ def create_leaguepage(league, leagues, i):
                     colour=award_colour["rocket"],
                     name_class="h2",
                 )
-                json[str(league.id)][gw]["awards"]["rocket"] = [m.id, score]
+                json[str(league.id)][gw]["awards"]["rocket"] = [m.id, delta]
 
                 ### down the toilet
 
-                m = api.get_manager(id=pairs[0][0])
-                delta = pairs[0][-1]
-                score = m.gw_rank_gain
+                m = sorted_managers[-1]
+                delta = m.league_rank_diff(league.id)
                 html_buffer += award_panel(
                     "🚽",
                     "#DownTheToilet",
@@ -4706,7 +4695,7 @@ def create_leaguepage(league, leagues, i):
                     colour=award_colour["flushed"],
                     name_class="h3",
                 )
-                json[str(league.id)][gw]["awards"]["flushed"] = [m.id, score]
+                json[str(league.id)][gw]["awards"]["flushed"] = [m.id, delta]
 
             ### BONER
 

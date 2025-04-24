@@ -1556,3 +1556,8 @@ class Manager:
 
                 if n_changes == 3:
                     break
+
+
+    def league_rank_diff(self, league_id):
+        return self._league_positions[league_id]["last_rank"] - self._league_positions[league_id]["rank"]
+        
