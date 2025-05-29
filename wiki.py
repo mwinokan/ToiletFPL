@@ -49,7 +49,7 @@ force_go_graphs = True  # force update of Assets graph
 
 # gamestate options (to be automated)
 halfway_awards = True  # generate half-season / christmas awards
-season_awards = False  # generate full-season awards
+season_awards = True  # generate full-season awards
 cup_active = True  # activate the cup
 
 christmas_gw = 17
@@ -103,6 +103,8 @@ award_flavourtext = dict(
     tc_worst="Worst Triple Captain",
     bb_best="Best Bench Boost",
     bb_worst="Worst Bench Boost",
+    am_best="Best Ass. Man.",
+    am_worst="Worst Ass. Man.",
     fh_best="Best Free Hit",
     fh_worst="Worst Free Hit",
     zombie="Best Dead Team",
@@ -153,6 +155,8 @@ award_colour = dict(
     wc1_worst="red",
     wc2_best="red",
     wc2_worst="red",
+    am_best="purple",
+    am_worst="purple",
     tc_best="yellow",
     tc_worst="yellow",
     bb_best="blue",
@@ -2641,6 +2645,32 @@ def create_chip_table(api, man):
                         detail = f"+{pts} points gained"
                     else:
                         detail = f"{pts} points lost"
+
+                case "am1":
+                    color = "purple"
+                    total = man._am_ptsgain
+                    pts = man._am1_pts
+                    if pts > 0:
+                        detail = f"+{pts} points gained from {man._am1_name}"
+                    else:
+                        detail = f"{pts} points lost from {man._am1_name}"
+
+                case "am2":
+                    color = "purple"
+                    pts = man._am2_pts
+                    if pts > 0:
+                        detail = f"+{pts} points gained from {man._am2_name}"
+                    else:
+                        detail = f"{pts} points lost from {man._am2_name}"
+
+                case "am3":
+                    color = "purple"
+                    pts = man._am3_pts
+                    if pts > 0:
+                        detail = f"+{pts} points gained from {man._am3_name}"
+                    else:
+                        detail = f"{pts} points lost from {man._am3_name}"
+
                 case "tc":
                     color = "amber"
                     old_squad = man._squad
@@ -2651,10 +2681,6 @@ def create_chip_table(api, man):
                         )
                         detail = f"-"
                         break
-
-                    # mout.out(f"{man} TC{chip[1]}")
-
-                    # pts_delta = squad.captain.get_event_score(gw=chip[1],not_playing_is_none=False)
 
                     pts_delta = man._tc_ptsgain
 
@@ -2669,6 +2695,7 @@ def create_chip_table(api, man):
                     detail += f"with {man._tc_name}"
 
                     man._squad = old_squad
+
                 case _:
                     color = "black"
                     detail = f"-"
@@ -3503,7 +3530,7 @@ def create_seasonpage(leagues):
     html_page(
         f"html/season.html",
         None,
-        title="22/23 Season Review",
+        title="24/25 Season Review",
         gw=api._current_gw,
         html=html_buffer,
         bar_html=navbar,
@@ -3709,6 +3736,15 @@ def league_best_chips(league):
         json[str(league.id)]["chips"]["wc2"]["best"] = [wc2_best[0], wc2_best[1].id]
         json[str(league.id)]["chips"]["wc2"]["worst"] = [wc2_worst[0], wc2_worst[1].id]
 
+    # Second wildcard
+    am_subset = [m for m in league.managers if m._am1_week]
+    am_best = get_winners("Best Ass.Man.", am_subset, lambda x: x._am_ptsgain)
+    am_worst = get_losers("Worst Ass.Man.", am_subset, lambda x: x._am_ptsgain)
+    
+    create_key(json[str(league.id)]["chips"], "am")
+    json[str(league.id)]["chips"]["am"]["best"] = [am_best[0], am_best[1].id]
+    json[str(league.id)]["chips"]["am"]["worst"] = [am_worst[0], am_worst[1].id]
+
     # table
     html_buffer += '<table class="w3-table-all w3-hoverable">\n'
     html_buffer += "<thead>\n"
@@ -3887,6 +3923,34 @@ def league_best_chips(league):
             html_buffer += f"in GW{man._bb_week}\n"
             html_buffer += "</td>\n"
             html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb_worst[0][0])}</td>\n'
+        html_buffer += "</tr>\n"
+
+    ### assistant manager
+    if len(am_subset) > 0:
+        html_buffer += "<tr>\n"
+        html_buffer += f'<td class="w3-purple" style="text-align:center;">AM</td>\n'
+        html_buffer += f'<td style="text-align:center;">\n'
+        man = am_best[1]
+        html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+        if "Toilet" in league.name and man.is_diamond:
+            html_buffer += "💎"
+        html_buffer += f"in {man._am_gwstr}\n"
+        html_buffer += "</td>\n"
+        html_buffer += (
+            f'<td style="text-align:center;">{pts_delta_format(am_best[0])}</td>\n'
+        )
+        # if len(am_subset) == 1:
+            # html_buffer += f"<td></td>\n"
+            # html_buffer += f"<td></td>\n"
+        # else:
+        html_buffer += f'<td style="text-align:center;">\n'
+        man = am_worst[1]
+        html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+        if "Toilet" in league.name and man.is_diamond:
+            html_buffer += "💎"
+        html_buffer += f"in {man._am_gwstr}\n"
+        html_buffer += "</td>\n"
+        html_buffer += f'<td style="text-align:center;">{pts_delta_format(am_worst[0])}</td>\n'
         html_buffer += "</tr>\n"
 
     html_buffer += "</tbody>\n"
@@ -5188,6 +5252,9 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
     show_transfer_summary = False
 
     last_gw_position_dict = league.last_gw_position_dict
+
+    if seasontable:
+        show_pos_delta = False
 
     if seasontable:
         show_gw_rank = False

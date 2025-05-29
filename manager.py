@@ -286,6 +286,11 @@ class Manager:
         self.__tc_ptsgain = None
         self._tc_name = None
 
+        self.__am_ptsgain = None
+        self._am1_name = None
+        self._am2_name = None
+        self._am3_name = None
+
         names = []
         events = []
 
@@ -295,7 +300,7 @@ class Manager:
                 self._tc_week = chip["event"]
                 # self._tc_name = self.get_current_squad(gw = self._tc_week).captain
                 # self._squad = None
-                self._tc_ptsgain
+                # self._tc_ptsgain
 
             elif chip["name"] == "bboost":
                 self._bb_week = chip["event"]
@@ -343,9 +348,17 @@ class Manager:
                     )
 
             elif chip["name"] == "manager":
+
                 self._am1_week = chip["event"]
-                self._am2_week = chip["event"] + 1
-                self._am3_week = chip["event"] + 2
+                self._am_gwstr = f'GW{self._am1_week}'
+
+                if chip["event"] < 38:
+                    self._am2_week = chip["event"] + 1
+                    self._am_gwstr = f'GW{self._am1_week}-{self._am1_week+1}'
+                
+                if chip["event"] < 37:
+                    self._am3_week = chip["event"] + 2             
+                    self._am_gwstr = f'GW{self._am1_week}-{self._am1_week+2}'
 
             else:
                 print("Unrecognised chip: " + chip["name"])
@@ -411,6 +424,37 @@ class Manager:
             # mout.out(f"{self} {self._squad.captain} {self._tc_week}")
             self._squad = None
         return self.__tc_ptsgain
+
+    @property
+    def _am_ptsgain(self):
+        if self.__am_ptsgain is None:
+
+            self.__am_ptsgain = 0
+            
+            self.get_current_squad(gw=self._am1_week, force=True)
+            am = self._squad.manager
+            s = am.get_event_score(gw=self._am1_week)
+            self.__am_ptsgain += s
+            self._am1_pts = s
+            self._am1_name = am.name
+
+            self.get_current_squad(gw=self._am2_week, force=True)
+            am = self._squad.manager
+            s = am.get_event_score(gw=self._am2_week)
+            self.__am_ptsgain += s
+            self._am2_pts = s
+            self._am2_name = am.name
+
+            self.get_current_squad(gw=self._am3_week, force=True)
+            am = self._squad.manager
+            s = am.get_event_score(gw=self._am3_week)
+            self.__am_ptsgain += s
+            self._am3_pts = s
+            self._am3_name = am.name
+
+            self._squad = None
+
+        return self.__am_ptsgain
 
     def get_event_chip(self, gw):
         if self._tc_week == gw:

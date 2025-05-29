@@ -113,6 +113,10 @@ class Squad:
         return [p for p in self._players if p.is_captain][0]
 
     @property
+    def manager(self):
+        return [p for p in self._players if p.position_id == 5][0]
+
+    @property
     def vice_captain(self):
         return [p for p in self._players if p.is_vice_captain][0]
 
