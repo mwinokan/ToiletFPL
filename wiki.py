@@ -3433,7 +3433,7 @@ def create_homepage(navbar):
     if preseason:
 
         # table of total player information
-        html_buffer += floating_subtitle("22/23 Top Assets", pad=0)
+        html_buffer += floating_subtitle("24/25 Top Assets", pad=0)
 
         html_buffer += previous_player_table()
 
