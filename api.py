@@ -151,10 +151,12 @@ class FPL_API:
             [42, "Man City"],
             [48, "Sheffield Utd"],
             [53, "Fulham"],
+            [55, "Sunderland"],
             [89, "Burnley"],
             [90, "Bournemouth"],
             [93, "Brentford"],
             [101, "Luton"],
+
         ]
 
         self._short_team_pairs = {
