@@ -70,6 +70,11 @@ class League:
 
         maximum = len(manager_df)
 
+        if "rank" not in manager_df.keys():
+            manager_df["rank"] = [None]*len(manager_df)
+        if "last_rank" not in manager_df.keys():
+            manager_df["last_rank"] = [None]*len(manager_df)
+
         count = 0
         if "player_name" in manager_df.keys():
             for c, n, t, rank, last_rank in zip(

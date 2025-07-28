@@ -19,49 +19,55 @@ import mrich
 url = "https://fantasy.premierleague.com/api/"
 
 GC_DICT = {
-    "MCI": 34,
-    "ARS": 29,
-    "MUN": 58,
-    "NEW": 62,
+    "MCI": 44,
+    "ARS": 34,
+    "MUN": 54,
+    "NEW": 47,
     "LIV": 41,
-    "BHA": 62,
-    "AVL": 61,
-    "TOT": 61,
-    "BRE": 65,
-    "FUL": 61,
-    "CRY": 58,
-    "CHE": 63,
-    "WOL": 65,
-    "WHU": 74,
-    "BOU": 67,
-    "NFO": 67,
-    "EVE": 51,
-    "IPS": 57 * 2 * 38 / 46,
-    "LEI": 41 * 2 * 38 / 46,
-    "SOU": 63 * 2 * 38 / 46,
+    "BHA": 59,
+    "AVL": 51,
+    "TOT": 65,
+    "BRE": 57,
+    "FUL": 54,
+    "CRY": 51,
+    "CHE": 43,
+    "WOL": 69,
+    "WHU": 62,
+    "BOU": 46,
+    "NFO": 46,
+    "EVE": 44,
+    # "IPS": 57 * 2 * 38 / 46,
+    # "LEI": 41 * 2 * 38 / 46,
+    # "SOU": 63 * 2 * 38 / 46,
+    "SUN": 44 * 2 * 38 / 46,
+    "BUR": 16 * 2 * 38 / 46,
+    "LEE": 30 * 2 * 38 / 46,
 }
 
 GF_DICT = {
-    "MCI": 96,
-    "ARS": 91,
-    "MUN": 57,
-    "NEW": 85,
+    "MCI": 72,
+    "ARS": 69,
+    "MUN": 44,
+    "NEW": 68,
     "LIV": 86,
-    "BHA": 55,
-    "AVL": 76,
-    "TOT": 74,
-    "BRE": 56,
-    "FUL": 55,
-    "CRY": 57,
-    "CHE": 77,
-    "WOL": 50,
-    "WHU": 60,
-    "BOU": 54,
-    "NFO": 49,
-    "EVE": 40,
-    "IPS": 92 / 2 * 38 / 46,
-    "LEI": 89 / 2 * 38 / 46,
-    "SOU": 87 / 2 * 38 / 46,
+    "BHA": 66,
+    "AVL": 58,
+    "TOT": 64,
+    "BRE": 66,
+    "FUL": 54,
+    "CRY": 51,
+    "CHE": 64,
+    "WOL": 54,
+    "WHU": 46,
+    "BOU": 58,
+    "NFO": 58,
+    "EVE": 42,
+    # "IPS": 92 / 2 * 38 / 46,
+    # "LEI": 89 / 2 * 38 / 46,
+    # "SOU": 87 / 2 * 38 / 46,
+    "SUN": 58 / 2 * 38 / 46,
+    "BUR": 69 / 2 * 38 / 46,
+    "LEE": 95 / 2 * 38 / 46,
 }
 
 
@@ -89,9 +95,9 @@ class FPL_API:
     _skip_gws = []
     _wc_cutoff = 16
 
-    _season_str = 2425
-    _season_str_fmt = "24/25"
-    _last_season_str = 2324
+    _season_str = 2526
+    _season_str_fmt = "25/26"
+    _last_season_str = 2425
 
     _prev_element_dict = None
 
@@ -281,6 +287,11 @@ class FPL_API:
                 "accent": "black",
             },
             "Southampton": {
+                "background-color": "white",
+                "color": "FireBrick",
+                "accent": "black",
+            },
+            "Sunderland": {
                 "background-color": "white",
                 "color": "FireBrick",
                 "accent": "black",

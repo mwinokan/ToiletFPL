@@ -33,7 +33,7 @@ timestamp = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
 
 # deployment configuration
 DEPLOY_ROOT = "mwinokan.github.io/ToiletFPL"
-JSON_PATH = "data_wiki_2425.json"  # store the award data in this JSON
+JSON_PATH = "data_wiki_2526.json"  # store the award data in this JSON
 TAGLINE = "Home of the RBS Diamond Invitational and Tesco Bean Value Toilet League"
 
 # run options
@@ -48,9 +48,9 @@ fetch_latest = False  # pull latest changes from github before running
 force_go_graphs = True  # force update of Assets graph
 
 # gamestate options (to be automated)
-halfway_awards = True  # generate half-season / christmas awards
-season_awards = True  # generate full-season awards
-cup_active = True  # activate the cup
+halfway_awards = False  # generate half-season / christmas awards
+season_awards = False  # generate full-season awards
+cup_active = False  # activate the cup
 
 christmas_gw = 17
 
@@ -65,11 +65,36 @@ if "--test" in argv:
 
 # configure the leagues
 
-# 23/24
-league_codes = [352961, 241682, 1678697, 352258]
-league_icons = ["💎", "🚽", "🧭", "🍝"]
-league_shortnames = ["Diamond", "Toilet", "SOLENT", "Dinner"]
-league_colours = ["aqua", "dark-grey", "indigo", "dark-grey"]
+# 24/25
+# league_codes = [352961, 241682, 1678697, 352258]
+# league_icons = ["💎", "🚽", "🧭", "🍝"]
+# league_shortnames = ["Diamond", "Toilet", "SOLENT", "Dinner"]
+# league_colours = ["aqua", "dark-grey", "indigo", "dark-grey"]
+
+league_codes = [
+    # 352961, 
+    116790, 
+    # 1678697, 
+    # 352258,
+]
+league_icons = [
+    # "💎", 
+    "🚽", 
+    # "🧭", 
+    # "🍝",
+]
+league_shortnames = [
+    # "Diamond", 
+    "Toilet", 
+    # "SOLENT",
+    # "Dinner",
+]
+league_colours = [
+    # "aqua", 
+    "dark-grey", 
+    # "indigo", 
+    # "dark-grey",
+]
 
 award_flavourtext = dict(
     king="👑 King",
@@ -253,7 +278,7 @@ def main():
             mout.error(f"Could not init League({code},{shortname})")
 
     # hookins was doing weird stuff
-    leagues[1]._skip_awards.append(3900121)
+    # leagues[1]._skip_awards.append(3900121)
 
     if api._current_gw < 38:
         create_comparison_page(api, leagues)
@@ -270,10 +295,10 @@ def main():
     if cup_active:
         create_cup_page(api, leagues[1], leagues)
 
-    if not api._live_gw or any(
-        [f["started"] for f in api.get_gw_fixtures(api._current_gw)]
-    ):
-        generate_summary_template(api, leagues[1])
+    # if not api._live_gw or any(
+    #     [f["started"] for f in api.get_gw_fixtures(api._current_gw)]
+    # ):
+    #     generate_summary_template(api, leagues[1])
 
     create_teampage(api, leagues)
 
@@ -4589,16 +4614,17 @@ def create_leaguepage(league, leagues, i):
     create_key(json, str(league.id))
     create_key(json[str(league.id)], gw)
 
-    mout.debugOut(f"create_leaguepage({league})::differential_buffer")
-    differential_buffer = league_differentials(league, gw)
-
-    mout.debugOut(f"create_leaguepage({league})::Awards")
-
-    create_key(json[str(league.id)][gw], "awards")
-
     awards = gw > 0 and (
         not api._live_gw or any([f["started"] for f in api.get_gw_fixtures(gw)])
     )
+
+    if gw > 0:
+        mout.debugOut(f"create_leaguepage({league})::differential_buffer")
+        differential_buffer = league_differentials(league, gw)
+
+        mout.debugOut(f"create_leaguepage({league})::Awards")
+
+        create_key(json[str(league.id)][gw], "awards")
 
     if awards:
 
