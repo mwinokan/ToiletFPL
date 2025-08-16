@@ -65,36 +65,17 @@ if "--test" in argv:
 
 # configure the leagues
 
-# 24/25
-# league_codes = [352961, 241682, 1678697, 352258]
-# league_icons = ["💎", "🚽", "🧭", "🍝"]
-# league_shortnames = ["Diamond", "Toilet", "SOLENT", "Dinner"]
-# league_colours = ["aqua", "dark-grey", "indigo", "dark-grey"]
+# 25/26
+leagues = [
+    (1717868, "💎", "Diamond", "aqua"),
+    (116790, "🚽", "Toilet", "dark-grey"),
+    (2128169, "🍝", "Dinner", "dark-grey"),
+]
 
-league_codes = [
-    # 352961, 
-    116790, 
-    # 1678697, 
-    # 352258,
-]
-league_icons = [
-    # "💎", 
-    "🚽", 
-    # "🧭", 
-    # "🍝",
-]
-league_shortnames = [
-    # "Diamond", 
-    "Toilet", 
-    # "SOLENT",
-    # "Dinner",
-]
-league_colours = [
-    # "aqua", 
-    "dark-grey", 
-    # "indigo", 
-    # "dark-grey",
-]
+league_codes = [ list(i)[0] for i in leagues ]
+league_icons = [ list(i)[1] for i in leagues ]
+league_shortnames = [ list(i)[2] for i in leagues ]
+league_colours = [ list(i)[3] for i in leagues ]
 
 award_flavourtext = dict(
     king="👑 King",
