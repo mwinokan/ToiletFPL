@@ -989,7 +989,8 @@ def create_cup_page(api, league, leagues):
             html_buffer += f'<br><a href="{man1.gui_url}">{man1.team_name}</a>\n'
             html_buffer += "</td>\n"
 
-            html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man1._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
+            # html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man1._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
+            html_buffer += f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
 
             if winner == 1:
                 html_buffer += f'<td class="w3-green w3-center">\n'
@@ -1177,7 +1178,8 @@ def create_cup_page(api, league, leagues):
                     )
                 html_buffer += "</td>\n"
 
-                html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man2._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
+                # html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man2._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
+                html_buffer += f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
 
                 html_buffer += f'<td class="w3-left">\n'
                 html_buffer += f'<a href="{man2.gui_url}">{man2.name}</a>'
@@ -5114,7 +5116,8 @@ def league_chips(league, gw):
         html_buffer += f'<td class="w3-{color}" style="text-align:center;">{man.get_event_chip(gw)}</td>\n'
 
         # team
-        html_buffer += f'<td><img class="w3-image" src="{man._kit_path}" alt="Kit Icon" width="22" height="29"> <a href="{man.gui_url}">{man.team_name}</a></td>\n'
+        # html_buffer += f'<td><img class="w3-image" src="{man._kit_path}" alt="Kit Icon" width="22" height="29"> <a href="{man.gui_url}">{man.team_name}</a></td>\n'
+        html_buffer += f'<td><a href="{man.gui_url}">{man.team_name}</a></td>\n'
 
         # manager
         html_buffer += f'<td><a href="{man.gui_url}">{man.name}</a>\n'
@@ -5237,7 +5240,8 @@ def preseason_table(league):
 
         html_buffer += "\t<tr>\n"
         html_buffer += f'\t\t<td style="text-align:right;">{i+1}</td>\n'
-        html_buffer += f'\t\t<td><img src="{m._kit_path}" alt="Kit Icon" width="22" height="29"></img>\n'
+        # html_buffer += f'\t\t<td><img src="{m._kit_path}" alt="Kit Icon" width="22" height="29"></img>\n'
+        html_buffer += f'\t\t<td>\n'
 
         html_buffer += f'\t\t<a href="{m.gui_url}">{m.team_name}</a></td>\n'
 
@@ -5269,7 +5273,7 @@ def preseason_table(league):
         else:
             f.write(f"| {i+1} ")
 
-        f.write(f"| [[{m._kit_path}]]")
+        # f.write(f"| [[{m._kit_path}]]")
         f.write(f" [{m.team_name}]({m.gui_url})")
         f.write(f"| [{m.name}]({m.gui_url}) ")
 
@@ -5885,7 +5889,7 @@ def league_differentials(league, gw, cutoff=10):
             html_buffer += f"</td>\n"
 
             html_buffer += f'<td style="vertical-align:middle;mid-width:25px;">\n'
-            html_buffer += f'<img class="w3-image" src="{m._kit_path}" alt="Kit Icon" width="22" height="29">'
+            # html_buffer += f'<img class="w3-image" src="{m._kit_path}" alt="Kit Icon" width="22" height="29">'
             html_buffer += f"</td>\n"
             html_buffer += f'<td style="vertical-align:middle;">\n'
             html_buffer += f'<a href="{m.gui_url}">{m.team_name}</a>\n'
