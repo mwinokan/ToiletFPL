@@ -866,6 +866,14 @@ class Manager:
         return sum([p.event_minutes * p.multiplier for p in self.players])
 
     @property
+    def defensive_contributions(self):
+        return sum([p.event_defensive_contributions * p.multiplier for p in self.players])
+
+    @property
+    def goals_conceded(self):
+        return sum([p.event_goals_conceded for p in self.players if p.multiplier])
+
+    @property
     def minutes_per_player(self):
         ms = [p.event_minutes for p in self.players if p.multiplier]
         return sum(ms) / len(ms)

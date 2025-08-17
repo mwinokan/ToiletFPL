@@ -114,6 +114,8 @@ award_flavourtext = dict(
     fh_best="Best Free Hit",
     fh_worst="Worst Free Hit",
     zombie="Best Dead Team",
+    most_defcon="Most Defensive Constributions",
+    least_defcon="Least Defensive Constributions",
 )
 
 award_unittext = dict(
@@ -135,6 +137,8 @@ award_unittext = dict(
     hot_stuff="points overperformed",
     soggy_biscuit="points underperformed",
     zombie="th place",
+    most_defcon="DC",
+    least_defcon="DC",
 )
 
 award_colour = dict(
@@ -174,6 +178,9 @@ award_colour = dict(
     rocket="lime",
     flushed="brown",
     zombie="teal",
+    most_defcon="blue-grey",
+    least_defcon="taupe",
+
 )
 
 _league_table_html = {}
@@ -375,16 +382,17 @@ def run_test():
 
     # print(p,s)
 
-    p = Player("Iraola", api)
+    # p = Player("Wirtz", api)
 
-    s = p.get_event_score(23, debug=True)
+    # s = p.get_event_score(1, debug=True)
 
-    s2 = p.get_event_summary(23, html_highlight=False)
+    # s2 = p.get_event_summary(1, html_highlight=False)
 
-    create_playerpage(api, p, [])
+    # create_playerpage(api, p, [])
 
-    print(p, s)
-    print(s2)
+    # print(p, s)
+    # print(s2)
+    # print(p.event_defensive_contributions)
 
     # create_comparison_page(api,[])
 
@@ -411,8 +419,11 @@ def run_test():
     # # p.expected_points(gw=2,use_official=True,debug=True)
     # # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
     # man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
-    # man = Manager("Max Winokan", 264578, api, team_name="Diamond Diogo's", authenticate=False)
+    man = Manager("Max Winokan", 527088, api, team_name="Cherki Farker", authenticate=False)
     # create_managerpage(api, man, leagues)
+
+    print(man)
+    print(man.defensive_contributions)
 
     api.finish()
     exit()
@@ -1515,7 +1526,8 @@ def create_teampage(api, leagues):
             html_buffer += f"<th style={team_style_str}>Total Points</th>\n"
             sorted_players = sorted(players, key=lambda x: x.total_points, reverse=True)
             for p in sorted_players[:5]:
-                style_str = get_style_from_event_score(p.total_points / p.appearances)
+                score = p.total_points / p.appearances if p.appearances else None
+                style_str = get_style_from_event_score(score)
                 html_buffer += f'<td class="w3-center" style={style_str}>'
                 html_buffer += f"{player_name_str(p)} {p.total_points}"
                 html_buffer += "</td>\n"
@@ -4842,6 +4854,40 @@ def create_leaguepage(league, leagues, i):
             )
             json[str(league.id)][gw]["awards"]["asbo"] = [m.id, m.card_emojis]
 
+            ### DEFCON
+
+            sorted_managers = sorted(
+                league.active_managers,
+                key=lambda x: (x.defensive_contributions, -x.goals_conceded),
+                reverse=True,
+            )
+            m = sorted_managers[0]
+            html_buffer += award_panel(
+                "🛡️",
+                f"DEFCON 1",
+                "Most Def. Con.",
+                m.defensive_contributions,
+                m,
+                colour=award_colour["most_defcon"],
+                name_class="h2",
+            )
+            json[str(league.id)][gw]["awards"]["most_defcon"] = [m.id, m.defensive_contributions]
+
+            m = sorted_managers[-1]
+            html_buffer += award_panel(
+                "⛓️‍💥",
+                f"Weakest Link",
+                "Least Def. Con.",
+                m.defensive_contributions,
+                m,
+                colour=award_colour["least_defcon"],
+                name_class="h2",
+            )
+            json[str(league.id)][gw]["awards"]["least_defcon"] = [m.id, m.defensive_contributions]
+
+            # print(json[str(league.id)][gw]["awards"]["most_defcon"])
+            # print(json[str(league.id)][gw]["awards"]["least_defcon"])
+
         if gw > 1:
 
             ### FORTUNE TELLER
@@ -5359,7 +5405,8 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
             html_buffer += f'<td class="w3-center">{pos_str}</td>\n'
 
         # team
-        html_buffer += f'<td><img class="w3-image" src="{m._kit_path}" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a>'
+        # html_buffer += f'<td><img class="w3-image" src="{m._kit_path}" alt="Kit Icon" width="22" height="29"> <a href="{m.gui_url}">{m.team_name}</a>'
+        html_buffer += f'<td><a href="{m.gui_url}">{m.team_name}</a>'
 
         if cup_active:
             matches = m.get_cup_matches(league)
@@ -5768,7 +5815,7 @@ def effective_points_gained(player, n):
     )
 
 
-def league_differentials(league, gw):
+def league_differentials(league, gw, cutoff=10):
     global json
 
     html_buffer = ""
@@ -5776,6 +5823,8 @@ def league_differentials(league, gw):
     players = league.get_starting_players(unique=False, active_only=True)
 
     n = league.num_managers
+
+    players = [p for p in players if p.league_multiplier_count <= cutoff]
 
     sorted_players = sorted(
         players,

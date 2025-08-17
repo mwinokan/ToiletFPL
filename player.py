@@ -120,6 +120,7 @@ class Player:
         self.__fix_started = None
         self.__fix_finished = None
         self.__total_points = None
+        self.__defensive_contributions = None
 
         self._gui_url = f"player_{self.id}.html"
 
@@ -2127,6 +2128,7 @@ class Player:
         self.__threat = event_stats["threat"]
         self.__ict_index = event_stats["ict_index"]
         self.__total_points = event_stats["total_points"]
+        self.__defensive_contributions = event_stats["defensive_contribution"]
 
     def fetch_event_stats(self, gw):
         gw = gw or self._api.current_gw
@@ -2164,6 +2166,16 @@ class Player:
         return self.__minutes
 
     @property
+    def event_defensive_contributions(self):
+        gw = self._api.current_gw
+        if gw > self._api.current_gw:
+            mout.errorOut("Gameweek has not happened yet")
+            return None
+        if self.__defensive_contributions is None:
+            self.fetch_event_stats(gw)
+        return self.__defensive_contributions
+
+    @property
     def event_bps(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
@@ -2192,6 +2204,16 @@ class Player:
         if self.__goals_scored is None:
             self.fetch_event_stats(gw)
         return self.__goals_scored
+
+    @property
+    def event_goals_conceded(self):
+        gw = self._api.current_gw
+        if gw > self._api.current_gw:
+            mout.errorOut("Gameweek has not happened yet")
+            return None
+        if self.__goals_conceded is None:
+            self.fetch_event_stats(gw)
+        return self.__goals_conceded
 
     def get_event_summary(
         self,

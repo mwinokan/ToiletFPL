@@ -1047,6 +1047,7 @@ class FPL_API:
                 "ict_index": 0,
                 "total_points": 0,
                 "in_dreamteam": 0,
+                "defensive_contribution": 0,
             }
 
         return player_stats[0]

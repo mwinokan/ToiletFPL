@@ -99,7 +99,7 @@ def html_page(
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
     )
     fout_buffer.append(
-        '<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">\n'
+        '<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">\n'
     )
     fout_buffer.append(
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">\n'
