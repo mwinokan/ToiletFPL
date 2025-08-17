@@ -231,7 +231,7 @@ class Player:
                 # https://resources.premierleague.com/premierleague/photos/players/110x140/man85.png
                 self._photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/{elements["opta_code"][i]}.png'
             else:
-                self._photo_url = f'https://resources.premierleague.com/premierleague/photos/players/110x140/p{elements["photo"][i].replace(".jpg",".png")}'
+                self._photo_url = f'https://resources.premierleague.com/premierleague25/photos/players/110x140/{elements["photo"][i].replace(".jpg",".png")}'
 
             self._transfers_in = elements["transfers_in_event"][i]
             self._transfers_out = elements["transfers_out_event"][i]
