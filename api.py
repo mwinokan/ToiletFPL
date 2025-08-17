@@ -1301,6 +1301,10 @@ class FPL_API:
                 shutil.copy(f"kits/{i}.png", f"kits/{name}.png")
             except FileNotFoundError:
                 continue
+            try:
+                shutil.copy(f"kits/{i}_gkp.png", f"kits/{name}_gkp.png")
+            except FileNotFoundError:
+                continue
 
         # for i, name in self._scrape_team_pairs:
         #     try:
