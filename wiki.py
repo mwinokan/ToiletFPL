@@ -114,8 +114,8 @@ award_flavourtext = dict(
     fh_best="Best Free Hit",
     fh_worst="Worst Free Hit",
     zombie="Best Dead Team",
-    most_defcon="Most Defensive Constributions",
-    least_defcon="Least Defensive Constributions",
+    most_defcon="🚌 Park the Bus",
+    least_defcon="🧀 Gruyère",
 )
 
 award_unittext = dict(
@@ -179,7 +179,7 @@ award_colour = dict(
     flushed="brown",
     zombie="teal",
     most_defcon="blue-grey",
-    least_defcon="taupe",
+    least_defcon="note",
 
 )
 
@@ -4865,8 +4865,8 @@ def create_leaguepage(league, leagues, i):
             )
             m = sorted_managers[0]
             html_buffer += award_panel(
-                "🛡️",
-                f"DEFCON 1",
+                "🚌", #🧱 🛡️ 
+                "Park the Bus", # DEFCON 1
                 "Most Def. Con.",
                 m.defensive_contributions,
                 m,
@@ -4877,8 +4877,8 @@ def create_leaguepage(league, leagues, i):
 
             m = sorted_managers[-1]
             html_buffer += award_panel(
-                "⛓️‍💥",
-                f"Weakest Link",
+                "🧀", # ⛓️‍💥🫖
+                "Gruyère", #Weakest Link, Chocolate Teapot
                 "Least Def. Con.",
                 m.defensive_contributions,
                 m,
@@ -4886,9 +4886,6 @@ def create_leaguepage(league, leagues, i):
                 name_class="h2",
             )
             json[str(league.id)][gw]["awards"]["least_defcon"] = [m.id, m.defensive_contributions]
-
-            # print(json[str(league.id)][gw]["awards"]["most_defcon"])
-            # print(json[str(league.id)][gw]["awards"]["least_defcon"])
 
         if gw > 1:
 
