@@ -24,6 +24,7 @@ import time
 from pprint import pprint
 from sys import argv
 import mrich
+from mrich import print
 
 # https://stackoverflow.com/questions/60598837/html-to-image-using-python
 
@@ -402,7 +403,17 @@ def run_test():
 
     # create_leaguepage(l,[],0)
 
-    # p = Player('Havertz',api)
+    p = Player('B.Fernandes',api)
+
+    # pd = api.__elements[p._full_name]
+
+    # print(sorted(list(pd.keys())))
+
+    # print(p.history.columns)
+
+    # print([float(x) for x in p.history["defensive_contribution"]])
+
+    print(p.expected_points(gw=3, debug=True))
 
     # create_playerpage(api,p,[])
 
@@ -419,11 +430,11 @@ def run_test():
     # # p.expected_points(gw=2,use_official=True,debug=True)
     # # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
     # man = Manager("Max Winokan", 1327451, api, team_name="Diamond Diogo's", authenticate=False)
-    man = Manager("Max Winokan", 527088, api, team_name="Cherki Farker", authenticate=False)
-    # create_managerpage(api, man, leagues)
+    # man = Manager("Max Winokan", 527088, api, team_name="Cherki Farker", authenticate=False)
+    # # create_managerpage(api, man, leagues)
 
-    print(man)
-    print(man.defensive_contributions)
+    # print(man)
+    # print(man.defensive_contributions)
 
     api.finish()
     exit()

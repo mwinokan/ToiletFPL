@@ -1067,6 +1067,10 @@ class Player:
         return [3, 3, 3, 3, 0][self.position_id - 1]
 
     @property
+    def defcon_threshold(self):
+        return [None, 10, 12, 12, None][self.position_id - 1]
+
+    @property
     def performed_expected_attacking_points(self):
         return (
             self._total_expected_goals * self.goal_multiplier
@@ -1524,6 +1528,38 @@ class Player:
             if debug:
                 mout.varOut("xA_per_minute", xA_per_minute)
 
+            ### DEFCON
+
+            if self.no_history:
+                DCs = []
+            else:
+                DCs = [float(x) for x in self.history["defensive_contribution"]]
+                if self._api._live_gw:
+                    DCs.pop()
+
+            if debug:
+                mout.varOut("DCs", DCs)
+
+            # weighted average xDC per game
+            DC_per_minute = weighted_average(
+                DCs, Ms, None, None #TODO! in future have to support previous defensive contributions
+            )
+
+            defcon_threshold = self.defcon_threshold
+            
+            if debug:
+                mout.varOut("DC_per_minute", DC_per_minute)
+                mout.varOut("DC_per_90", DC_per_minute * 90)
+                mout.varOut("defcon_threshold", defcon_threshold)
+
+            if defcon_threshold:
+                xDCPts = min([2, 2 * (DC_per_minute * xM) / defcon_threshold])
+            else:
+                xDCPts = 0
+
+            if debug:
+                mout.varOut("xDCPts", xDCPts)
+
             ### ATTACKING POINTS
 
             n = self.appearances + self._prev_appearances
@@ -1683,6 +1719,7 @@ class Player:
                 + xPMPts
                 + xPSPts
                 + xSPts
+                + xDCPts
             )
 
             # if debug:
@@ -1732,6 +1769,7 @@ class Player:
                 mout.varOut("xPMPts", xPMPts)
                 mout.varOut("xPSPts", xPSPts)
                 mout.varOut("xSPts", xSPts)
+                mout.varOut("xDCPts", xDCPts)
 
             if debug:
                 mout.varOut("expected_points", expected_points)
