@@ -27,8 +27,8 @@ class Team:
         self._style = self.get_style()
 
         # self._badge_path = f"kits/{self._name}.png"
-        self._kit_path = f"kits/{self._name}.png"
-        self._kit_path_gkp = f"kits/{self._name}_gkp.png"
+        self._kit_path = f"../kits/{self._name}.png"
+        self._kit_path_gkp = f"../kits/{self._name}_gkp.png"
 
         # print(id,name)
 

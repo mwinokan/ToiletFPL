@@ -266,7 +266,7 @@ def main():
             mout.error(f"Could not init League({code},{shortname})")
 
     # hookins was doing weird stuff
-    # leagues[1]._skip_awards.append(3900121)
+    leagues[1]._skip_awards.append(1988353)
 
     if api._current_gw < 38:
         create_comparison_page(api, leagues)
