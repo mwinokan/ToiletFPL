@@ -268,6 +268,7 @@ def main():
 
     # hookins was doing weird stuff
     leagues[1]._skip_awards.append(1988353)
+    # leagues[1]._skip_awards.append(132821) # Helen Bamford too
 
     if api._current_gw < 38:
         create_comparison_page(api, leagues)
@@ -4687,6 +4688,11 @@ def create_leaguepage(league, leagues, i):
                 key=lambda x: (x.goals, x.gw_xg, x.gw_xa, x.livescore),
                 reverse=True,
             )
+
+            print("Massive Goals")
+            for m in sorted_managers[:3]:
+                print(m, m.goals, m.gw_xg)
+
             m = sorted_managers[0]
             score = m.goals
             if score > 4:
@@ -5820,11 +5826,19 @@ def position_template(league, players, pos_str, gw):
 
 
 def effective_points_gained(player, n):
-    # return player.multiplier*player.get_event_score(not_playing_is_none=False)/player.league_count
-    # return player.get_event_score(not_playing_is_none=False) * (player.multiplier - player.league_count/n)
-    return player.get_event_score(not_playing_is_none=False) * (
-        player.multiplier - player.league_multiplier_count / n
-    )
+
+    score = player.get_event_score(not_playing_is_none=False)
+
+    multiplier = player.multiplier
+    league_multiplier_count = player.league_multiplier_count
+
+    if multiplier == league_multiplier_count:
+        return score
+
+    multiplier_sum = league_multiplier_count - multiplier
+    multiplier_avg = multiplier_sum / (n-1)
+
+    return score * (multiplier - multiplier_avg)
 
 
 def league_differentials(league, gw, cutoff=10):
@@ -5857,6 +5871,9 @@ def league_differentials(league, gw, cutoff=10):
         if p.id not in ids_so_far:
 
             pts_gain = effective_points_gained(p, n)
+
+            if not ids_so_far:
+                print(p, pts_gain, p.league_count, p.league_multiplier_count, p._parent_manager)
 
             # print(p.name, pts_gain, p.league_count, p.league_multiplier_count, p._parent_manager)
 

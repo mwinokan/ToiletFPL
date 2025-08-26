@@ -73,6 +73,7 @@ class Player:
         self._xA_no_opponent = None
         self._xC_no_opponent = None
         self._xBpts = None
+        self._xDCpts = None
 
         self._A_per_xA = None
         self._G_per_xG = None
@@ -1136,6 +1137,12 @@ class Player:
             self.expected_points()
         return self._xBpts
 
+    @property
+    def xDCpts(self):
+        if self._xDCpts is None:
+            self.expected_points()
+        return self._xDCpts
+
     def expected_minutes(self, gw=None, Ms=None):
 
         if gw is None:
@@ -1559,6 +1566,8 @@ class Player:
 
             if debug:
                 mout.varOut("xDCPts", xDCPts)
+
+            self._xDCPts = xDCPts
 
             ### ATTACKING POINTS
 

@@ -563,6 +563,39 @@ def get_style_from_expected_return(value):
     style_str += '"'
     return style_str
 
+def get_style_from_xDCpts(value):
+    style_str = '"'
+    if value is None:
+        # blackish
+        style_str += "background-color:#17202A;color:white"
+
+    elif value > 2*0.99:
+        # dark green
+        style_str += "background-color:#196F3D;color:white"
+
+    elif value > 2*0.39:
+        # green
+        style_str += "background-color:#52BE80;color:black"
+
+    elif value > 2*0.19:
+        # yellow
+        style_str += "background-color:#F4D03F;color:black"
+
+    elif value > 2*0.09:
+        # orange
+        style_str += "background-color:#DC7633;color:black"
+
+    elif value > 2*0.00:
+        # red
+        style_str += "background-color:#CB4335;color:black"
+
+    else:
+        # dark red
+        style_str += "background-color:#901517;color:white"
+
+    style_str += '"'
+    return style_str
+
 
 def get_style_from_bonus(value):
     style_str = '"'
