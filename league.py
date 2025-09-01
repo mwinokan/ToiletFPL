@@ -2,7 +2,7 @@ import mout
 from manager import Manager
 import pandas as pd
 from tqdm import tqdm
-
+import mrich
 
 class League:
 
@@ -84,6 +84,11 @@ class League:
                 manager_df["rank"],
                 manager_df["last_rank"],
             ):
+
+                if last_rank == 0 or rank == 0:
+                    mrich.warning(n, "has invalid current/last league rank")
+                    continue
+
                 mout.progress(count, maximum)
 
                 m = self._api.get_manager(f"{n}", c, t, authenticate=False)
