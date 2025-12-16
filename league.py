@@ -17,6 +17,7 @@ class League:
         self._average_event_points = None
         self._graph_paths = []
         self._active_managers = None
+        self._normal_transfers_managers = None
         self._all_players = None
         self._last_gw_position_dict = None
         self._position_change_dict = None
@@ -155,6 +156,16 @@ class League:
                 if not m.is_dead and not m.id in self._skip_awards
             ]
         return self._active_managers
+
+    @property
+    def normal_transfers_managers(self):
+        if self._normal_transfers_managers is None:
+            self._normal_transfers_managers = [
+                m
+                for m in self.active_managers
+                if m._bb_week != self._api._current_gw and m._fh_week != self._api._current_gw
+            ]
+        return self._normal_transfers_managers
 
     @property
     def name(self):

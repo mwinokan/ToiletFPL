@@ -18,6 +18,7 @@ from web import (
     get_style_from_minutes_played,
     get_style_from_expected_return,
     get_style_from_bonus,
+    get_style_from_xDCpts,
 )
 from squad import Squad
 import time
@@ -557,6 +558,7 @@ def create_comparison_page(api, leagues, prev_gw_count=5, next_gw_count=5):
     html_buffer += f'<th style="text-align:center;">xA</th>\n'
     html_buffer += f'<th style="text-align:center;">xC</th>\n'
     html_buffer += f'<th style="text-align:center;">xB</th>\n'
+    html_buffer += f'<th style="text-align:center;">xDC</th>\n'
 
     for i in range(start_gw, now_gw + 1):
         html_buffer += f'<th style="text-align:center;">GW{i}</th>\n'
@@ -686,6 +688,18 @@ def create_comparison_page(api, leagues, prev_gw_count=5, next_gw_count=5):
             html_buffer += f"-"
         else:
             html_buffer += f"{p.xBpts:.2f}"
+        html_buffer += "</td>\n"
+
+        # xDCpts
+        style_str = (
+            get_style_from_xDCpts(p.xDCpts).rstrip('"')
+            + ';vertical-align:middle;text-align:right;border-right: 4px solid white;border-collapse:collapse;"'
+        )
+        html_buffer += f'<td class="w3-center" style={style_str}>'
+        if p.xDCpts is None:
+            html_buffer += f"-"
+        else:
+            html_buffer += f"{p.xDCpts:.1f}"
         html_buffer += "</td>\n"
 
         # previous GWs
@@ -4909,7 +4923,7 @@ def create_leaguepage(league, leagues, i):
             ### FORTUNE TELLER
 
             sorted_managers = sorted(
-                league.active_managers,
+                league.normal_transfers_managers,
                 key=lambda x: (x.calculate_transfer_gain(), x._transfer_uniqueness),
                 reverse=True,
             )
