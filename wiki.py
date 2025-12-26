@@ -294,7 +294,7 @@ def main():
     create_teampage(api, leagues)
 
     if halfway_awards:
-        create_christmaspage(leagues)
+        # create_christmaspage(leagues)
         pass
 
     if season_awards:
