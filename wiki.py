@@ -3972,32 +3972,32 @@ def league_best_chips(league):
         html_buffer += "</tr>\n"
 
     ### assistant manager
-    if len(am_subset) > 0:
-        html_buffer += "<tr>\n"
-        html_buffer += f'<td class="w3-purple" style="text-align:center;">AM</td>\n'
-        html_buffer += f'<td style="text-align:center;">\n'
-        man = am_best[1]
-        html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-        if "Toilet" in league.name and man.is_diamond:
-            html_buffer += "💎"
-        html_buffer += f"in {man._am_gwstr}\n"
-        html_buffer += "</td>\n"
-        html_buffer += (
-            f'<td style="text-align:center;">{pts_delta_format(am_best[0])}</td>\n'
-        )
+    #if len(am_subset) > 0:
+     #   html_buffer += "<tr>\n"
+      #  html_buffer += f'<td class="w3-purple" style="text-align:center;">AM</td>\n'
+       # html_buffer += f'<td style="text-align:center;">\n'
+       # man = am_best[1]
+       # html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+        #if "Toilet" in league.name and man.is_diamond:
+        #    html_buffer += "💎"
+#        html_buffer += f"in {man._am_gwstr}\n"
+ #       html_buffer += "</td>\n"
+  #      html_buffer += (
+   #         f'<td style="text-align:center;">{pts_delta_format(am_best[0])}</td>\n'
+    #    )
         # if len(am_subset) == 1:
             # html_buffer += f"<td></td>\n"
             # html_buffer += f"<td></td>\n"
         # else:
-        html_buffer += f'<td style="text-align:center;">\n'
-        man = am_worst[1]
-        html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-        if "Toilet" in league.name and man.is_diamond:
-            html_buffer += "💎"
-        html_buffer += f"in {man._am_gwstr}\n"
-        html_buffer += "</td>\n"
-        html_buffer += f'<td style="text-align:center;">{pts_delta_format(am_worst[0])}</td>\n'
-        html_buffer += "</tr>\n"
+     #   html_buffer += f'<td style="text-align:center;">\n'
+      #man = am_worst[1]
+        #html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+#        if "Toilet" in league.name and man.is_diamond:
+ #           html_buffer += "💎"
+  #      html_buffer += f"in {man._am_gwstr}\n"
+   #     html_buffer += "</td>\n"
+    #    html_buffer += f'<td style="text-align:center;">{pts_delta_format(am_worst[0])}</td>\n'
+     #   html_buffer += "</tr>\n"
 
     html_buffer += "</tbody>\n"
     html_buffer += "</table>\n"
