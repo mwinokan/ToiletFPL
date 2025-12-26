@@ -3782,14 +3782,14 @@ def league_best_chips(league):
         json[str(league.id)]["chips"]["wc2"]["best"] = [wc2_best[0], wc2_best[1].id]
         json[str(league.id)]["chips"]["wc2"]["worst"] = [wc2_worst[0], wc2_worst[1].id]
 
-    # Second wildcard
-    am_subset = [m for m in league.managers if m._am1_week]
-    am_best = get_winners("Best Ass.Man.", am_subset, lambda x: x._am_ptsgain)
-    am_worst = get_losers("Worst Ass.Man.", am_subset, lambda x: x._am_ptsgain)
+    # Ass Man
+    #am_subset = [m for m in league.managers if m._am1_week]
+    #am_best = get_winners("Best Ass.Man.", am_subset, lambda x: x._am_ptsgain)
+    #am_worst = get_losers("Worst Ass.Man.", am_subset, lambda x: x._am_ptsgain)
     
-    create_key(json[str(league.id)]["chips"], "am")
-    json[str(league.id)]["chips"]["am"]["best"] = [am_best[0], am_best[1].id]
-    json[str(league.id)]["chips"]["am"]["worst"] = [am_worst[0], am_worst[1].id]
+    #create_key(json[str(league.id)]["chips"], "am")
+    #json[str(league.id)]["chips"]["am"]["best"] = [am_best[0], am_best[1].id]
+    #json[str(league.id)]["chips"]["am"]["worst"] = [am_worst[0], am_worst[1].id]
 
     # table
     html_buffer += '<table class="w3-table-all w3-hoverable">\n'
