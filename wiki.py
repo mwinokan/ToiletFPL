@@ -54,7 +54,7 @@ halfway_awards = True  # generate half-season / christmas awards
 season_awards = False  # generate full-season awards
 cup_active = False  # activate the cup
 
-christmas_gw = 17
+christmas_gw = 18
 
 if "--push" in argv:
     run_push_changes = True
@@ -3694,7 +3694,7 @@ def create_christmaspage(leagues):
     html_page(
         f"html/christmas.html",
         None,
-        title="2024 Christmas Review",
+        title="2025 Christmas Review",
         gw=api._current_gw,
         html=html_buffer,
         bar_html=navbar,
