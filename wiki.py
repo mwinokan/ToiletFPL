@@ -3597,7 +3597,7 @@ def create_christmaspage(leagues):
     html_buffer += '<div class="w3-center" style="padding-bottom:0px">\n'
     html_buffer += floating_subtitle(title)
     # html_buffer += f"<h2>{title}</h2>\n"
-    html_buffer += f'<img class="w3-image" src="../images/christmas2024.png" alt="Banner" width="1320" height="702">\n'
+    # html_buffer += f'<img class="w3-image" src="../images/christmas2024.png" alt="Banner" width="1320" height="702">\n'
     html_buffer += "</div>\n"
 
     html_buffer += '<div class="w3-col s12 m12 l12">\n'
@@ -3658,10 +3658,10 @@ def create_christmaspage(leagues):
         html_buffer += award_buffer
 
         html_buffer += floating_subtitle("League Table")
-        md_buffer = ""
+        # md_buffer = ""
         # md_buffer += f"\n## League Table:\n"
         # md_buffer += f"Is your team's kit the boring default? Design it [here](https://fantasy.premierleague.com/entry-update)\n\n"
-        html_buffer += md2html(md_buffer)
+        # html_buffer += md2html(md_buffer)
         html_buffer += "</div>\n"
         html_buffer += _league_table_html[league.id]
 
@@ -5014,10 +5014,10 @@ def create_leaguepage(league, leagues, i):
 
         html_buffer += f'<div class="w3-padding">\n'
         html_buffer += f"<h2>League Table:</h2>\n"
-        html_buffer += (
-            "<p>Is your team"
-            + f's kit the boring default? Design it <a href="https://fantasy.premierleague.com/entry-update">here</a><p>\n'
-        )
+        # html_buffer += (
+            # "<p>Is your team"
+            # + f's kit the boring default? Design it <a href="https://fantasy.premierleague.com/entry-update">here</a><p>\n'
+        # )
         html_buffer += f"</div>\n"
         html_buffer += league_table_html(league, gw)
 
