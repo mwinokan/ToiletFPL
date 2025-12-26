@@ -54,7 +54,7 @@ halfway_awards = True  # generate half-season / christmas awards
 season_awards = False  # generate full-season awards
 cup_active = False  # activate the cup
 
-christmas_gw = 18
+christmas_gw = 17
 
 if "--push" in argv:
     run_push_changes = True
@@ -294,7 +294,7 @@ def main():
     create_teampage(api, leagues)
 
     if halfway_awards:
-        # create_christmaspage(leagues)
+        create_christmaspage(leagues)
         pass
 
     if season_awards:
