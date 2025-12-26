@@ -50,7 +50,7 @@ fetch_latest = False  # pull latest changes from github before running
 force_go_graphs = True  # force update of Assets graph
 
 # gamestate options (to be automated)
-halfway_awards = False  # generate half-season / christmas awards
+halfway_awards = True  # generate half-season / christmas awards
 season_awards = False  # generate full-season awards
 cup_active = False  # activate the cup
 
