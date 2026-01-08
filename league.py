@@ -4,6 +4,7 @@ import pandas as pd
 from tqdm import tqdm
 import mrich
 
+
 class League:
 
     def __init__(self, code, api, extra=None):
@@ -72,15 +73,15 @@ class League:
         maximum = len(manager_df)
 
         if "rank" not in manager_df.keys():
-            manager_df["rank"] = [None]*len(manager_df)
+            manager_df["rank"] = [None] * len(manager_df)
         if "last_rank" not in manager_df.keys():
-            manager_df["last_rank"] = [None]*len(manager_df)
+            manager_df["last_rank"] = [None] * len(manager_df)
 
         count = 0
         if "player_name" in manager_df.keys():
             for c, n, t, rank, last_rank in zip(
-                manager_df["entry"], 
-                manager_df["player_name"], 
+                manager_df["entry"],
+                manager_df["player_name"],
                 manager_df["entry_name"],
                 manager_df["rank"],
                 manager_df["last_rank"],
@@ -100,7 +101,7 @@ class League:
                     mout.warningOut(
                         f"Skipping invalid manager '{m.name}' with ID: {m.id}"
                     )
-                
+
                 m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
 
                 # print(f'adding {m} [1]')
@@ -163,7 +164,8 @@ class League:
             self._normal_transfers_managers = [
                 m
                 for m in self.active_managers
-                if m._bb_week != self._api._current_gw and m._fh_week != self._api._current_gw
+                if self._api._current_gw
+                not in [m._bb1_week, m._bb2_week, m._fh1_week, m._fh2_week]
             ]
         return self._normal_transfers_managers
 

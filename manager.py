@@ -270,21 +270,27 @@ class Manager:
 
     def get_chips(self):
 
-        self._tc_week = None
-        self._bb_week = None
-        self._fh_week = None
+        self._tc1_week = None
+        self._tc2_week = None
+        self._bb1_week = None
+        self._bb2_week = None
+        self._fh1_week = None
+        self._fh2_week = None
         self._wc1_week = None
         self._wc2_week = None
         self._am1_week = None
         self._am2_week = None
         self._am3_week = None
 
-        self.__bb_ptsgain = None
+        self.__bb1_ptsgain = None
+        self.__bb2_ptsgain = None
         # self._bb_total = None
         # self._bb_rank = None
 
-        self.__tc_ptsgain = None
-        self._tc_name = None
+        self.__tc1_ptsgain = None
+        self.__tc2_ptsgain = None
+        self._tc1_name = None
+        self._tc2_name = None
 
         self.__am_ptsgain = None
         self._am1_name = None
@@ -297,23 +303,35 @@ class Manager:
         for chip in self._history_chips:
 
             if chip["name"] == "3xc":
-                self._tc_week = chip["event"]
-                # self._tc_name = self.get_current_squad(gw = self._tc_week).captain
-                # self._squad = None
-                # self._tc_ptsgain
+                if not self._tc1_week:
+                    self._tc1_week = chip["event"]
+                else:
+                    self._tc2_week = chip["event"]
 
             elif chip["name"] == "bboost":
-                self._bb_week = chip["event"]
-                # rel_gw = self.active_gws.index(self._bb_week)
-                # self._bb_total = self._event_points[rel_gw]
-                # self._bb_rank = self._event_rank[rel_gw]
+                if not self._bb1_week:
+                    self._bb1_week = chip["event"]
+                else:
+                    self._bb2_week = chip["event"]
+
             elif chip["name"] == "freehit":
-                self._fh_week = chip["event"]
-                rel_gw = self.active_gws.index(self._fh_week)
-                self._fh_total = self._event_points[rel_gw]
-                self._fh_gwrank = self._event_rank[rel_gw]
-                self._fh_or = self._overall_rank[rel_gw]
-                self._fh_orprev = self._overall_rank[rel_gw - 1]
+
+                if not self._fh1_week:
+                    self._fh1_week = chip["event"]
+                    rel_gw = self.active_gws.index(self._fh1_week)
+                    self._fh1_total = self._event_points[rel_gw]
+                    self._fh1_gwrank = self._event_rank[rel_gw]
+                    self._fh1_or = self._overall_rank[rel_gw]
+                    self._fh1_orprev = self._overall_rank[rel_gw - 1]
+
+                else:
+                    self._fh2_week = chip["event"]
+                    rel_gw = self.active_gws.index(self._fh2_week)
+                    self._fh2_total = self._event_points[rel_gw]
+                    self._fh2_gwrank = self._event_rank[rel_gw]
+                    self._fh2_or = self._overall_rank[rel_gw]
+                    self._fh2_orprev = self._overall_rank[rel_gw - 1]
+
             elif chip["name"] == "wildcard":
                 if self._wc1_week is None:
                     self._wc1_week = chip["event"]
@@ -350,23 +368,26 @@ class Manager:
             elif chip["name"] == "manager":
 
                 self._am1_week = chip["event"]
-                self._am_gwstr = f'GW{self._am1_week}'
+                self._am_gwstr = f"GW{self._am1_week}"
 
                 if chip["event"] < 38:
                     self._am2_week = chip["event"] + 1
-                    self._am_gwstr = f'GW{self._am1_week}-{self._am1_week+1}'
-                
+                    self._am_gwstr = f"GW{self._am1_week}-{self._am1_week+1}"
+
                 if chip["event"] < 37:
-                    self._am3_week = chip["event"] + 2             
-                    self._am_gwstr = f'GW{self._am1_week}-{self._am1_week+2}'
+                    self._am3_week = chip["event"] + 2
+                    self._am_gwstr = f"GW{self._am1_week}-{self._am1_week+2}"
 
             else:
                 print("Unrecognised chip: " + chip["name"])
 
         self._chip_dict = dict(
-            tc=self._tc_week,
-            bb=self._bb_week,
-            fh=self._fh_week,
+            tc1=self._tc1_week,
+            bb1=self._bb1_week,
+            fh1=self._fh1_week,
+            tc2=self._tc2_week,
+            bb2=self._bb2_week,
+            fh2=self._fh2_week,
             wc1=self._wc1_week,
             wc2=self._wc2_week,
             am1=self._am1_week,
@@ -374,28 +395,47 @@ class Manager:
             am3=self._am3_week,
         )
         self._chip_names = dict(
-            tc="Triple Captain",
-            bb="Bench Boost",
-            fh="Free Hit",
-            wc1="First Wildcard",
-            wc2="Second Wildcard",
             am1="Ass. Man. 1",
             am2="Ass. Man. 2",
             am3="Ass. Man. 3",
+            bb1="Bench Boost",
+            bb2="Bench Boost",
+            bb="Bench Boost",
+            fh1="Free Hit",
+            fh2="Free Hit",
+            fh="Free Hit",
+            tc1="Triple Captain",
+            tc2="Triple Captain",
+            tc="Triple Captain",
+            wc1="Wildcard",
+            wc2="Wildcard",
         )
 
     @property
-    def _bb_ptsgain(self):
-        if self.__bb_ptsgain is None:
-            self.get_current_squad(gw=self._bb_week, force=True)
-            self.__bb_ptsgain = sum(
+    def _bb1_ptsgain(self):
+        if self.__bb1_ptsgain is None:
+            self.get_current_squad(gw=self._bb1_week, force=True)
+            self.__bb1_ptsgain = sum(
                 [
-                    p.get_event_score(gw=self._bb_week, not_playing_is_none=False)
+                    p.get_event_score(gw=self._bb1_week, not_playing_is_none=False)
                     for p in self._squad.players[-4:]
                 ]
             )
             self._squad = None
-        return self.__bb_ptsgain
+        return self.__bb1_ptsgain
+
+    @property
+    def _bb2_ptsgain(self):
+        if self.__bb2_ptsgain is None:
+            self.get_current_squad(gw=self._bb2_week, force=True)
+            self.__bb2_ptsgain = sum(
+                [
+                    p.get_event_score(gw=self._bb2_week, not_playing_is_none=False)
+                    for p in self._squad.players[-4:]
+                ]
+            )
+            self._squad = None
+        return self.__bb2_ptsgain
 
     @property
     def gw_rank_gain(self):
@@ -416,21 +456,31 @@ class Manager:
             return 0
 
     @property
-    def _tc_ptsgain(self):
-        if self.__tc_ptsgain is None:
-            self.get_current_squad(gw=self._tc_week, force=True)
-            self.__tc_ptsgain = self._squad.captain.get_event_score(gw=self._tc_week)
-            self._tc_name = self._squad.captain.name
-            # mout.out(f"{self} {self._squad.captain} {self._tc_week}")
+    def _tc1_ptsgain(self):
+        if self.__tc1_ptsgain is None:
+            self.get_current_squad(gw=self._tc1_week, force=True)
+            self.__tc1_ptsgain = self._squad.captain.get_event_score(gw=self._tc1_week)
+            self._tc1_name = self._squad.captain.name
+            # mout.out(f"{self} {self._squad.captain} {self._tc1_week}")
             self._squad = None
-        return self.__tc_ptsgain
+        return self.__tc1_ptsgain
+
+    @property
+    def _tc2_ptsgain(self):
+        if self.__tc2_ptsgain is None:
+            self.get_current_squad(gw=self._tc2_week, force=True)
+            self.__tc2_ptsgain = self._squad.captain.get_event_score(gw=self._tc2_week)
+            self._tc2_name = self._squad.captain.name
+            # mout.out(f"{self} {self._squad.captain} {self._tc2_week}")
+            self._squad = None
+        return self.__tc2_ptsgain
 
     @property
     def _am_ptsgain(self):
         if self.__am_ptsgain is None:
 
             self.__am_ptsgain = 0
-            
+
             self.get_current_squad(gw=self._am1_week, force=True)
             am = self._squad.manager
             s = am.get_event_score(gw=self._am1_week)
@@ -457,12 +507,18 @@ class Manager:
         return self.__am_ptsgain
 
     def get_event_chip(self, gw):
-        if self._tc_week == gw:
-            return "TC"
-        elif self._bb_week == gw:
-            return "BB"
-        elif self._fh_week == gw:
-            return "FH"
+        if self._tc1_week == gw:
+            return "TC1"
+        elif self._tc2_week == gw:
+            return "TC2"
+        elif self._bb1_week == gw:
+            return "BB1"
+        elif self._fh1_week == gw:
+            return "FH1"
+        elif self._bb2_week == gw:
+            return "BB2"
+        elif self._fh2_week == gw:
+            return "FH2"
         elif self._wc1_week == gw:
             return "WC1"
         elif self._wc2_week == gw:
@@ -489,21 +545,36 @@ class Manager:
 
         # text = [None for i in self.active_gws if i not in self._api._skip_gws]
 
-        if self._tc_week is not None:
+        if self._tc1_week is not None:
             if with_name:
-                data[self._tc_week] = f"TC {self._name}"
+                data[self._tc1_week] = f"TC1 {self._name}"
             else:
-                data[self._tc_week] = "TC"
-        if self._bb_week is not None:
+                data[self._tc1_week] = "TC1"
+        if self._tc2_week is not None:
             if with_name:
-                data[self._bb_week] = f"BB {self._name}"
+                data[self._tc2_week] = f"TC2 {self._name}"
             else:
-                data[self._bb_week] = "BB"
-        if self._fh_week is not None:
+                data[self._tc2_week] = "TC2"
+        if self._bb1_week is not None:
             if with_name:
-                data[self._fh_week] = f"FH {self._name}"
+                data[self._bb1_week] = f"BB1 {self._name}"
             else:
-                data[self._fh_week] = "FH"
+                data[self._bb1_week] = "BB1"
+        if self._fh1_week is not None:
+            if with_name:
+                data[self._fh1_week] = f"FH1 {self._name}"
+            else:
+                data[self._fh1_week] = "FH1"
+        if self._bb2_week is not None:
+            if with_name:
+                data[self._bb2_week] = f"BB2 {self._name}"
+            else:
+                data[self._bb2_week] = "BB2"
+        if self._fh2_week is not None:
+            if with_name:
+                data[self._fh2_week] = f"FH2 {self._name}"
+            else:
+                data[self._fh2_week] = "FH2"
         if self._wc1_week is not None:
             if with_name:
                 data[self._wc1_week] = f"C1 {self._name}"
@@ -568,9 +639,10 @@ class Manager:
                     old_cap.multiplier = 0
                     old_cap.is_captain = False
 
-            if self._tc_week is not None:
-                if gw == self._tc_week:
-                    self.captain.multiplier = 3
+            if gw == self._tc1_week:
+                self.captain.multiplier = 3
+            elif gw == self._tc2_week:
+                self.captain.multiplier = 3
 
         return self._squad
 
@@ -867,7 +939,9 @@ class Manager:
 
     @property
     def defensive_contributions(self):
-        return sum([p.event_defensive_contributions * p.multiplier for p in self.players])
+        return sum(
+            [p.event_defensive_contributions * p.multiplier for p in self.players]
+        )
 
     @property
     def goals_conceded(self):
@@ -929,7 +1003,8 @@ class Manager:
                     and t["event"] != self._wc2_week
                     and t["event"] != 17
                     and t["event"] != 7
-                    and t["event"] != self._fh_week
+                    and t["event"] != self._fh1_week
+                    and t["event"] != self._fh2_week
                 ]
             )
         return self._nonwc_transfers
@@ -1050,8 +1125,7 @@ class Manager:
 
     def get_transfer_str(self, gw=None, short=False):
 
-        if gw is None:
-            gw = self._api.current_gw
+        gw = gw or self._api.current_gw
 
         str_buff = ""
         score = 0
@@ -1062,7 +1136,7 @@ class Manager:
         elif self._wc2_week is not None and gw == self._wc2_week:
             wc_active = True
         fh_active = False
-        if self._fh_week is not None and gw == self._fh_week:
+        if gw in [self._fh1_week, self._fh2_week]:
             fh_active = True
 
         # transfers = self.get_gw_transfers(gw=gw,simplify=True)
@@ -1493,7 +1567,7 @@ class Manager:
         bench = [p for p in self.players if p.multiplier == 0]
 
         if len(bench) != 4:
-            if self._bb_week != self._api._current_gw:
+            if self._api._current_gw not in [self._bb1_week, self._bb2_week]:
                 mout.warningOut(
                     f"Bench has wrong number of players ({self.name}). And no BB played!"
                 )
@@ -1609,7 +1683,8 @@ class Manager:
                 if n_changes == 3:
                     break
 
-
     def league_rank_diff(self, league_id):
-        return self._league_positions[league_id]["last_rank"] - self._league_positions[league_id]["rank"]
-        
+        return (
+            self._league_positions[league_id]["last_rank"]
+            - self._league_positions[league_id]["rank"]
+        )

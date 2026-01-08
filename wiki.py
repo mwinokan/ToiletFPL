@@ -74,10 +74,10 @@ leagues = [
     (2128169, "🍝", "Dinner", "dark-grey"),
 ]
 
-league_codes = [ list(i)[0] for i in leagues ]
-league_icons = [ list(i)[1] for i in leagues ]
-league_shortnames = [ list(i)[2] for i in leagues ]
-league_colours = [ list(i)[3] for i in leagues ]
+league_codes = [list(i)[0] for i in leagues]
+league_icons = [list(i)[1] for i in leagues]
+league_shortnames = [list(i)[2] for i in leagues]
+league_colours = [list(i)[3] for i in leagues]
 
 award_flavourtext = dict(
     king="👑 King",
@@ -103,21 +103,33 @@ award_flavourtext = dict(
     kneejerker="🔨 Kneejerker",
     rocket="🚀 Rocket",
     flushed="🚽 #DownTheToilet",
+    zombie="Best Dead Team",
+    most_defcon="🚌 Park the Bus",
+    least_defcon="🧀 Gruyère",
+    am_best="Best Ass. Man.",
+    am_worst="Worst Ass. Man.",
+    bb1_best="Best Bench Boost 1",
+    bb1_worst="Worst Bench Boost 1",
+    bb2_best="Best Bench Boost 2",
+    bb2_worst="Worst Bench Boost 2",
+    bb_best="Best Bench Boost 1",
+    bb_worst="Worst Bench Boost 1",
+    fh1_best="Best Free Hit 1",
+    fh1_worst="Worst Free Hit 1",
+    fh2_best="Best Free Hit 2",
+    fh2_worst="Worst Free Hit 2",
+    fh_best="Best Free Hit 1",
+    fh_worst="Worst Free Hit 1",
+    tc1_best="Best Triple Captain 1",
+    tc1_worst="Worst Triple Captain 1",
+    tc2_best="Best Triple Captain 2",
+    tc2_worst="Worst Triple Captain 2",
+    tc_best="Best Triple Captain 1",
+    tc_worst="Worst Triple Captain 1",
     wc1_best="Best Wildcard 1",
     wc1_worst="Worst Wildcard 1",
     wc2_best="Best Wildcard 2",
     wc2_worst="Worst Wildcard 2",
-    tc_best="Best Triple Captain",
-    tc_worst="Worst Triple Captain",
-    bb_best="Best Bench Boost",
-    bb_worst="Worst Bench Boost",
-    am_best="Best Ass. Man.",
-    am_worst="Worst Ass. Man.",
-    fh_best="Best Free Hit",
-    fh_worst="Worst Free Hit",
-    zombie="Best Dead Team",
-    most_defcon="🚌 Park the Bus",
-    least_defcon="🧀 Gruyère",
 )
 
 award_unittext = dict(
@@ -163,18 +175,6 @@ award_colour = dict(
     glow_up="pale-yellow",
     has_been="grey",
     kneejerker="deep-orange",
-    wc1_best="red",
-    wc1_worst="red",
-    wc2_best="red",
-    wc2_worst="red",
-    am_best="purple",
-    am_worst="purple",
-    tc_best="yellow",
-    tc_worst="yellow",
-    bb_best="blue",
-    bb_worst="blue",
-    fh_best="green",
-    fh_worst="green",
     hot_stuff="orange",
     soggy_biscuit="teal",
     rocket="lime",
@@ -182,7 +182,30 @@ award_colour = dict(
     zombie="teal",
     most_defcon="blue-grey",
     least_defcon="note",
-
+    am_best="purple",
+    am_worst="purple",
+    bb1_best="blue",
+    bb1_worst="blue",
+    bb2_best="blue",
+    bb2_worst="blue",
+    bb_best="blue",
+    bb_worst="blue",
+    fh1_best="green",
+    fh1_worst="green",
+    fh2_best="green",
+    fh2_worst="green",
+    fh_best="green",
+    fh_worst="green",
+    tc1_best="yellow",
+    tc1_worst="yellow",
+    tc2_best="yellow",
+    tc2_worst="yellow",
+    tc_best="yellow",
+    tc_worst="yellow",
+    wc1_best="red",
+    wc1_worst="red",
+    wc2_best="red",
+    wc2_worst="red",
 )
 
 _league_table_html = {}
@@ -405,7 +428,7 @@ def run_test():
 
     # create_leaguepage(l,[],0)
 
-    p = Player('B.Fernandes',api)
+    p = Player("B.Fernandes", api)
 
     # pd = api.__elements[p._full_name]
 
@@ -1016,7 +1039,9 @@ def create_cup_page(api, league, leagues):
             html_buffer += "</td>\n"
 
             # html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man1._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
-            html_buffer += f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
+            html_buffer += (
+                f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
+            )
 
             if winner == 1:
                 html_buffer += f'<td class="w3-green w3-center">\n'
@@ -1205,7 +1230,9 @@ def create_cup_page(api, league, leagues):
                 html_buffer += "</td>\n"
 
                 # html_buffer += f'<td class="w3-center" style="vertical-align:middle;"><img class="w3-image" src="{man2._kit_path}" alt="Kit Icon" width="22" height="29"></td>\n'
-                html_buffer += f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
+                html_buffer += (
+                    f'<td class="w3-center" style="vertical-align:middle;"></td>\n'
+                )
 
                 html_buffer += f'<td class="w3-left">\n'
                 html_buffer += f'<a href="{man2.gui_url}">{man2.name}</a>'
@@ -2675,7 +2702,7 @@ def create_chip_table(api, man):
                     else:
                         delta = f" {delta:.0f}"
                     detail += f"({delta}% OR)"
-                case "fh":
+                case "fh1":
                     color = "green"
                     pts = man.get_event_score(chip[1])
                     rank = [
@@ -2684,9 +2711,25 @@ def create_chip_table(api, man):
                         if i == chip[1]
                     ][0]
                     detail = f"GW Points: {pts}, GW Rank: {api.big_number_format(rank)}"
-                case "bb":
+                case "fh2":
+                    color = "green"
+                    pts = man.get_event_score(chip[1])
+                    rank = [
+                        r
+                        for i, r in zip(man.active_gws, man._event_rank)
+                        if i == chip[1]
+                    ][0]
+                    detail = f"GW Points: {pts}, GW Rank: {api.big_number_format(rank)}"
+                case "bb1":
                     color = "blue"
-                    pts = man._bb_ptsgain
+                    pts = man._bb1_ptsgain
+                    if pts > 0:
+                        detail = f"+{pts} points gained"
+                    else:
+                        detail = f"{pts} points lost"
+                case "bb2":
+                    color = "blue"
+                    pts = man._bb2_ptsgain
                     if pts > 0:
                         detail = f"+{pts} points gained"
                     else:
@@ -2717,7 +2760,7 @@ def create_chip_table(api, man):
                     else:
                         detail = f"{pts} points lost from {man._am3_name}"
 
-                case "tc":
+                case "tc1":
                     color = "amber"
                     old_squad = man._squad
                     squad = man.get_current_squad(gw=chip[1], force=True)
@@ -2728,7 +2771,7 @@ def create_chip_table(api, man):
                         detail = f"-"
                         break
 
-                    pts_delta = man._tc_ptsgain
+                    pts_delta = man._tc1_ptsgain
 
                     try:
                         if pts_delta > 0:
@@ -2738,7 +2781,32 @@ def create_chip_table(api, man):
                     except TypeError:
                         detail = ""
 
-                    detail += f"with {man._tc_name}"
+                    detail += f"with {man._tc1_name}"
+
+                    man._squad = old_squad
+
+                case "tc2":
+                    color = "amber"
+                    old_squad = man._squad
+                    squad = man.get_current_squad(gw=chip[1], force=True)
+                    if squad is None:
+                        mout.warningOut(
+                            f"Squad is none for GW{chip[1]} (manager {man.id})"
+                        )
+                        detail = f"-"
+                        break
+
+                    pts_delta = man._tc2_ptsgain
+
+                    try:
+                        if pts_delta > 0:
+                            detail = f"+{pts_delta} points gained "
+                        else:
+                            detail = f"{pts_delta} points lost "
+                    except TypeError:
+                        detail = ""
+
+                    detail += f"with {man._tc2_name}"
 
                     man._squad = old_squad
 
@@ -3721,47 +3789,90 @@ def league_best_chips(league):
     finished = api._current_gw == 38 and not api._live_gw
 
     # bench boost
-    bb_subset = [m for m in league.managers if m._bb_week]
-    if len(bb_subset) > 1:
-        bb_best = get_winners(
-            "Best BB",
-            bb_subset,
-            lambda x: (x._bb_ptsgain, -x.get_specific_event_rank(x._bb_week)),
+    bb1_subset = [m for m in league.managers if m._bb1_week]
+    if len(bb1_subset) > 1:
+        bb1_best = get_winners(
+            "Best BB1",
+            bb1_subset,
+            lambda x: (x._bb1_ptsgain, -x.get_specific_event_rank(x._bb1_week)),
         )
-        bb_worst = get_losers(
-            "Worst BB",
-            bb_subset,
-            lambda x: (x._bb_ptsgain, -x.get_specific_event_rank(x._bb_week)),
+        bb1_worst = get_losers(
+            "Worst BB1",
+            bb1_subset,
+            lambda x: (x._bb1_ptsgain, -x.get_specific_event_rank(x._bb1_week)),
         )
-        create_key(json[str(league.id)]["chips"], "bb")
-        json[str(league.id)]["chips"]["bb"]["best"] = [bb_best[0], bb_best[1].id]
-        json[str(league.id)]["chips"]["bb"]["worst"] = [bb_worst[0], bb_worst[1].id]
+        create_key(json[str(league.id)]["chips"], "bb1")
+        json[str(league.id)]["chips"]["bb1"]["best"] = [bb1_best[0], bb1_best[1].id]
+        json[str(league.id)]["chips"]["bb1"]["worst"] = [bb1_worst[0], bb1_worst[1].id]
+
+    # bench boost
+    bb2_subset = [m for m in league.managers if m._bb2_week]
+    if len(bb2_subset) > 1:
+        bb2_best = get_winners(
+            "Best BB2",
+            bb2_subset,
+            lambda x: (x._bb2_ptsgain, -x.get_specific_event_rank(x._bb2_week)),
+        )
+        bb2_worst = get_losers(
+            "Worst BB2",
+            bb2_subset,
+            lambda x: (x._bb2_ptsgain, -x.get_specific_event_rank(x._bb2_week)),
+        )
+        create_key(json[str(league.id)]["chips"], "bb2")
+        json[str(league.id)]["chips"]["bb2"]["best"] = [bb2_best[0], bb2_best[1].id]
+        json[str(league.id)]["chips"]["bb2"]["worst"] = [bb2_worst[0], bb2_worst[1].id]
 
     # triple captain
-    tc_subset = [m for m in league.managers if m._tc_week]
-    if len(tc_subset) > 1:
-        tc_best = get_winners(
-            "Best TC",
-            tc_subset,
-            lambda x: (x._tc_ptsgain, -x.get_specific_event_rank(x._tc_week)),
+    tc1_subset = [m for m in league.managers if m._tc1_week]
+    if len(tc1_subset) > 1:
+        tc1_best = get_winners(
+            "Best TC1",
+            tc1_subset,
+            lambda x: (x._tc1_ptsgain, -x.get_specific_event_rank(x._tc1_week)),
         )
-        tc_worst = get_losers(
-            "Worst TC",
-            tc_subset,
-            lambda x: (x._tc_ptsgain, -x.get_specific_event_rank(x._tc_week)),
+        tc1_worst = get_losers(
+            "Worst TC1",
+            tc1_subset,
+            lambda x: (x._tc1_ptsgain, -x.get_specific_event_rank(x._tc1_week)),
         )
-        create_key(json[str(league.id)]["chips"], "tc")
-        json[str(league.id)]["chips"]["tc"]["best"] = [tc_best[0], tc_best[1].id]
-        json[str(league.id)]["chips"]["tc"]["worst"] = [tc_worst[0], tc_worst[1].id]
+        create_key(json[str(league.id)]["chips"], "tc1")
+        json[str(league.id)]["chips"]["tc1"]["best"] = [tc1_best[0], tc1_best[1].id]
+        json[str(league.id)]["chips"]["tc1"]["worst"] = [tc1_worst[0], tc1_worst[1].id]
+
+    # triple captain
+    tc2_subset = [m for m in league.managers if m._tc2_week]
+    if len(tc2_subset) > 1:
+        tc2_best = get_winners(
+            "Best TC2",
+            tc2_subset,
+            lambda x: (x._tc2_ptsgain, -x.get_specific_event_rank(x._tc2_week)),
+        )
+        tc2_worst = get_losers(
+            "Worst TC2",
+            tc2_subset,
+            lambda x: (x._tc2_ptsgain, -x.get_specific_event_rank(x._tc2_week)),
+        )
+        create_key(json[str(league.id)]["chips"], "tc2")
+        json[str(league.id)]["chips"]["tc2"]["best"] = [tc2_best[0], tc2_best[1].id]
+        json[str(league.id)]["chips"]["tc2"]["worst"] = [tc2_worst[0], tc2_worst[1].id]
 
     # Free hit
-    fh_subset = [m for m in league.managers if m._fh_week]
+    fh1_subset = [m for m in league.managers if m._fh1_week]
     if len(fh_subset) > 1:
-        fh_best = get_losers("Best fh", fh_subset, lambda x: x._fh_gwrank)
-        fh_worst = get_winners("Worst fh", fh_subset, lambda x: x._fh_gwrank)
-        create_key(json[str(league.id)]["chips"], "fh")
-        json[str(league.id)]["chips"]["fh"]["best"] = [fh_best[0], fh_best[1].id]
-        json[str(league.id)]["chips"]["fh"]["worst"] = [fh_worst[0], fh_worst[1].id]
+        fh1_best = get_losers("Best fh1", fh1_subset, lambda x: x._fh1_gwrank)
+        fh1_worst = get_winners("Worst fh1", fh1_subset, lambda x: x._fh1_gwrank)
+        create_key(json[str(league.id)]["chips"], "fh1")
+        json[str(league.id)]["chips"]["fh1"]["best"] = [fh1_best[0], fh1_best[1].id]
+        json[str(league.id)]["chips"]["fh1"]["worst"] = [fh1_worst[0], fh1_worst[1].id]
+
+    # Free hit
+    fh2_subset = [m for m in league.managers if m._fh2_week]
+    if len(fh_subset) > 1:
+        fh2_best = get_losers("Best fh2", fh2_subset, lambda x: x._fh2_gwrank)
+        fh2_worst = get_winners("Worst fh2", fh2_subset, lambda x: x._fh2_gwrank)
+        create_key(json[str(league.id)]["chips"], "fh2")
+        json[str(league.id)]["chips"]["fh2"]["best"] = [fh2_best[0], fh2_best[1].id]
+        json[str(league.id)]["chips"]["fh2"]["worst"] = [fh2_worst[0], fh2_worst[1].id]
 
     # First wildcard
     wc1_subset = [m for m in league.managers if m._wc1_week]
@@ -3783,13 +3894,13 @@ def league_best_chips(league):
         json[str(league.id)]["chips"]["wc2"]["worst"] = [wc2_worst[0], wc2_worst[1].id]
 
     # Ass Man
-    #am_subset = [m for m in league.managers if m._am1_week]
-    #am_best = get_winners("Best Ass.Man.", am_subset, lambda x: x._am_ptsgain)
-    #am_worst = get_losers("Worst Ass.Man.", am_subset, lambda x: x._am_ptsgain)
-    
-    #create_key(json[str(league.id)]["chips"], "am")
-    #json[str(league.id)]["chips"]["am"]["best"] = [am_best[0], am_best[1].id]
-    #json[str(league.id)]["chips"]["am"]["worst"] = [am_worst[0], am_worst[1].id]
+    # am_subset = [m for m in league.managers if m._am1_week]
+    # am_best = get_winners("Best Ass.Man.", am_subset, lambda x: x._am_ptsgain)
+    # am_worst = get_losers("Worst Ass.Man.", am_subset, lambda x: x._am_ptsgain)
+
+    # create_key(json[str(league.id)]["chips"], "am")
+    # json[str(league.id)]["chips"]["am"]["best"] = [am_best[0], am_best[1].id]
+    # json[str(league.id)]["chips"]["am"]["worst"] = [am_worst[0], am_worst[1].id]
 
     # table
     html_buffer += '<table class="w3-table-all w3-hoverable">\n'
@@ -3807,32 +3918,61 @@ def league_best_chips(league):
     html_buffer += "<tbody>\n"
 
     ### triple captain
-    if len(tc_subset) > 1:
+    if len(tc1_subset) > 1:
         html_buffer += "<tr>\n"
         html_buffer += f'<td class="w3-amber" style="text-align:center;">TC</td>\n'
         html_buffer += f'<td style="text-align:center;">\n'
-        man = tc_best[1]
+        man = tc1_best[1]
         html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
         if "Toilet" in league.name and man.is_diamond:
             html_buffer += "💎"
-        html_buffer += f"with {man._tc_name} in GW{man._tc_week}\n"
+        html_buffer += f"with {man._tc1_name} in GW{man._tc1_week}\n"
 
         html_buffer += "</td>\n"
         html_buffer += (
-            f'<td style="text-align:center;">{pts_delta_format(tc_best[0][0])}</td>\n'
+            f'<td style="text-align:center;">{pts_delta_format(tc1_best[0][0])}</td>\n'
         )
-        if len(tc_subset) == 1:
+        if len(tc1_subset) == 1:
             html_buffer += f"<td></td>\n"
             html_buffer += f"<td></td>\n"
         else:
-            man = tc_worst[1]
+            man = tc1_worst[1]
             html_buffer += f'<td style="text-align:center;">\n'
             html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
             if "Toilet" in league.name and man.is_diamond:
                 html_buffer += "💎"
-            html_buffer += f"with {man._tc_name} in GW{man._tc_week}\n"
+            html_buffer += f"with {man._tc1_name} in GW{man._tc1_week}\n"
             html_buffer += "</td>\n"
-            html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc_worst[0][0])}</td>\n'
+            html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc1_worst[0][0])}</td>\n'
+        html_buffer += "</tr>\n"
+
+    ### triple captain
+    if len(tc2_subset) > 1:
+        html_buffer += "<tr>\n"
+        html_buffer += f'<td class="w3-amber" style="text-align:center;">TC</td>\n'
+        html_buffer += f'<td style="text-align:center;">\n'
+        man = tc2_best[1]
+        html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+        if "Toilet" in league.name and man.is_diamond:
+            html_buffer += "💎"
+        html_buffer += f"with {man._tc2_name} in GW{man._tc2_week}\n"
+
+        html_buffer += "</td>\n"
+        html_buffer += (
+            f'<td style="text-align:center;">{pts_delta_format(tc2_best[0][0])}</td>\n'
+        )
+        if len(tc2_subset) == 1:
+            html_buffer += f"<td></td>\n"
+            html_buffer += f"<td></td>\n"
+        else:
+            man = tc2_worst[1]
+            html_buffer += f'<td style="text-align:center;">\n'
+            html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+            if "Toilet" in league.name and man.is_diamond:
+                html_buffer += "💎"
+            html_buffer += f"with {man._tc2_name} in GW{man._tc2_week}\n"
+            html_buffer += "</td>\n"
+            html_buffer += f'<td style="text-align:center;">{pts_delta_format(tc2_worst[0][0])}</td>\n'
         html_buffer += "</tr>\n"
 
     ### wildcard 1
@@ -3908,34 +4048,70 @@ def league_best_chips(league):
         html_buffer += "</tr>\n"
 
     ### free hit
-    if len(fh_subset) > 1:
+    if len(fh1_subset) > 1:
         html_buffer += "<tr>\n"
-        html_buffer += f'<td class="w3-green" style="text-align:center;">FH</td>\n'
+        html_buffer += f'<td class="w3-green" style="text-align:center;">FH1</td>\n'
         html_buffer += f'<td style="text-align:center;">\n'
-        man = fh_best[1]
+        man = fh1_best[1]
         html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
         if "Toilet" in league.name and man.is_diamond:
             html_buffer += "💎"
-        html_buffer += f" with {man._fh_total}pts in GW{man._fh_week}\n"
+        html_buffer += f" with {man._fh1_total}pts in GW{man._fh1_week}\n"
         html_buffer += "</td>\n"
-        delta = 100 * (man._fh_orprev - man._fh_or) / man._fh_orprev
+        delta = 100 * (man._fh1_orprev - man._fh1_or) / man._fh1_orprev
         if delta > 0:
             delta = f"+{delta:.0f}"
         else:
             delta = f"{delta:.0f}"
         html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
-        if len(fh_subset) == 1:
+        if len(fh1_subset) == 1:
             html_buffer += f"<td></td>\n"
             html_buffer += f"<td></td>\n"
         else:
             html_buffer += f'<td style="text-align:center;">\n'
-            man = fh_worst[1]
+            man = fh1_worst[1]
             html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
             if "Toilet" in league.name and man.is_diamond:
                 html_buffer += "💎"
-            html_buffer += f"with {man._fh_total}pts in GW{man._fh_week}\n"
+            html_buffer += f"with {man._fh1_total}pts in GW{man._fh1_week}\n"
             html_buffer += "</td>\n"
-            delta = 100 * (man._fh_orprev - man._fh_or) / man._fh_orprev
+            delta = 100 * (man._fh1_orprev - man._fh1_or) / man._fh1_orprev
+            if delta > 0:
+                delta = f"+{delta:.0f}"
+            else:
+                delta = f"{delta:.0f}"
+            html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+        html_buffer += "</tr>\n"
+
+    ### free hit
+    if len(fh2_subset) > 1:
+        html_buffer += "<tr>\n"
+        html_buffer += f'<td class="w3-green" style="text-align:center;">FH2</td>\n'
+        html_buffer += f'<td style="text-align:center;">\n'
+        man = fh2_best[1]
+        html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+        if "Toilet" in league.name and man.is_diamond:
+            html_buffer += "💎"
+        html_buffer += f" with {man._fh2_total}pts in GW{man._fh2_week}\n"
+        html_buffer += "</td>\n"
+        delta = 100 * (man._fh2_orprev - man._fh2_or) / man._fh2_orprev
+        if delta > 0:
+            delta = f"+{delta:.0f}"
+        else:
+            delta = f"{delta:.0f}"
+        html_buffer += f'<td style="text-align:center;">{delta}% OR</td>\n'
+        if len(fh2_subset) == 1:
+            html_buffer += f"<td></td>\n"
+            html_buffer += f"<td></td>\n"
+        else:
+            html_buffer += f'<td style="text-align:center;">\n'
+            man = fh2_worst[1]
+            html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+            if "Toilet" in league.name and man.is_diamond:
+                html_buffer += "💎"
+            html_buffer += f"with {man._fh2_total}pts in GW{man._fh2_week}\n"
+            html_buffer += "</td>\n"
+            delta = 100 * (man._fh2_orprev - man._fh2_or) / man._fh2_orprev
             if delta > 0:
                 delta = f"+{delta:.0f}"
             else:
@@ -3944,60 +4120,88 @@ def league_best_chips(league):
         html_buffer += "</tr>\n"
 
     ### bench boost
-    if len(bb_subset) > 1:
+    if len(bb1_subset) > 1:
         html_buffer += "<tr>\n"
-        html_buffer += f'<td class="w3-blue" style="text-align:center;">BB</td>\n'
+        html_buffer += f'<td class="w3-blue" style="text-align:center;">BB1</td>\n'
         html_buffer += f'<td style="text-align:center;">\n'
-        man = bb_best[1]
+        man = bb1_best[1]
         html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
         if "Toilet" in league.name and man.is_diamond:
             html_buffer += "💎"
-        html_buffer += f"in GW{man._bb_week}\n"
+        html_buffer += f"in GW{man._bb1_week}\n"
         html_buffer += "</td>\n"
         html_buffer += (
-            f'<td style="text-align:center;">{pts_delta_format(bb_best[0][0])}</td>\n'
+            f'<td style="text-align:center;">{pts_delta_format(bb1_best[0][0])}</td>\n'
         )
-        if len(bb_subset) == 1:
+        if len(bb1_subset) == 1:
             html_buffer += f"<td></td>\n"
             html_buffer += f"<td></td>\n"
         else:
             html_buffer += f'<td style="text-align:center;">\n'
-            man = bb_worst[1]
+            man = bb1_worst[1]
             html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
             if "Toilet" in league.name and man.is_diamond:
                 html_buffer += "💎"
-            html_buffer += f"in GW{man._bb_week}\n"
+            html_buffer += f"in GW{man._bb1_week}\n"
             html_buffer += "</td>\n"
-            html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb_worst[0][0])}</td>\n'
+            html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb1_worst[0][0])}</td>\n'
+        html_buffer += "</tr>\n"
+
+    ### bench boost
+    if len(bb2_subset) > 1:
+        html_buffer += "<tr>\n"
+        html_buffer += f'<td class="w3-blue" style="text-align:center;">BB2</td>\n'
+        html_buffer += f'<td style="text-align:center;">\n'
+        man = bb2_best[1]
+        html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+        if "Toilet" in league.name and man.is_diamond:
+            html_buffer += "💎"
+        html_buffer += f"in GW{man._bb2_week}\n"
+        html_buffer += "</td>\n"
+        html_buffer += (
+            f'<td style="text-align:center;">{pts_delta_format(bb2_best[0][0])}</td>\n'
+        )
+        if len(bb2_subset) == 1:
+            html_buffer += f"<td></td>\n"
+            html_buffer += f"<td></td>\n"
+        else:
+            html_buffer += f'<td style="text-align:center;">\n'
+            man = bb2_worst[1]
+            html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+            if "Toilet" in league.name and man.is_diamond:
+                html_buffer += "💎"
+            html_buffer += f"in GW{man._bb2_week}\n"
+            html_buffer += "</td>\n"
+            html_buffer += f'<td style="text-align:center;">{pts_delta_format(bb2_worst[0][0])}</td>\n'
         html_buffer += "</tr>\n"
 
     ### assistant manager
-    #if len(am_subset) > 0:
-     #   html_buffer += "<tr>\n"
-      #  html_buffer += f'<td class="w3-purple" style="text-align:center;">AM</td>\n'
-       # html_buffer += f'<td style="text-align:center;">\n'
-       # man = am_best[1]
-       # html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-        #if "Toilet" in league.name and man.is_diamond:
-        #    html_buffer += "💎"
-#        html_buffer += f"in {man._am_gwstr}\n"
- #       html_buffer += "</td>\n"
-  #      html_buffer += (
-   #         f'<td style="text-align:center;">{pts_delta_format(am_best[0])}</td>\n'
+    # if len(am_subset) > 0:
+    #   html_buffer += "<tr>\n"
+    #  html_buffer += f'<td class="w3-purple" style="text-align:center;">AM</td>\n'
+    # html_buffer += f'<td style="text-align:center;">\n'
+    # man = am_best[1]
+    # html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+    # if "Toilet" in league.name and man.is_diamond:
+    #    html_buffer += "💎"
+    #        html_buffer += f"in {man._am_gwstr}\n"
+    #       html_buffer += "</td>\n"
+    #      html_buffer += (
+    #         f'<td style="text-align:center;">{pts_delta_format(am_best[0])}</td>\n'
     #    )
-        # if len(am_subset) == 1:
-            # html_buffer += f"<td></td>\n"
-            # html_buffer += f"<td></td>\n"
-        # else:
-     #   html_buffer += f'<td style="text-align:center;">\n'
-      #man = am_worst[1]
-        #html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
-#        if "Toilet" in league.name and man.is_diamond:
- #           html_buffer += "💎"
-  #      html_buffer += f"in {man._am_gwstr}\n"
-   #     html_buffer += "</td>\n"
+    # if len(am_subset) == 1:
+    # html_buffer += f"<td></td>\n"
+    # html_buffer += f"<td></td>\n"
+    # else:
+    #   html_buffer += f'<td style="text-align:center;">\n'
+    # man = am_worst[1]
+    # html_buffer += f'<a href="{man.gui_url}">{man.name}</a>\n'
+    #        if "Toilet" in league.name and man.is_diamond:
+    #           html_buffer += "💎"
+    #      html_buffer += f"in {man._am_gwstr}\n"
+    #     html_buffer += "</td>\n"
     #    html_buffer += f'<td style="text-align:center;">{pts_delta_format(am_worst[0])}</td>\n'
-     #   html_buffer += "</tr>\n"
+    #   html_buffer += "</tr>\n"
 
     html_buffer += "</tbody>\n"
     html_buffer += "</table>\n"
@@ -4781,7 +4985,11 @@ def create_leaguepage(league, leagues, i):
 
             if gw > 1:
 
-                sorted_managers = sorted(league.active_managers, key=lambda x: (x.league_rank_diff(league.id), x.gw_rank_gain), reverse=True)
+                sorted_managers = sorted(
+                    league.active_managers,
+                    key=lambda x: (x.league_rank_diff(league.id), x.gw_rank_gain),
+                    reverse=True,
+                )
 
                 ### rocketeer
 
@@ -4896,27 +5104,33 @@ def create_leaguepage(league, leagues, i):
             )
             m = sorted_managers[0]
             html_buffer += award_panel(
-                "🚌", #🧱 🛡️ 
-                "Park the Bus", # DEFCON 1
+                "🚌",  # 🧱 🛡️
+                "Park the Bus",  # DEFCON 1
                 "Most Def. Con.",
                 m.defensive_contributions,
                 m,
                 colour=award_colour["most_defcon"],
                 name_class="h2",
             )
-            json[str(league.id)][gw]["awards"]["most_defcon"] = [m.id, m.defensive_contributions]
+            json[str(league.id)][gw]["awards"]["most_defcon"] = [
+                m.id,
+                m.defensive_contributions,
+            ]
 
             m = sorted_managers[-1]
             html_buffer += award_panel(
-                "🧀", # ⛓️‍💥🫖
-                "Gruyère", #Weakest Link, Chocolate Teapot
+                "🧀",  # ⛓️‍💥🫖
+                "Gruyère",  # Weakest Link, Chocolate Teapot
                 "Least Def. Con.",
                 m.defensive_contributions,
                 m,
                 colour=award_colour["least_defcon"],
                 name_class="h2",
             )
-            json[str(league.id)][gw]["awards"]["least_defcon"] = [m.id, m.defensive_contributions]
+            json[str(league.id)][gw]["awards"]["least_defcon"] = [
+                m.id,
+                m.defensive_contributions,
+            ]
 
         if gw > 1:
 
@@ -5015,8 +5229,8 @@ def create_leaguepage(league, leagues, i):
         html_buffer += f'<div class="w3-padding">\n'
         html_buffer += f"<h2>League Table:</h2>\n"
         # html_buffer += (
-            # "<p>Is your team"
-            # + f's kit the boring default? Design it <a href="https://fantasy.premierleague.com/entry-update">here</a><p>\n'
+        # "<p>Is your team"
+        # + f's kit the boring default? Design it <a href="https://fantasy.premierleague.com/entry-update">here</a><p>\n'
         # )
         html_buffer += f"</div>\n"
         html_buffer += league_table_html(league, gw)
@@ -5127,21 +5341,27 @@ def league_chips(league, gw):
 
         chip = man.get_event_chip(gw)
 
-        if chip == "TC":
+        if chip.startswith("TC"):
             color = "amber"
+            chip = "TC"
         elif chip.startswith("WC"):
             color = "red"
-        elif chip == "BB":
+            chip = "WC"
+        elif chip.startswith("BB"):
             color = "blue"
-        elif chip == "FH":
+            chip = "BB"
+        elif chip.startswith("FH"):
             color = "green"
+            chip = "FH"
         elif chip.startswith("AM"):
             color = "purple"
             chip = "AM"
         else:
             mrich.error("Unsupported chip:", chip)
 
-        html_buffer += f'<td class="w3-{color}" style="text-align:center;">{man.get_event_chip(gw)}</td>\n'
+        html_buffer += (
+            f'<td class="w3-{color}" style="text-align:center;">{chip}</td>\n'
+        )
 
         # team
         # html_buffer += f'<td><img class="w3-image" src="{man._kit_path}" alt="Kit Icon" width="22" height="29"> <a href="{man.gui_url}">{man.team_name}</a></td>\n'
@@ -5269,7 +5489,7 @@ def preseason_table(league):
         html_buffer += "\t<tr>\n"
         html_buffer += f'\t\t<td style="text-align:right;">{i+1}</td>\n'
         # html_buffer += f'\t\t<td><img src="{m._kit_path}" alt="Kit Icon" width="22" height="29"></img>\n'
-        html_buffer += f'\t\t<td>\n'
+        html_buffer += f"\t\t<td>\n"
 
         html_buffer += f'\t\t<a href="{m.gui_url}">{m.team_name}</a></td>\n'
 
@@ -5535,9 +5755,9 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
                 f'<td style="text-align:center;">{m.total_livescore:,}</td>\n'
             )
 
-        if m._bb_week == gw:
+        if gw in [m._bb1_week, m._bb2_week]:
             html_buffer += f'<td class="w3-blue" style="text-align:center;"><strong>BB</strong> {m.livescore}</td>\n'
-        elif m._fh_week == gw:
+        elif gw in [m._fh1_week, m._fh2_week]:
             html_buffer += f'<td class="w3-green" style="text-align:center;"><strong>FH</strong> {m.livescore}</td>\n'
         elif gw in [m._am1_week, m._am2_week, m._am3_week]:
             html_buffer += f'<td class="w3-purple" style="text-align:center;"><strong>AM</strong> {m.livescore}</td>\n'
@@ -5550,7 +5770,7 @@ def league_table_html(league, gw, awardkey=None, seasontable=False):
             html_buffer += f'<td style="text-align:right;">{api.big_number_format(m.gw_rank)}</td>\n'
 
         if show_captain:
-            if m._tc_week == gw:
+            if gw in [m._tc1_week, m._tc2_week]:
                 html_buffer += f'<td class="w3-amber"><strong>TC</strong> {m.captain} ({3*m.captain_points})'
                 html_buffer += "</td>\n"
             else:
@@ -5850,7 +6070,7 @@ def effective_points_gained(player, n):
         return score
 
     multiplier_sum = league_multiplier_count - multiplier
-    multiplier_avg = multiplier_sum / (n-1)
+    multiplier_avg = multiplier_sum / (n - 1)
 
     return score * (multiplier - multiplier_avg)
 
@@ -5887,7 +6107,13 @@ def league_differentials(league, gw, cutoff=10):
             pts_gain = effective_points_gained(p, n)
 
             if not ids_so_far:
-                print(p, pts_gain, p.league_count, p.league_multiplier_count, p._parent_manager)
+                print(
+                    p,
+                    pts_gain,
+                    p.league_count,
+                    p.league_multiplier_count,
+                    p._parent_manager,
+                )
 
             # print(p.name, pts_gain, p.league_count, p.league_multiplier_count, p._parent_manager)
 

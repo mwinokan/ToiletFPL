@@ -156,7 +156,6 @@ class FPL_API:
             [90, "Bournemouth"],
             [93, "Brentford"],
             [101, "Luton"],
-
         ]
 
         self._short_team_pairs = {
@@ -1271,17 +1270,15 @@ class FPL_API:
         while True:
             print(i, count)
             try:
-                urllib.request.urlretrieve(
-                    f"{url}shirt_{i+1}-66.png", f"kits/{i}.png"
-                )
+                urllib.request.urlretrieve(f"{url}shirt_{i+1}-66.png", f"kits/{i}.png")
                 count += 1
-            
+
                 urllib.request.urlretrieve(
                     f"{url}shirt_{i+1}_1-66.png", f"kits/{i}_gkp.png"
                 )
                 count += 1
                 i += 1
-            
+
             except urllib.error.HTTPError:
                 i += 1
                 if i > 200:

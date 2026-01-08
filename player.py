@@ -1363,7 +1363,7 @@ class Player:
 
             if debug:
                 mout.varOut("Ms", Ms)
-                
+
             if not Ms:
                 return 0
 
@@ -1549,11 +1549,14 @@ class Player:
 
             # weighted average xDC per game
             DC_per_minute = weighted_average(
-                DCs, Ms, None, None #TODO! in future have to support previous defensive contributions
+                DCs,
+                Ms,
+                None,
+                None,  # TODO! in future have to support previous defensive contributions
             )
 
             defcon_threshold = self.defcon_threshold
-            
+
             if debug:
                 mout.varOut("DC_per_minute", DC_per_minute)
                 mout.varOut("DC_per_90", DC_per_minute * 90)
