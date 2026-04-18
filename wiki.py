@@ -5156,11 +5156,11 @@ def create_leaguepage(league, leagues, i):
                 )
                 json[str(league.id)][gw]["awards"]["fortune"] = [m.id, score]
 
-            ### CLOWN
+                ### CLOWN
 
-            m = sorted_managers[-1]
-            score = m.calculate_transfer_gain()
-            html_buffer += award_panel(
+                m = sorted_managers[-1]
+                score = m.calculate_transfer_gain()
+                html_buffer += award_panel(
                 "🤡",
                 "Clown",
                 "Worst Transfers",
@@ -5168,8 +5168,8 @@ def create_leaguepage(league, leagues, i):
                 m,
                 colour=award_colour["clown"],
                 name_class="h2",
-            )
-            json[str(league.id)][gw]["awards"]["clown"] = [m.id, score]
+                )
+                json[str(league.id)][gw]["awards"]["clown"] = [m.id, score]
 
             ### NERD AND INNOVATOR (REMOVED)
 
