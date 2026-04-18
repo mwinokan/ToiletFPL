@@ -5141,9 +5141,11 @@ def create_leaguepage(league, leagues, i):
                 key=lambda x: (x.calculate_transfer_gain(), x._transfer_uniqueness),
                 reverse=True,
             )
-            m = sorted_managers[0]
-            score = m.calculate_transfer_gain()
-            html_buffer += award_panel(
+            
+            if sorted_managers:
+                m = sorted_managers[0]
+                score = m.calculate_transfer_gain()
+                html_buffer += award_panel(
                 "🔮",
                 "Fortune Teller",
                 "Best Transfers",
@@ -5151,8 +5153,8 @@ def create_leaguepage(league, leagues, i):
                 m,
                 colour=award_colour["fortune"],
                 name_class="h2",
-            )
-            json[str(league.id)][gw]["awards"]["fortune"] = [m.id, score]
+                )
+                json[str(league.id)][gw]["awards"]["fortune"] = [m.id, score]
 
             ### CLOWN
 
