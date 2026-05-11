@@ -21416,22 +21416,22 @@
 				],
 				"lowest_winner_score": [
 					5285488,
-					67,
+					73,
 					836787
 				],
 				"highest_winner_score": [
-					527088,
-					82,
-					555713
+					503449,
+					83,
+					3661293
 				],
 				"lowest_loser_score": [
 					555713,
-					59,
+					61,
 					527088
 				],
 				"highest_loser_score": [
 					3661293,
-					75,
+					77,
 					503449
 				]
 			},
@@ -21460,17 +21460,17 @@
 				],
 				"lowest_winner_score": [
 					555713,
-					59,
+					61,
 					9788
 				],
 				"highest_winner_score": [
-					527088,
-					82,
-					2202702
+					503449,
+					83,
+					132271
 				],
 				"lowest_loser_score": [
 					678313,
-					48,
+					51,
 					836787
 				],
 				"highest_loser_score": [
@@ -21504,7 +21504,7 @@
 				],
 				"lowest_winner_score": [
 					678313,
-					48,
+					51,
 					4850424
 				],
 				"highest_winner_score": [
@@ -21514,7 +21514,7 @@
 				],
 				"lowest_loser_score": [
 					1100794,
-					43,
+					44,
 					836787
 				],
 				"highest_loser_score": [
@@ -21548,7 +21548,7 @@
 				],
 				"lowest_winner_score": [
 					1100794,
-					43,
+					44,
 					5564439
 				],
 				"highest_winner_score": [
@@ -21558,7 +21558,7 @@
 				],
 				"lowest_loser_score": [
 					8842837,
-					29,
+					31,
 					530609
 				],
 				"highest_loser_score": [
@@ -21592,7 +21592,7 @@
 				],
 				"lowest_winner_score": [
 					8842837,
-					29,
+					31,
 					7105110
 				],
 				"highest_winner_score": [
@@ -24351,7 +24351,7 @@
 				],
 				"clown": [
 					132271,
-					-14
+					-13
 				],
 				"zombie": [
 					682071,
@@ -24660,8 +24660,8 @@
 						"position": "Attack",
 						"multiplier": 0.16981132075471697,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 5.277777777777778,
+						"started": true
 					},
 					{
 						"shortteam": "EVE",
@@ -24684,16 +24684,16 @@
 						"position": "Defence",
 						"multiplier": 0.14150943396226415,
 						"kit_path": "../kits/Spurs.png",
-						"points": 0.0,
-						"started": false
+						"points": 1.4,
+						"started": true
 					},
 					{
 						"shortteam": "LEE",
 						"position": "Defence",
 						"multiplier": 0.1320754716981132,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 1.7857142857142858,
+						"started": true
 					},
 					{
 						"shortteam": "BRE",
@@ -24796,8 +24796,8 @@
 						"position": "Attack",
 						"multiplier": 0.009433962264150943,
 						"kit_path": "../kits/Spurs.png",
-						"points": 0.0,
-						"started": false
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "WOL",
@@ -24836,29 +24836,29 @@
 				"654644": 23,
 				"7723263": 24,
 				"2202702": 25,
-				"26655": 26,
-				"5285488": 27,
+				"5285488": 26,
+				"26655": 27,
 				"3456670": 28,
 				"4681230": 29,
 				"4652788": 0,
 				"1384128": 31,
 				"555713": 1,
 				"1639901": 0,
-				"3661293": 34,
-				"4850424": 35,
+				"4850424": 34,
+				"3661293": 35,
 				"7795401": 0,
 				"2006783": 37,
 				"834670": 38,
 				"1527672": 39,
-				"7641021": 40,
-				"1824179": 41,
-				"4371747": 42,
-				"945278": 43,
-				"3568592": 44,
+				"1824179": 40,
+				"7641021": 41,
+				"3568592": 42,
+				"4371747": 43,
+				"945278": 44,
 				"132821": 45,
 				"964672": 46,
+				"204545": 47,
 				"5837921": 1,
-				"204545": 48,
 				"5391786": 0,
 				"1809959": 50,
 				"931312": 51,
@@ -24884,8 +24884,8 @@
 				"6713974": 71,
 				"968044": 72,
 				"256477": 73,
-				"2896729": 74,
-				"1100794": 75,
+				"1100794": 74,
+				"2896729": 75,
 				"1774181": 76,
 				"2169525": 77,
 				"151629": 78,
@@ -24905,8 +24905,8 @@
 				"1566869": 92,
 				"422643": 93,
 				"5564439": 94,
-				"3496930": 95,
-				"6526444": 96,
+				"6526444": 95,
+				"3496930": 96,
 				"9202041": 97,
 				"4187481": 98,
 				"2176874": 99,
@@ -24924,7 +24924,7 @@
 			]
 		}
 	},
-	"timestamp": "2026-05-11 18:59:03",
+	"timestamp": "2026-05-11 20:49:44",
 	"1717868": {
 		"1": {
 			"differentials": [
@@ -40504,15 +40504,15 @@
 			"awards": {
 				"king": [
 					39324,
-					79
+					86
 				],
 				"cock": [
-					9788,
-					66
+					1828042,
+					67
 				],
 				"goals": [
 					39324,
-					4
+					5
 				],
 				"scientist": [
 					39324,
@@ -40534,23 +40534,23 @@
 				],
 				"smooth_brain": [
 					9788,
-					14
+					21
 				],
 				"minutes": [
-					1828042,
-					87.63636363636364
+					563428,
+					88.45454545454545
 				],
 				"asbo": [
 					1828042,
 					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
 				],
 				"most_defcon": [
-					26655,
-					67
+					39324,
+					69
 				],
 				"least_defcon": [
-					563428,
-					45
+					530609,
+					47
 				],
 				"fortune": [
 					563428,
@@ -40558,7 +40558,7 @@
 				],
 				"clown": [
 					39324,
-					-12
+					-6
 				],
 				"zombie": [
 					5432835,
@@ -40663,7 +40663,7 @@
 					[
 						691,
 						0.3,
-						null
+						6
 					],
 					[
 						64,
@@ -40749,8 +40749,8 @@
 						"position": "Defence",
 						"multiplier": 0.4,
 						"kit_path": "../kits/Spurs.png",
-						"points": 0.0,
-						"started": false
+						"points": 1.5,
+						"started": true
 					},
 					{
 						"shortteam": "EVE",
@@ -40765,8 +40765,8 @@
 						"position": "Attack",
 						"multiplier": 0.3,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 6.0,
+						"started": true
 					},
 					{
 						"shortteam": "AVL",
@@ -40837,8 +40837,8 @@
 						"position": "Defence",
 						"multiplier": 0.1,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 1.0,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
@@ -55964,10 +55964,10 @@
 				],
 				"cock": [
 					7545237,
-					60
+					66
 				],
 				"goals": [
-					8893060,
+					3748484,
 					4
 				],
 				"scientist": [
@@ -55993,8 +55993,8 @@
 					23
 				],
 				"minutes": [
-					1828042,
-					87.63636363636364
+					3748484,
+					88.45454545454545
 				],
 				"asbo": [
 					1828042,
@@ -56006,11 +56006,11 @@
 				],
 				"least_defcon": [
 					7545237,
-					47
+					50
 				],
 				"fortune": [
 					5837921,
-					8
+					10
 				],
 				"clown": [
 					1828042,
@@ -56109,7 +56109,7 @@
 					[
 						691,
 						0.2857142857142857,
-						null
+						6
 					]
 				],
 				"ownership": [
@@ -56190,8 +56190,8 @@
 						"position": "Attack",
 						"multiplier": 0.42857142857142855,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 4.666666666666667,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
@@ -56302,8 +56302,8 @@
 						"position": "Defence",
 						"multiplier": 0.14285714285714285,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 2.0,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
@@ -56318,8 +56318,8 @@
 						"position": "Defence",
 						"multiplier": 0.14285714285714285,
 						"kit_path": "../kits/Spurs.png",
-						"points": 0.0,
-						"started": false
+						"points": 2.0,
+						"started": true
 					}
 				]
 			},
