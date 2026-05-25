@@ -3858,7 +3858,7 @@ def league_best_chips(league):
 
     # Free hit
     fh1_subset = [m for m in league.managers if m._fh1_week]
-    if len(fh_subset) > 1:
+    if len(fh1_subset) > 1:
         fh1_best = get_losers("Best fh1", fh1_subset, lambda x: x._fh1_gwrank)
         fh1_worst = get_winners("Worst fh1", fh1_subset, lambda x: x._fh1_gwrank)
         create_key(json[str(league.id)]["chips"], "fh1")
@@ -3867,7 +3867,7 @@ def league_best_chips(league):
 
     # Free hit
     fh2_subset = [m for m in league.managers if m._fh2_week]
-    if len(fh_subset) > 1:
+    if len(fh2_subset) > 1:
         fh2_best = get_losers("Best fh2", fh2_subset, lambda x: x._fh2_gwrank)
         fh2_worst = get_winners("Worst fh2", fh2_subset, lambda x: x._fh2_gwrank)
         create_key(json[str(league.id)]["chips"], "fh2")
