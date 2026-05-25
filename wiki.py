@@ -51,7 +51,7 @@ force_go_graphs = True  # force update of Assets graph
 
 # gamestate options (to be automated)
 halfway_awards = True  # generate half-season / christmas awards
-season_awards = False  # generate full-season awards
+season_awards = True  # generate full-season awards
 cup_active = True  # activate the cup
 
 christmas_gw = 17
