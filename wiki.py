@@ -3164,12 +3164,15 @@ def get_manager_json_awards(api, leagues):
 
                     # print(key, data)
 
+                    if not data:
+                        continue
+
                     try:
                         m = api.get_manager(id=data[0])
                         m._awards.append(
                             dict(key=key, score=data[-1], league=l_name, gw="season")
                         )
-                    except TypeError as e:
+                    except Exception as e:
                         mout.error(key, data)
                         mout.error(str(e))
                         raise e
