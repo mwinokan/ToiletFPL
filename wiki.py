@@ -3525,7 +3525,7 @@ def create_homepage(navbar):
     if preseason:
 
         # table of total player information
-        html_buffer += floating_subtitle("24/25 Top Assets", pad=0)
+        html_buffer += floating_subtitle("25/26 Top Assets", pad=0)
 
         html_buffer += previous_player_table()
 
@@ -3647,7 +3647,7 @@ def create_seasonpage(leagues):
     html_page(
         f"html/season.html",
         None,
-        title="24/25 Season Review",
+        title="25/26 Season Review",
         gw=api._current_gw,
         html=html_buffer,
         bar_html=navbar,
