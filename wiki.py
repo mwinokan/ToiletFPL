@@ -5,7 +5,7 @@ from league import League
 import api as fpl_api
 import plot
 from collections import Counter
-import mout
+import mrich
 from player import Player
 from manager import Manager
 import json as js
@@ -35,7 +35,7 @@ timestamp = datetime.today().strftime("%Y-%m-%d %H:%M:%S")
 
 # deployment configuration
 DEPLOY_ROOT = "mwinokan.github.io/ToiletFPL"
-JSON_PATH = "data_wiki_2526.json"  # store the award data in this JSON
+JSON_PATH = "data_wiki_2627.json"  # store the award data in this JSON
 TAGLINE = "Home of the RBS Diamond Invitational and Tesco Bean Value Toilet League"
 
 # run options
@@ -50,9 +50,9 @@ fetch_latest = False  # pull latest changes from github before running
 force_go_graphs = True  # force update of Assets graph
 
 # gamestate options (to be automated)
-halfway_awards = True  # generate half-season / christmas awards
-season_awards = True  # generate full-season awards
-cup_active = True  # activate the cup
+halfway_awards = False  # generate half-season / christmas awards
+season_awards = False  # generate full-season awards
+cup_active = False  # activate the cup
 
 christmas_gw = 17
 
@@ -69,9 +69,9 @@ if "--test" in argv:
 
 # 25/26
 leagues = [
-    (1717868, "💎", "Diamond", "aqua"),
-    (116790, "🚽", "Toilet", "dark-grey"),
-    (2128169, "🍝", "Dinner", "dark-grey"),
+    # (12, "💎", "Diamond", "aqua"),
+    (546912, "🚽", "Toilet", "dark-grey"),
+    (1239674, "🍝", "Dinner", "dark-grey"),
 ]
 
 league_codes = [list(i)[0] for i in leagues]
@@ -225,14 +225,12 @@ preseason = False
 
 completed_playerpages = []
 
-mout.showDebug()
-
 api = None
 json = {}
 
 
 def main():
-    mout.debugOut("main()")
+    mrich.debug("main()")
     import os
 
     if offline:
@@ -288,10 +286,10 @@ def main():
             leagues[-1]._shortname = shortname
             leagues[-1]._colour_str = colour
         except fpl_api.Request404:
-            mout.error(f"Could not init League({code},{shortname})")
+            mrich.error(f"Could not init League({code},{shortname})")
 
     # hookins was doing weird stuff
-    leagues[1]._skip_awards.append(1988353)
+    # leagues[1]._skip_awards.append(1988353)
     # leagues[1]._skip_awards.append(132821) # Helen Bamford too
 
     if api._current_gw < 38:
@@ -331,31 +329,23 @@ def main():
     get_manager_json_awards(api, leagues)
 
     count = 0
-    mout.debugOut("main()::ManagerPages")
-    mout.hideDebug()
-    maximum = len(api._managers)
-    for i, m in enumerate(api._managers.values()):
-        mout.progress(i, maximum)
+    mrich.debug("main()::ManagerPages")
+    for i, m in mrich.track(
+        enumerate(api._managers.values()),
+        total=len(api._managers),
+    ):
 
         if m.valid:
             create_managerpage(api, m, leagues)
 
-    mout.progress(maximum, maximum)
-    mout.showDebug()
-
     count = 0
-    mout.debugOut("main()::PlayerPages")
-    mout.hideDebug()
-    maximum = len(api._loaded_players)
-    for pid in api._loaded_players:
-        mout.progress(count, maximum, append=f" {count}/{maximum}")
+    mrich.debug("main()::PlayerPages")
+    for pid in mrich.track(api._loaded_players, total=len(api._loaded_players)):
         pid = int(pid)
         create_playerpage(
             api, Player(None, index=api.get_player_index(pid), api=api), leagues
         )
         count += 1
-    mout.progress(maximum, maximum)
-    mout.showDebug()
 
     create_assetpage(leagues)
 
@@ -376,7 +366,7 @@ def test_christmas():
             leagues[-1]._shortname = shortname
             leagues[-1]._colour_str = colour
         except fpl_api.Request404:
-            mout.error(f"Could not init League({code},{shortname})")
+            mrich.error(f"Could not init League({code},{shortname})")
 
     for i, l in enumerate(leagues):
         create_leaguepage(l, leagues, i)
@@ -450,7 +440,7 @@ def run_test():
     # 		leagues[-1]._shortname = shortname
     # 		leagues[-1]._colour_str = colour
     # 	except fpl_api.Request404:
-    # 		mout.error(f'Could not init League({code},{shortname})')
+    # 		mrich.error(f'Could not init League({code},{shortname})')
 
     # # p.expected_points(gw=2,use_official=True,debug=True)
     # # p.new_expected_points(gw=2,use_official=False,debug=True,force=True)
@@ -466,7 +456,7 @@ def run_test():
 
 
 def create_comparison_page(api, leagues, prev_gw_count=5, next_gw_count=5):
-    mout.debug(f"create_comparison_page()")
+    mrich.debug(f"create_comparison_page()")
 
     # instantiate all the player objects
     players = []
@@ -593,12 +583,8 @@ def create_comparison_page(api, leagues, prev_gw_count=5, next_gw_count=5):
 
     html_buffer += f"</tr>\n"
 
-    n = len(players)
-
     ### PLAYER ROWS
-    for i, p in enumerate(players):
-
-        mout.progress(i, n)
+    for i, p in mrich.track(enumerate(players)):
 
         html_buffer += f'<tr id="statRow{p.id}" style="display:none;">\n'
 
@@ -747,8 +733,6 @@ def create_comparison_page(api, leagues, prev_gw_count=5, next_gw_count=5):
 
         html_buffer += f"</tr>\n"
 
-    mout.finish()
-
     html_buffer += f"</table>"
 
     html_buffer += f"</div>"
@@ -874,13 +858,11 @@ def create_cup_page(api, league, leagues):
 
     all_matches = []
 
-    mout.debugOut(f"Getting all cup matches in {league.name}...")
-    for i, manager in enumerate(league.managers):
-        mout.progress(i, league.num_managers, width=50)
+    mrich.debug(f"Getting all cup matches in {league.name}...")
+    for i, manager in mrich.track(enumerate(league.managers)):
         matches = manager.get_cup_matches(league)
         # print(i,manager.name,len(matches))
         all_matches += manager.get_cup_matches(league)
-    mout.progress(league.num_managers, league.num_managers, width=50)
 
     # go by gameweek
 
@@ -982,9 +964,7 @@ def create_cup_page(api, league, leagues):
 
         html_buffer += "</tr>\n"
 
-        for j, match in enumerate(matches):
-
-            # mout.progress(i*prog_step + j*prog_step/len(matches),50,width=50)
+        for j, match in mrich.track(enumerate(matches)):
 
             man1 = match["self"]
             man1_score = man1.get_event_score(gw)
@@ -1256,8 +1236,6 @@ def create_cup_page(api, league, leagues):
         if gw < 36:
             total_buffer += html_buffer
 
-    # mout.progress(50,50,width=50)
-
     navbar = create_navbar(leagues, active="K", colour="black", active_colour="green")
     html_page(
         "html/toilet_cup.html",
@@ -1272,7 +1250,7 @@ def create_cup_page(api, league, leagues):
 
 
 def create_teampage(api, leagues):
-    mout.debugOut(f"create_teampage()")
+    mrich.debug(f"create_teampage()")
 
     from expected import weighted_average
 
@@ -1374,9 +1352,7 @@ def create_teampage(api, leagues):
 
     ### by team info
 
-    for i, team in enumerate(api.teams):
-        mout.progress(i, 20)
-
+    for i, team in mrich.track(enumerate(api.teams)):
         team_bg_color = team.get_style()["background-color"]
         team_text_color = team.get_style()["color"]
         team_style_str = f"background-color:{team_bg_color};color:{team_text_color};"
@@ -1632,8 +1608,6 @@ def create_teampage(api, leagues):
         html_buffer += "</div>\n"
         html_buffer += "</div>\n"
 
-    mout.progress(20, 20)
-
     navbar = create_navbar(leagues)
     html_page(
         "html/teams.html",
@@ -1648,7 +1622,7 @@ def create_teampage(api, leagues):
 
 
 def create_assetpage(leagues):
-    mout.debugOut(f"create_assetpage()")
+    mrich.debug(f"create_assetpage()")
 
     if force_go_graphs or not api._live_gw:
 
@@ -1751,7 +1725,11 @@ def create_assetpage(leagues):
 
 
 def create_navbar(
-    leagues, active=None, colour="black", active_colour="aqua", path_root=""
+    leagues,
+    active=None,
+    colour="black",
+    active_colour="aqua",
+    path_root="",
 ):
 
     html_buffer = ""
@@ -1806,8 +1784,8 @@ def create_navbar(
         html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🏆</h3></a>\n'
     url = f"{path_root}Tesco-Bean-Value-Toilet-League.html"
     html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>🚽</h3></a>\n'
-    url = f"{path_root}The-RBS-Diamond-Invitational.html"
-    html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>\n'
+    # url = f"{path_root}The-RBS-Diamond-Invitational.html"
+    # html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-aqua w3-right"><h3>💎</h3></a>\n'
     html_buffer += "</div>\n"
 
     html_buffer += f'<div class="w3-bar w3-{colour}">\n'
@@ -1818,7 +1796,7 @@ def create_navbar(
 
 
 def create_fixturepage(api, leagues):
-    mout.debugOut(f"create_fixturepage()")
+    mrich.debug(f"create_fixturepage()")
 
     gw = api._current_gw
 
@@ -1842,7 +1820,7 @@ def create_playerpage(api, player, leagues):
 
     if int(player.id) not in completed_playerpages:
 
-        mout.debugOut(f"create_playerpage({player.name})")
+        mrich.debug(f"create_playerpage({player.name})")
 
         gw = api._current_gw
 
@@ -2196,7 +2174,7 @@ def create_trophycabinet(api, man):
 
 
 def create_managerpage(api, man, leagues):
-    mout.debugOut(f"create_managerpage({man.name})")
+    mrich.debug(f"create_managerpage({man.name})")
 
     """
 
@@ -2264,9 +2242,7 @@ def create_managerpage(api, man, leagues):
     html_buffer += '<div class="w3-col s12 m12 l4">\n'
     html_buffer += '<div class="w3-panel w3-center w3-indigo w3-padding shadow89">\n'
     url = man.fpl_event_url
-    html_buffer += (
-        f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">🗓️ FPL Event</a>\n'
-    )
+    html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">🗓️ FPL Event</a>\n'
     url = man.fpl_history_url
     html_buffer += f'<a href="{url}" class="w3-bar-item w3-button w3-hover-blue">📈 FPL GW History</a>\n'
     html_buffer += f'<a class="w3-bar-item w3-button w3-hover-blue">ID: {man.id}</a>\n'
@@ -2402,10 +2378,10 @@ def create_managerpage(api, man, leagues):
                     html_buffer += compare_squads(man, opponent)
                 except Exception as e:
                     html_buffer += "Something went wrong!"
-                    mout.error(
+                    mrich.error(
                         f"something went wrong with squad comparison {(man, opponent)}"
                     )
-                    mout.error(str(e))
+                    mrich.error(str(e))
 
                 html_buffer += "</div>\n"
 
@@ -2765,7 +2741,7 @@ def create_chip_table(api, man):
                     old_squad = man._squad
                     squad = man.get_current_squad(gw=chip[1], force=True)
                     if squad is None:
-                        mout.warningOut(
+                        mrich.warning(
                             f"Squad is none for GW{chip[1]} (manager {man.id})"
                         )
                         detail = f"-"
@@ -2790,7 +2766,7 @@ def create_chip_table(api, man):
                     old_squad = man._squad
                     squad = man.get_current_squad(gw=chip[1], force=True)
                     if squad is None:
-                        mout.warningOut(
+                        mrich.warning(
                             f"Squad is none for GW{chip[1]} (manager {man.id})"
                         )
                         detail = f"-"
@@ -3119,7 +3095,7 @@ def get_manager_json_positions(api, leagues):
                         m_id = int(m_id)
 
                         if m_id not in api._managers.keys():
-                            # mout.warningOut(f'{m_id} not in api._managers')
+                            # mrich.warning(f'{m_id} not in api._managers')
                             continue
 
                         m = api.get_manager(id=m_id)
@@ -3131,7 +3107,7 @@ def get_manager_json_positions(api, leagues):
 
 
 def get_manager_json_awards(api, leagues):
-    mout.debug("get_manager_json_awards()")
+    mrich.debug("get_manager_json_awards()")
 
     for l_id, l_data in json.items():
 
@@ -3152,8 +3128,8 @@ def get_manager_json_awards(api, leagues):
                             dict(key=key, score=data[-1], league=l_name, gw="half")
                         )
                     except TypeError as e:
-                        mout.error(key, data)
-                        mout.error(str(e))
+                        mrich.error(key, data)
+                        mrich.error(str(e))
                         raise e
 
                 continue
@@ -3173,8 +3149,8 @@ def get_manager_json_awards(api, leagues):
                             dict(key=key, score=data[-1], league=l_name, gw="season")
                         )
                     except Exception as e:
-                        mout.error(key, data)
-                        mout.error(str(e))
+                        mrich.error(key, data)
+                        mrich.error(str(e))
                         raise e
 
                 continue
@@ -3298,7 +3274,7 @@ def fixture_table(api, gw):
 
 
 def generate_graphs(league):
-    mout.debugOut(f"generate_graphs()")
+    mrich.debug(f"generate_graphs()")
 
     global api
 
@@ -3490,7 +3466,7 @@ def previous_player_table(min_minutes=200, show_top=10):
 
 
 def create_homepage(navbar):
-    mout.debugOut(f"create_homepage()")
+    mrich.debug(f"create_homepage()")
 
     html_buffer = ""
 
@@ -3558,7 +3534,7 @@ def create_homepage(navbar):
 
 
 def create_seasonpage(leagues):
-    mout.debugOut("create_seasonpage()")
+    mrich.debug("create_seasonpage()")
 
     title = f"The RBS Diamond Invitational / Tesco Bean Value Toilet League"
 
@@ -3658,7 +3634,7 @@ def create_seasonpage(leagues):
 
 
 def create_christmaspage(leagues):
-    mout.debugOut("create_christmaspage()")
+    mrich.debug("create_christmaspage()")
 
     # title = f"Christmas Review"
     title = f"The RBS Diamond Invitational / Tesco Bean Value Toilet League"
@@ -4278,7 +4254,7 @@ def make_season_awards(league):
             scores[0],
         ]
     else:
-        mout.warningOut("Too many people sharing cock award")
+        mrich.warning("Too many people sharing cock award")
         json[str(league.id)]["season"]["awards"]["cock"] = None
 
     sorted_managers = sorted(
@@ -4304,7 +4280,7 @@ def make_season_awards(league):
             scores[0],
         ]
     else:
-        mout.warningOut("Too many people sharing fortune spot")
+        mrich.warning("Too many people sharing fortune spot")
         json[str(league.id)]["season"]["awards"]["fortune"] = None
 
     sorted_managers.reverse()
@@ -4328,7 +4304,7 @@ def make_season_awards(league):
             scores[0],
         ]
     else:
-        mout.warningOut("Too many people sharing clown spot")
+        mrich.warning("Too many people sharing clown spot")
         json[str(league.id)]["season"]["awards"]["clown"] = None
 
     # kneejerker
@@ -4341,7 +4317,7 @@ def make_season_awards(league):
     data = Counter(scores)
     num = data[scores[0]]
     if num > 1:
-        mout.warningOut("Too many people sharing kneejerker spot")
+        mrich.warning("Too many people sharing kneejerker spot")
         json[str(league.id)]["season"]["awards"]["kneejerker"] = None
         # sorted_managers2 = [sorted(sorted_managers[0:num], key=lambda x: x.num_hits, reverse=True)[0]]
         # scores2 = [[x.num_hits for x in sorted_managers][0]]
@@ -4377,7 +4353,7 @@ def make_season_awards(league):
     data = Counter(scores)
     num = data[scores[0]]
     if num > 1:
-        mout.warningOut("Too many people sharing iceman spot")
+        mrich.warning("Too many people sharing iceman spot")
         json[str(league.id)]["season"]["awards"]["iceman"] = None
         # sorted_managers2 = sorted(sorted_managers[0:num], key=lambda x: x.num_hits, reverse=False)
         # scores2 = [x.num_hits for x in sorted_managers]
@@ -4771,7 +4747,7 @@ def award_panel(
     m = manager
 
     if many and len(manager) > 1:
-        mout.error("Awards are not supposed to be shared anymore!!")
+        mrich.error("Awards are not supposed to be shared anymore!!")
         print(icon, name, description, value, manager)
 
     html_buffer = ""
@@ -4829,7 +4805,7 @@ def floating_subtitle(text, pad=1, button=False):
 
 
 def create_leaguepage(league, leagues, i):
-    mout.debugOut(f"create_leaguepage({league})")
+    mrich.debug(f"create_leaguepage({league})")
 
     global api
     global json
@@ -4847,10 +4823,10 @@ def create_leaguepage(league, leagues, i):
     )
 
     if gw > 0:
-        mout.debugOut(f"create_leaguepage({league})::differential_buffer")
+        mrich.debug(f"create_leaguepage({league})::differential_buffer")
         differential_buffer = league_differentials(league, gw)
 
-        mout.debugOut(f"create_leaguepage({league})::Awards")
+        mrich.debug(f"create_leaguepage({league})::Awards")
 
         create_key(json[str(league.id)][gw], "awards")
 
@@ -5144,18 +5120,18 @@ def create_leaguepage(league, leagues, i):
                 key=lambda x: (x.calculate_transfer_gain(), x._transfer_uniqueness),
                 reverse=True,
             )
-            
+
             if sorted_managers:
                 m = sorted_managers[0]
                 score = m.calculate_transfer_gain()
                 html_buffer += award_panel(
-                "🔮",
-                "Fortune Teller",
-                "Best Transfers",
-                f"{score:+d} pts",
-                m,
-                colour=award_colour["fortune"],
-                name_class="h2",
+                    "🔮",
+                    "Fortune Teller",
+                    "Best Transfers",
+                    f"{score:+d} pts",
+                    m,
+                    colour=award_colour["fortune"],
+                    name_class="h2",
                 )
                 json[str(league.id)][gw]["awards"]["fortune"] = [m.id, score]
 
@@ -5164,13 +5140,13 @@ def create_leaguepage(league, leagues, i):
                 m = sorted_managers[-1]
                 score = m.calculate_transfer_gain()
                 html_buffer += award_panel(
-                "🤡",
-                "Clown",
-                "Worst Transfers",
-                f"{score:+d} pts",
-                m,
-                colour=award_colour["clown"],
-                name_class="h2",
+                    "🤡",
+                    "Clown",
+                    "Worst Transfers",
+                    f"{score:+d} pts",
+                    m,
+                    colour=award_colour["clown"],
+                    name_class="h2",
                 )
                 json[str(league.id)][gw]["awards"]["clown"] = [m.id, score]
 
@@ -5188,12 +5164,12 @@ def create_leaguepage(league, leagues, i):
             # most out of form team
 
     if gw > 0:
-        mout.debugOut(f"create_leaguepage({league})::Template")
+        mrich.debug(f"create_leaguepage({league})::Template")
         html_buffer += floating_subtitle("League Template")
         html_buffer += league_template(league, gw)
 
     if awards:
-        mout.debugOut(f"create_leaguepage({league})::Differentials")
+        mrich.debug(f"create_leaguepage({league})::Differentials")
         html_buffer += floating_subtitle("Killer Differentials")
         html_buffer += '<div class="w3-col s12 m12 l12">\n'
         html_buffer += '<div class="w3-panel w3-white shadow89" style="padding-left:0px;padding-right:0px;padding-bottom:4px">\n'
@@ -5202,7 +5178,7 @@ def create_leaguepage(league, leagues, i):
         html_buffer += "</div>\n"
 
     if preseason:
-        mout.debugOut(f"create_leaguepage({league})::PreseasonTable")
+        mrich.debug(f"create_leaguepage({league})::PreseasonTable")
         html_buffer += floating_subtitle("Last Season")
         html_buffer += '<div class="w3-col s12 m12 l12">\n'
         html_buffer += '<div class="w3-panel w3-white w3-padding shadow89">\n'
@@ -5211,7 +5187,7 @@ def create_leaguepage(league, leagues, i):
         html_buffer += "</div>\n"
 
     if gw > 1:
-        mout.debugOut(f"create_leaguepage({league})::Transfers")
+        mrich.debug(f"create_leaguepage({league})::Transfers")
         ids_in, ids_out = league.get_league_transfers(gw)
 
         html_buffer += floating_subtitle("Popular Moves")
@@ -5222,10 +5198,10 @@ def create_leaguepage(league, leagues, i):
 
     if not preseason:
 
-        mout.debugOut(f"create_leaguepage({league})::Chips")
+        mrich.debug(f"create_leaguepage({league})::Chips")
         html_buffer += league_chips(league, gw)
 
-        mout.debugOut(f"create_leaguepage({league})::Table")
+        mrich.debug(f"create_leaguepage({league})::Table")
         html_buffer += floating_subtitle("League Table")
 
         html_buffer += '<div class="w3-col s12 m12 l12">\n'
@@ -6185,10 +6161,14 @@ def league_differentials(league, gw, cutoff=10):
 
 
 def generate_summary_template(api, league):
-    mout.debugOut(f"generate_summary_template({league.name})")
+    mrich.debug(f"generate_summary_template({league.name})")
 
     # GW string
     gw = api._current_gw
+
+    if gw == 0:
+        return
+
     gw_str = "GW"
     if gw in api._special_gws.keys():
         gw_str = api._special_gws[gw]
@@ -6301,8 +6281,8 @@ def generate_summary_template(api, league):
                 f.write(f"\n({api._current_gw} {api._live_gw})\n")
 
         except Exception as e:
-            mout.error("Something went wrong with the cup summary")
-            mout.error(str(e))
+            mrich.error("Something went wrong with the cup summary")
+            mrich.error(str(e))
 
             # #managers
             # #diamond managers
@@ -6312,7 +6292,7 @@ def generate_summary_template(api, league):
 
 
 def push_changes():
-    mout.debugOut(f"push_changes()")
+    mrich.debug(f"push_changes()")
     import os
 
     os.system(r"rm -v html/*\@*")
@@ -6335,7 +6315,7 @@ def push_changes():
 
 
 def pull_changes():
-    mout.debugOut(f"pull_changes()")
+    mrich.debug(f"pull_changes()")
     import os
 
     os.system(f"git pull")
@@ -6347,7 +6327,7 @@ def create_key(json, key):
 
 
 def load_json():
-    mout.debug("load_json()")
+    mrich.debug("load_json()")
     from os.path import exists
 
     if exists(JSON_PATH):
@@ -6358,7 +6338,7 @@ def load_json():
 
 
 def dump_json(data):
-    mout.debug("dump_json()")
+    mrich.debug("dump_json()")
 
     new_dict = {}
 

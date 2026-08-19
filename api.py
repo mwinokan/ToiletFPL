@@ -1,4 +1,4 @@
-import mout
+import mrich
 import requests
 import datetime
 import json as js
@@ -19,55 +19,61 @@ import mrich
 url = "https://fantasy.premierleague.com/api/"
 
 GC_DICT = {
-    "MCI": 44,
-    "ARS": 34,
-    "MUN": 54,
-    "NEW": 47,
-    "LIV": 41,
-    "BHA": 59,
-    "AVL": 51,
-    "TOT": 65,
-    "BRE": 57,
-    "FUL": 54,
-    "CRY": 51,
-    "CHE": 43,
-    "WOL": 69,
-    "WHU": 62,
-    "BOU": 46,
-    "NFO": 46,
-    "EVE": 44,
+    "ARS": 71,
+    "MCI": 77,
+    "MUN": 69,
+    "NEW": 53,
+    "LIV": 63,
+    "BHA": 52,
+    "AVL": 56,
+    "TOT": 48,
+    "BRE": 55,
+    "FUL": 47,
+    "CRY": 41,
+    "CHE": 58,
+    # "WOL": ,
+    # "WHU": ,
+    "BOU": 58,
+    "NFO": 48,
+    "EVE": 47,
     # "IPS": 57 * 2 * 38 / 46,
     # "LEI": 41 * 2 * 38 / 46,
     # "SOU": 63 * 2 * 38 / 46,
-    "SUN": 44 * 2 * 38 / 46,
-    "BUR": 16 * 2 * 38 / 46,
-    "LEE": 30 * 2 * 38 / 46,
+    "SUN": 42,
+    # "BUR": 16 * 2 * 38 / 46,
+    "LEE": 49,
+    "COV": 97 * 38 / 46,
+    "IPS": 80 * 38 / 46,
+    "HUL": 70 * 38 / 46,
 }
 
 GF_DICT = {
-    "MCI": 72,
-    "ARS": 69,
-    "MUN": 44,
-    "NEW": 68,
-    "LIV": 86,
-    "BHA": 66,
-    "AVL": 58,
-    "TOT": 64,
-    "BRE": 66,
-    "FUL": 54,
+    "ARS": 27,
+    "MCI": 35,
+    "MUN": 50,
+    "NEW": 55,
+    "LIV": 53,
+    "BHA": 46,
+    "AVL": 49,
+    "TOT": 57,
+    "BRE": 52,
+    "FUL": 51,
     "CRY": 51,
-    "CHE": 64,
-    "WOL": 54,
-    "WHU": 46,
-    "BOU": 58,
-    "NFO": 58,
-    "EVE": 42,
+    "CHE": 52,
+    # "WOL": ,
+    # "WHU": ,
+    "BOU": 54,
+    "NFO": 51,
+    "EVE": 50,
     # "IPS": 92 / 2 * 38 / 46,
     # "LEI": 89 / 2 * 38 / 46,
     # "SOU": 87 / 2 * 38 / 46,
-    "SUN": 58 / 2 * 38 / 46,
-    "BUR": 69 / 2 * 38 / 46,
-    "LEE": 95 / 2 * 38 / 46,
+    "SUN": 48,
+    # "BUR": 69 / 2 * 38 / 46,
+    "LEE": 56,
+    "COV": 45 * 38 / 46,
+    "IPS": 47 * 38 / 46,
+    "HUL": 65 * 38 / 46,
 }
 
 
@@ -93,11 +99,11 @@ class FPL_API:
     _special_gws = {}
 
     _skip_gws = []
-    _wc_cutoff = 16
+    _wc_cutoff = 19
 
-    _season_str = 2526
-    _season_str_fmt = "25/26"
-    _last_season_str = 2425
+    _season_str = 2627
+    _season_str_fmt = "26/27"
+    _last_season_str = 2526
 
     _prev_element_dict = None
 
@@ -108,7 +114,7 @@ class FPL_API:
         quick=True,
         write_offline_data=False,
     ):
-        mout.debugOut(f"FPL_API.__init__(quick={quick})")
+        mrich.debug(f"FPL_API.__init__(quick={quick})")
 
         self._init_time = datetime.datetime.now()
         self._request_log = []
@@ -120,7 +126,7 @@ class FPL_API:
                 f = open(f"data_{self._season_str}.json", "rt")
                 self._request_data = js.load(f)
             else:
-                mout.errorOut("No offline data found!", fatal=True)
+                mrich.error("No offline data found!", fatal=True)
         else:
             self._request_data = {}
 
@@ -128,7 +134,7 @@ class FPL_API:
             f = open(f"data_{self._last_season_str}.json", "rt")
             self._prev_request_data = js.load(f)
         else:
-            mout.errorOut("No previous season offline data found!", fatal=False)
+            mrich.error("No previous season offline data found!", fatal=False)
 
         self._scrape_team_pairs = [
             [0, "Man Utd"],
@@ -138,6 +144,7 @@ class FPL_API:
             [5, "Spurs"],
             [6, "Aston Villa"],
             [7, "Chelsea"],
+            [9, "Coventry City"],
             [10, "Everton"],
             [12, "Leicester"],
             [13, "Liverpool"],
@@ -147,11 +154,12 @@ class FPL_API:
             [30, "Crystal Palace"],
             [35, "Brighton"],
             [38, "Wolves"],
-            [40, "Ipswich"],
+            [40, "Ipswich Town"],
             [42, "Man City"],
             [48, "Sheffield Utd"],
             [53, "Fulham"],
             [55, "Sunderland"],
+            [88, "Hull City"],
             [89, "Burnley"],
             [90, "Bournemouth"],
             [93, "Brentford"],
@@ -166,6 +174,7 @@ class FPL_API:
             5: "TOT",
             6: "AVL",
             7: "CHE",
+            9: "COV",
             10: "EVE",
             12: "LEI",
             13: "LIV",
@@ -179,6 +188,7 @@ class FPL_API:
             42: "MCI",
             48: "SHU",
             53: "FUL",
+            88: "HUL",
             89: "BUR",
             90: "BOU",
             93: "BRE",
@@ -221,6 +231,11 @@ class FPL_API:
                 "color": "white",
                 "accent": "PaleGoldenRod",
             },
+            "Coventry City": {
+                "background-color": "#629CF3",
+                "color": "white",
+                "accent": "PaleGoldenRod",
+            },
             "Crystal Palace": {
                 "background-color": "#BE2C2A",
                 "color": "#2C67A9",
@@ -236,7 +251,12 @@ class FPL_API:
                 "color": "black",
                 "accent": "#A6271E",
             },
-            "Ipswich": {
+            "Hull City": {
+                "background-color": "#D77206",
+                "color": "black",
+                "accent": "white",
+            },
+            "Ipswich Town": {
                 "background-color": "#1E2F75",
                 "color": "white",
                 "accent": "#BA423A",
@@ -352,7 +372,7 @@ class FPL_API:
         print(f"Live: {self._live_gw}")
 
         if offline:
-            mout.warningOut("Offline mode!")
+            mrich.warning("Offline mode!")
 
     def request(self, handle, last_season=False):
 
@@ -363,18 +383,19 @@ class FPL_API:
             return self._request_data[handle]
         else:
             try:
-                r = requests.get(handle)
+                r = requests.get(handle, verify=False)
             except requests.exceptions.ConnectionError:
-                mout.warningOut("ConnectionError, trying again...")
-                return self.request(handle)
+                mrich.warning("ConnectionError, trying again...")
+                # return self.request(handle)
+                raise
 
             if "502" in str(r):
-                mout.warningOut("Error 502, trying again...")
+                mrich.warning("Error 502, trying again...")
                 return self.request(handle)
 
             if "404" in str(r):
                 print(handle)
-                mout.errorOut("Request 404'd")
+                mrich.error("Request 404'd")
                 raise Request404()
                 return {}
 
@@ -384,12 +405,12 @@ class FPL_API:
                 self._request_log.append(handle)
 
                 if "The game is being updated." in json:
-                    mout.errorOut("The game is being updated.", fatal=True)
+                    mrich.error("The game is being updated.", fatal=True)
 
                 return json
             except requests.exceptions.JSONDecodeError:
                 print(r)
-                mout.errorOut(f"Problem handling JSON from {handle}", fatal=True)
+                mrich.error(f"Problem handling JSON from {handle}", fatal=True)
 
     def finish(self):
 
@@ -397,19 +418,19 @@ class FPL_API:
             js.dump(self._request_data, open(f"data_{self._season_str}.json", "wt"))
             # js.dump(self._request_data,open('data_2223.json','wt'), indent="\t")
 
-        mout.varOut("#requests=", len(self._request_log))
+        mrich.var("#requests=", len(self._request_log))
 
         reqs = [x for x in self._request_log]
         data = Counter(reqs)
         for req in self._request_log:
             if data[req] > 1:
-                mout.warningOut(f"Multiple requests ({data[req]}) to {req}")
+                mrich.warning(f"Multiple requests ({data[req]}) to {req}")
 
         js.dump(self._request_log, open("requests.json", "wt"), indent="\t")
 
         self._finish_time = datetime.datetime.now()
 
-        mout.varOut("Execution Time", str(self._finish_time - self._init_time))
+        mrich.var("Execution Time", str(self._finish_time - self._init_time))
 
     def create_team_styles_css(self):
 
@@ -435,7 +456,7 @@ class FPL_API:
                 html_buffer += f'border: 1px {team.style["color"]} solid !important; '
                 html_buffer += "}\n"
             except TypeError:
-                mout.error(f"Missing style for {team}")
+                mrich.error(f"Missing style for {team}")
 
             # html_buffer += f'.w3-{team.shortname.lower()}-acc'
             # html_buffer += '{'
@@ -548,7 +569,7 @@ class FPL_API:
         id = int(id)
         if id not in self._managers.keys():
             if team_name is None or name is None:
-                mout.warningOut(
+                mrich.warning(
                     f"Warning: Manager with id {id} was not found in dictionary and no details were passed!"
                 )
             m = Manager(name, id, self, team_name=team_name, authenticate=authenticate)
@@ -566,7 +587,7 @@ class FPL_API:
 
     @property
     def elements_by_team(self):
-        # mout.debugOut(f"FPL_API.elements_by_team()")
+        # mrich.debug(f"FPL_API.elements_by_team()")
 
         if not self._elements_by_team:
 
@@ -593,7 +614,7 @@ class FPL_API:
 
     @property
     def element_indices_by_team(self):
-        # mout.debugOut(f"FPL_API.element_indices_by_team()")
+        # mrich.debug(f"FPL_API.element_indices_by_team()")
 
         if not self._element_indices_by_team:
 
@@ -709,14 +730,14 @@ class FPL_API:
             response = self._session.post(url, data=payload)
 
             if "<Response [403]>" in str(response):
-                mout.errorOut("Could not authenticate", code=403, fatal=True)
+                mrich.error("Could not authenticate", code=403, fatal=True)
                 self._authenticated = False
                 return
 
             self._authenticated = True
 
     def authenticate(self):
-        mout.debugOut("FPL_API.authenticate()")
+        mrich.debug("FPL_API.authenticate()")
         if not self._authenticated:
 
             print("Authenticating...")
@@ -806,7 +827,7 @@ class FPL_API:
                 print(
                     "https://mkyong.com/computer-tips/how-to-view-http-headers-in-google-chrome/"
                 )
-                mout.errorOut(
+                mrich.error(
                     "Could not authenticate. Refresh the headers? (datadome cookie)",
                     code=403,
                     fatal=True,
@@ -1023,7 +1044,7 @@ class FPL_API:
 
         if not len(player_stats):
             if gw == self._current_gw:
-                mout.warningOut(
+                mrich.warning(
                     f"Could not retrieve stats for player {player_id} (GW:{gw}, {len(player_stats)=})"
                 )
             return {
@@ -1067,7 +1088,7 @@ class FPL_API:
         # 	json = r.json()
         # except:
         # 	print(url+'entry/'+str(id)+'/history/')
-        # 	mout.errorOut("Problem parsing manager stats JSON, trying again")
+        # 	mrich.error("Problem parsing manager stats JSON, trying again")
         # 	return self.get_manager_history(id)
         return json
 
@@ -1096,7 +1117,7 @@ class FPL_API:
             json = r.json()
 
             # if "not provided" in json['detail']:
-            # 	mout.errorOut("Authentication Failed.",fatal=False)
+            # 	mrich.error("Authentication Failed.",fatal=False)
             # 	# json=dict({"picks":[{"element":559,"position":1,"selling_price":51,"multiplier":1,"purchase_price":51,"is_captain":False,"is_vice_captain":True},{"element":237,"position":2,"selling_price":80,"multiplier":1,"purchase_price":75,"is_captain":False,"is_vice_captain":False},{"element":256,"position":3,"selling_price":69,"multiplier":1,"purchase_price":66,"is_captain":False,"is_vice_captain":False},{"element":234,"position":4,"selling_price":70,"multiplier":1,"purchase_price":70,"is_captain":False,"is_vice_captain":False},{"element":370,"position":5,"selling_price":53,"multiplier":1,"purchase_price":53,"is_captain":False,"is_vice_captain":False},{"element":233,"position":6,"selling_price":130,"multiplier":2,"purchase_price":130,"is_captain":True,"is_vice_captain":False},{"element":359,"position":7,"selling_price":107,"multiplier":1,"purchase_price":107,"is_captain":False,"is_vice_captain":False},{"element":420,"position":8,"selling_price":68,"multiplier":1,"purchase_price":66,"is_captain":False,"is_vice_captain":False},{"element":578,"position":9,"selling_price":59,"multiplier":1,"purchase_price":59,"is_captain":False,"is_vice_captain":False},{"element":63,"position":10,"selling_price":65,"multiplier":1,"purchase_price":65,"is_captain":False,"is_vice_captain":False},{"element":450,"position":11,"selling_price":58,"multiplier":1,"purchase_price":56,"is_captain":False,"is_vice_captain":False},{"element":448,"position":12,"selling_price":40,"multiplier":0,"purchase_price":40,"is_captain":False,"is_vice_captain":False},{"element":413,"position":13,"selling_price":77,"multiplier":0,"purchase_price":77,"is_captain":False,"is_vice_captain":False},{"element":51,"position":14,"selling_price":47,"multiplier":0,"purchase_price":47,"is_captain":False,"is_vice_captain":False},{"element":418,"position":15,"selling_price":47,"multiplier":0,"purchase_price":47,"is_captain":False,"is_vice_captain":False}],"chips":[{"status_for_entry":"available","played_by_entry":[],"name":"wildcard","number":1,"start_event":21,"stop_event":38,"chip_type":"transfer"},{"status_for_entry":"available","played_by_entry":[22],"name":"freehit","number":2,"start_event":2,"stop_event":38,"chip_type":"transfer"},{"status_for_entry":"available","played_by_entry":[],"name":"bboost","number":1,"start_event":1,"stop_event":38,"chip_type":"team"},{"status_for_entry":"available","played_by_entry":[],"name":"3xc","number":1,"start_event":1,"stop_event":38,"chip_type":"team"}],"transfers":{"cost":4,"status":"cost","limit":1,"made":4,"bank":0,"value":1039}})
 
             return pd.DataFrame(json["picks"])
@@ -1116,7 +1137,7 @@ class FPL_API:
             # try:
             # 	r = requests.get(this_url)
             # except requests.exceptions.ConnectionError:
-            # 	mout.warningOut(f"Connection error for {id}'s picks, retrying...")
+            # 	mrich.warning(f"Connection error for {id}'s picks, retrying...")
             # 	return self.get_manager_team(id,authenticate)
             # self._request_log.append(this_url)
             # json = r.json()
@@ -1125,12 +1146,12 @@ class FPL_API:
                 json = self.request(this_url)
             except Request404 as e:
                 print(e)
-                mout.error(f"Could not get GW{gw} picks for {id=}")
+                mrich.error(f"Could not get GW{gw} picks for {id=}")
                 raise
 
             if "picks" not in json.keys():
                 print(this_url)
-                mout.warningOut("No picks in json")
+                mrich.warning("No picks in json")
 
             return pd.DataFrame(json["picks"])
 
@@ -1150,10 +1171,10 @@ class FPL_API:
             json = json.loads(r.content)
         except json.decoder.JSONDecodeError:
             # print(r)
-            mout.errorOut("Invalid server response.", fatal=True)
+            mrich.error("Invalid server response.", fatal=True)
 
         if "detail" in json.keys() and "not provided." in json["detail"]:
-            mout.errorOut("Authentication failed.", fatal=True)
+            mrich.error("Authentication failed.", fatal=True)
 
         return dict(json["transfers"])
 
@@ -1189,7 +1210,7 @@ class FPL_API:
     def get_manager_team_shirt(self, id):
         import json as js
 
-        mout.debugOut(f"get_manager_team_shirt({id})")
+        mrich.debug(f"get_manager_team_shirt({id})")
 
         json = self.request(url + "entry/" + str(id) + "/")
 
@@ -1199,7 +1220,7 @@ class FPL_API:
         # 	json = r.json()
         # except:
         # 	print(url+'entry/'+str(id)+'/')
-        # 	mout.errorOut("Problem parsing JSON")
+        # 	mrich.error("Problem parsing JSON")
 
         if json["kit"] is None:
             return None
@@ -1207,7 +1228,7 @@ class FPL_API:
         return js.loads(json["kit"])
 
     def generate_kit_png(self, kit_json, path):
-        mout.debugOut(f"generate_kit_png({path})")
+        mrich.debug(f"generate_kit_png({path})")
 
         from cairosvg import svg2png
 
@@ -1222,7 +1243,7 @@ class FPL_API:
         # print(kit_json["kit_shirt_base"])
 
         if kit_json["kit_shirt_type"] not in ["plain", "stripes", "hoops"]:
-            mout.warningOut(f"Not implemented: {kit_json['kit_shirt_type']}")
+            mrich.warning(f"Not implemented: {kit_json['kit_shirt_type']}")
 
         if kit_json["kit_shirt_type"] == "stripes":
 
@@ -1260,7 +1281,7 @@ class FPL_API:
 
         import urllib
 
-        url = "https://fantasy.premierleague.com/dist/img/shirts/standard/"
+        base_url = "https://fantasy.premierleague.com/dist/img/shirts/standard/"
 
         # not_found = [5,9,10,12,15,16,18,19,22]
 
@@ -1268,14 +1289,16 @@ class FPL_API:
         i = 0
         # i = 39
         while True:
-            print(i, count)
+            mrich.print(i, count)
             try:
-                urllib.request.urlretrieve(f"{url}shirt_{i+1}-66.png", f"kits/{i}.png")
+                url = f"{base_url}shirt_{i+1}-66.png"
+                mrich.print(url)
+                urllib.request.urlretrieve(url, f"kits/{i}.png")
                 count += 1
 
-                urllib.request.urlretrieve(
-                    f"{url}shirt_{i+1}_1-66.png", f"kits/{i}_gkp.png"
-                )
+                url = f"{base_url}shirt_{i+1}_1-66.png"
+                mrich.print(url)
+                urllib.request.urlretrieve(url, f"kits/{i}_gkp.png")
                 count += 1
                 i += 1
 
@@ -1315,7 +1338,7 @@ class FPL_API:
         #         self.webp2png(f"kits/{i}_gkp.webp", f"kits/{name}_gkp.png")
         #     except urllib.error.HTTPError:
         #         # print(i+1,name)
-        #         mout.errorOut(f"Problem accessing {url}shirt_{i+1}-66.webp")
+        #         mrich.error(f"Problem accessing {url}shirt_{i+1}-66.webp")
 
         # print(f"{url}shirt_{i+1}-66.webp", f"kits/{i}.webp")
 
@@ -1389,7 +1412,7 @@ class FPL_API:
                 )
 
         if isinstance(json, str):
-            mout.errorOut(json)
+            mrich.error(json)
             exit(code=1)
 
         # print(json.keys())
@@ -1417,7 +1440,7 @@ class FPL_API:
             # # # print(f"{url}leagues-classic/{code}/standings/")
             # # pprint(json)
 
-            # mout.header("json['new_entries']")
+            # mrich.header("json['new_entries']")
             # pprint(json['new_entries'])
 
             json2 = None

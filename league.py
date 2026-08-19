@@ -1,4 +1,4 @@
-import mout
+import mrich
 from manager import Manager
 import pandas as pd
 from tqdm import tqdm
@@ -25,7 +25,7 @@ class League:
         self._skip_awards = []
 
     def get_stats(self):
-        # mout.debug(f'{self.name}.get_stats()')
+        # mrich.debug(f'{self.name}.get_stats()')
         name, manager_df = self._api.get_league_stats(self._code)
 
         if self._api._current_gw < 2:
@@ -64,11 +64,10 @@ class League:
         self._name = name
 
         if len(manager_df) == 0:
-            mout.errorOut("League stats dataframe is empty!")
+            mrich.error("League stats dataframe is empty!")
             return
 
-        mout.debugOut(f"League({self.name})::get_stats()::ManagerInits")
-        mout.hideDebug()
+        mrich.debug(f"League({self.name})::get_stats()::ManagerInits")
 
         maximum = len(manager_df)
 
@@ -77,48 +76,48 @@ class League:
         if "last_rank" not in manager_df.keys():
             manager_df["last_rank"] = [None] * len(manager_df)
 
-        count = 0
         if "player_name" in manager_df.keys():
-            for c, n, t, rank, last_rank in zip(
-                manager_df["entry"],
-                manager_df["player_name"],
-                manager_df["entry_name"],
-                manager_df["rank"],
-                manager_df["last_rank"],
+            for c, n, t, rank, last_rank in mrich.track(
+                zip(
+                    manager_df["entry"],
+                    manager_df["player_name"],
+                    manager_df["entry_name"],
+                    manager_df["rank"],
+                    manager_df["last_rank"],
+                ),
+                total=len(manager_df),
             ):
 
                 if last_rank == 0 or rank == 0:
                     mrich.warning(n, "has invalid current/last league rank")
                     continue
 
-                mout.progress(count, maximum)
-
                 m = self._api.get_manager(f"{n}", c, t, authenticate=False)
                 # m = Manager(f"{n}",c,self._api,team_name=t)
                 if m.valid:
                     self._managers.append(m)
                 else:
-                    mout.warningOut(
+                    mrich.warning(
                         f"Skipping invalid manager '{m.name}' with ID: {m.id}"
                     )
 
                 m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
 
                 # print(f'adding {m} [1]')
-                count += 1
 
         else:
 
-            for c, f, l, t, rank, last_rank in zip(
-                manager_df["entry"],
-                manager_df["player_first_name"],
-                manager_df["player_last_name"],
-                manager_df["entry_name"],
-                manager_df["rank"],
-                manager_df["last_rank"],
+            for c, f, l, t, rank, last_rank in mrich.track(
+                zip(
+                    manager_df["entry"],
+                    manager_df["player_first_name"],
+                    manager_df["player_last_name"],
+                    manager_df["entry_name"],
+                    manager_df["rank"],
+                    manager_df["last_rank"],
+                ),
+                total=len(manager_df),
             ):
-                mout.progress(count, maximum)
-
                 m = self._api.get_manager(f"{f} {l}", c, t, authenticate=False)
                 # m = Manager(f"{f} {l}",c,self._api,team_name=t)
 
@@ -127,14 +126,11 @@ class League:
                 if m.valid:
                     self._managers.append(m)
                 else:
-                    mout.warningOut(
+                    mrich.warning(
                         f"Skipping invalid manager '{m.name}' with ID: {m.id}"
                     )
 
                 # print(f'adding {m} [2]')
-                count += 1
-        mout.progress(maximum, maximum)
-        mout.showDebug()
 
         for m in self._managers:
             m.assign_league(self)
@@ -347,7 +343,7 @@ class League:
         """
 
         if plot:
-            mout.debugOut(f"create_points_graph({self.shortname})")
+            mrich.debug(f"create_points_graph({self.shortname})")
 
             import matplotlib.pyplot as plt
             from matplotlib.ticker import ScalarFormatter, MaxNLocator
@@ -423,7 +419,7 @@ class League:
 
     def get_cup_matches(self):
         all_matches = []
-        mout.debugOut(f"Getting all cup matches in {self.name}...")
+        mrich.debug(f"Getting all cup matches in {self.name}...")
         for i, manager in tqdm(enumerate(self.managers)):
             matches = manager.get_cup_matches(self)
             # print(i,manager.name,len(matches))

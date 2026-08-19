@@ -1,4 +1,4 @@
-import mout
+import mrich
 from player import Player
 from squad import Squad
 import pandas as pd
@@ -8,7 +8,7 @@ import mrich
 class Manager:
 
     def __init__(self, name, id, api, team_name=None, authenticate=False):
-        mout.debugOut(f"Manager.__init__({name},{id})")
+        mrich.debug(f"Manager.__init__({name},{id})")
         self._name = name.title()
         self._team_name = team_name
         self._id = id
@@ -94,7 +94,7 @@ class Manager:
         if self._api._current_gw > 0 and self._event_points is None:
             return False
         if self.name is None:
-            mout.errorOut(f"Manager with id {self.id} has no name!")
+            mrich.error(f"Manager with id {self.id} has no name!")
         return True
 
     def assign_league(self, league):
@@ -121,7 +121,7 @@ class Manager:
                 cup_league_id = l["cup_league"]
                 break
         else:
-            # mout.errorOut(f"{self} not in {league}'s Cup")
+            # mrich.error(f"{self} not in {league}'s Cup")
             return []
 
         league_matches = [m for m in cup_matches if m["league"] == cup_league_id]
@@ -154,7 +154,7 @@ class Manager:
                     opponent = self._api.get_manager(id=match["entry_1_entry"])
 
                 if opponent.id == self.id:
-                    mout.warningOut(
+                    mrich.warning(
                         f"{self}'s GW{match['event']} oppenent is themselves!"
                     )
                     continue
@@ -250,7 +250,7 @@ class Manager:
         force_generate = self._api._force_generate_kits
         # force_generate = True
 
-        mout.debug(f"get_team_shirt({self})")
+        mrich.debug(f"get_team_shirt({self})")
 
         path = Path(self._kit_path)
         if not path.is_file() or force_generate:
@@ -461,7 +461,7 @@ class Manager:
             self.get_current_squad(gw=self._tc1_week, force=True)
             self.__tc1_ptsgain = self._squad.captain.get_event_score(gw=self._tc1_week)
             self._tc1_name = self._squad.captain.name
-            # mout.out(f"{self} {self._squad.captain} {self._tc1_week}")
+            # mrich.out(f"{self} {self._squad.captain} {self._tc1_week}")
             self._squad = None
         return self.__tc1_ptsgain
 
@@ -471,7 +471,7 @@ class Manager:
             self.get_current_squad(gw=self._tc2_week, force=True)
             self.__tc2_ptsgain = self._squad.captain.get_event_score(gw=self._tc2_week)
             self._tc2_name = self._squad.captain.name
-            # mout.out(f"{self} {self._squad.captain} {self._tc2_week}")
+            # mrich.out(f"{self} {self._squad.captain} {self._tc2_week}")
             self._squad = None
         return self.__tc2_ptsgain
 
@@ -593,7 +593,7 @@ class Manager:
     def get_current_squad(self, gw=None, force=False):
         if self._squad is None or force:
 
-            # mout.debugOut(f"man_{self.id}.get_current_squad()")
+            # mrich.debug(f"man_{self.id}.get_current_squad()")
 
             response = self._api.get_manager_team(
                 self._id, gw=gw, authenticate=self._authenticate
@@ -729,7 +729,7 @@ class Manager:
     @property
     def score(self):
         if self._total_points is None:
-            mout.warningOut(f"No total_points! {self.name}")
+            mrich.warning(f"No total_points! {self.name}")
             return 0
         return self._total_points[-1]
 
@@ -1227,7 +1227,7 @@ class Manager:
         try:
             return self._event_points[j - 1]
         except IndexError:
-            mout.error(f"Can't index {self}'s _event_points[{j-1}] {gw=}")
+            mrich.error(f"Can't index {self}'s _event_points[{j-1}] {gw=}")
             return 0.0
 
     def get_event_performed_xpts(self, gw):
@@ -1270,7 +1270,7 @@ class Manager:
     def create_rank_graph(self, plot=True, show=False):
 
         if plot:
-            mout.debugOut("create_rank_graph()")
+            mrich.debug("create_rank_graph()")
 
             import matplotlib.pyplot as plt
             from matplotlib.ticker import ScalarFormatter, MaxNLocator
@@ -1351,7 +1351,7 @@ class Manager:
     def create_leaguepos_graph(self, plot=True, show=False):
 
         if plot:
-            mout.debugOut("create_leaguepos_graph()")
+            mrich.debug("create_leaguepos_graph()")
 
             import matplotlib.pyplot as plt
             from matplotlib.ticker import ScalarFormatter, MaxNLocator
@@ -1402,9 +1402,7 @@ class Manager:
 
                 else:
 
-                    mout.errorOut(
-                        f"Manager {self.name} ({self.id}) has no league data."
-                    )
+                    mrich.error(f"Manager {self.name} ({self.id}) has no league data.")
 
                 plt.legend(bbox_to_anchor=(0.5, 1.25), loc="upper center", ncol=2)
                 plt.tight_layout(pad=0.5)
@@ -1455,7 +1453,7 @@ class Manager:
         """
 
         if plot:
-            mout.debugOut("create_points_graph()")
+            mrich.debug("create_points_graph()")
 
             import matplotlib.pyplot as plt
             from matplotlib.ticker import ScalarFormatter, MaxNLocator
@@ -1562,13 +1560,13 @@ class Manager:
         self._graph_paths.append(f"graphs/{self.id}_points.png")
 
     def make_autosubs(self):
-        # mout.debugOut(f"man_{self.id}.make_autosubs()")
+        # mrich.debug(f"man_{self.id}.make_autosubs()")
 
         bench = [p for p in self.players if p.multiplier == 0]
 
         if len(bench) != 4:
             if self._api._current_gw not in [self._bb1_week, self._bb2_week]:
-                mout.warningOut(
+                mrich.warning(
                     f"Bench has wrong number of players ({self.name}). And no BB played!"
                 )
                 print("before:", bench)
@@ -1582,20 +1580,20 @@ class Manager:
                 bench = self.players[-4:]
 
         if all([p.needs_autosub for p in bench[1:]]):
-            # mout.warningOut(f'No one on the bench is playing ({self.name})')
+            # mrich.warning(f'No one on the bench is playing ({self.name})')
             return
 
         # goalkeeper
         for player in self.squad.starting_goalkeepers:
             if player.needs_autosub:
-                # mout.out(f'{player.name} did not play ({self.name})',end=' ')
-                # mout.varOut("bench",bench)
+                # mrich.out(f'{player.name} did not play ({self.name})',end=' ')
+                # mrich.var("bench",bench)
                 replacement = bench[0]
-                # mout.varOut('replacement',replacement)
+                # mrich.var('replacement',replacement)
             else:
                 break
             if replacement.needs_autosub:
-                # mout.warningOut(f'{replacement.name} also did not play. No change made')
+                # mrich.warning(f'{replacement.name} also did not play. No change made')
                 break
             else:
                 # make the change
@@ -1603,7 +1601,7 @@ class Manager:
                 replacement.multiplier = 1
                 replacement.was_subbed = True
                 bench[0] = player
-                # mout.varOut("new bench",bench)
+                # mrich.var("new bench",bench)
                 break
 
         n_defenders = len(self.squad.starting_defenders)
@@ -1619,20 +1617,20 @@ class Manager:
                 continue
 
             if player.needs_autosub:
-                # mout.out(f'{player.name} did not play ({self.name}).',end=' ')
-                # mout.varOut("bench",bench)
-                # mout.varOut("squad",self.players)
+                # mrich.out(f'{player.name} did not play ({self.name}).',end=' ')
+                # mrich.var("bench",bench)
+                # mrich.var("squad",self.players)
 
                 # select replacement
                 replacement = bench[1]
                 if replacement.needs_autosub:
-                    # mout.warningOut(f'{replacement.name} also did not play.')
+                    # mrich.warning(f'{replacement.name} also did not play.')
                     replacement = bench[2]
                     if replacement.needs_autosub:
-                        # mout.warningOut(f'{replacement.name} also did not play.')
+                        # mrich.warning(f'{replacement.name} also did not play.')
                         replacement = bench[3]
                         if replacement.needs_autosub:
-                            # mout.errorOut(f'No one on the bench is playing.')
+                            # mrich.error(f'No one on the bench is playing.')
                             break
 
                 # check for formation validity
@@ -1641,28 +1639,28 @@ class Manager:
                     and player.position_id == 2
                     and replacement.position_id != 2
                 ):
-                    # mout.warningOut('Replacement must be a defender')
+                    # mrich.warning('Replacement must be a defender')
                     if bench[2].position_id == 2 and not bench[2].needs_autosub:
                         replacement = bench[2]
                     elif bench[3].position_id == 2 and not bench[3].needs_autosub:
                         replacement = bench[3]
                     else:
-                        # mout.warningOut(f'Could not find replacement defender. {self.name}, {self.id}')
+                        # mrich.warning(f'Could not find replacement defender. {self.name}, {self.id}')
                         continue
 
-                # mout.varOut('replacement',replacement)
+                # mrich.var('replacement',replacement)
 
                 # check for captaincy
                 if player.is_captain:
                     new_cap = self.squad.vice_captain
                     player.is_captain = False
                     player.is_vice_captain = True
-                    # mout.warningOut(f'cap {player.name}')
-                    # mout.warningOut(f'new_cap {new_cap.name}')
+                    # mrich.warning(f'cap {player.name}')
+                    # mrich.warning(f'new_cap {new_cap.name}')
                     new_cap.is_captain = True
                     new_cap.is_vice_captain = False
                     new_cap.multiplier = 2
-                    # mout.warningOut(f'{new_cap.name} is now captain!')
+                    # mrich.warning(f'{new_cap.name} is now captain!')
 
                 # make the change
                 player.multiplier = 0
@@ -1678,7 +1676,7 @@ class Manager:
 
                 bench[3] = player
 
-                # mout.varOut("new bench",bench)
+                # mrich.var("new bench",bench)
 
                 if n_changes == 3:
                     break

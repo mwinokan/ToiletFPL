@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import markdown
-import mout
+import mrich
 
 player_modals = {}
 player_history_tables = {}
@@ -58,7 +58,7 @@ def fix_table_classes(html):
     return html
 
 
-# @mout.debug_time
+# @mrich.debug_time
 def html_page(
     target,
     mdfile=None,
@@ -76,7 +76,7 @@ def html_page(
     timestamp=False,
     live=None,
 ):
-    mout.debugOut(f"html_page({target})")
+    # mrich.debug(f"html_page({target})")
 
     if mdfile is None:
         html_content = html

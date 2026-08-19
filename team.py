@@ -1,4 +1,4 @@
-import mout
+import mrich
 
 
 class Team:
@@ -20,7 +20,8 @@ class Team:
                 break
 
         if self._badge_url is None:
-            mout.error(f"No badge url for Team: {self.name} {self.id}")
+            mrich.error(f"No badge url for Team: {self.name} {self.id}")
+            raise ValueError(self._name)
 
         self._fixtures = None
 

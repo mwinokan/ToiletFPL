@@ -1,4 +1,4 @@
-import mout
+import mrich
 import json
 import datetime
 import pytz
@@ -39,7 +39,7 @@ class Player:
             # if index is None:
             # 	print("player.index=None")
             if not self.get_stats(api, index=index):
-                mout.errorOut(
+                mrich.error(
                     "Problem accessing player stats (" + name + ")", fatal=False
                 )
                 return None
@@ -64,7 +64,7 @@ class Player:
             self._team_obj = None
 
             if not self.get_stats(api):
-                mout.errorOut(
+                mrich.error(
                     "Problem accessing player stats (" + name + ")", fatal=False
                 )
                 return None
@@ -219,7 +219,7 @@ class Player:
                         self._returndate = returndate.replace(year=year)
                     except ValueError:
                         self._returndate = None
-                        mout.errorOut(f"Could not parse date: {date}")
+                        mrich.error(f"Could not parse date: {date}")
 
             else:
                 self._news = None
@@ -379,8 +379,8 @@ class Player:
 
             else:
 
-                # mout.warning(f'No previous data for {self._full_name}')
-                # mout.out(close_matches)
+                # mrich.warning(f'No previous data for {self._full_name}')
+                # mrich.out(close_matches)
 
                 self._prev_dreamteam_count = 0.0
                 self._prev_now_cost = 0.0
@@ -421,7 +421,7 @@ class Player:
             return True
 
         elif len(matches) < 1:
-            mout.errorOut(f"Could not find player {self._name}. Close matches:")
+            mrich.error(f"Could not find player {self._name}. Close matches:")
 
             import difflib
 
@@ -430,19 +430,19 @@ class Player:
 
         else:
 
-            mout.errorOut("Multiple player matches:")
+            mrich.error("Multiple player matches:")
 
             for i in matches:
-                mout.out(elements["first_name"][i] + " " + elements["web_name"][i])
+                mrich.out(elements["first_name"][i] + " " + elements["web_name"][i])
 
         return False
 
     def get_playing_chance(self, gw, debug=False):
         if debug:
-            mout.debug(f"{self.name}.get_playing_chance({gw=})")
+            mrich.debug(f"{self.name}.get_playing_chance({gw=})")
         if gw in self._playing_chance.keys():
             if debug:
-                mout.debug(f"Using cached playing chance {self._playing_chance[gw]=}")
+                mrich.debug(f"Using cached playing chance {self._playing_chance[gw]=}")
             return self._playing_chance[gw]
         elif gw > self._api._current_gw + 1:
             if self._returndate is not None:
@@ -454,7 +454,7 @@ class Player:
                     if len(fixs) < 1:
                         return 0.0
                     else:
-                        # mout.warningOut(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
+                        # mrich.warning(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
 
                         all_fixtures = self._api.get_gw_fixtures(gw)
 
@@ -486,7 +486,7 @@ class Player:
                         gw_prob = sum(probs) / len(probs)
 
                         if gw_prob < 1:
-                            # mout.warningOut(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
+                            # mrich.warning(f"{self.name} has DGW{gw} and is flagged! Player::get_playing_chance()")
                             # print(probs,gw_prob)
                             return gw_prob
                         else:
@@ -712,8 +712,8 @@ class Player:
                             ).lower()
                         )
                         # except AttributeError:
-                        # mout.errorOut(self.fixtures['team_h'][rgw])
-                        # mout.errorOut(self._api.team_name(self.fixtures['team_h'][rgw],short=short))
+                        # mrich.error(self.fixtures['team_h'][rgw])
+                        # mrich.error(self._api.team_name(self.fixtures['team_h'][rgw],short=short))
                     else:
                         strs.append(
                             self._api.team_name(
@@ -825,11 +825,11 @@ class Player:
         if gw is None:
             gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
 
         if debug:
-            mout.debug(f'Player("{self}",{self.id=}).get_event_score({gw=})')
+            mrich.debug(f'Player("{self}",{self.id=}).get_event_score({gw=})')
 
         event_stats = self._api.get_player_event_stats(gw, self._id)
 
@@ -928,7 +928,7 @@ class Player:
         if gw is None:
             gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
 
         indices = [i for i, r in enumerate(self.history["round"]) if r == gw]
@@ -939,7 +939,7 @@ class Player:
         if gw is None:
             gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
 
         indices = [i for i, r in enumerate(self.history["round"]) if r == gw]
@@ -953,7 +953,7 @@ class Player:
         if gw is None:
             gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
 
         if "round" not in self.history:
@@ -1176,7 +1176,7 @@ class Player:
                 self._A_per_xA = (self.total_assists + self._prev_assists) / (
                     self._total_expected_assists + self._prev_expected_assists
                 )
-            # mout.out(f'A/xA {self} {self._A_per_xA:.2f}')
+            # mrich.out(f'A/xA {self} {self._A_per_xA:.2f}')
         return self._A_per_xA
 
     @property
@@ -1188,7 +1188,7 @@ class Player:
                 self._G_per_xG = (self.total_goals + self._prev_goals_scored) / (
                     self._total_expected_goals + self._prev_expected_goals
                 )
-            # mout.out(f'G/xG {self} {self._G_per_xG:.2f}')
+            # mrich.out(f'G/xG {self} {self._G_per_xG:.2f}')
         return self._G_per_xG
 
     @property
@@ -1277,7 +1277,7 @@ class Player:
                 return 0
 
         if debug:
-            mout.debug(
+            mrich.debug(
                 f"{self.name}.expected_points({opponent=},{gw=},{use_official=})"
             )
 
@@ -1295,18 +1295,18 @@ class Player:
 
         if opponent is None:
             if debug:
-                mout.out(f"no opponent (gw={gw})")
+                mrich.out(f"no opponent (gw={gw})")
             if not not_started_only:
                 self._api._exp_archive[self.id][gw] = 0
             return 0
 
         if debug:
-            mout.varOut("opponent", str(opponent))
+            mrich.var("opponent", str(opponent))
 
         # use flag status for prediction
         chance = self.get_playing_chance(gw)
         if debug:
-            mout.varOut("playing_chance", chance)
+            mrich.var("playing_chance", chance)
         if chance == 0.0:
             if not not_started_only:
                 self._api._exp_archive[self.id][gw] = 0
@@ -1314,7 +1314,7 @@ class Player:
 
         if use_official and gw == self._api._current_gw:
             if debug:
-                mout.varOut("expected_points (official)", chance * self._exp_next_round)
+                mrich.var("expected_points (official)", chance * self._exp_next_round)
             if not not_started_only:
                 self._api._exp_archive[self.id][gw] = (
                     x := chance * self._exp_this_round
@@ -1322,7 +1322,7 @@ class Player:
             return x
         elif use_official and gw == self._api._current_gw + 1:
             if debug:
-                mout.varOut("expected_points (official)", chance * self._exp_next_round)
+                mrich.var("expected_points (official)", chance * self._exp_next_round)
             if not not_started_only:
                 self._api._exp_archive[self.id][gw] = (
                     x := chance * self._exp_next_round
@@ -1335,23 +1335,23 @@ class Player:
             # weighted_average(this_season_by_gw,this_season_minutes_by_gw,last_season_value,last_season_minutes)
 
             if debug:
-                mout.varOut("self._prev_expected_goals", self._prev_expected_goals)
+                mrich.var("self._prev_expected_goals", self._prev_expected_goals)
             if debug:
-                mout.varOut("self._prev_expected_assists", self._prev_expected_assists)
+                mrich.var("self._prev_expected_assists", self._prev_expected_assists)
             if debug:
-                mout.varOut("self._prev_minutes", self._prev_minutes)
+                mrich.var("self._prev_minutes", self._prev_minutes)
             if debug:
-                mout.varOut(
+                mrich.var(
                     "self._prev_clean_sheets_per_90", self._prev_clean_sheets_per_90
                 )
             if debug:
-                mout.varOut("self._prev_bonus", self._prev_bonus)
+                mrich.var("self._prev_bonus", self._prev_bonus)
 
             ### MINUTES
 
             if "minutes" not in self.history:
                 if debug:
-                    mout.error(f"{self} has no minutes in self.history")
+                    mrich.error(f"{self} has no minutes in self.history")
                 if not self._prev_minutes:
                     if not not_started_only:
                         self._api._exp_archive[self.id][gw] = 0
@@ -1362,7 +1362,7 @@ class Player:
                 Ms = [float(x) for x in self.history["minutes"]]
 
             if debug:
-                mout.varOut("Ms", Ms)
+                mrich.var("Ms", Ms)
 
             if not Ms:
                 return 0
@@ -1374,7 +1374,7 @@ class Player:
 
             if not xM:
                 if debug:
-                    mout.error(f"{self} has no xM < 1")
+                    mrich.error(f"{self} has no xM < 1")
                 xMPts = 0.0
 
                 if not not_started_only:
@@ -1384,9 +1384,9 @@ class Player:
                 xMPts = 1 + min([1, xM / 60])
 
             if debug:
-                mout.varOut("xM", xM)
+                mrich.var("xM", xM)
             if debug:
-                mout.varOut("xMPts", xMPts)
+                mrich.var("xMPts", xMPts)
 
             ### OPPONENT GOALS CONCEDED
 
@@ -1394,7 +1394,7 @@ class Player:
                 if self.no_history:
                     from api import GC_DICT, GF_DICT
 
-                    # mout.error(f"{opponent} has no prev_obj and the game hasn't started yet (assuming promoted)")
+                    # mrich.error(f"{opponent} has no prev_obj and the game hasn't started yet (assuming promoted)")
                     opp_GF_per_game = GF_DICT[opponent.shortname] / 46
                     opp_GC_per_game = GC_DICT[opponent.shortname] / 46
                 else:
@@ -1416,9 +1416,9 @@ class Player:
                 ) / 2
 
             if debug:
-                mout.varOut("opp_GC_per_game", opp_GC_per_game)
+                mrich.var("opp_GC_per_game", opp_GC_per_game)
             if debug:
-                mout.varOut("opp_GF_per_game", opp_GF_per_game)
+                mrich.var("opp_GF_per_game", opp_GF_per_game)
 
             if self.no_history:
                 avg_GC_per_game = self._api._prev_avg_gc_per_game
@@ -1430,14 +1430,14 @@ class Player:
                 ) / 2
 
             if debug:
-                mout.varOut("avg_GC_per_game", avg_GC_per_game)
+                mrich.var("avg_GC_per_game", avg_GC_per_game)
 
             opp_GC_ratio = opp_GC_per_game / avg_GC_per_game
             opp_GC_ratio = opp_GC_ratio or 1.0
             # opp_GC_ratio = scale_by_sample_size(opp_GC_ratio,opponent.games_played)
 
             if debug:
-                mout.varOut("opp_GC_ratio", opp_GC_ratio)
+                mrich.var("opp_GC_ratio", opp_GC_ratio)
 
             ### OPPONENT GOALS THREAT
 
@@ -1450,14 +1450,14 @@ class Player:
                 ) / 2
 
             if debug:
-                mout.varOut("avg_GF_per_game", avg_GF_per_game)
+                mrich.var("avg_GF_per_game", avg_GF_per_game)
 
             opp_GF_ratio = opp_GF_per_game / avg_GF_per_game
             opp_GF_ratio = opp_GF_ratio or 1.0
             # opp_GF_ratio = scale_by_sample_size(opp_GF_ratio,opponent.games_played)
 
             if debug:
-                mout.varOut("opp_GF_ratio", opp_GF_ratio)
+                mrich.var("opp_GF_ratio", opp_GF_ratio)
 
             ### CLEAN SHEETS
 
@@ -1475,7 +1475,7 @@ class Player:
                     xCSs.pop()
 
             if debug:
-                mout.var("xCSs", xCSs)
+                mrich.var("xCSs", xCSs)
 
             self._xC_no_opponent = weighted_average(
                 xCSs,
@@ -1487,14 +1487,14 @@ class Player:
             )
 
             if debug:
-                mout.var("self._xC_no_opponent", self._xC_no_opponent)
+                mrich.var("self._xC_no_opponent", self._xC_no_opponent)
 
             xCSPts = self._xC_no_opponent * self.clean_sheet_multiplier / opp_GF_ratio
 
             xCSPts *= min([1, xM / 60])
 
             if debug:
-                mout.var("xCSPts", xCSPts)
+                mrich.var("xCSPts", xCSPts)
 
             ### GOALS
 
@@ -1506,14 +1506,14 @@ class Player:
                     xGs.pop()
 
             if debug:
-                mout.varOut("xGs", xGs)
+                mrich.var("xGs", xGs)
             # weighted average xG per game
             xG_per_minute = weighted_average(
                 xGs, Ms, self._prev_expected_goals, self._prev_minutes
             )
 
             if debug:
-                mout.varOut("xG_per_minute", xG_per_minute)
+                mrich.var("xG_per_minute", xG_per_minute)
 
             ### ASSISTS
 
@@ -1525,7 +1525,7 @@ class Player:
                     xAs.pop()
 
             if debug:
-                mout.varOut("xAs", xAs)
+                mrich.var("xAs", xAs)
 
             # weighted average xA per game
             xA_per_minute = weighted_average(
@@ -1533,7 +1533,7 @@ class Player:
             )
 
             if debug:
-                mout.varOut("xA_per_minute", xA_per_minute)
+                mrich.var("xA_per_minute", xA_per_minute)
 
             ### DEFCON
 
@@ -1545,7 +1545,7 @@ class Player:
                     DCs.pop()
 
             if debug:
-                mout.varOut("DCs", DCs)
+                mrich.var("DCs", DCs)
 
             # weighted average xDC per game
             DC_per_minute = weighted_average(
@@ -1558,9 +1558,9 @@ class Player:
             defcon_threshold = self.defcon_threshold
 
             if debug:
-                mout.varOut("DC_per_minute", DC_per_minute)
-                mout.varOut("DC_per_90", DC_per_minute * 90)
-                mout.varOut("defcon_threshold", defcon_threshold)
+                mrich.var("DC_per_minute", DC_per_minute)
+                mrich.var("DC_per_90", DC_per_minute * 90)
+                mrich.var("defcon_threshold", defcon_threshold)
 
             if defcon_threshold:
                 xDCPts = min([2, 2 * (DC_per_minute * xM) / defcon_threshold])
@@ -1568,7 +1568,7 @@ class Player:
                 xDCPts = 0
 
             if debug:
-                mout.varOut("xDCPts", xDCPts)
+                mrich.var("xDCPts", xDCPts)
 
             self._xDCPts = xDCPts
 
@@ -1584,25 +1584,25 @@ class Player:
             )
 
             if debug:
-                mout.varOut("_xG_no_opponent", self._xG_no_opponent)
+                mrich.var("_xG_no_opponent", self._xG_no_opponent)
             if debug:
-                mout.varOut("_xA_no_opponent", self._xA_no_opponent)
+                mrich.var("_xA_no_opponent", self._xA_no_opponent)
 
             if debug:
-                mout.varOut("G_per_xG", self.G_per_xG)
+                mrich.var("G_per_xG", self.G_per_xG)
             if debug:
-                mout.varOut("A_per_xA", self.A_per_xA)
+                mrich.var("A_per_xA", self.A_per_xA)
 
             xG = self._xG_no_opponent * opp_GC_ratio
             xA = self._xA_no_opponent * opp_GC_ratio
             xGIPts = self.goal_multiplier * xG + 3 * xA
 
             if debug:
-                mout.varOut("xGIPts", xGIPts)
+                mrich.var("xGIPts", xGIPts)
             if debug:
-                mout.varOut("xG", xG)
+                mrich.var("xG", xG)
             if debug:
-                mout.varOut("xA", xA)
+                mrich.var("xA", xA)
 
             ### BONUS POINTS
 
@@ -1614,14 +1614,14 @@ class Player:
                     Bs.pop()
 
             if debug:
-                mout.varOut("Bs", Bs)
+                mrich.var("Bs", Bs)
 
             self._xBpts = weighted_average(
                 Bs, None, self._prev_bonus, self._prev_minutes / 90
             )
 
             if debug:
-                mout.varOut("xBPts", self._xBpts)
+                mrich.var("xBPts", self._xBpts)
 
             ### YELLOW CARDS
 
@@ -1691,7 +1691,7 @@ class Player:
                 )
 
                 if debug:
-                    mout.varOut("xPSPts", xPSPts)
+                    mrich.var("xPSPts", xPSPts)
 
                 ### SAVES
 
@@ -1711,7 +1711,7 @@ class Player:
                 )
 
                 if debug:
-                    mout.varOut("xSPts", xSPts)
+                    mrich.var("xSPts", xSPts)
 
             else:
 
@@ -1735,62 +1735,62 @@ class Player:
             )
 
             # if debug:
-            # 	mout.varOut('opponent',str(opponent))
-            # 	mout.varOut('opp_GC_per_game',opp_GC_per_game)
-            # 	mout.varOut('avg_GC_per_game',avg_GC_per_game)
-            # 	mout.varOut('opp_GC_ratio',opp_GC_ratio)
+            # 	mrich.var('opponent',str(opponent))
+            # 	mrich.var('opp_GC_per_game',opp_GC_per_game)
+            # 	mrich.var('avg_GC_per_game',avg_GC_per_game)
+            # 	mrich.var('opp_GC_ratio',opp_GC_ratio)
 
-            # 	mout.varOut('opp_GF_per_game',opp_GF_per_game)
-            # 	mout.varOut('avg_GF_per_game',avg_GF_per_game)
-            # 	mout.varOut('opp_GF_ratio',opp_GF_ratio)
+            # 	mrich.var('opp_GF_per_game',opp_GF_per_game)
+            # 	mrich.var('avg_GF_per_game',avg_GF_per_game)
+            # 	mrich.var('opp_GF_ratio',opp_GF_ratio)
 
-            # 	mout.var('xCSs',xCSs)
-            # 	mout.var('self._xC_no_opponent',self._xC_no_opponent)
-            # 	mout.var('xCSPts',xCSPts)
+            # 	mrich.var('xCSs',xCSs)
+            # 	mrich.var('self._xC_no_opponent',self._xC_no_opponent)
+            # 	mrich.var('xCSPts',xCSPts)
 
-            # 	mout.varOut('xGs',xGs)
-            # 	mout.varOut('_prev_expected_goals',self._prev_expected_goals)
-            # 	mout.varOut('_xG_no_opponent',self._xG_no_opponent)
+            # 	mrich.var('xGs',xGs)
+            # 	mrich.var('_prev_expected_goals',self._prev_expected_goals)
+            # 	mrich.var('_xG_no_opponent',self._xG_no_opponent)
 
-            # 	mout.varOut('xAs',xAs)
-            # 	mout.varOut('_prev_expected_assists',self._prev_expected_goals)
-            # 	mout.varOut('self._xA_no_opponent',self._xA_no_opponent)
+            # 	mrich.var('xAs',xAs)
+            # 	mrich.var('_prev_expected_assists',self._prev_expected_goals)
+            # 	mrich.var('self._xA_no_opponent',self._xA_no_opponent)
 
-            # 	mout.varOut('Bs',Bs)
+            # 	mrich.var('Bs',Bs)
 
-            # 	mout.varOut('Ms',Ms)
-            # 	mout.varOut('xM',xM)
+            # 	mrich.var('Ms',Ms)
+            # 	mrich.var('xM',xM)
 
-            # 	mout.varOut('xG_per_minute',xG_per_minute)
-            # 	mout.varOut('xA_per_minute',xA_per_minute)
+            # 	mrich.var('xG_per_minute',xG_per_minute)
+            # 	mrich.var('xA_per_minute',xA_per_minute)
 
-            # 	mout.varOut('G_per_xG',self.G_per_xG)
-            # 	mout.varOut('A_per_xA',self.A_per_xA)
+            # 	mrich.var('G_per_xG',self.G_per_xG)
+            # 	mrich.var('A_per_xA',self.A_per_xA)
 
-            # 	mout.varOut('xG',xG)
-            # 	mout.varOut('xA',xA)
+            # 	mrich.var('xG',xG)
+            # 	mrich.var('xA',xA)
 
             if summary:
-                mout.varOut("xMPts", xMPts)
-                mout.varOut("xCSPts", xCSPts)
-                mout.varOut("xGIPts", xGIPts)
-                mout.varOut("xBPts", self._xBpts)
-                mout.varOut("xYCPts", xYCPts)
-                mout.varOut("xRCPts", xRCPts)
-                mout.varOut("xOGPts", xOGPts)
-                mout.varOut("xPMPts", xPMPts)
-                mout.varOut("xPSPts", xPSPts)
-                mout.varOut("xSPts", xSPts)
-                mout.varOut("xDCPts", xDCPts)
+                mrich.var("xMPts", xMPts)
+                mrich.var("xCSPts", xCSPts)
+                mrich.var("xGIPts", xGIPts)
+                mrich.var("xBPts", self._xBpts)
+                mrich.var("xYCPts", xYCPts)
+                mrich.var("xRCPts", xRCPts)
+                mrich.var("xOGPts", xOGPts)
+                mrich.var("xPMPts", xPMPts)
+                mrich.var("xPSPts", xPSPts)
+                mrich.var("xSPts", xSPts)
+                mrich.var("xDCPts", xDCPts)
 
             if debug:
-                mout.varOut("expected_points", expected_points)
+                mrich.var("expected_points", expected_points)
 
             if not not_started_only:
                 self._api._exp_archive[self.id][gw] = expected_points
             return expected_points
 
-    # @mout.debug_log
+    # @mrich.debug_log
     def old_expected_points(
         self,
         opponent=None,
@@ -1818,7 +1818,7 @@ class Player:
             opponent = self.team_obj.get_opponent(gw)
 
         if debug:
-            mout.debug(
+            mrich.debug(
                 f"{self.name}.expected_points({opponent=},{gw=},{fit_ratio=},{use_official=})"
             )
 
@@ -1837,25 +1837,25 @@ class Player:
 
         if opponent is None:
             if debug:
-                mout.out(f"no opponent (gw={gw})")
+                mrich.out(f"no opponent (gw={gw})")
             return 0
 
         # use flag status for prediction
         chance = self.get_playing_chance(gw)
         if debug:
-            mout.varOut("playing_chance", chance)
+            mrich.var("playing_chance", chance)
         if chance == 0.0:
             self._api._exp_archive[self.id][gw] = 0
             return self._api._exp_archive[self.id][gw]
 
         if use_official and gw == self._api._current_gw:
             if debug:
-                mout.varOut("expected_points (official)", chance * self._exp_next_round)
+                mrich.var("expected_points (official)", chance * self._exp_next_round)
             self._api._exp_archive[self.id][gw] = chance * self._exp_this_round
             return self._api._exp_archive[self.id][gw]
         elif use_official and gw == self._api._current_gw + 1:
             if debug:
-                mout.varOut("expected_points (official)", chance * self._exp_next_round)
+                mrich.var("expected_points (official)", chance * self._exp_next_round)
             self._api._exp_archive[self.id][gw] = chance * self._exp_next_round
             return self._api._exp_archive[self.id][gw]
         else:
@@ -1897,20 +1897,18 @@ class Player:
                         + fit_ratio * from_fit
                     )
                 if debug:
-                    mout.varOut("attacking_points_per90 (fit)", from_fit)
+                    mrich.var("attacking_points_per90 (fit)", from_fit)
             if debug:
-                mout.varOut("attacking_points_per90", attacking_points_per90)
+                mrich.var("attacking_points_per90", attacking_points_per90)
 
             # compensate for difficult opponent
             expected_goals_scored = (
                 self.team_obj.goals_scored_per_game + opponent.goals_conceded_per_game
             ) / 2
             if debug:
-                mout.varOut("expected_goals_scored", expected_goals_scored)
+                mrich.var("expected_goals_scored", expected_goals_scored)
             if debug:
-                mout.varOut(
-                    "self._attacking_returns_per90", self.attacking_returns_per90
-                )
+                mrich.var("self._attacking_returns_per90", self.attacking_returns_per90)
             if self.attacking_points_per90 is None:
                 boost = 1
             elif self.attacking_returns_per90 == 0:
@@ -1920,7 +1918,7 @@ class Player:
                     expected_goals_scored - self.attacking_returns_per90
                 ) / self.attacking_returns_per90 + 1
             if debug:
-                mout.varOut("boost", boost)
+                mrich.var("boost", boost)
             boost = max(0.7, boost)
             boost = min(1.3, boost)
             attacking_points_per90 *= boost
@@ -1929,7 +1927,7 @@ class Player:
             if self.appearances > 0:
                 mins_per_appearance = self.total_minutes / self.appearances
                 if debug:
-                    mout.varOut("mins_per_appearance", mins_per_appearance)
+                    mrich.var("mins_per_appearance", mins_per_appearance)
             else:
                 self._api._exp_archive[self.id][gw] = 0
                 return self._api._exp_archive[self.id][gw]
@@ -1937,14 +1935,14 @@ class Player:
             # calculated clean sheet probability
             clean_sheet_probability = self.team_obj.expected_clean_sheet(opponent)
             if debug:
-                mout.varOut("clean_sheet_probability", clean_sheet_probability)
+                mrich.var("clean_sheet_probability", clean_sheet_probability)
 
             # calculate points lost due to conceding multiple goals
             expected_goals_conceded = (
                 self.team_obj.goals_conceded_per_game + opponent.goals_scored_per_game
             ) / 2
             if debug:
-                mout.varOut("expected_goals_conceded", expected_goals_conceded)
+                mrich.var("expected_goals_conceded", expected_goals_conceded)
 
             goals_conceded_loss = 0
             if self.position_id == 3:
@@ -1956,7 +1954,7 @@ class Player:
                 clean_sheet_value = 0
 
             if debug:
-                mout.varOut("goals_conceded_loss", goals_conceded_loss)
+                mrich.var("goals_conceded_loss", goals_conceded_loss)
 
             # use get team on team scoring data to build up defensive and offensive ratings for all the teams
 
@@ -1985,7 +1983,7 @@ class Player:
             expected_points *= chance
 
             if debug:
-                mout.varOut("expected_points", expected_points)
+                mrich.var("expected_points", expected_points)
 
             self._api._exp_archive[self.id][gw] = expected_points
             return self._api._exp_archive[self.id][gw]
@@ -2017,10 +2015,10 @@ class Player:
             diff_list.append(expected - actual)
 
         if debug:
-            mout.headerOut(self.name)
-            mout.varOut("actual_total", actual_total)
-            mout.varOut("expected_total", expected_total)
-            mout.varOut("error", sum(diff_list) / len(diff_list))
+            mrich.headerOut(self.name)
+            mrich.var("actual_total", actual_total)
+            mrich.var("expected_total", expected_total)
+            mrich.var("error", sum(diff_list) / len(diff_list))
 
         if return_actual:
             return expected_total, actual_total
@@ -2189,7 +2187,7 @@ class Player:
     def event_yellows(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__yellow_cards is None:
             self.fetch_event_stats(gw)
@@ -2199,7 +2197,7 @@ class Player:
     def event_reds(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__red_cards is None:
             self.fetch_event_stats(gw)
@@ -2209,7 +2207,7 @@ class Player:
     def event_minutes(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__minutes is None:
             self.fetch_event_stats(gw)
@@ -2219,7 +2217,7 @@ class Player:
     def event_defensive_contributions(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__defensive_contributions is None:
             self.fetch_event_stats(gw)
@@ -2229,7 +2227,7 @@ class Player:
     def event_bps(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__bps is None:
             self.fetch_event_stats(gw)
@@ -2239,7 +2237,7 @@ class Player:
     def event_bonus(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__bonus is None:
             self.fetch_event_stats(gw)
@@ -2249,7 +2247,7 @@ class Player:
     def event_goals(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__goals_scored is None:
             self.fetch_event_stats(gw)
@@ -2259,7 +2257,7 @@ class Player:
     def event_goals_conceded(self):
         gw = self._api.current_gw
         if gw > self._api.current_gw:
-            mout.errorOut("Gameweek has not happened yet")
+            mrich.error("Gameweek has not happened yet")
             return None
         if self.__goals_conceded is None:
             self.fetch_event_stats(gw)
@@ -2285,7 +2283,7 @@ class Player:
         # print(self.name,list(self.history['round']))
 
         if "round" not in self.history:
-            # mout.error(f'{self} has no round in self.history')
+            # mrich.error(f'{self} has no round in self.history')
             return "No data."
 
         # if the player was added to the game late, their history is weird
@@ -2664,10 +2662,10 @@ class Player:
                     )
 
         except Exception as e:
-            mout.error(
+            mrich.error(
                 f"something went wrong with calculating projected points for {self} {gw=}"
             )
-            mout.error(str(e))
+            mrich.error(str(e))
 
         return score
 
