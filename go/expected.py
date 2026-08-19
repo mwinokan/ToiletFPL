@@ -3,7 +3,7 @@
 import api as fpl_api
 from player import Player
 import plotly.graph_objects as go
-import mout
+import mrich
 from scipy import stats
 import numpy as np
 
@@ -63,10 +63,10 @@ def main():
 
     # forwards
     # res = stats.linregress(xdata, ydata)
-    mout.headerOut("Forwards")
-    # mout.varOut("R-squared",f"{res.rvalue**2:.6f}")
-    # mout.varOut("slope",f"{res.slope:.6f}")
-    # mout.varOut("intercept",f"{res.intercept:.6f}")
+    mrich.headerOut("Forwards")
+    # mrich.var("R-squared",f"{res.rvalue**2:.6f}")
+    # mrich.var("slope",f"{res.slope:.6f}")
+    # mrich.var("intercept",f"{res.intercept:.6f}")
     # y = res.intercept + res.slope*x
     y = x
     fig.add_trace(go.Scatter(x=x, y=y, mode="lines"))

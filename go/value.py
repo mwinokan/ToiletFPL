@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 # import plotly.io as pio
 from plotly.offline import plot
 import re
-import mout
+import mrich
 
 
 def main():
@@ -62,8 +62,7 @@ def create_value_figure(api, players, show=False, return_fig=False):
 
     maximum = len(players)
 
-    for i, p in enumerate(players):
-        mout.progress(i, maximum)
+    for i, p in mrich.track(enumerate(players)):
 
         next5_sum = 0
         for i in range(gw, gw + 6):
@@ -101,8 +100,6 @@ def create_value_figure(api, players, show=False, return_fig=False):
             tdata_fwd.append(f"{p.name}, {p.team_obj.shortname}, {p.selected_by}%")
             sdata_fwd.append(size)
             udata_fwd.append(f"{p._gui_url}")
-
-    mout.progress(maximum, maximum)
 
     fig = go.Figure()
     fig.add_trace(
@@ -194,16 +191,12 @@ def create_value_figure(api, players, show=False, return_fig=False):
 	    }}
 	}})
 	</script>
-	""".format(
-        div_id=div_id
-    )
+	""".format(div_id=div_id)
 
     # Build HTML string
     html_str = """{plot_div}
 	{js_callback}
-	""".format(
-        plot_div=plot_div, js_callback=js_callback
-    )
+	""".format(plot_div=plot_div, js_callback=js_callback)
 
     # # Write out HTML file
     # with open('go/value.html', 'w') as f:

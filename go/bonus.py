@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 # import plotly.io as pio
 from plotly.offline import plot
 import re
-import mout
+import mrich
 
 
 def main():
@@ -33,7 +33,7 @@ def main():
 
 def create_bonus_figure(api, players, show=False):
     gw = api._current_gw
-    mout.debugOut(f"create_bonus_figure(gw={gw+1})")
+    mrich.debug(f"create_bonus_figure(gw={gw+1})")
 
     budget = None
     position = None
@@ -62,9 +62,7 @@ def create_bonus_figure(api, players, show=False):
 
     maximum = len(players)
 
-    for i, p in enumerate(players):
-        mout.progress(i, maximum)
-
+    for i, p in mrich.track(enumerate(players)):
         # official_gwexp = p.expected_points(gw=gw+1,fit_ratio=0.8,use_official=True,debug=False)
         # gwexp = p.expected_points(gw=gw+1,fit_ratio=0.8,use_official=False,debug=False,force=True)
 
@@ -97,8 +95,6 @@ def create_bonus_figure(api, players, show=False):
             tdata_fwd.append(f"{p.name}, {p.team_obj.shortname}, {p.selected_by}%")
             sdata_fwd.append(size)
             udata_fwd.append(f"{p._gui_url}")
-
-    mout.progress(maximum, maximum)
 
     fig = go.Figure()
     fig.add_trace(
@@ -187,16 +183,12 @@ def create_bonus_figure(api, players, show=False):
 	    }}
 	}})
 	</script>
-	""".format(
-        div_id=div_id
-    )
+	""".format(div_id=div_id)
 
     # Build HTML string
     html_str = """{plot_div}
 	{js_callback}
-	""".format(
-        plot_div=plot_div, js_callback=js_callback
-    )
+	""".format(plot_div=plot_div, js_callback=js_callback)
 
     # # Write out HTML file
     # with open('go/value.html', 'w') as f:

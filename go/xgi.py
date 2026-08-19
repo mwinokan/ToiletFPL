@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 # import plotly.io as pio
 from plotly.offline import plot
 import re
-import mout
+import mrich
 
 
 def main():
@@ -64,8 +64,7 @@ def create_xgi_figure(api, players, show=False):
 
     # hival = 0.0
 
-    for i, p in enumerate(players):
-        mout.progress(i, maximum)
+    for i, p in mrich.track(enumerate(players)):
 
         size = p.selected_by / 2 + 5
 
@@ -119,8 +118,6 @@ def create_xgi_figure(api, players, show=False):
                 ndata_fwd.append(p.name)
             else:
                 ndata_fwd.append(None)
-
-    mout.progress(maximum, maximum)
 
     fig = go.Figure()
 
@@ -224,16 +221,12 @@ def create_xgi_figure(api, players, show=False):
 	    }}
 	}})
 	</script>
-	""".format(
-        div_id=div_id
-    )
+	""".format(div_id=div_id)
 
     # Build HTML string
     html_str = """{plot_div}
 	{js_callback}
-	""".format(
-        plot_div=plot_div, js_callback=js_callback
-    )
+	""".format(plot_div=plot_div, js_callback=js_callback)
 
     # # Write out HTML file
     # with open('go/value.html', 'w') as f:

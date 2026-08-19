@@ -3,7 +3,7 @@ from player import Player
 import plotly.graph_objects as go
 from plotly.offline import plot
 import re
-import mout
+import mrich
 import math
 
 
@@ -121,8 +121,6 @@ def create_player_figure(api, player, show=False):
 
     # Build HTML string
     html_str = """{plot_div}
-	""".format(
-        plot_div=plot_div
-    )
+	""".format(plot_div=plot_div)
 
     return html_str

@@ -8,7 +8,7 @@ import plotly.io as pio
 import plotly.graph_objects as go
 from plotly.offline import plot
 import re
-import mout
+import mrich
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
 
 def create_league_figure(api, league, subset=None, show=False, rank=True, single=False):
     gw = api._current_gw
-    mout.debugOut(f"create_league_figure()")
+    mrich.debug(f"create_league_figure()")
 
     fig = go.Figure()
 
@@ -193,16 +193,12 @@ def create_league_figure(api, league, subset=None, show=False, rank=True, single
 	    }}
 	}})
 	</script>
-	""".format(
-        div_id=div_id
-    )
+	""".format(div_id=div_id)
 
     # Build HTML string
     html_str = """{plot_div}
 	{js_callback}
-	""".format(
-        plot_div=plot_div, js_callback=js_callback
-    )
+	""".format(plot_div=plot_div, js_callback=js_callback)
 
     # # Write out HTML file
     # with open('go/value.html', 'w') as f:
@@ -218,7 +214,7 @@ def create_league_figure(api, league, subset=None, show=False, rank=True, single
 def create_league_histogram(api, league, subset=None, show=False, all_gws=True):
 
     gw = api._current_gw
-    mout.debugOut(f"create_league_histogram()")
+    mrich.debug(f"create_league_histogram()")
 
     fig = go.Figure()
 
@@ -263,16 +259,12 @@ def create_league_histogram(api, league, subset=None, show=False, all_gws=True):
 	    }}
 	}})
 	</script>
-	""".format(
-        div_id=div_id
-    )
+	""".format(div_id=div_id)
 
     # Build HTML string
     html_str = """{plot_div}
 	{js_callback}
-	""".format(
-        plot_div=plot_div, js_callback=js_callback
-    )
+	""".format(plot_div=plot_div, js_callback=js_callback)
 
     # # Write out HTML file
     # with open('go/value.html', 'w') as f:
