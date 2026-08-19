@@ -42,6 +42,7 @@ TAGLINE = "Home of the RBS Diamond Invitational and Tesco Bean Value Toilet Leag
 run_push_changes = False  # push changes to github
 test = False  # only run the 'run_test' function
 offline = False  # use cached request data
+verify = True
 
 ### other options
 force_generate_kits = False  # force the generation of manager's kits
@@ -60,6 +61,8 @@ if "--push" in argv:
     run_push_changes = True
 if "--offline" in argv:
     offline = True
+if "--no-verify" in argv:
+    verify = False
 if "--kits" in argv:
     scrape_kits = True
 if "--test" in argv:
@@ -251,6 +254,7 @@ def main():
         quick=False,
         force_generate_kits=force_generate_kits,
         write_offline_data=True,
+        verify=verify,
     )
 
     global halfway_awards
@@ -1820,7 +1824,7 @@ def create_playerpage(api, player, leagues):
 
     if int(player.id) not in completed_playerpages:
 
-        mrich.debug(f"create_playerpage({player.name})")
+        # mrich.debug(f"create_playerpage({player.name})")
 
         gw = api._current_gw
 

@@ -113,6 +113,7 @@ class FPL_API:
         force_generate_kits=False,
         quick=True,
         write_offline_data=False,
+        verify=True,
     ):
         mrich.debug(f"FPL_API.__init__(quick={quick})")
 
@@ -120,6 +121,7 @@ class FPL_API:
         self._request_log = []
         self._offline = offline
         self._write_offline_data = write_offline_data
+        self.verify = verify
 
         if offline:
             if exists(f"data_{self._season_str}.json"):
@@ -383,7 +385,7 @@ class FPL_API:
             return self._request_data[handle]
         else:
             try:
-                r = requests.get(handle, verify=False)
+                r = requests.get(handle, verify=self.verify)
             except requests.exceptions.ConnectionError:
                 mrich.warning("ConnectionError, trying again...")
                 # return self.request(handle)
