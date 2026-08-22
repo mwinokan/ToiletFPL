@@ -69,8 +69,6 @@ class League:
 
         mrich.debug(f"League({self.name})::get_stats()::ManagerInits")
 
-        maximum = len(manager_df)
-
         if "rank" not in manager_df.keys():
             manager_df["rank"] = [None] * len(manager_df)
         if "last_rank" not in manager_df.keys():
@@ -88,10 +86,6 @@ class League:
                 total=len(manager_df),
             ):
 
-                if last_rank == 0 or rank == 0:
-                    mrich.warning(n, "has invalid current/last league rank")
-                    continue
-
                 m = self._api.get_manager(f"{n}", c, t, authenticate=False)
                 # m = Manager(f"{n}",c,self._api,team_name=t)
                 if m.valid:
@@ -101,9 +95,10 @@ class League:
                         f"Skipping invalid manager '{m.name}' with ID: {m.id}"
                     )
 
-                m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
-
-                # print(f'adding {m} [1]')
+                if last_rank == 0 or rank == 0:
+                    m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
+                else:
+                    mrich.warning(n, "has invalid current/last league rank")
 
         else:
 
@@ -132,6 +127,8 @@ class League:
 
                 # print(f'adding {m} [2]')
 
+        assert self._managers
+
         for m in self._managers:
             m.assign_league(self)
 
@@ -147,6 +144,11 @@ class League:
     @property
     def active_managers(self):
         if self._active_managers is None:
+
+            for m in self.managers:
+                mrich.print(m, m.is_dead, m._history_current)
+                raise ValueError
+
             self._active_managers = [
                 m
                 for m in self.managers
