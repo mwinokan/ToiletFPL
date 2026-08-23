@@ -385,6 +385,7 @@ class FPL_API:
             return self._request_data[handle]
         else:
             try:
+                mrich.debug("GET", handle)
                 r = requests.get(handle, verify=self.verify)
             except requests.exceptions.ConnectionError:
                 mrich.warning("ConnectionError, trying again...")

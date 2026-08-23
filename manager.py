@@ -45,7 +45,7 @@ class Manager:
 
         self.get_stats()
         self.get_chips()
-        self.get_team_shirt()
+        # self.get_team_shirt()
 
     @property
     def projected_points(self):

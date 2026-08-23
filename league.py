@@ -145,9 +145,9 @@ class League:
     def active_managers(self):
         if self._active_managers is None:
 
-            for m in self.managers:
-                mrich.print(m, m.is_dead, m._history_current)
-                raise ValueError
+            # for m in self.managers:
+            #     mrich.print(m, m.is_dead, m._history_current)
+            # raise ValueError
 
             self._active_managers = [
                 m

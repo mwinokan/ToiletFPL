@@ -337,6 +337,7 @@ def main():
     for i, m in mrich.track(
         enumerate(api._managers.values()),
         total=len(api._managers),
+        prefix="ManagerPages",
     ):
 
         if m.valid:
@@ -344,7 +345,9 @@ def main():
 
     count = 0
     mrich.debug("main()::PlayerPages")
-    for pid in mrich.track(api._loaded_players, total=len(api._loaded_players)):
+    for pid in mrich.track(
+        api._loaded_players, total=len(api._loaded_players), prefix="PlayerPages"
+    ):
         pid = int(pid)
         create_playerpage(
             api, Player(None, index=api.get_player_index(pid), api=api), leagues
@@ -588,7 +591,9 @@ def create_comparison_page(api, leagues, prev_gw_count=5, next_gw_count=5):
     html_buffer += f"</tr>\n"
 
     ### PLAYER ROWS
-    for i, p in mrich.track(enumerate(players)):
+    for i, p in mrich.track(
+        enumerate(players), total=len(players), prefix="ComparisonPage Players"
+    ):
 
         html_buffer += f'<tr id="statRow{p.id}" style="display:none;">\n'
 
@@ -863,7 +868,11 @@ def create_cup_page(api, league, leagues):
     all_matches = []
 
     mrich.debug(f"Getting all cup matches in {league.name}...")
-    for i, manager in mrich.track(enumerate(league.managers)):
+    for i, manager in mrich.track(
+        enumerate(league.managers),
+        total=len(league.managers),
+        prefix="Getting cup matches",
+    ):
         matches = manager.get_cup_matches(league)
         # print(i,manager.name,len(matches))
         all_matches += manager.get_cup_matches(league)
@@ -968,7 +977,9 @@ def create_cup_page(api, league, leagues):
 
         html_buffer += "</tr>\n"
 
-        for j, match in mrich.track(enumerate(matches)):
+        for j, match in mrich.track(
+            enumerate(matches), total=len(matches), prefix="cup page matches"
+        ):
 
             man1 = match["self"]
             man1_score = man1.get_event_score(gw)
@@ -1256,8 +1267,6 @@ def create_cup_page(api, league, leagues):
 def create_teampage(api, leagues):
     mrich.debug(f"create_teampage()")
 
-    from expected import weighted_average
-
     html_buffer = ""
 
     ### fixture table
@@ -1356,7 +1365,9 @@ def create_teampage(api, leagues):
 
     ### by team info
 
-    for i, team in mrich.track(enumerate(api.teams)):
+    for i, team in mrich.track(
+        enumerate(api.teams), total=len(api.teams), prefix="teampage"
+    ):
         team_bg_color = team.get_style()["background-color"]
         team_text_color = team.get_style()["color"]
         team_style_str = f"background-color:{team_bg_color};color:{team_text_color};"
