@@ -314,7 +314,7 @@ def main():
     if not api._live_gw or any(
         [f["started"] for f in api.get_gw_fixtures(api._current_gw)]
     ):
-        generate_summary_template(api, leagues[1])
+        generate_summary_template(api, leagues[0])
 
     create_teampage(api, leagues)
 
