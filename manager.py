@@ -1682,7 +1682,10 @@ class Manager:
                     break
 
     def league_rank_diff(self, league_id):
-        return (
-            self._league_positions[league_id]["last_rank"]
-            - self._league_positions[league_id]["rank"]
-        )
+        try:
+            return (
+                self._league_positions[league_id]["last_rank"]
+                - self._league_positions[league_id]["rank"]
+            )
+        except KeyError:
+            return 0
