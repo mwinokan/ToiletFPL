@@ -34,7 +34,8 @@ class League:
         else:
             # print(manager_df)
             manager_df = manager_df.drop(
-                columns=["id", "event_total", "rank_sort", "total"]
+                columns=["id", "event_total", "rank_sort", "total"], 
+                errors="ignore",
             )
 
         # print(manager_df)
