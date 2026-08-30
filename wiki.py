@@ -292,9 +292,8 @@ def main():
         except fpl_api.Request404:
             mrich.error(f"Could not init League({code},{shortname})")
 
-    # hookins was doing weird stuff
-    # leagues[1]._skip_awards.append(1988353)
-    # leagues[1]._skip_awards.append(132821) # Helen Bamford too
+    # exclude specific managers from awards
+    leagues[0]._skip_awards.append(3958856)  # exclude Kieran 26/27
 
     if api._current_gw < 38:
         create_comparison_page(api, leagues)
