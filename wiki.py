@@ -4978,41 +4978,52 @@ def create_leaguepage(league, leagues, i):
 
             if gw > 1:
 
-                sorted_managers = sorted(
-                    league.active_managers,
-                    key=lambda x: (x.league_rank_diff(league.id), x.gw_rank_gain),
+                tuples = [
+                    (m, m.league_rank_diff(league.id), m.gw_rank_gain)
+                    for m in league.active_managers
+                ]
+
+                tuples = [(m, d, r) for m, d, r in tuples if d is not None]
+
+                sorted_tuples = sorted(
+                    tuples,
+                    key=lambda t: (t[1], t[2]),
                     reverse=True,
                 )
 
+                sorted_managers = [m for m, _, _ in sorted_tuples]
+
                 ### rocketeer
 
-                m = sorted_managers[0]
-                delta = m.league_rank_diff(league.id)
-                html_buffer += award_panel(
-                    "🚀",
-                    "Rocketeer",
-                    "Best Rank Gain",
-                    f"{delta:+} places",
-                    m,
-                    colour=award_colour["rocket"],
-                    name_class="h2",
-                )
-                json[str(league.id)][gw]["awards"]["rocket"] = [m.id, delta]
+                if sorted_managers:
 
-                ### down the toilet
+                    m = sorted_managers[0]
+                    delta = m.league_rank_diff(league.id)
+                    html_buffer += award_panel(
+                        "🚀",
+                        "Rocketeer",
+                        "Best Rank Gain",
+                        f"{delta:+} places",
+                        m,
+                        colour=award_colour["rocket"],
+                        name_class="h2",
+                    )
+                    json[str(league.id)][gw]["awards"]["rocket"] = [m.id, delta]
 
-                m = sorted_managers[-1]
-                delta = m.league_rank_diff(league.id)
-                html_buffer += award_panel(
-                    "🚽",
-                    "#DownTheToilet",
-                    "Worst Rank Loss",
-                    f"{delta:+} places",
-                    m,
-                    colour=award_colour["flushed"],
-                    name_class="h3",
-                )
-                json[str(league.id)][gw]["awards"]["flushed"] = [m.id, delta]
+                    ### down the toilet
+
+                    m = sorted_managers[-1]
+                    delta = m.league_rank_diff(league.id)
+                    html_buffer += award_panel(
+                        "🚽",
+                        "#DownTheToilet",
+                        "Worst Rank Loss",
+                        f"{delta:+} places",
+                        m,
+                        colour=award_colour["flushed"],
+                        name_class="h3",
+                    )
+                    json[str(league.id)][gw]["awards"]["flushed"] = [m.id, delta]
 
             ### BONER
 

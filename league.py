@@ -25,21 +25,13 @@ class League:
         self._skip_awards = []
 
     def get_stats(self):
-        # mrich.debug(f'{self.name}.get_stats()')
         name, manager_df = self._api.get_league_stats(self._code)
 
-        if self._api._current_gw < 2:
-            # manager_df = manager_df.drop(columns=['entry', 'entry_name', 'player_first_name', 'player_last_name'])
-            pass
-        else:
-            # print(manager_df)
+        if self._api._current_gw > 1:
             manager_df = manager_df.drop(
-                columns=["id", "event_total", "rank_sort", "total"], 
+                columns=["id", "event_total", "rank_sort", "total"],
                 errors="ignore",
             )
-
-        # print(manager_df)
-        # print(len(manager_df))
 
         if self._extra_managers is not None:
             data = []
@@ -49,12 +41,8 @@ class League:
                 else:
                     data.append([d[1], d[2], d[0], d[3]])
 
-            # print(manager_df.keys())
-            # print(data)
-
             new_df = pd.DataFrame(data, columns=manager_df.keys())
 
-            # manager_df = manager_df.append(new_df, ignore_index=True, verify_integrity=False, sort=False)
             manager_df = pd.concat(
                 [manager_df, new_df],
                 ignore_index=True,
@@ -75,68 +63,39 @@ class League:
         if "last_rank" not in manager_df.keys():
             manager_df["last_rank"] = [None] * len(manager_df)
 
-        if "player_name" in manager_df.keys():
-            for c, n, t, rank, last_rank in mrich.track(
-                zip(
-                    manager_df["entry"],
-                    manager_df["player_name"],
-                    manager_df["entry_name"],
-                    manager_df["rank"],
-                    manager_df["last_rank"],
-                ),
-                total=len(manager_df),
-            ):
+        for _, row in mrich.track(
+            manager_df.iterrows(),
+            total=len(manager_df),
+        ):
 
-                m = self._api.get_manager(f"{n}", c, t, authenticate=False)
-                # m = Manager(f"{n}",c,self._api,team_name=t)
-                if m.valid:
-                    self._managers.append(m)
-                else:
-                    mrich.warning(
-                        f"Skipping invalid manager '{m.name}' with ID: {m.id}"
-                    )
+            if "player_name" in row:
+                name = row["player_name"]
+            else:
+                name = " ".join([row["player_first_name"], row["player_last_name"]])
 
-                if last_rank == 0 or rank == 0:
-                    m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
-                else:
-                    mrich.warning(n, "has invalid current/last league rank")
+            m = self._api.get_manager(
+                name,
+                row["entry"],
+                row["entry_name"],
+                authenticate=False,
+            )
+            if m.valid:
+                self._managers.append(m)
+            else:
+                mrich.warning(f"Skipping invalid manager '{m.name}' with ID: {m.id}")
 
-        else:
+            rank = row["rank"]
+            last_rank = row["last_rank"]
 
-            for c, f, l, t, rank, last_rank in mrich.track(
-                zip(
-                    manager_df["entry"],
-                    manager_df["player_first_name"],
-                    manager_df["player_last_name"],
-                    manager_df["entry_name"],
-                    manager_df["rank"],
-                    manager_df["last_rank"],
-                ),
-                total=len(manager_df),
-            ):
-                m = self._api.get_manager(f"{f} {l}", c, t, authenticate=False)
-                # m = Manager(f"{f} {l}",c,self._api,team_name=t)
-
+            if last_rank == 0 or rank == 0:
+                mrich.warning(m.name, "has invalid current/last league rank")
+            else:
                 m._league_positions[self.id] = dict(rank=rank, last_rank=last_rank)
+                mrich.print(m.id, rank, last_rank)
 
-                if m.valid:
-                    self._managers.append(m)
-                else:
-                    mrich.warning(
-                        f"Skipping invalid manager '{m.name}' with ID: {m.id}"
-                    )
-
-                # print(f'adding {m} [2]')
-
-        assert self._managers
-
-        for m in self._managers:
             m.assign_league(self)
 
-        # print(self.managers)
-
-    # def get_manager(self,id):
-    # 	[m for m in self.managers if m.id == int(id)][0]
+        assert self._managers
 
     @property
     def managers(self):
@@ -145,11 +104,6 @@ class League:
     @property
     def active_managers(self):
         if self._active_managers is None:
-
-            # for m in self.managers:
-            #     mrich.print(m, m.is_dead, m._history_current)
-            # raise ValueError
-
             self._active_managers = [
                 m
                 for m in self.managers
@@ -422,9 +376,6 @@ class League:
 
     def get_cup_matches(self):
         all_matches = []
-        mrich.debug(f"Getting all cup matches in {self.name}...")
-        for i, manager in tqdm(enumerate(self.managers)):
-            matches = manager.get_cup_matches(self)
-            # print(i,manager.name,len(matches))
+        for manager in mrich.track(self.managers, prefix="Getting cup matches"):
             all_matches += manager.get_cup_matches(self)
         return all_matches

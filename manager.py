@@ -1688,4 +1688,4 @@ class Manager:
                 - self._league_positions[league_id]["rank"]
             )
         except KeyError:
-            return 0
+            return None
