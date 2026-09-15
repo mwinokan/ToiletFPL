@@ -6321,6 +6321,9 @@ def generate_summary_template(api, league):
 
             # raise NotImplementedError
 
+        f.write(f"See you next week!\n")
+        f.write(f"https://toilet.football\n")
+
 
 def push_changes():
     mrich.debug(f"push_changes()")
