@@ -49,6 +49,7 @@ force_generate_kits = False  # force the generation of manager's kits
 scrape_kits = False  # scrape latest PL team jerseys and exit
 fetch_latest = False  # pull latest changes from github before running
 force_go_graphs = True  # force update of Assets graph
+require_final = False
 
 # gamestate options (to be automated)
 halfway_awards = False  # generate half-season / christmas awards
@@ -67,6 +68,8 @@ if "--kits" in argv:
     scrape_kits = True
 if "--test" in argv:
     test = True
+if "--require-final" in argv:
+    require_final = True
 
 # configure the leagues
 
@@ -256,6 +259,9 @@ def main():
         write_offline_data=True,
         verify=verify,
     )
+
+    if require_final and api._live_gw:
+        raise ValueError("Game is still live")
 
     global halfway_awards
     if api._current_gw == 18 and not api._live_gw:
