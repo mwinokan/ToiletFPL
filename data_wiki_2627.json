@@ -4552,6 +4552,20 @@
 		"7": {
 			"differentials": [
 				[
+					79,
+					1661872,
+					false,
+					12,
+					11.870967741935484
+				],
+				[
+					138,
+					3237514,
+					false,
+					12,
+					11.096774193548386
+				],
+				[
 					53,
 					87028,
 					false,
@@ -4559,96 +4573,82 @@
 					10.881720430107528
 				],
 				[
-					379,
-					3296493,
+					504,
+					5164247,
 					false,
-					9,
-					8.70967741935484
+					11,
+					10.526881720430108
 				],
 				[
-					597,
-					1345051,
+					68,
+					1670325,
 					false,
-					8,
-					8
-				],
-				[
-					258,
-					864565,
-					false,
-					8,
-					8
-				],
-				[
-					32,
-					1110785,
-					false,
-					8,
-					7.913978494623656
+					10,
+					9.46236559139785
 				]
 			],
 			"awards": {
 				"king": [
 					3712490,
-					49
+					75
 				],
 				"cock": [
-					1661872,
-					13
+					3964344,
+					21
 				],
 				"goals": [
-					2044993,
-					6
+					1661872,
+					7
 				],
 				"scientist": [
-					87028,
-					53,
+					1661872,
+					79,
 					1,
-					11
+					12
 				],
 				"rocket": [
-					87028,
-					12
+					250365,
+					15
 				],
 				"flushed": [
 					8476467,
-					-18
+					-29
 				],
 				"boner": [
-					2044993,
-					274
+					3712490,
+					357
 				],
 				"smooth_brain": [
-					8476467,
-					15
+					7255155,
+					24
 				],
 				"minutes": [
-					7255155,
-					64.0
+					1506655,
+					80.0
 				],
 				"asbo": [
-					604440,
-					"\ud83d\udfe5 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
+					1021464,
+					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
 				],
 				"most_defcon": [
-					7255155,
-					54
+					1998095,
+					60
 				],
 				"least_defcon": [
 					7674797,
-					10
+					16
 				],
 				"fortune": [
-					7255155,
-					14
+					1156855,
+					19
 				],
 				"clown": [
-					1661872,
-					-30
+					138773,
+					-19
 				],
 				"zombie": [
 					6376501,
-					38
+					28
 				]
 			},
 			"template": {
@@ -4666,12 +4666,12 @@
 					[
 						115,
 						0.02127659574468085,
-						null
+						6
 					],
 					[
 						426,
 						0.02127659574468085,
-						null
+						1
 					],
 					[
 						40,
@@ -4688,7 +4688,7 @@
 					[
 						109,
 						0.2765957446808511,
-						null
+						6
 					],
 					[
 						496,
@@ -4703,7 +4703,7 @@
 					[
 						385,
 						0.05319148936170213,
-						null
+						2
 					]
 				],
 				"defence": [
@@ -4714,8 +4714,8 @@
 					],
 					[
 						115,
-						0.5106382978723404,
-						null
+						0.5212765957446809,
+						6
 					],
 					[
 						391,
@@ -4742,7 +4742,7 @@
 					[
 						124,
 						0.6170212765957447,
-						null
+						5
 					],
 					[
 						154,
@@ -4752,7 +4752,7 @@
 					[
 						426,
 						0.2765957446808511,
-						null
+						1
 					],
 					[
 						12,
@@ -4774,7 +4774,7 @@
 					[
 						346,
 						0.23404255319148937,
-						null
+						9
 					],
 					[
 						569,
@@ -4784,16 +4784,16 @@
 					[
 						138,
 						0.0851063829787234,
-						null
+						12
 					]
 				],
 				"ownership": [
 					{
 						"shortteam": "MCI",
 						"position": "Attack",
-						"multiplier": 2.0851063829787235,
+						"multiplier": 2.095744680851064,
 						"kit_path": "../kits/Man City.png",
-						"points": 6.066326530612245,
+						"points": 6.040609137055838,
 						"started": true
 					},
 					{
@@ -4815,18 +4815,18 @@
 					{
 						"shortteam": "BHA",
 						"position": "Defence",
-						"multiplier": 0.8936170212765957,
+						"multiplier": 0.9042553191489362,
 						"kit_path": "../kits/Brighton.png",
-						"points": 0.0,
-						"started": false
+						"points": 6.211764705882353,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Attack",
 						"multiplier": 0.776595744680851,
 						"kit_path": "../kits/Brighton.png",
-						"points": 0.0,
-						"started": false
+						"points": 5.465753424657534,
+						"started": true
 					},
 					{
 						"shortteam": "MCI",
@@ -4841,8 +4841,8 @@
 						"position": "Attack",
 						"multiplier": 0.5319148936170213,
 						"kit_path": "../kits/Man Utd.png",
-						"points": 0.0,
-						"started": false
+						"points": 2.9,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
@@ -4857,8 +4857,8 @@
 						"position": "Attack",
 						"multiplier": 0.2553191489361702,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 8.416666666666666,
+						"started": true
 					},
 					{
 						"shortteam": "FUL",
@@ -4873,23 +4873,23 @@
 						"position": "Defence",
 						"multiplier": 0.22340425531914893,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 2.7142857142857144,
+						"started": true
 					},
 					{
 						"shortteam": "LIV",
 						"position": "Attack",
-						"multiplier": 0.20212765957446807,
+						"multiplier": 0.22340425531914893,
 						"kit_path": "../kits/Liverpool.png",
-						"points": 3.5789473684210527,
+						"points": 3.7142857142857144,
 						"started": true
 					},
 					{
 						"shortteam": "BRE",
 						"position": "Attack",
-						"multiplier": 0.18085106382978725,
+						"multiplier": 0.19148936170212766,
 						"kit_path": "../kits/Brentford.png",
-						"points": 0.6470588235294118,
+						"points": 0.6111111111111112,
 						"started": true
 					},
 					{
@@ -4957,14 +4957,6 @@
 						"started": true
 					},
 					{
-						"shortteam": "MUN",
-						"position": "Defence",
-						"multiplier": 0.11702127659574468,
-						"kit_path": "../kits/Man Utd.png",
-						"points": 0.0,
-						"started": false
-					},
-					{
 						"shortteam": "NEW",
 						"position": "Attack",
 						"multiplier": 0.10638297872340426,
@@ -4977,8 +4969,8 @@
 						"position": "Attack",
 						"multiplier": 0.09574468085106383,
 						"kit_path": "../kits/Bournemouth.png",
-						"points": 0.0,
-						"started": false
+						"points": 9.666666666666666,
+						"started": true
 					},
 					{
 						"shortteam": "COV",
@@ -5005,6 +4997,14 @@
 						"started": true
 					},
 					{
+						"shortteam": "MUN",
+						"position": "Defence",
+						"multiplier": 0.06382978723404255,
+						"kit_path": "../kits/Man Utd.png",
+						"points": 3.8333333333333335,
+						"started": true
+					},
+					{
 						"shortteam": "NFO",
 						"position": "Defence",
 						"multiplier": 0.06382978723404255,
@@ -5013,20 +5013,28 @@
 						"started": false
 					},
 					{
-						"shortteam": "SUN",
+						"shortteam": "CRY",
 						"position": "Attack",
-						"multiplier": 0.06382978723404255,
-						"kit_path": "../kits/Sunderland.png",
-						"points": 0.0,
-						"started": false
+						"multiplier": 0.05319148936170213,
+						"kit_path": "../kits/Crystal Palace.png",
+						"points": 1.4,
+						"started": true
 					},
 					{
 						"shortteam": "CRY",
 						"position": "Defence",
 						"multiplier": 0.05319148936170213,
 						"kit_path": "../kits/Crystal Palace.png",
-						"points": 0.0,
-						"started": false
+						"points": 0.8,
+						"started": true
+					},
+					{
+						"shortteam": "IPS",
+						"position": "Defence",
+						"multiplier": 0.05319148936170213,
+						"kit_path": "../kits/Ipswich Town.png",
+						"points": 1.8,
+						"started": true
 					},
 					{
 						"shortteam": "NFO",
@@ -5041,23 +5049,7 @@
 						"position": "Defence",
 						"multiplier": 0.0425531914893617,
 						"kit_path": "../kits/Bournemouth.png",
-						"points": 0.0,
-						"started": false
-					},
-					{
-						"shortteam": "CRY",
-						"position": "Attack",
-						"multiplier": 0.0425531914893617,
-						"kit_path": "../kits/Crystal Palace.png",
-						"points": 0.0,
-						"started": false
-					},
-					{
-						"shortteam": "IPS",
-						"position": "Defence",
-						"multiplier": 0.0425531914893617,
-						"kit_path": "../kits/Ipswich Town.png",
-						"points": 2.25,
+						"points": 6.5,
 						"started": true
 					},
 					{
@@ -5095,18 +5087,26 @@
 					{
 						"shortteam": "SUN",
 						"position": "Defence",
-						"multiplier": 0.02127659574468085,
+						"multiplier": 0.031914893617021274,
 						"kit_path": "../kits/Sunderland.png",
-						"points": 0.0,
-						"started": false
+						"points": 2.3333333333333335,
+						"started": true
 					},
 					{
 						"shortteam": "COV",
 						"position": "Attack",
-						"multiplier": 0.010638297872340425,
+						"multiplier": 0.02127659574468085,
 						"kit_path": "../kits/Coventry City.png",
 						"points": 0.0,
 						"started": false
+					},
+					{
+						"shortteam": "SUN",
+						"position": "Attack",
+						"multiplier": 0.02127659574468085,
+						"kit_path": "../kits/Sunderland.png",
+						"points": 2.0,
+						"started": true
 					}
 				]
 			},
@@ -5115,95 +5115,95 @@
 				"58869": 1,
 				"4313924": 2,
 				"4151190": 3,
-				"524640": 4,
-				"4769529": 5,
-				"2717562": 6,
-				"10573": 7,
-				"3210132": 8,
+				"2717562": 4,
+				"524640": 5,
+				"4769529": 6,
+				"3210132": 7,
+				"2050247": 8,
 				"1506137": 9,
-				"245772": 10,
-				"864565": 11,
-				"1932351": 12,
-				"2050247": 13,
-				"431298": 14,
-				"105074": 15,
-				"551403": 16,
-				"250365": 17,
-				"816585": 18,
-				"4352021": 19,
-				"5876405": 20,
-				"604440": 21,
+				"10573": 10,
+				"250365": 11,
+				"245772": 12,
+				"551403": 13,
+				"4325196": 14,
+				"816585": 15,
+				"105074": 16,
 				"6617023": 0,
-				"5645748": 23,
-				"6966224": 24,
-				"747210": 25,
-				"4325196": 26,
-				"8300458": 27,
-				"234823": 28,
-				"227730": 29,
+				"5876405": 18,
+				"1932351": 19,
+				"864565": 20,
 				"1506655": 0,
+				"747210": 22,
+				"8300458": 23,
+				"431298": 24,
+				"5645748": 25,
+				"1946450": 26,
+				"6376501": 27,
+				"227730": 28,
+				"604440": 29,
+				"1998095": 30,
 				"87028": 31,
-				"1946450": 32,
-				"6124937": 33,
-				"3106861": 34,
-				"341516": 35,
-				"1021464": 36,
-				"6376501": 37,
-				"1998095": 38,
-				"8476467": 39,
-				"2044993": 40,
-				"261547": 41,
-				"5039691": 42,
-				"3431151": 43,
-				"5735592": 44,
-				"5419895": 45,
-				"808117": 46,
-				"1810526": 47,
+				"4352021": 32,
+				"341516": 33,
+				"6966224": 34,
+				"234823": 35,
+				"5039691": 36,
 				"933641": 0,
-				"2193941": 49,
-				"2564898": 50,
-				"5164247": 51,
-				"1591980": 52,
-				"7768614": 53,
+				"5164247": 38,
+				"1021464": 39,
+				"3431151": 40,
+				"3106861": 41,
+				"5419895": 42,
+				"261547": 43,
+				"6124937": 44,
+				"1810526": 45,
+				"5735592": 46,
+				"8476467": 47,
+				"808117": 48,
+				"2044993": 49,
+				"2193941": 50,
+				"2564898": 51,
+				"7768614": 52,
+				"1591980": 53,
+				"4510786": 54,
 				"3965494": 0,
-				"8751828": 55,
 				"5632970": 56,
-				"3296493": 57,
+				"8751828": 57,
 				"5341690": 58,
+				"138773": 59,
+				"3296493": 60,
+				"1617165": 61,
+				"7674797": 62,
 				"283547": 0,
-				"4510786": 60,
+				"7273504": 64,
+				"8771010": 65,
 				"2836146": 0,
-				"8771010": 62,
-				"7674797": 63,
-				"138773": 64,
-				"1034063": 65,
-				"1776714": 66,
-				"3670767": 67,
-				"1747648": 68,
-				"2477002": 69,
+				"2477002": 67,
+				"1776714": 68,
+				"2080108": 69,
 				"5113021": 70,
-				"1617165": 71,
-				"7273504": 72,
-				"1110785": 73,
+				"1747648": 71,
+				"1034063": 72,
+				"3237514": 73,
 				"9729002": 74,
-				"2080108": 75,
-				"3958856": 76,
-				"1093046": 77,
-				"3541909": 78,
-				"2470669": 79,
-				"3964344": 80,
-				"3237514": 81,
-				"1481733": 82,
-				"2850535": 83,
-				"7255155": 84,
+				"1110785": 75,
+				"3670767": 76,
+				"3958856": 77,
+				"1093046": 78,
+				"3541909": 79,
+				"2850535": 80,
 				"1670325": 0,
-				"1345051": 86,
-				"9189414": 87,
+				"2470669": 82,
+				"1481733": 83,
+				"3964344": 84,
+				"7255155": 85,
 				"806554": 1,
+				"1345051": 87,
+				"9189414": 88,
 				"1661872": 8,
-				"1156855": 90,
-				"7712224": 91,
-				"6643365": 92,
+				"7712224": 90,
+				"6643365": 91,
+				"1156855": 92,
 				"9321460": 0
 			},
 			"promotion": [
@@ -7825,46 +7825,46 @@
 					20.8
 				],
 				[
-					258,
-					864565,
+					138,
+					341516,
+					false,
+					12,
+					12
+				],
+				[
+					504,
+					7627411,
+					false,
+					11,
+					11
+				],
+				[
+					115,
+					5039691,
+					true,
+					12,
+					8.399999999999999
+				],
+				[
+					427,
+					806554,
 					false,
 					8,
 					8
-				],
-				[
-					250,
-					341516,
-					false,
-					6,
-					6
-				],
-				[
-					366,
-					7627411,
-					false,
-					5,
-					5
-				],
-				[
-					387,
-					7627411,
-					false,
-					2,
-					2
 				]
 			],
 			"awards": {
 				"king": [
 					3712490,
-					49
+					75
 				],
 				"cock": [
 					7627411,
-					16
+					27
 				],
 				"goals": [
 					3712490,
-					6
+					7
 				],
 				"scientist": [
 					3712490,
@@ -7882,31 +7882,31 @@
 				],
 				"boner": [
 					3712490,
-					261
+					357
 				],
 				"smooth_brain": [
-					7627411,
+					864565,
 					6
 				],
 				"minutes": [
-					864565,
-					56.72727272727273
+					3712490,
+					71.81818181818181
 				],
 				"asbo": [
 					5039691,
-					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
+					"\ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8 \ud83d\udfe8"
 				],
 				"most_defcon": [
 					341516,
-					45
+					57
 				],
 				"least_defcon": [
-					806554,
-					21
+					7627411,
+					39
 				],
 				"fortune": [
-					864565,
-					0
+					3712490,
+					8
 				],
 				"clown": [
 					806554,
@@ -7942,7 +7942,7 @@
 					[
 						115,
 						0.6666666666666666,
-						null
+						6
 					]
 				],
 				"midfield": [
@@ -7954,7 +7954,7 @@
 					[
 						124,
 						0.6666666666666666,
-						null
+						5
 					],
 					[
 						12,
@@ -7981,7 +7981,7 @@
 					[
 						346,
 						0.3333333333333333,
-						null
+						9
 					]
 				],
 				"ownership": [
@@ -8012,18 +8012,18 @@
 					{
 						"shortteam": "BHA",
 						"position": "Defence",
-						"multiplier": 1.0,
+						"multiplier": 1.1666666666666667,
 						"kit_path": "../kits/Brighton.png",
-						"points": 0.0,
-						"started": false
+						"points": 5.857142857142857,
+						"started": true
 					},
 					{
 						"shortteam": "BHA",
 						"position": "Attack",
 						"multiplier": 0.8333333333333334,
 						"kit_path": "../kits/Brighton.png",
-						"points": 0.0,
-						"started": false
+						"points": 6.4,
+						"started": true
 					},
 					{
 						"shortteam": "ARS",
@@ -8078,8 +8078,8 @@
 						"position": "Attack",
 						"multiplier": 0.3333333333333333,
 						"kit_path": "../kits/Leeds.png",
-						"points": 0.0,
-						"started": false
+						"points": 9.0,
+						"started": true
 					},
 					{
 						"shortteam": "MCI",
@@ -8094,8 +8094,8 @@
 						"position": "Attack",
 						"multiplier": 0.3333333333333333,
 						"kit_path": "../kits/Man Utd.png",
-						"points": 0.0,
-						"started": false
+						"points": 4.5,
+						"started": true
 					},
 					{
 						"shortteam": "NEW",
@@ -8118,8 +8118,8 @@
 						"position": "Defence",
 						"multiplier": 0.16666666666666666,
 						"kit_path": "../kits/Bournemouth.png",
-						"points": 0.0,
-						"started": false
+						"points": 6.0,
+						"started": true
 					},
 					{
 						"shortteam": "COV",
@@ -8150,16 +8150,8 @@
 						"position": "Attack",
 						"multiplier": 0.16666666666666666,
 						"kit_path": "../kits/Sunderland.png",
-						"points": 0.0,
-						"started": false
-					},
-					{
-						"shortteam": "SUN",
-						"position": "Defence",
-						"multiplier": 0.16666666666666666,
-						"kit_path": "../kits/Sunderland.png",
-						"points": 0.0,
-						"started": false
+						"points": 2.0,
+						"started": true
 					}
 				]
 			},
@@ -8173,5 +8165,5 @@
 			}
 		}
 	},
-	"timestamp": "2026-10-18 11:56:48"
+	"timestamp": "2026-10-18 15:27:33"
 }
