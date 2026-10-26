@@ -624,6 +624,10 @@ class Manager:
 
             if gw == self._api._current_gw and self._api._live_gw:
                 self.make_autosubs()
+            elif gw == self._api._current_gw:
+                # GW has finished - re-simulate autosubs so that was_subbed
+                # and captaincy match what FPL actually did (for awards)
+                self.make_autosubs()
             else:
                 old_cap = self._squad.captain
                 old_cap.fetch_event_stats(gw)
@@ -960,6 +964,21 @@ class Manager:
                 for p in self.players
                 if p.multiplier == 0
             ]
+        )
+
+    @property
+    def autosub_players(self):
+        # bench players that were autosubbed into the XI this GW
+        return [p for p in self.players if p.multiplier == 1 and p.was_subbed]
+
+    @property
+    def autosub_count(self):
+        return len(self.autosub_players)
+
+    @property
+    def autosub_points(self):
+        return sum(
+            [p.get_event_score(not_playing_is_none=False) or 0 for p in self.autosub_players]
         )
 
     @property

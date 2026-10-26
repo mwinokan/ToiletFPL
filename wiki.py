@@ -136,6 +136,8 @@ award_flavourtext = dict(
     wc1_worst="Worst Wildcard 1",
     wc2_best="Best Wildcard 2",
     wc2_worst="Worst Wildcard 2",
+    autostub_best="🩹 Best Autosub",
+    autostub_worst="🫠 Worst Autosub",
 )
 
 award_unittext = dict(
@@ -159,6 +161,8 @@ award_unittext = dict(
     zombie="th place",
     most_defcon="DC",
     least_defcon="DC",
+    autostub_best="pts",
+    autostub_worst="subs",
 )
 
 award_colour = dict(
@@ -212,6 +216,8 @@ award_colour = dict(
     wc1_worst="red",
     wc2_best="red",
     wc2_worst="red",
+    autostub_best="aqua",
+    autostub_worst="brown",
 )
 
 _league_table_html = {}
@@ -5060,6 +5066,48 @@ def create_leaguepage(league, leagues, i):
                 name_class="h3",
             )
             json[str(league.id)][gw]["awards"]["smooth_brain"] = [m.id, m.bench_points]
+
+            # ### AUTOSUBS
+
+            # sorted_managers = sorted(
+            #     [m for m in league.active_managers if m.autosub_count > 0],
+            #     key=lambda x: (x.autosub_points, x.autosub_count),
+            #     reverse=True,
+            # )
+
+            # if sorted_managers:
+
+            #     m = sorted_managers[0]
+            #     html_buffer += award_panel(
+            #         "🩹",
+            #         "Best Autosub",
+            #         "Most Points From Autosubs",
+            #         f"{m.autosub_points} pts ({m.autosub_count}🔄)",
+            #         m,
+            #         colour=award_colour["autostub_best"],
+            #         name_class="h2",
+            #     )
+            #     json[str(league.id)][gw]["awards"]["autostub_best"] = [
+            #         m.id,
+            #         m.autosub_points,
+            #     ]
+
+            #     m = max(
+            #         sorted_managers, key=lambda x: (x.autosub_count, x.autosub_points)
+            #     )
+            #     html_buffer += award_panel(
+            #         "🫠",
+            #         "Worst Autosub",
+            #         "Most Autosubs",
+            #         f"{m.autosub_count}🔄 ({m.autosub_points} pts)",
+            #         m,
+            #         colour=award_colour["autostub_worst"],
+            #         name_class="h3",
+            #     )
+            #     json[str(league.id)][gw]["awards"]["autostub_worst"] = [
+            #         m.id,
+            #         m.autosub_count,
+            #     ]
 
             ### CHAIR
 
